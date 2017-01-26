@@ -13,7 +13,46 @@
 
 class Migration_model extends CI_Model
 {
-	public function run_sql($sql, $success_msg='Success', $error_msg='Error')
+    public function run_parsed_sql($sql)
+    {
+        $sql_statements = explode(';', $sql);
+        $this->db->trans_start();
+        $output_str = '';
+        array_pop($sql_statements);
+        foreach($sql_statements as $sql_statement)
+        {
+            try
+            {
+                $query = $this->db->query($sql_statement);
+                if(is_object($sql_statement))
+                {
+                    $output_str = $output_str . "<p><strong>$sql_statement</strong></p>" . json_encode($query->result_array(). JSON_PRETTY_PRINT) . "</pre></p>";
+                }
+                else
+                {
+                    $status = $query ? 'success' : 'failure';
+                    $output_str = $output_str . "<p><strong>$sql_statement</strong</p><p>" . $status . "</p>";
+
+                }
+            }
+            catch (Exception $e)
+            {
+                $output_str = $output_str . "<p><strong>$sql_statement</strong></p><p><pre>" . $e->getMessage() . "</pre></p>";
+            }
+        }
+        $this->db->trans_complete();
+
+        $output = array(
+            'output_str' => $output_str,
+            'status' => $this->db->trans_status() ? '<p style="color:green"><strong>SUCCESS</strong></p>' : '<p style="color:red"><strong>FAILURE</strong></p>'
+        );
+
+        return $output;
+    }
+
+	public function run_sql($sql,
+                            $success_msg='<p style="color:red;"><strong>Success</strong></p>',
+                            $error_msg='<p style="color:green;"><strong>Failure</strong></p>')
     {
         if($this->db->query($sql))
         {
