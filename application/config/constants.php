@@ -92,7 +92,7 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 define('RESOURCES_FOLDER', 'http://localhost/_project_index/resources/');
 define('SYSTEM_DATE_FORMAT', 'd M Y');
-define('DATE_TIME_ZONE', 'Asia/Singapore');
+define('DATETIME_ZONE', 'Asia/Singapore');
 
 
 // table names
