@@ -28,8 +28,10 @@ class Migrate extends CI_Controller
 		}
 		else
 		{
-			echo 'Migration successful.';
-			echo 'Migration version: ' . $this->Migration_model->get_version();
+			echo '<hr/>';
+			echo '<h3>Status</h3>';
+			echo '<p>Migration successful.<br/>';
+			echo 'Migration version: ' . $this->Migration_model->get_version() . '</p>';
 			$this->load->view('migrate/result_page');
 		}
 	}
