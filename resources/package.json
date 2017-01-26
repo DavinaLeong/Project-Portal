@@ -1,0 +1,32 @@
+{
+  "name": "project_portal",
+  "version": "1.0.0",
+  "description": "Project Portal",
+  "main": "../index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "project",
+    "portal"
+  ],
+  "author": "Davina Leong",
+  "license": "ISC",
+  "homepage": "",
+  "devDependencies": {
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-debug": "^3.0.0"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0",
+    "jquery": "^2.2.4",
+    "parsleyjs": "^2.6.0",
+    "sb-admin-2": "^3.3.8"
+  }
+}
