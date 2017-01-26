@@ -19,6 +19,7 @@
  * @property CI_Loader $load
  * @property CI_Log $log
  * @property CI_Model $model
+ * @property CI_Migration $migration
  * @property CI_Output $output
  * @property CI_Pagination $pagination
  * @property CI_Parser $parser
@@ -38,6 +39,7 @@
  *
  *
  * --- CUSTOM LIBRARIES ---
+ * @property Migration_model $Migration_model
  *
  */
 class CI_Controller {};
@@ -63,6 +65,7 @@ class MY_Controller extends CI_Controller {};
  * @property CI_Loader $load
  * @property CI_Log $log
  * @property CI_Model $model
+ * @property CI_Migration $migration
  * @property CI_Output $output
  * @property CI_Pagination $pagination
  * @property CI_Parser $parser
@@ -82,6 +85,7 @@ class MY_Controller extends CI_Controller {};
  *
  *
  * --- CUSTOM LIBRARIES ---
+ * @property Migration_model $Migration_model
  *
  */
 class CI_Model {};
