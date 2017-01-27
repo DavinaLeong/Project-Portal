@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <footer class="site-footer">
 	<hr/>
     <div class="text-right text-muted text-italic">
-		<small><?=SITE_TITLE;?> &#8226; <?= $this->datetime_helper->today('Y'); ?></small>
+		<small><?=ADMIN_SITE_NAME;?> &#8226; <?= now('Y'); ?></small>
     </div>
 </footer>
 <!--footer end-->
