@@ -89,8 +89,10 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 | Custom Constants
 |--------------------------------------------------------------------------
 */
+define('SITE_NAME', 'Project Portal');
+define('ADMIN_SITE_NAME', 'Project Portal - Admin Panel');
 
-define('RESOURCES_FOLDER', 'http://localhost/_project_index/resources/');
+define('RESOURCES_FOLDER', 'http://localhost/_project_portal/resources/');
 define('SYSTEM_DATE_FORMAT', 'd M Y');
 define('DATETIME_ZONE', 'Asia/Singapore');
 
