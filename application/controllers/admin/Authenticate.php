@@ -20,12 +20,12 @@ class Authenticate extends CI_Controller
 	
 	public function index()
 	{
-	    redirect('admin/test/start');
+	    redirect('admin/authenticate/start');
 	}
 
     public function login()
     {
-        $this->load->view('admin/test/login_page');
+        $this->load->view('admin/authenticate/login_page');
     }
 
     public function logout()
@@ -35,7 +35,7 @@ class Authenticate extends CI_Controller
 
     public function start()
     {
-        $this->load->view('admin/test/start_page');
+        $this->load->view('admin/authenticate/start_page');
     }
 	
 } // end Test controller class
