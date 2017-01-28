@@ -36,6 +36,8 @@
                     <h3 class="panel-title text-center"><img data-toggle="tooltip" title="<?=ADMIN_SITE_NAME;?>" src="<?=RESOURCES_FOLDER;?>pp/images/pp_logo.png" alt="site logo" width="64" height="64" /></h3>
                 </div>
                 <div class="panel-body">
+                    <?php $this->load->view('admin/_snippets/validation_errors_box'); ?>
+                    <?php $this->load->view('admin/_snippets/message_box'); ?>
                     <form method="post" data-parsley-validate>
                         <fieldset>
                             <div class="form-group">

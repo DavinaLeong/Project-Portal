@@ -28,14 +28,24 @@
 
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Welcome to <?=ADMIN_SITE_NAME;?></h1>
-                <p class="lead">You are logged in as <span class="text-primary"<?=$this->session->userdata('name');?></span>.</p>
+                <h1 class="page-header">Welcome to <span class="text-primary"><?=ADMIN_SITE_NAME;?></span></h1>
+
+                <p class="lead">You are logged in as <span class="text-primary"><?=$this->session->userdata('name');?></span>.</p>
                 <?php $this->load->view('admin/_snippets/message_box'); ?>
-<!--                <ul>-->
-<!--                    <li>Script Generator is a simple tool built to assist in exporting commonly used scripts.</li>-->
-<!--                    <li>There is no CRUD for this Admin Panel.</li>-->
-<!--                    <li>The main purpose of the login is to prevent access of this tool to strangers of this site.</li>-->
-<!--                </ul>-->
+
+                <div class="row">
+                    <div class="col-md-2 text-center">
+                        <img src="<?=RESOURCES_FOLDER;?>pp/images/pp_logo.png" alt="Site Logo" />
+                    </div>
+                    <div class="col-md-10">
+                        <h2>About</h2>
+                        <ul>
+                            <li>This admin panel provides a user friendly interface in handling the database.</li>
+                            <li>It also manages how the Project Links are displayed on the Project Portal page.</li>
+                            <li>This particular admin panel does not have a User module.</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
 

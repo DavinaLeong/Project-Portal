@@ -29,7 +29,20 @@ class User_model extends CI_Model
     {
         if($user_id)
         {
-            $query = $this->db->get_where($user_id);
+            $query = $this->db->get_where(TABLE_USER, array('user_id' => $user_id));
+            return $query->row_array();
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
+    public function get_by_username($username=FALSE)
+    {
+        if($username)
+        {
+            $query = $this->db->get_where(TABLE_USER, array('username' => $username));
             return $query->row_array();
         }
         else
@@ -66,7 +79,6 @@ class User_model extends CI_Model
         if($user)
         {
             $temp_array = array(
-                'user_id' => $user['user_id'],
                 'username' => $user['username'],
                 'name' => $user['name'],
                 'password_hash' => $user['password_hash'],
@@ -75,7 +87,7 @@ class User_model extends CI_Model
             );
 
             $this->db->set('last_updated', now('c'));
-            $this->db->update(TABLE_USER, $temp_array, $temp_array['user_id']);
+            $this->db->update(TABLE_USER, $temp_array, array('user_id' => $user['user_id']));
             return $this->db->affected_rows();
         }
         else

@@ -16,6 +16,7 @@ class Authenticate extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('User_model');
 	}
 
 	public function index()
@@ -37,7 +38,7 @@ class Authenticate extends CI_Controller
 		}
 
 		$this->_set_rules_login();
-		if($this->form_validation->runw())
+		if($this->form_validation->run())
 		{
 			if($user = $this->User_model->get_by_username($this->input->post('username')))
 			{
@@ -45,9 +46,10 @@ class Authenticate extends CI_Controller
 				{
 					if(password_verify($this->input->post('password'), $user['password_hash']))
 					{
-						$this->_set_userdata();
+						$this->_set_userdata($user);
 						$this->User_log_model->log_message('User has logged in.');
 						$this->session->set_userdata('message', 'Login successful.');
+						redirect('admin/authenticate/start');
 					}
 					else
 					{
@@ -64,15 +66,17 @@ class Authenticate extends CI_Controller
 				$this->session->set_userdata('message', 'Invalid Username');
 			}
 		}
+
+		$this->load->view('admin/authenticate/login_page');
     }
 
 	private function _set_rules_login()
 	{
-		$this->form_validaton->set_rules('username', 'Username', 'trim|required|max_length[512]');
+		$this->form_validation->set_rules('username', 'Username', 'trim|required|max_length[512]');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required|max_length[512]');
 	}
 
-	private function _set_userdata()
+	private function _set_userdata($user)
 	{
 		$this->session->set_userdata('user_id', $user['user_id']);
 		$this->session->set_userdata('username', $user['username']);

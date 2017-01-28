@@ -30,7 +30,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <i class="fa fa-user fa-fw"></i> <?=$this->session->userdata('name');?> <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
-                <li><a href="<?=site_url('authenticate/logout');?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+                <li><a href="<?=site_url('admin/authenticate/logout');?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
             </ul>
         </li>
     </ul>
