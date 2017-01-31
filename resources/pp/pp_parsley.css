@@ -1,0 +1,47 @@
+/**********************************************************************************
+	- File Info -
+		File name		: pp_parsley.css
+		Author(s)		: DAVINA Leong Shi Yun
+		Date Created	: 31 Jan 2016
+
+	- Contact Info -
+		Email	: leong.shi.yun@gmail.com
+		Mobile	: (+65) 9369 3752 [Singapore]
+
+***********************************************************************************/
+input.parsley-success,
+select.parsley-success,
+textarea.parsley-success {
+    border-color: #3c763d;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    background: #efe;
+}
+
+input.parsley-error,
+select.parsley-error,
+textarea.parsley-error {
+    border-color: #a94442;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    background: #fee;
+}
+
+.parsley-errors-list {
+    margin: 2px 0 3px;
+    padding: 0;
+    list-style-type: none;
+    font-size: 0.9em;
+    line-height: 0.9em;
+    opacity: 0;
+    color: #a94442;
+
+    transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -moz-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+}
+
+.parsley-errors-list.filled {
+    opacity: 1;
+}

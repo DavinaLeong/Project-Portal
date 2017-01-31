@@ -40,13 +40,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
-                    <a href="#"><i class="fa fa-download fa-fw"></i> Export<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-desktop fa-fw"></i> Platforms<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="<?=site_url('page/new_unity_csharp');?>"><i class="cdc-c-sharp"></i> Unity C&#35; Script</a>
+                            <a href="<?=site_url('admin/platform/browse');?>">Browse Platforms</a>
                         </li>
                         <li>
-                            <a href="<?=site_url('page/new_migration');?>"><i class="cdc-php"></i> Migrations</a>
+                            <a href="<?=site_url('admin/platform/create');?>">New Platform</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->

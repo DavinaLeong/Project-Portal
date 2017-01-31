@@ -12,3 +12,11 @@
 .navbar-brand img {
     display: inline;
 }
+
+.clickable {
+    cursor: pointer;
+}
+
+#main {
+    min-height: 750px;
+}

@@ -27,7 +27,7 @@
         </ol>
 
         <div class="row">
-            <div class="col-lg-12">
+            <div id="main" class="col-lg-12">
                 <h1 class="page-header">Welcome to <span class="text-primary"><?=ADMIN_SITE_NAME;?></span></h1>
 
                 <p class="lead">You are logged in as <span class="text-info"><?=$this->session->userdata('name');?></span>.</p>
@@ -48,8 +48,6 @@
                 </div>
             </div>
         </div>
-
-        <div style="height: 450px;">&nbsp;</div>
         <?php $this->load->view('admin/_snippets/footer'); ?>
     </div>
 </div>
