@@ -14,8 +14,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!--footer start-->
 <footer class="site-footer">
 	<hr/>
-    <div class="text-right text-muted text-italic">
-		<small><?=ADMIN_SITE_NAME;?> &#8226; <?= now('Y'); ?></small>
+    <div class="text-right">
+		<span class="text-muted"><em><?=ADMIN_SITE_NAME;?> &#8226; <?= now('Y'); ?></em></span>
     </div>
 </footer>
 <!--footer end-->
