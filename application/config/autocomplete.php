@@ -86,7 +86,8 @@ class MY_Controller extends CI_Controller {};
  *
  * --- CUSTOM LIBRARIES ---
  * @property Migration_model $Migration_model
- *
+ * @property User_model $User_model
+ * @property User_log_model $User_log_model
  */
 class CI_Model {};
 
@@ -131,6 +132,8 @@ class CI_Model {};
  *
  * --- CUSTOM LIBRARIES ---
  * @property Migration_model $Migration_model
+ * @property User_model $User_model
+ * @property User_log_model $User_log_model
  *
  */
 class CI_Migration {};
