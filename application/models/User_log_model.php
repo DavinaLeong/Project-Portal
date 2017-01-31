@@ -40,7 +40,7 @@ class User_log_model extends CI_Model
         }
     }
 
-    public function validate_access($required=FALSE, $session=FALSE)
+    public function process_access_validation($required=FALSE, $session=FALSE)
     {
         if(isset($required) && isset($session))
         {
@@ -61,9 +61,9 @@ class User_log_model extends CI_Model
         }
     }
 
-    public function validate_admin_access()
+    public function validate_access($access_values='A')
     {
-        if($this->validate_access('A', $this->session->userdata('access')) == FALSE)
+        if($this->process_access_validation($access_values, $this->session->userdata('access')) == FALSE)
         {
             $this->session->set_userdata('message', 'This user has invalid access rights to requested page.');
             redirect('admin/authenticate/logout');

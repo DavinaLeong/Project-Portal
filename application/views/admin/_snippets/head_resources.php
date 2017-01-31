@@ -14,7 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?><title><?=ADMIN_SITE_NAME;?></title>
 
 <!-- favicon -->
-<link href="<?=RESOURCES_FOLDER;?>pp_images/pp_icon.png" type="image/png" rel="icon" />
+<link href="<?=RESOURCES_FOLDER;?>pp/images/pp_icon.png" type="image/png" rel="icon" />
 
 <!-- Bootstrap Core CSS -->
 <link href="<?=RESOURCES_FOLDER;?>bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -27,6 +27,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <!-- Font Awesome Icons -->
 <link href="<?=RESOURCES_FOLDER;?>font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<!-- Project Portal CSS -->
+<link href="<?=RESOURCES_FOLDER;?>pp/pp_styles.css" rel="stylesheet" type="text/css" />
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
