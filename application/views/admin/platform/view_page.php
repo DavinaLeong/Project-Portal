@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**********************************************************************************
 	- File Info -
-		File name		: create_page.php
+		File name		: view_page.php
 		Author(s)		: DAVINA Leong Shi Yun
 		Date Created	: 31 Jan 2016
 
@@ -11,14 +11,13 @@
 
 ***********************************************************************************/
 /**
- * @var $status_options
+ * @var $platform
  */
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
 <?php $this->load->view('admin/_snippets/meta'); ?>
 <?php $this->load->view('admin/_snippets/head_resources'); ?>
-<link href="<?=RESOURCES_FOLDER;?>pp/pp_parsley.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div id="wrapper">
@@ -29,53 +28,56 @@
         <ol class="breadcrumb">
             <li><a href="<?=site_url('admin/authenticate/start');?>">Home</a></li>
             <li><a href="<?=site_url('admin/platform/browse');?>"><i class="fa fa-desktop fa-fw"></i> Platforms</a></li>
-            <li class="active">New Platform</li>
+            <li class="active">Platform ID: <?=$platform['platform_id'];?></li>
         </ol>
 
         <div class="row">
             <div id="main" class="col-lg-12">
-                <h1 class="page-header">New Platform</h1>
+                <h1 class="page-header">View Platform</h1>
 
                 <div class="row">
                     <div class="col-md-10">
 
-                        <form id="form" class="form-horizontal" method="post" data-parsley-validate>
+                        <form id="form" class="form-horizontal">
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="platform_name">Name <span class="text-danger">*</span></label>
                                 <div class="col-md-10">
-                                    <input class="form-control" type="text" id="platform_name" name="platform_name" value="<?=set_value('platform_name');?>" required maxlength="512" />
+                                    <p id="platform_name"><?=$platform['platform_name'];?></p>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="platform_description">Description <span class="text-danger">*</span></label>
                                 <div class="col-md-10">
-                                    <input class="form-control" type="text" id="platform_description" name="platform_description" value="<?=set_value('platform_description');?>" required maxlength="512" />
+                                    <p id="platform_description"><?$platform['platform_description'];?></p>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="platform_icon">Icon <span class="text-danger">*</span></label>
                                 <div class="col-md-10">
-                                    <input class="form-control" type="text" id="platform_icon" name="platform_icon" value="<?=set_value('platform_icon');?>" required maxlength="512" />
+                                    <p id="platform_icon"><i class="fa <?=$platform['platform_icon'];?> fa-fw"></i> <small><?=$platform['platform_icon'];?></small></p>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="platform_status">Status <span class="text-danger">*</span></label>
                                 <div class="col-md-10">
-                                    <select class="form-control" id="platform_status" name="platform_status" required>
-                                        <option id="platform_status_0" value="">-- Select Status --</option>
-                                        <?php foreach($status_options as $key=>$status_option): ?>
-                                        <option id="platform_status_<?=$key+1;?>" value="<?=$status_option;?>" <?=set_select("platform_status", $status_option);?>><?=$status_option;?></option>
-                                        <?php endforeach; ?>
-                                    </select>
+                                    <p id="platform_status"><?=$platform['platform_status'];?></p>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <div class="col-md-10 col-md-offset-2">
-                                    <button id="submit_btn" class="btn btn-primary" type="submit"><i class="fa fa-check fa-fw"></i> Submit</button>
+                                <label class="control-label col-md-2" for="platform_status">Date Added <span class="text-danger">*</span></label>
+                                <div class="col-md-10">
+                                    <p id="date_added"><?=format_dd_mm_yyy_hh_ii_ss($platform['date_added']);?></p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="platform_status">Last Updated <span class="text-danger">*</span></label>
+                                <div class="col-md-10">
+                                    <p id="last_updated"><?=format_rfc($platform['last_updated']);?></p>
                                 </div>
                             </div>
                         </form>
@@ -91,6 +93,5 @@
 </div>
 </div>
 <?php $this->load->view('admin/_snippets/body_resources') ;?>
-<script src="<?=RESOURCES_FOLDER;?>vendor/parsleyjs/parsley.min.js"></script>
 </body>
 </html>
