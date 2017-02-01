@@ -92,8 +92,18 @@ class Platform_model extends CI_Model
     {
         if($platform_id)
         {
-            $this->db->delete(TABLE_PLATFORM, array('platform_id' => $platform_id));
-            return $this->db->affected_rows();
+            if($this->db->delete(TABLE_PLATFORM, array('platform_id' => $platform_id)))
+            {
+                if($this->count_all() <= 0)
+                {
+                    $this->db->truncate(TABLE_PLATFORM);
+                }
+                return TRUE;
+            }
+            else
+            {
+                return FALSE;
+            }
         }
         else
         {

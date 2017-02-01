@@ -11,8 +11,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		Mobile	: (+65) 9369 3752 [Singapore]
 
 ***********************************************************************************/
-?><!-- Navigation -->
+?><!-- Navigation start -->
 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <!-- navbar-header start -->
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -22,8 +23,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </button>
         <a class="navbar-brand" href="<?=site_url('admin/authenticate/start');?>"><img src="<?=RESOURCES_FOLDER;?>pp/images/pp_logo.png" alt="Site Logo" height="16px" /> <?=ADMIN_SITE_NAME;?></a>
     </div>
-    <!-- /.navbar-header -->
+    <!-- navbar-header end -->
 
+    <!-- navbar-top-links start -->
     <ul class="nav navbar-top-links navbar-right">
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -34,11 +36,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </ul>
         </li>
     </ul>
-    <!-- /.navbar-top-links -->
+    <!-- navbar-top-links end -->
 
+    <!-- navbar-static start -->
     <div class="navbar-default sidebar" role="navigation">
+        <!-- sidebar-collapse start -->
         <div class="sidebar-nav navbar-collapse">
+
             <ul class="nav" id="side-menu">
+                <!-- platform module start -->
                 <li>
                     <a href="#"><i class="fa fa-desktop fa-fw"></i> Platforms<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
@@ -49,11 +55,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <a href="<?=site_url('admin/platform/create');?>"><i class="fa fa-plus fa-fw"></i> Create Platform</a>
                         </li>
                     </ul>
-                    <!-- /.nav-second-level -->
+                </li>
+
+                <!-- project-category module start -->
+                <li>
+                    <a href="#"><i class="fa fa-tags fa-fw"></i> Project Categories<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="<?=site_url('admin/project_category/browse');?>"><i class="fa fa-file-text-o fa-fw"></i> Browse Project Categories</a>
+                        </li>
+                        <li>
+                            <a href="<?=site_url('admin/project_category/create');?>"><i class="fa fa-plus fa-fw"></i> Create Project Category</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
-        <!-- /.sidebar-collapse -->
+        <!-- sidebar-collapse end -->
     </div>
-    <!-- /.navbar-static-side -->
+    <!-- navbar-static end -->
 </nav>
+<!-- Navigation end -->

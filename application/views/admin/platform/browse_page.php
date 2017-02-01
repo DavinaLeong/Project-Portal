@@ -83,9 +83,9 @@
         });
     });
 
-    function goto_view(platform_id)
+    function goto_view(record_id)
     {
-        location.href = '<?=site_url("admin/platform/view");?>/' + platform_id;
+        location.href = '<?=site_url("admin/platform/view");?>/' + record_id;
     }
 </script>
 </body>
