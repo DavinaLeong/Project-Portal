@@ -124,7 +124,7 @@ class Platform extends CI_Controller
 
             $data = array(
                 'platform' => $platform,
-                'status_option' => $this->Platform_model->_status_array()
+                'status_options' => $this->Platform_model->_status_array()
             );
             $this->load->view('admin/platform/edit_page', $data);
         }

@@ -87,7 +87,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="platform_status">Date Added</label>
                                     <div class="col-md-10">
-                                        <p id="date_added" class="form-control-static"><?=format_dd_mm_yyy_hh_ii_ss($platform['date_added']);?></p>
+                                        <p id="date_added" class="form-control-static"><?=format_dd_mm_yyyy_hh_ii_ss($platform['date_added']);?></p>
                                     </div>
                                 </div>
 

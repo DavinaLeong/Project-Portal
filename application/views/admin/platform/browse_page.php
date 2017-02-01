@@ -57,7 +57,7 @@
                                 <tr class="clickable" onclick="goto_view(<?=$platform['platform_id'];?>)">
                                     <td><?=$platform['platform_name'];?></td>
                                     <td><?=$platform['platform_description'];?></td>
-                                    <td data-sort="<?=format_dd_mm_yyy_hh_ii_ss($platform['last_uodated']);?>"
+                                    <td data-sort="<?=format_dd_mm_yyyy_hh_ii_ss($platform['last_updated']);?>"
                                         ><?=$platform['last_updated'];?></td>
                                 </tr>
                             <?php endforeach; ?>

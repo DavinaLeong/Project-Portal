@@ -46,7 +46,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <a href="<?=site_url('admin/platform/browse');?>">Browse Platforms</a>
                         </li>
                         <li>
-                            <a href="<?=site_url('admin/platform/create');?>">New Platform</a>
+                            <a href="<?=site_url('admin/platform/create');?>">Create Platform</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->

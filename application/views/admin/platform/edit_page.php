@@ -1,9 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**********************************************************************************
 	- File Info -
-		File name		: create_page.php
+		File name		: edit_page.php
 		Author(s)		: DAVINA Leong Shi Yun
-		Date Created	: 31 Jan 2016
+		Date Created	: 01 Feb 2016
 
 	- Contact Info -
 		Email	: leong.shi.yun@gmail.com
@@ -11,6 +11,7 @@
 
 ***********************************************************************************/
 /**
+ * @var $platform
  * @var $status_options
  */
 ?><!DOCTYPE html>
@@ -29,12 +30,13 @@
         <ol class="breadcrumb">
             <li><a href="<?=site_url('admin/authenticate/start');?>">Home</a></li>
             <li><a href="<?=site_url('admin/platform/browse');?>"><i class="fa fa-desktop fa-fw"></i> Platforms</a></li>
-            <li class="active">Create Platform</li>
+            <li><a href="<?=site_url('admin/platform/view/' . $platform['platform_id']);?>">Platform ID: <?=$platform['platform_id'];?></a></li>
+            <li class="active">Edit Platform</li>
         </ol>
 
         <div class="row">
             <div id="main" class="col-lg-12">
-                <h1 class="page-header">Create Platform</h1>
+                <h1 class="page-header">Edit Platform</h1>
 
                 <div class="row">
                     <div class="col-md-10">
@@ -46,31 +48,26 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="platform_name">Name <span class="text-danger">*</span></label>
                                     <div class="col-md-10">
-                                        <input class="form-control" type="text" id="platform_name" name="platform_name"
-                                               value="<?=set_value('platform_name');?>" required maxlength="512" />
+                                        <input class="form-control" type="text" id="platform_name" name="platform_name" value="<?=set_value('platform_name', $platform['platform_name']);?>" required maxlength="512" />
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="platform_description">Description <span class="text-danger">*</span></label>
                                     <div class="col-md-10">
-                                        <input class="form-control" type="text" id="platform_description"
-                                               name="platform_description" value="<?=set_value('platform_description');?>"
-                                               required maxlength="512" />
+                                        <input class="form-control" type="text" id="platform_description" name="platform_description" value="<?=set_value('platform_description', $platform['platform_description']);?>" required maxlength="512" />
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="platform_icon">Icon <span class="text-danger">*</span></label>
                                     <div class="col-md-10">
-                                        <input class="form-control" type="text" id="platform_icon"
-                                               name="platform_icon" value="<?=set_value('platform_icon');?>"
-                                               required maxlength="512" />
+                                        <input class="form-control" type="text" id="platform_icon" name="platform_icon" value="<?=set_value('platform_icon', $platform['platform_icon']);?>" required maxlength="512" />
                                     </div>
                                 </div>
                             </fieldset>
 
-                            <fieldset>
+                            <fielset>
                                 <legend>Admin</legend>
 
                                 <div class="form-group">
@@ -79,12 +76,26 @@
                                         <select class="form-control" id="platform_status" name="platform_status" required>
                                             <option id="platform_status_0" value="">-- Select Status --</option>
                                             <?php foreach($status_options as $key=>$status_option): ?>
-                                                <option id="platform_status_<?=$key+1;?>" value="<?=$status_option;?>" <?=set_select("platform_status", $status_option);?>><?=$status_option;?></option>
+                                                <option id="platform_status_<?=$key+1;?>" value="<?=$status_option;?>" <?=set_select("platform_status", $status_option, ($platform['platform_status'] == $status_option));?>><?=$status_option;?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
                                 </div>
-                            </fieldset>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="platform_status">Date Added</label>
+                                    <div class="col-md-10">
+                                        <p id="date_added" class="form-control-static"><?=format_dd_mmm_yyyy_hh_ii_ss($platform['date_added']);?></p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="platform_status">Last Updated</label>
+                                    <div class="col-md-10">
+                                        <p id="last_updated" class="form-control-static"><?=format_rfc($platform['last_updated']);?></p>
+                                    </div>
+                                </div>
+                            </fielset>
 
                             <div class="form-group">
                                 <br/>
