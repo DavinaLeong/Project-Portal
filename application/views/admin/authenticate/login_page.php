@@ -48,7 +48,7 @@
                             <div class="form-group">
                                 <input class="form-control" id="password" name="password" type="password" required />
                             </div>
-                            <button class="btn btn-lg btn-primary btn-block" id="submit_btn" type="submit">Login</button>
+                            <button class="btn btn-lg btn-primary btn-block" id="submit_btn" type="submit"><i class="fa fa-sign-in fa-fw"></i> Login</button>
                         </fieldset>
                     </form>
                 </div>

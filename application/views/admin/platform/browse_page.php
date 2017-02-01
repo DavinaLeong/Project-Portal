@@ -28,12 +28,12 @@
     <div class="container-fluid">
         <ol class="breadcrumb">
             <li><a href="<?=site_url('admin/platform/browse');?>">Home</a></li>
-            <li class="active"><i class="fa fa-desktop fa-fw"></i> Platforms</li>
+            <li class="active">Platforms</li>
         </ol>
 
         <div class="row">
             <div id="main" class="col-lg-12">
-                <h1 class="page-header">Platforms</h1>
+                <h1 class="page-header text-info"><i class="fa fa-file-text-o fa-fw"></i> Platforms</h1>
 
                 <p class="lead">Click on a 'row' to view a Platform record.</p>
                 <?php $this->load->view('admin/_snippets/message_box');?>
@@ -46,6 +46,7 @@
                             <thead>
                             <tr>
                                 <th>Name</th>
+                                <th>Description</th>
                                 <th>Status</th>
                                 <th>Last Updated</th>
                             </tr>
@@ -55,6 +56,7 @@
                                 <tr class="clickable" onclick="goto_view(<?=$platform['platform_id'];?>)">
                                     <td><?=$platform['platform_name'];?></td>
                                     <td><?=$platform['platform_description'];?></td>
+                                    <td><span class="label label-default label-<?=strtolower($platform['platform_status']);?>"><?=$platform['platform_status'];?></span></td>
                                     <td data-sort="<?=format_dd_mm_yyyy_hh_ii_ss($platform['last_updated']);?>"
                                         ><?=$platform['last_updated'];?></td>
                                 </tr>

@@ -22,7 +22,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="delete_modal_label"><i class="fa fa-exclamation-triangle"></i>&nbsp; <?=$delete_modal_header;?></h4>
+                <h4 class="modal-title text-danger" id="delete_modal_label"><i class="fa fa-exclamation-triangle"></i>&nbsp; <?=$delete_modal_header;?></h4>
             </div>
             <div class="modal-body">
                 <div class="alert alert-danger" role="alert"><strong>This action cannot be undone.</strong></div>

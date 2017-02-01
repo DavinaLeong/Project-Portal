@@ -28,13 +28,13 @@
     <div class="container-fluid">
         <ol class="breadcrumb">
             <li><a href="<?=site_url('admin/authenticate/start');?>">Home</a></li>
-            <li><a href="<?=site_url('admin/platform/browse');?>"><i class="fa fa-desktop fa-fw"></i> Platforms</a></li>
+            <li><a href="<?=site_url('admin/platform/browse');?>">Platforms</a></li>
             <li class="active">Create Platform</li>
         </ol>
 
         <div class="row">
             <div id="main" class="col-lg-12">
-                <h1 class="page-header">Create Platform</h1>
+                <h1 class="page-header text-info"><i class="fa fa-plus fa-fw"></i> Create Platform</h1>
 
                 <div class="row">
                     <div class="col-md-10">

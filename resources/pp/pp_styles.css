@@ -20,3 +20,11 @@
 #main {
     min-height: 750px;
 }
+
+.label-publish {
+    background-color: #090;
+}
+
+.label-draft {
+    background-color: #c00;
+}

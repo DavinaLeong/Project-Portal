@@ -27,13 +27,13 @@
     <div class="container-fluid">
         <ol class="breadcrumb">
             <li><a href="<?=site_url('admin/authenticate/start');?>">Home</a></li>
-            <li><a href="<?=site_url('admin/platform/browse');?>"><i class="fa fa-desktop fa-fw"></i> Platforms</a></li>
+            <li><a href="<?=site_url('admin/platform/browse');?>">Platforms</a></li>
             <li class="active">Platform ID: <?=$platform['platform_id'];?></li>
         </ol>
 
         <div class="row">
             <div id="main" class="col-lg-12">
-                <h1 class="page-header">View Platform&nbsp;
+                <h1 class="page-header text-info"><i class="fa fa-eye fa-fw"></i> View Platform&nbsp;
                     <div class="btn-group">
                         <button id="action_btn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-gavel fa-fw"></i> Action <span class="caret"></span>
@@ -44,6 +44,8 @@
                         </ul>
                     </div>
                 </h1>
+
+                <?php $this->load->view('admin/_snippets/message_box'); ?>
 
                 <div class="row">
                     <div class="col-md-10">
@@ -80,7 +82,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="platform_status">Status</label>
                                     <div class="col-md-10">
-                                        <p id="platform_status" class="form-control-static"><?=$platform['platform_status'];?></p>
+                                        <p id="platform_status" class="form-control-static"><span class="label label-default label-<?=strtolower($platform['platform_status']);?>"><?=$platform['platform_status'];?></span></p>
                                     </div>
                                 </div>
 

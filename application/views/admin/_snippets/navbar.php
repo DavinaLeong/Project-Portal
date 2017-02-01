@@ -20,7 +20,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="<?=site_url();?>"><img src="<?=RESOURCES_FOLDER;?>pp/images/pp_logo.png" alt="Site Logo" height="16px" /> <?=ADMIN_SITE_NAME;?></a>
+        <a class="navbar-brand" href="<?=site_url('admin/authenticate/start');?>"><img src="<?=RESOURCES_FOLDER;?>pp/images/pp_logo.png" alt="Site Logo" height="16px" /> <?=ADMIN_SITE_NAME;?></a>
     </div>
     <!-- /.navbar-header -->
 
@@ -43,10 +43,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <a href="#"><i class="fa fa-desktop fa-fw"></i> Platforms<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="<?=site_url('admin/platform/browse');?>">Browse Platforms</a>
+                            <a href="<?=site_url('admin/platform/browse');?>"><i class="fa fa-file-text-o fa-fw"></i> Browse Platforms</a>
                         </li>
                         <li>
-                            <a href="<?=site_url('admin/platform/create');?>">Create Platform</a>
+                            <a href="<?=site_url('admin/platform/create');?>"><i class="fa fa-plus fa-fw"></i> Create Platform</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->

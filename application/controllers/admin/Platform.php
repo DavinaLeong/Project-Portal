@@ -43,7 +43,7 @@ class Platform extends CI_Controller
             if($platform_id = $this->Platform_model->insert($this->_prepare_create_platform_array()))
             {
                 $this->User_log_model->log_message('Platform created. | platform_id: ' . $platform_id);
-                $this->session->set_userdata('message', 'Platform created.');
+                $this->session->set_userdata('message', 'Platform created. <a href="' . site_url() . 'admin/platform/create">Create another.</a>');
                 redirect('admin/platform/view/' . $platform_id);
             }
             else

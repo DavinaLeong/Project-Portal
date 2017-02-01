@@ -29,14 +29,14 @@
     <div class="container-fluid">
         <ol class="breadcrumb">
             <li><a href="<?=site_url('admin/authenticate/start');?>">Home</a></li>
-            <li><a href="<?=site_url('admin/platform/browse');?>"><i class="fa fa-desktop fa-fw"></i> Platforms</a></li>
+            <li><a href="<?=site_url('admin/platform/browse');?>">Platforms</a></li>
             <li><a href="<?=site_url('admin/platform/view/' . $platform['platform_id']);?>">Platform ID: <?=$platform['platform_id'];?></a></li>
             <li class="active">Edit Platform</li>
         </ol>
 
         <div class="row">
             <div id="main" class="col-lg-12">
-                <h1 class="page-header">Edit Platform</h1>
+                <h1 class="page-header text-info"><i class="fa fa-pencil-square-o fa-fw"></i> Edit Platform</h1>
 
                 <div class="row">
                     <div class="col-md-10">
