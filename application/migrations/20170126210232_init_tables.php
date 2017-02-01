@@ -20,7 +20,7 @@ class Migration_Init_tables extends CI_Migration
 	public function up()
 	{
 		$this->load->model('Migration_model');
-		echo '<h1>Migration</h1>';
+		echo '<h1>Migration: Init Tables</h1>';
 		echo '<hr/>';
 		echo '<p>Running Up Script...</p>';
 		echo '<p style="text-align: center;">- start of script -</p>';
@@ -32,7 +32,7 @@ class Migration_Init_tables extends CI_Migration
 	public function down()
 	{
 		$this->load->model('Migration_model');
-		echo '<h1>Migration</h1>';
+		echo '<h1>Migration: Init Tables</h1>';
 		echo '<hr/>';
 		echo '<p>Running Down Script...</p>';
 		echo '<p style="text-align: center;">- start of script -</p>';
