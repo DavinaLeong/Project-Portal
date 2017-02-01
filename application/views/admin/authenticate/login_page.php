@@ -15,6 +15,7 @@
 <head>
 <?php $this->load->view('admin/_snippets/meta'); ?>
 <?php $this->load->view('admin/_snippets/head_resources'); ?>
+<link href="<?=RESOURCES_FOLDER;?>pp/pp_parsley.css" rel="stylesheet" type="text/css">
 <style>
     html, body {
         width: 100%;
@@ -47,7 +48,7 @@
                             <div class="form-group">
                                 <input class="form-control" id="password" name="password" type="password" required />
                             </div>
-                            <button class="btn btn-lg btn-primary btn-block" id="submit_btn" type="submit">Login</button>
+                            <button class="btn btn-lg btn-primary btn-block" id="submit_btn" type="submit"><i class="fa fa-sign-in fa-fw"></i> Login</button>
                         </fieldset>
                     </form>
                 </div>
@@ -59,5 +60,6 @@
     </div>
 </div>
 <?php $this->load->view('admin/_snippets/body_resources'); ?>
+<script src="<?=RESOURCES_FOLDER;?>vendor/parsleyjs/parsley.min.js"></script>
 </body>
 </html>
