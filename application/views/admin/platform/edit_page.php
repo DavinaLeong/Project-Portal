@@ -67,7 +67,7 @@
                                 </div>
                             </fieldset>
 
-                            <fielset>
+                            <fieldset>
                                 <legend>Admin</legend>
 
                                 <div class="form-group">
@@ -95,7 +95,7 @@
                                         <p id="last_updated" class="form-control-static"><?=format_rfc($platform['last_updated']);?></p>
                                     </div>
                                 </div>
-                            </fielset>
+                            </fieldset>
 
                             <div class="form-group">
                                 <br/>

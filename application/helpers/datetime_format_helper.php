@@ -53,6 +53,12 @@ function format_dd_mm_yyyy_hh_ii_ss($datetime_str)
     return $datetime->format('d-m-Y H:i:s');
 }
 
+function format_dd_mmm_yyyy($datetime_str)
+{
+    $datetime = new DateTime($datetime_str, new DateTimeZone(DATETIME_ZONE));
+    return $datetime->format('d M Y');
+}
+
 function format_dd_mmm_yyyy_hh_ii_ss($datetime_str)
 {
     $datetime = new DateTime($datetime_str, new DateTimeZone(DATETIME_ZONE));

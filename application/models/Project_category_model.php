@@ -43,7 +43,7 @@ class Project_category_model extends CI_Model
         if($pc)
         {
             $temp_array = array(
-                'pc_name' => $pc['$pc_name'],
+                'pc_name' => $pc['pc_name'],
                 'pc_description' => $pc['pc_description']
             );
 
@@ -81,8 +81,19 @@ class Project_category_model extends CI_Model
     {
         if($pc_id)
         {
-            $this->db->delete(TABLE_PROJECT_CATEGORY, array('pc_id' => $pc_id));
-            return $this->db->affected_rows();
+            if($var = $this->db->delete(TABLE_PROJECT_CATEGORY, array('pc_id' => $pc_id)))
+            {
+                var_dump($var);
+                if($this->count_all() <= 0)
+                {
+                    $this->db->truncate(TABLE_PROJECT_CATEGORY);
+                }
+                return TRUE;
+            }
+            else
+            {
+                return FALSE;
+            }
         }
         else
         {

@@ -43,8 +43,8 @@ class Project_category extends CI_Controller
             if($pc_id = $this->Project_category_model->insert($this->_prepare_create_array()))
             {
                 $this->User_log_model->log_message('Project Category created. | pc_id: ' . $pc_id);
-                $this->session->set_userdata('message', 'Project Category created. | <a href="' . site_url() . '/admin/project_category.create">Create another.</a>');
-                redirect('admin/project_category/view/' . $pc_id);
+                $this->session->set_userdata('message', 'Project Category created. <a href="' . site_url() . '/admin/project_category/create">Create another.</a>');
+                redirect('admin/project_category/browse');
             }
             else
             {
@@ -82,7 +82,7 @@ class Project_category extends CI_Controller
                 {
                     $this->User_log_model->log_message('Project Category updated. | pc_id: ' . $pc_id);
                     $this->session->set_userdata('message', 'Project Category updated.');
-                    redirect('admin/project_category/view/' . $pc_id);
+                    redirect('admin/project_category/browse');
                 }
                 else
                 {
@@ -125,14 +125,13 @@ class Project_category extends CI_Controller
             {
                 $this->User_log_model->log_message('Project Category deleted. | pc_id: ' . $pc_id);
                 $this->session->set_userdata('message', 'Project Category deleted.');
-                redirect('admin/project_category/browse');
             }
             else
             {
                 $this->User_log_model->log_message('Unable to delete Project Category. | pc_id: ' . $pc_id);
                 $this->session->set_userdata('message', 'Unable to delete Project Category.');
-                redirect('admin/project_category/view/' . $pc_id);
             }
+            redirect('admin/project_category/browse');
         }
         else
         {
