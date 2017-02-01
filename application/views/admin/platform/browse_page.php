@@ -12,6 +12,7 @@
 ***********************************************************************************/
 /**
  * @var $platforms
+ * @var $create_uri
  */
 ?><!DOCTYPE html>
 <html lang="en">
@@ -37,7 +38,8 @@
                 <h1 class="page-header">Platforms</h1>
 
                 <p class="lead">Click on a 'row' to view a Platform record.</p>
-                <?php $this->load->view('admin/_snippets/message_box'); ?>
+                <?php $this->load->view('admin/_snippets/message_box');?>
+                <?php if( ! $platforms) $this->load->view('admin/_snippets/no_records_box'); ?>
 
                 <div class="row">
                     <div class="col-md-12">

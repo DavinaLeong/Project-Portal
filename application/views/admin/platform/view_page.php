@@ -49,47 +49,55 @@
                     <div class="col-md-10">
 
                         <form id="form" class="form-horizontal">
-                            <div class="form-group">
-                                <label class="control-label col-md-2" for="platform_name">Name</label>
-                                <div class="col-md-10">
-                                    <p id="platform_name" class="form-control-static"><?=$platform['platform_name'];?></p>
-                                </div>
-                            </div>
+                            <fieldset>
+                                <legend>Details</legend>
 
-                            <div class="form-group">
-                                <label class="control-label col-md-2" for="platform_description">Description</label>
-                                <div class="col-md-10">
-                                    <p id="platform_description" class="form-control-static"><?$platform['platform_description'];?></p>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="platform_name">Name</label>
+                                    <div class="col-md-10">
+                                        <p id="platform_name" class="form-control-static"><?=$platform['platform_name'];?></p>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label class="control-label col-md-2" for="platform_icon">Icon</label>
-                                <div class="col-md-10">
-                                    <p id="platform_icon" class="form-control-static"><i class="fa <?=$platform['platform_icon'];?> fa-fw"></i> <small>(<?=$platform['platform_icon'];?>)</small></p>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="platform_description">Description</label>
+                                    <div class="col-md-10">
+                                        <p id="platform_description" class="form-control-static"><?=$platform['platform_description'];?></p>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label class="control-label col-md-2" for="platform_status">Status</label>
-                                <div class="col-md-10">
-                                    <p id="platform_status" class="form-control-static"><?=$platform['platform_status'];?></p>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="platform_icon">Icon</label>
+                                    <div class="col-md-10">
+                                        <p id="platform_icon" class="form-control-static"><i class="fa <?=$platform['platform_icon'];?> fa-fw"></i> <small>(<?=$platform['platform_icon'];?>)</small></p>
+                                    </div>
                                 </div>
-                            </div>
+                            </fieldset>
 
-                            <div class="form-group">
-                                <label class="control-label col-md-2" for="platform_status">Date Added</label>
-                                <div class="col-md-10">
-                                    <p id="date_added" class="form-control-static"><?=format_dd_mm_yyy_hh_ii_ss($platform['date_added']);?></p>
-                                </div>
-                            </div>
+                            <fieldset>
+                                <legend>Admin</legend>
 
-                            <div class="form-group">
-                                <label class="control-label col-md-2" for="platform_status">Last Updated</label>
-                                <div class="col-md-10">
-                                    <p id="last_updated" class="form-control-static"><?=format_rfc($platform['last_updated']);?></p>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="platform_status">Status</label>
+                                    <div class="col-md-10">
+                                        <p id="platform_status" class="form-control-static"><?=$platform['platform_status'];?></p>
+                                    </div>
                                 </div>
-                            </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="platform_status">Date Added</label>
+                                    <div class="col-md-10">
+                                        <p id="date_added" class="form-control-static"><?=format_dd_mm_yyy_hh_ii_ss($platform['date_added']);?></p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="platform_status">Last Updated</label>
+                                    <div class="col-md-10">
+                                        <p id="last_updated" class="form-control-static"><?=format_rfc($platform['last_updated']);?></p>
+                                    </div>
+                                </div>
+                            </fieldset>
                         </form>
 
                     </div>

@@ -40,40 +40,54 @@
                     <div class="col-md-10">
 
                         <form id="form" class="form-horizontal" method="post" data-parsley-validate>
-                            <div class="form-group">
-                                <label class="control-label col-md-2" for="platform_name">Name <span class="text-danger">*</span></label>
-                                <div class="col-md-10">
-                                    <input class="form-control" type="text" id="platform_name" name="platform_name" value="<?=set_value('platform_name');?>" required maxlength="512" />
+                            <fieldset>
+                                <legend>Details</legend>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="platform_name">Name <span class="text-danger">*</span></label>
+                                    <div class="col-md-10">
+                                        <input class="form-control" type="text" id="platform_name" name="platform_name"
+                                               value="<?=set_value('platform_name');?>" required maxlength="512" />
+                                    </div>
                                 </div>
-                            </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="platform_description">Description <span class="text-danger">*</span></label>
+                                    <div class="col-md-10">
+                                        <input class="form-control" type="text" id="platform_description"
+                                               name="platform_description" value="<?=set_value('platform_description');?>"
+                                               required maxlength="512" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="platform_icon">Icon <span class="text-danger">*</span></label>
+                                    <div class="col-md-10">
+                                        <input class="form-control" type="text" id="platform_icon"
+                                               name="platform_icon" value="<?=set_value('platform_icon');?>"
+                                               required maxlength="512" />
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset>
+                                <legend>Admin</legend>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="platform_status">Status <span class="text-danger">*</span></label>
+                                    <div class="col-md-10">
+                                        <select class="form-control" id="platform_status" name="platform_status" required>
+                                            <option id="platform_status_0" value="">-- Select Status --</option>
+                                            <?php foreach($status_options as $key=>$status_option): ?>
+                                                <option id="platform_status_<?=$key+1;?>" value="<?=$status_option;?>" <?=set_select("platform_status", $status_option);?>><?=$status_option;?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </fieldset>
 
                             <div class="form-group">
-                                <label class="control-label col-md-2" for="platform_description">Description <span class="text-danger">*</span></label>
-                                <div class="col-md-10">
-                                    <input class="form-control" type="text" id="platform_description" name="platform_description" value="<?=set_value('platform_description');?>" required maxlength="512" />
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-md-2" for="platform_icon">Icon <span class="text-danger">*</span></label>
-                                <div class="col-md-10">
-                                    <input class="form-control" type="text" id="platform_icon" name="platform_icon" value="<?=set_value('platform_icon');?>" required maxlength="512" />
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-md-2" for="platform_status">Status <span class="text-danger">*</span></label>
-                                <div class="col-md-10">
-                                    <select class="form-control" id="platform_status" name="platform_status" required>
-                                        <option id="platform_status_0" value="">-- Select Status --</option>
-                                        <?php foreach($status_options as $key=>$status_option): ?>
-                                        <option id="platform_status_<?=$key+1;?>" value="<?=$status_option;?>" <?=set_select("platform_status", $status_option);?>><?=$status_option;?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
+                                <br/>
                                 <div class="col-md-10 col-md-offset-2">
                                     <button id="submit_btn" class="btn btn-primary" type="submit"><i class="fa fa-check fa-fw"></i> Submit</button>
                                 </div>

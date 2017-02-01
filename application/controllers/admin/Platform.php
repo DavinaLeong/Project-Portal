@@ -28,7 +28,8 @@ class Platform extends CI_Controller
     {
         $this->User_log_model->validate_access();
         $data = array(
-            'platforms' => $this->Platform_model->get_all()
+            'platforms' => $this->Platform_model->get_all(),
+            'create_uri' => 'admin/platform/create'
         );
         $this->load->view('admin/platform/browse_page', $data);
     }
