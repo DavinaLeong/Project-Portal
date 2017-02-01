@@ -18,9 +18,7 @@
 <html lang="en">
 <head>
 <?php $this->load->view('admin/_snippets/meta'); ?>
-<?php $this->load->view('admin/_snippets/head_resources'); ?>
-<link href="<?=RESOURCES_FOLDER;?>sb-admin-2/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
-<link href="<?=RESOURCES_FOLDER;?>sb-admin-2/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet" type="text/css" />
+<?php $this->load->view('admin/_snippets/head_resources_datatables'); ?>
 </head>
 <body>
 <div id="wrapper">
@@ -44,7 +42,7 @@
                 <div class="row">
                     <div class="col-md-12">
 
-                        <table id="dataTable">
+                        <table id="dataTable" class="table table-hover">
                             <thead>
                             <tr>
                                 <th>Name</th>
@@ -73,15 +71,13 @@
     </div>
 </div>
 </div>
-<?php $this->load->view('admin/_snippets/body_resources'); ?>
-<script src="<?=RESOURCES_FOLDER;?>sb-admin-2/vendor/datatables/js/jquery.dataTables.min.js"></script>
-<script src="<?=RESOURCES_FOLDER;?>sb-admin-2/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
-<script src="<?=RESOURCES_FOLDER;?>sb-admin-2/vendor/datatables-responsive/dataTables.responsive.js"></script>
+<?php $this->load->view('admin/_snippets/body_resources_datatables'); ?>
 <script>
     $(document).ready(function()
     {
         $('#dataTable').DataTable({
-            "order": [[2, 'desc']]
+            "order": [[2, 'desc']],
+            "responsive": true
         });
     });
 
