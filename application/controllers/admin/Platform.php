@@ -71,10 +71,10 @@ class Platform extends CI_Controller
     private function _prepare_create_platform_array()
     {
         $platform = array();
-        $platform['platform_name'];
-        $platform['platform_icon'];
-        $platform['platform_description'];
-        $platform['platform_status'];
+        $platform['platform_name'] = $this->input->post('platform_name');
+        $platform['platform_icon'] = $this->input->post('platform_icon');
+        $platform['platform_description'] = $this->input->post('platform_description');
+        $platform['platform_status'] = $this->input->post('platform_status');
 
         return $platform;
     }
@@ -86,7 +86,9 @@ class Platform extends CI_Controller
         if($platform)
         {
             $data = array(
-                'platform' => $platform
+                'platform' => $platform,
+                'delete_modal_header' => 'Delete Platform Record',
+                'delete_uri' => 'admin/platform/delete/' . $platform_id
             );
             $this->load->view('admin/platform/view_page', $data);
         }
@@ -144,10 +146,10 @@ class Platform extends CI_Controller
 
     private function _prepare_edit_platform_array($platform)
     {
-        $platform['platform_name'];
-        $platform['platform_icon'];
-        $platform['platform_description'];
-        $platform['platform_status'];
+        $platform['platform_name'] = $this->input->post('platform_name');
+        $platform['platform_icon'] = $this->input->post('platform_icon');
+        $platform['platform_description'] = $this->input->post('platform_description');
+        $platform['platform_status'] = $this->input->post('platform_status');
 
         return $platform;
     }
