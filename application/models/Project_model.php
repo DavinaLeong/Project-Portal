@@ -43,6 +43,24 @@ class Project_model extends CI_Controller
 		}
 	}
 
+	public function get_by_id_project_category($project_id=FALSE)
+	{
+		if($project_id)
+		{
+			$this->db->select(TABLE_PROJECT . '.*, ' . TABLE_PROJECT_CATEGORY . '.pc_name');
+			$this->db->from(TABLE_PROJECT);
+			$this->db->join(TABLE_PROJECT_CATEGORY, 'project.pc_id = project_category.pc_id', 'left');
+			$this->db->where(TABLE_PROJECT . '.project_id = ', $project_id);
+
+			$query = $this->db->get();
+			return $query->row_array();
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+
 	public function get_by_pc_id($pc_id=FALSE,
 								 $column='last_updated',
 								 $direction='DESC')
@@ -51,6 +69,27 @@ class Project_model extends CI_Controller
 		{
 			$this->db->order_by($column, $direction);
 			$query = $this->db->get_where(TABLE_PROJECT, array('pc_id' => $pc_id));
+			return $query->result_array();
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+
+	public function get_by_pc_id_project_category($pc_id=FALSE,
+								 $column='last_updated',
+								 $direction='DESC')
+	{
+		if($pc_id)
+		{
+			$this->db->select(TABLE_PROJECT . '.*, ' . TABLE_PROJECT_CATEGORY . '.pc_name');
+			$this->db->from(TABLE_PROJECT);
+			$this->db->join(TABLE_PROJECT_CATEGORY, 'project.pc_id = project_category.pc_id', 'left');
+			$this->db->where(TABLE_PROJECT . '.pc_id = ', $pc_id);
+			$this->db->order_by($column, $direction);
+
+			$query = $this->db->get();
 			return $query->result_array();
 		}
 		else
