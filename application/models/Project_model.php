@@ -25,6 +25,23 @@ class Project_model extends CI_Model
 		return $query->result_array();
 	}
 
+    public function get_all_ids()
+    {
+        if($projects = $this->get_all('project_id', 'ASC'))
+        {
+            $id_array = array();
+            foreach($projects as $project)
+            {
+                $id_array[] = $project['project_id'];
+            }
+            return $id_array;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
 	public function get_by_id($project_id=FALSE)
 	{
 		if($project_id)
@@ -56,6 +73,32 @@ class Project_model extends CI_Model
 			return FALSE;
 		}
 	}
+
+    public function get_by_status($status='Publish',
+                                  $column='last_updated',
+                                  $direction='DESC')
+    {
+        $this->db->order_by($column, $direction);
+        $query = $this->db->get(TABLE_PROJECT, array('project_status' => $status));
+        return $query->result_array();
+    }
+
+    public function get_by_status_ids($status='Publish')
+    {
+        if($projects = $this->get_by_status($status, 'project_id', 'ASC'))
+        {
+            $id_array = array();
+            foreach($projects as $project)
+            {
+                $id_array[] = $project['project_id'];
+            }
+            return $id_array;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
 
 	public function get_by_pc_id($pc_id=FALSE,
 								 $column='last_updated',
