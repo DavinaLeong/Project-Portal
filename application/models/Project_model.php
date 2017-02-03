@@ -38,13 +38,14 @@ class Project_model extends CI_Model
 		}
 	}
 
-	public function get_by_id_project_category($project_id=FALSE)
+	public function get_by_id_platform_project_category($project_id=FALSE)
 	{
 		if($project_id)
 		{
 			$this->db->select(TABLE_PROJECT . '.*, ' . TABLE_PROJECT_CATEGORY . '.pc_name');
 			$this->db->from(TABLE_PROJECT);
-			$this->db->join(TABLE_PROJECT_CATEGORY, 'project.pc_id = project_category.pc_id', 'left');
+            $this->db->join(TABLE_PLATFORM, TABLE_PROJECT . 'platform_id = ' . TABLE_PLATFORM . '.platform_id', 'left');
+			$this->db->join(TABLE_PROJECT_CATEGORY, TABLE_PROJECT . '.pc_id = ' . TABLE_PROJECT_CATEGORY . '.pc_id', 'left');
 			$this->db->where(TABLE_PROJECT . '.project_id = ', $project_id);
 
 			$query = $this->db->get();
@@ -72,7 +73,7 @@ class Project_model extends CI_Model
 		}
 	}
 
-	public function get_by_pc_id_project_category($pc_id=FALSE,
+	public function get_by_pc_id_platform_project_category($pc_id=FALSE,
 								 $column='last_updated',
 								 $direction='DESC')
 	{
@@ -80,6 +81,7 @@ class Project_model extends CI_Model
 		{
 			$this->db->select(TABLE_PROJECT . '.*, ' . TABLE_PROJECT_CATEGORY . '.pc_name');
 			$this->db->from(TABLE_PROJECT);
+            $this->db->join(TABLE_PLATFORM, TABLE_PROJECT . 'platform_id = ' . TABLE_PLATFORM . '.platform_id', 'left');
 			$this->db->join(TABLE_PROJECT_CATEGORY, 'project.pc_id = project_category.pc_id', 'left');
 			$this->db->where(TABLE_PROJECT . '.pc_id = ', $pc_id);
 			$this->db->order_by($column, $direction);
@@ -93,12 +95,51 @@ class Project_model extends CI_Model
 		}
 	}
 
+    public function get_by_platform_id($platform_id=FALSE,
+                                       $column='last_updated',
+                                       $direction='DESC')
+    {
+        if($platform_id)
+        {
+            $this->db->order_by($column, $direction);
+            $query = $this->db->get_where(TABLE_PROJECT, array('platform_id' => $platform_id));
+            return $query->result_array();
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
+    public function get_by_platform_id_platform_project_category($platform_id=FALSE,
+                                                           $column='last_updated',
+                                                           $direction='DESC')
+    {
+        if($platform_id)
+        {
+            $this->db->select(TABLE_PROJECT . '.*, ' . TABLE_PROJECT_CATEGORY . '.pc_name');
+            $this->db->from(TABLE_PROJECT);
+            $this->db->join(TABLE_PLATFORM, TABLE_PROJECT . 'platform_id = ' . TABLE_PLATFORM . '.platform_id', 'left');
+            $this->db->join(TABLE_PROJECT_CATEGORY, 'project.pc_id = project_category.pc_id', 'left');
+            $this->db->where(TABLE_PROJECT . '.platform_id = ', $platform_id);
+            $this->db->order_by($column, $direction);
+
+            $query = $this->db->get();
+            return $query->result_array();
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
 	public function insert($project=FALSE)
 	{
 		if($project)
 		{
 			$temp_array = array(
 				'pc_id' => $project['pc_id'],
+                'platform_id' => $project['platform_id'],
                 'project_name' => $project['project_name'],
 				'project_description' => $project['project_description'],
                 'project_icon' => $project['project_icon'],
@@ -122,6 +163,7 @@ class Project_model extends CI_Model
 		{
 			$temp_array = array(
 				'pc_id' => $project['pc_id'],
+                'platform_id' => $project['platform_id'],
                 'project_name' => $project['project_name'],
 				'project_description' => $project['project_description'],
                 'project_icon' => $project['project_icon'],
@@ -160,6 +202,52 @@ class Project_model extends CI_Model
 			return FALSE;
 		}
 	}
+
+    public function delete_by_platform_id($platform_id=FALSE)
+    {
+        if($platform_id)
+        {
+            if($this->db->delete(TABLE_PROJECT, array('platform_id' => $platform_id)))
+            {
+                if($this->count_all() <= 0)
+                {
+                    $this->db->truncate(TABLE_PROJECT);
+                }
+                return TRUE;
+            }
+            else
+            {
+                return FALSE;
+            }
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
+    public function delete_by_pc_id($pc_id=FALSE)
+    {
+        if($pc_id)
+        {
+            if($this->db->delete(TABLE_PROJECT, array('pc_id' => $pc_id)))
+            {
+                if($this->count_all() <= 0)
+                {
+                    $this->db->truncate(TABLE_PROJECT);
+                }
+                return TRUE;
+            }
+            else
+            {
+                return FALSE;
+            }
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
 
 	public function _status_array()
 	{

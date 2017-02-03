@@ -25,11 +25,45 @@ class Platform_model extends CI_Model
         return $query->result_array();
     }
 
+    public function get_all_ids()
+    {
+        if($platforms = $this->get_all())
+        {
+            $id_array = array();
+            foreach($platforms as $platform)
+            {
+                $id_array[] = $platform['platform_id'];
+            }
+            return $id_array;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
     public function get_by_status($status='Publish', $column='last_updated', $direction='DESC')
     {
         $this->db->order_by($column, $direction);
         $query = $this->db->get_where(TABLE_PLATFORM, array('status' => $status));
         return $query->result_array();
+    }
+
+    public function get_by_status_ids($status='Publish')
+    {
+        if($platforms = $this->get_by_status($status))
+        {
+            $id_array = array();
+            foreach($platforms as $platform)
+            {
+                $id_array[] = $platform['platform_id'];
+            }
+            return $id_array;
+        }
+        else
+        {
+            return FALSE;
+        }
     }
 
     public function get_by_id($platform_id=FALSE)

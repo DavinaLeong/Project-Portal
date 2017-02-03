@@ -73,9 +73,9 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-2" for="project_icon">Icon <span class="text-danger">*</span></label>
+                                    <label class="control-label col-md-2" for="project_icon">Icon</label>
                                     <div class="col-md-10">
-                                        <input class="form-control" type="text" id="project_icon" name="project_icon" value="<?=set_value('project_icon', $project['project_icon']);?>" required maxlength="512" />
+                                        <input class="form-control" type="text" id="project_icon" name="project_icon" value="<?=set_value('project_icon', $project['project_icon']);?>" maxlength="512" />
                                     </div>
                                 </div>
                             </fieldset>
