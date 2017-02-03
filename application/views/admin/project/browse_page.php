@@ -78,7 +78,7 @@
     $(document).ready(function()
     {
         $('#dataTable').DataTable({
-            "order": [[2, 'desc']],
+            "order": [[3, 'desc']],
             "responsive": true
         });
     });

@@ -39,6 +39,9 @@
                 <div class="row">
                     <div class="col-md-10">
 
+                        <?php $this->load->view('admin/platform/validation_errors_box'); ?>
+                        <?php $this->load->view('admin/platform/message_box'); ?>
+
                         <form id="form" class="form-horizontal" method="post" data-parsley-validate>
                             <fieldset>
                                 <legend>Details</legend>

@@ -64,11 +64,12 @@ class Project extends CI_Controller
     private function _set_rules_create_project()
     {
 		$pc_ids_str = implode(',', $this->Project_category_model->get_all_ids());
-		$this->form_validation->set_rules('pc_id', 'Project Category', 'trim|required|in_list[' . $pc_ids_str . ']');
-        $this->form_validation->set_rules('project_name', 'Project Name', 'trim|required|max_length[512]');
-        $this->form_validation->set_rules('project_description', 'Project Description', 'trim|required|max_length[512]');
+		$this->form_validation->set_rules('pc_id', 'Category', 'trim|required|in_list[' . $pc_ids_str . ']');
+        $this->form_validation->set_rules('project_name', 'Name', 'trim|required|max_length[512]');
+        $this->form_validation->set_rules('project_icon', 'Icon', 'trim|max_length[512]');
+        $this->form_validation->set_rules('project_description', 'Description', 'trim|required|max_length[512]');
         $status_str = implode(',', $this->Project_model->_status_array());
-        $this->form_validation->set_rules('project_status', 'Project Status',
+        $this->form_validation->set_rules('project_status', 'Status',
             'trim|required|in_list[' . $status_str . ']|max_length[512]');
     }
 
@@ -80,14 +81,13 @@ class Project extends CI_Controller
         $project['project_icon'] = $this->input->post('project_icon');
         $project['project_description'] = $this->input->post('project_description');
         $project['project_status'] = $this->input->post('project_status');
-
         return $project;
     }
 
     public function view($project_id)
     {
         $this->User_log_model->validate_access();
-        $project = $this->Project_model->get_by_pc_id_project_category($project_id);
+        $project = $this->Project_model->get_by_id_project_category($project_id);
         if($project)
         {
             $data = array(
@@ -129,7 +129,7 @@ class Project extends CI_Controller
 
             $data = array(
                 'project' => $project,
-				'project_category' => $this->Project_category_model->get_all(),
+				'project_categories' => $this->Project_category_model->get_all(),
                 'status_options' => $this->Project_model->_status_array()
             );
             $this->load->view('admin/project/edit_page', $data);
@@ -143,13 +143,14 @@ class Project extends CI_Controller
 
     private function _set_rules_edit_project()
     {
-		$pc_ids_str = implode(',', $this->Project_category_model->get_all_ids());
-		$this->form_validation->set_rules('pc_id', 'Project Category', 'trim|required|in_list[' . $pc_ids_str . ']');
-		$this->form_validation->set_rules('project_name', 'Project Name', 'trim|required|max_length[512]');
-		$this->form_validation->set_rules('project_description', 'Project Description', 'trim|required|max_length[512]');
-		$status_str = implode(',', $this->Project_model->_status_array());
-		$this->form_validation->set_rules('project_status', 'Project Status',
-			'trim|required|in_list[' . $status_str . ']|max_length[512]');
+        $pc_ids_str = implode(',', $this->Project_category_model->get_all_ids());
+        $this->form_validation->set_rules('pc_id', 'Category', 'trim|required|in_list[' . $pc_ids_str . ']');
+        $this->form_validation->set_rules('project_name', 'Name', 'trim|required|max_length[512]');
+        $this->form_validation->set_rules('project_icon', 'Icon', 'trim|max_length[512]');
+        $this->form_validation->set_rules('project_description', 'Description', 'trim|required|max_length[512]');
+        $status_str = implode(',', $this->Project_model->_status_array());
+        $this->form_validation->set_rules('project_status', 'Status',
+            'trim|required|in_list[' . $status_str . ']|max_length[512]');
     }
 
     private function _prepare_edit_project_array($project)
@@ -159,7 +160,6 @@ class Project extends CI_Controller
         $project['project_icon'] = $this->input->post('project_icon');
         $project['project_description'] = $this->input->post('project_description');
         $project['project_status'] = $this->input->post('project_status');
-
         return $project;
     }
 

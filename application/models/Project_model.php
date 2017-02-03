@@ -11,13 +11,8 @@
 
 ***********************************************************************************/
 
-class Project_model extends CI_Controller
+class Project_model extends CI_Model
 {
-	public function __construct()
-	{
-		parent::__construct();
-	}
-
 	public function count_all()
 	{
 		return $this->db->count_all(TABLE_PROJECT);
@@ -104,7 +99,9 @@ class Project_model extends CI_Controller
 		{
 			$temp_array = array(
 				'pc_id' => $project['pc_id'],
+                'project_name' => $project['project_name'],
 				'project_description' => $project['project_description'],
+                'project_icon' => $project['project_icon'],
 				'project_status' => $project['project_status']
 			);
 
@@ -125,7 +122,9 @@ class Project_model extends CI_Controller
 		{
 			$temp_array = array(
 				'pc_id' => $project['pc_id'],
+                'project_name' => $project['project_name'],
 				'project_description' => $project['project_description'],
+                'project_icon' => $project['project_icon'],
 				'project_status' => $project['project_status']
 			);
 
