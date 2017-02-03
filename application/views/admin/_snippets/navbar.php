@@ -69,6 +69,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </li>
                     </ul>
                 </li>
+
+                <!-- project module start -->
+                <li>
+                    <a href="#"><i class="fa fa-sitemap fa-fw"></i> Project<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="<?=site_url('admin/project/browse');?>"><i class="fa fa-file-text-o fa-fw"></i> Browse Projects</a>
+                        </li>
+                        <li>
+                            <a href="<?=site_url('admin/project/create');?>"><i class="fa fa-plus fa-fw"></i> Create Project</a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </div>
         <!-- sidebar-collapse end -->

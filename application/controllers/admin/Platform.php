@@ -21,7 +21,7 @@ class Platform extends CI_Controller
 	
 	public function index()
 	{
-	    redirect('admin/authenticate/browse');
+	    redirect('admin/platform/browse');
 	}
 
     public function browse()
@@ -86,6 +86,7 @@ class Platform extends CI_Controller
         $platform = $this->Platform_model->get_by_id($platform_id);
         if($platform)
         {
+            $this->load->model('Project_model');
             $data = array(
                 'platform' => $platform,
                 'delete_modal_header' => 'Delete Platform Record',

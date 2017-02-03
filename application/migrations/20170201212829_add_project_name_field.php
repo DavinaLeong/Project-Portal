@@ -1,26 +1,26 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**********************************************************************************
 	- File Info -
-		File name		: 20170128160323_default_admin.php
+		File name		: 20170201212829_add_project_name_field.php
 		Author(s)		: DAVINA Leong Shi Yun
-		Date Created	: 28 Jan 2017
-
+		Date Created	: 01 Feb 2017
+	
 	- Contact Info -
 		Email	: leong.shi.yun@gmail.com
 		Mobile	: (+65) 9369 3752 [Singapore]
-
+	
 ***********************************************************************************/
-/* Migration version:
- * 28 Jan 2017, 16:03PM
- * 20170128160323
+/* Migration version: 
+ * 01 Feb 2017, 09:28PM
+ * 20170201212829
  */
-class Migration_Default_admin extends CI_Migration
+class Migration_Add_project_name_field extends CI_Migration
 {
 	// Public Functions ----------------------------------------------------------------
 	public function up()
 	{
 		$this->load->model('Migration_model');
-		echo '<h1>Migration: Default Admin</h1>';
+		echo '<h1>Migration: Add \'project_name\' Field</h1>';
 		echo '<hr/>';
 		echo '<p>Running Up Script...</p>';
 		echo '<p style="text-align: center;">- start of script -</p>';
@@ -28,11 +28,11 @@ class Migration_Default_admin extends CI_Migration
 		echo $this->Migration_model->run_parsed_sql($this->_up_script())['output_str'];
 		echo '</code></div>';
 	}
-
+	
 	public function down()
 	{
 		$this->load->model('Migration_model');
-		echo '<h1>Migration: Default Admin</h1>';
+		echo '<h1>Migration: Add \'project_name\' Field</h1>';
 		echo '<hr/>';
 		echo '<p>Running Down Script...</p>';
 		echo '<p style="text-align: center;">- start of script -</p>';
@@ -40,25 +40,22 @@ class Migration_Default_admin extends CI_Migration
 		echo $this->Migration_model->run_parsed_sql($this->_down_script())['output_str'];
 		echo '</code></div>';
 	}
-
+	
 	// Private Functions ---------------------------------------------------------------
 	private function _up_script()
 	{
-		$password_hash = password_hash('password', PASSWORD_DEFAULT);
-		$today = today('c');
 		$sql = "
-			INSERT INTO `user` (`username`, `name`, `password_hash`, `access`, `status`)
-			VALUES('admin', 'Default Admin', '" . $password_hash . "', 'A', 'Activated');
+			ALTER TABLE `project` ADD COLUMN `project_name` VARCHAR(512) NOT NULL;
 		";
 		return $sql;
 	}
-
+	
 	private function _down_script()
 	{
 		$sql = "
-			DELETE FROM user WHERE username = 'admin';
+			ALTER TABLE `project` DROP COLUMN `project_name`;
 		";
 		return $sql;
 	}
-
-} // end 20170126210232_init_tables class
+	
+} // end 20170201212829_add_project_name_field class

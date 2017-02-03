@@ -11,6 +11,6 @@
 
 ***********************************************************************************/
 ?>
-<p><a href="<?=site_url('migrate/reset')?>">Reset</a> | <a href="<?=site_url('admin/authenticate/start')?>">Start Page</a></p>
+<p><a href="<?=site_url('migrate/reset')?>">Reset</a> | <a href="<?=site_url('admin/authenticate/login');?>">Login</a> | <a href="<?=site_url('admin/authenticate/start')?>">Start Page</a></p>
 <hr/>
 <p style="text-align: center;">- end of script -</p>

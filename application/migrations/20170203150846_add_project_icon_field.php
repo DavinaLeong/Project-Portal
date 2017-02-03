@@ -1,9 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**********************************************************************************
 	- File Info -
-		File name		: 20170131121829_add_status_field.php
+		File name		: 20170203150846_add_project_icon_field.php
 		Author(s)		: DAVINA Leong Shi Yun
-		Date Created	: 31 Jan 2017
+		Date Created	: 03 Feb 2017
 	
 	- Contact Info -
 		Email	: leong.shi.yun@gmail.com
@@ -11,16 +11,16 @@
 	
 ***********************************************************************************/
 /* Migration version: 
- * 31 Jan 2017, 12:18PM
- * 20170131121829
+ * 03 Feb 2017, 03:08PM
+ * 20170203150846
  */
-class Migration_Add_status_field extends CI_Migration
+class Migration_Add_project_icon_field extends CI_Migration
 {
 	// Public Functions ----------------------------------------------------------------
 	public function up()
 	{
-		$this->load->model('Migration_model');
-        echo '<h1>Migration: Add Status Field</h1>';
+        $this->load->model('Migration_model');
+        echo '<h1>Migration: Add \'project_icon\' Field</h1>';
         echo '<hr/>';
         echo '<p>Running Up Script...</p>';
         echo '<p style="text-align: center;">- start of script -</p>';
@@ -31,8 +31,8 @@ class Migration_Add_status_field extends CI_Migration
 	
 	public function down()
 	{
-		$this->load->model('Migration_model');
-        echo '<h1>Migration: Add Status Field</h1>';
+        $this->load->model('Migration_model');
+        echo '<h1>Migration: Add \'project_icon\' Field</h1>';
         echo '<hr/>';
         echo '<p>Running Down Script...</p>';
         echo '<p style="text-align: center;">- start of script -</p>';
@@ -45,9 +45,7 @@ class Migration_Add_status_field extends CI_Migration
 	private function _up_script()
 	{
 		$sql = "
-			ALTER TABLE `platform` ADD COLUMN `platform_status` VARCHAR(512) NOT NULL;
-			ALTER TABLE `project` ADD COLUMN `project_status` VARCHAR(512) NOT NULL;
-			ALTER TABLE `link` ADD COLUMN `link_status` VARCHAR(512) NOT NULL;
+			ALTER TABLE `project` ADD COLUMN `project_icon` VARCHAR(512) NOT NULL;
 		";
 		return $sql;
 	}
@@ -55,11 +53,9 @@ class Migration_Add_status_field extends CI_Migration
 	private function _down_script()
 	{
 		$sql = "
-			ALTER TABLE `platform` DROP COLUMN `platform_status`;
-			ALTER TABLE `project` DROP COLUMN `project_status`;
-			ALTER TABLE `link` DROP COLUMN `link_status`;
+			ALTER TABLE `project` DROP COLUMN `project_icon`;
 		";
 		return $sql;
 	}
 	
-} // end 20170131121829_add_status_field class
+} // end 20170203150846_add_project_icon_field class
