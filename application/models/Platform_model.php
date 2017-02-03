@@ -27,19 +27,13 @@ class Platform_model extends CI_Model
 
     public function get_all_ids()
     {
-        if($platforms = $this->get_all('platform_id', 'ASC'))
+        $platforms = $this->get_all('platform_id', 'ASC');
+        $id_array = array();
+        foreach($platforms as $platform)
         {
-            $id_array = array();
-            foreach($platforms as $platform)
-            {
-                $id_array[] = $platform['platform_id'];
-            }
-            return $id_array;
+            $id_array[] = $platform['platform_id'];
         }
-        else
-        {
-            return FALSE;
-        }
+        return $id_array;
     }
 
     public function get_by_status($status='Publish', $column='last_updated', $direction='DESC')
@@ -51,19 +45,13 @@ class Platform_model extends CI_Model
 
     public function get_by_status_ids($status='Publish')
     {
-        if($platforms = $this->get_by_status($status, 'platform_id', 'ASC'))
+        $platforms = $this->get_by_status($status, 'platform_id', 'ASC');
+        $id_array = array();
+        foreach($platforms as $platform)
         {
-            $id_array = array();
-            foreach($platforms as $platform)
-            {
-                $id_array[] = $platform['platform_id'];
-            }
-            return $id_array;
+            $id_array[] = $platform['platform_id'];
         }
-        else
-        {
-            return FALSE;
-        }
+        return $id_array;
     }
 
     public function get_by_id($platform_id=FALSE)

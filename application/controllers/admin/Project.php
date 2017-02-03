@@ -56,8 +56,8 @@ class Project extends CI_Controller
         }
 
         $data = array(
-            'platforms' => $this->Platform_model->get_by_status(),
-			'project_categories' => $this->Project_category_model->get_all('pc_name', 'asc'),
+            'platforms' => $this->Platform_model->get_by_status('Publish', 'platform_name', 'ASC'),
+			'project_categories' => $this->Project_category_model->get_all('pc_name', 'ASC'),
             'status_options' => $this->Project_model->_status_array()
         );
         $this->load->view('admin/project/create_page', $data);
@@ -136,7 +136,8 @@ class Project extends CI_Controller
 
             $data = array(
                 'project' => $project,
-				'project_categories' => $this->Project_category_model->get_all(),
+                'platforms' => $this->Platform_model->get_by_status('Publish', 'platform_name', 'ASC'),
+                'project_categories' => $this->Project_category_model->get_all('pc_name', 'ASC'),
                 'status_options' => $this->Project_model->_status_array()
             );
             $this->load->view('admin/project/edit_page', $data);

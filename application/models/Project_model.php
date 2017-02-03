@@ -27,19 +27,13 @@ class Project_model extends CI_Model
 
     public function get_all_ids()
     {
-        if($projects = $this->get_all('project_id', 'ASC'))
-        {
-            $id_array = array();
-            foreach($projects as $project)
-            {
-                $id_array[] = $project['project_id'];
-            }
-            return $id_array;
-        }
-        else
-        {
-            return FALSE;
-        }
+		$projects = $this->get_all('project_id', 'ASC');
+		$id_array = array();
+		foreach($projects as $project)
+		{
+			$id_array[] = $project['project_id'];
+		}
+		return $id_array;
     }
 
 	public function get_by_id($project_id=FALSE)
@@ -59,9 +53,9 @@ class Project_model extends CI_Model
 	{
 		if($project_id)
 		{
-			$this->db->select(TABLE_PROJECT . '.*, ' . TABLE_PROJECT_CATEGORY . '.pc_name');
+			$this->db->select(TABLE_PROJECT . '.*, ' . TABLE_PLATFORM . '.platform_name, ' . TABLE_PROJECT_CATEGORY . '.pc_name');
 			$this->db->from(TABLE_PROJECT);
-            $this->db->join(TABLE_PLATFORM, TABLE_PROJECT . 'platform_id = ' . TABLE_PLATFORM . '.platform_id', 'left');
+            $this->db->join(TABLE_PLATFORM, TABLE_PROJECT . '.platform_id = ' . TABLE_PLATFORM . '.platform_id', 'left');
 			$this->db->join(TABLE_PROJECT_CATEGORY, TABLE_PROJECT . '.pc_id = ' . TABLE_PROJECT_CATEGORY . '.pc_id', 'left');
 			$this->db->where(TABLE_PROJECT . '.project_id = ', $project_id);
 
@@ -85,19 +79,13 @@ class Project_model extends CI_Model
 
     public function get_by_status_ids($status='Publish')
     {
-        if($projects = $this->get_by_status($status, 'project_id', 'ASC'))
-        {
-            $id_array = array();
-            foreach($projects as $project)
-            {
-                $id_array[] = $project['project_id'];
-            }
-            return $id_array;
-        }
-        else
-        {
-            return FALSE;
-        }
+		$projects = $this->get_by_status($status, 'project_id', 'ASC');
+		$id_array = array();
+		foreach($projects as $project)
+		{
+			$id_array[] = $project['project_id'];
+		}
+		return $id_array;
     }
 
 	public function get_by_pc_id($pc_id=FALSE,
@@ -122,10 +110,10 @@ class Project_model extends CI_Model
 	{
 		if($pc_id)
 		{
-			$this->db->select(TABLE_PROJECT . '.*, ' . TABLE_PROJECT_CATEGORY . '.pc_name');
+			$this->db->select(TABLE_PROJECT . '.*, ' . TABLE_PLATFORM . '.platform_name, ' . TABLE_PROJECT_CATEGORY . '.pc_name');
 			$this->db->from(TABLE_PROJECT);
-            $this->db->join(TABLE_PLATFORM, TABLE_PROJECT . 'platform_id = ' . TABLE_PLATFORM . '.platform_id', 'left');
-			$this->db->join(TABLE_PROJECT_CATEGORY, 'project.pc_id = project_category.pc_id', 'left');
+            $this->db->join(TABLE_PLATFORM, TABLE_PROJECT . '.platform_id = ' . TABLE_PLATFORM . '.platform_id', 'left');
+			$this->db->join(TABLE_PROJECT_CATEGORY, TABLE_PROJECT . '.pc_id = ' . TABLE_PROJECT_CATEGORY . '.pc_id', 'left');
 			$this->db->where(TABLE_PROJECT . '.pc_id = ', $pc_id);
 			$this->db->order_by($column, $direction);
 
@@ -160,10 +148,10 @@ class Project_model extends CI_Model
     {
         if($platform_id)
         {
-            $this->db->select(TABLE_PROJECT . '.*, ' . TABLE_PROJECT_CATEGORY . '.pc_name');
+			$this->db->select(TABLE_PROJECT . '.*, ' . TABLE_PLATFORM . '.platform_name, ' . TABLE_PROJECT_CATEGORY . '.pc_name');
             $this->db->from(TABLE_PROJECT);
             $this->db->join(TABLE_PLATFORM, TABLE_PROJECT . 'platform_id = ' . TABLE_PLATFORM . '.platform_id', 'left');
-            $this->db->join(TABLE_PROJECT_CATEGORY, 'project.pc_id = project_category.pc_id', 'left');
+			$this->db->join(TABLE_PROJECT_CATEGORY, TABLE_PROJECT . '.pc_id = ' . TABLE_PROJECT_CATEGORY . '.pc_id', 'left');
             $this->db->where(TABLE_PROJECT . '.platform_id = ', $platform_id);
             $this->db->order_by($column, $direction);
 

@@ -12,6 +12,7 @@
 ***********************************************************************************/
 /**
  * @var $project
+ * @var $platforms
  * @var $project_categories
  * @var $status_options
  */
@@ -44,7 +45,19 @@
 
                         <form id="form" class="form-horizontal" method="post" data-parsley-validate>
                             <fieldset>
-                                <legend>Record Details</legend>
+                                <legend>Grouping</legend>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="platform_id">Platform <span class="text-danger">*</span></label>
+                                    <div class="col-md-10">
+                                        <select class="form-control" id="platform_id" name="platform_id" required>
+                                            <option id="platform_id_0" value="">-- Select Platform --</option>
+                                            <?php foreach($platforms as $key=>$platform): ?>
+                                                <option id="platform_id<?=$key+1;?>" value="<?=$platform['platform_id'];?>" <?=set_select('platform_id', $platform['platform_id'], ($project['platform_id'] == $platform['platform_id']));?>><?=$platform['platform_name'];?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
 
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="pc_id">Category <span class="text-danger">*</span></label>
@@ -57,6 +70,10 @@
                                         </select>
                                     </div>
                                 </div>
+                            </fieldset>
+
+                            <fieldset>
+                                <legend>Identifiers</legend>
 
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="project_name">Name <span class="text-danger">*</span></label>

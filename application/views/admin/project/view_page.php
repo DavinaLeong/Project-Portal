@@ -52,17 +52,35 @@
 
                         <form id="form" class="form-horizontal">
                             <fieldset>
-                                <legend>Record Details</legend>
+                                <legend>Grouping</legend>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-2" for="pc_id">Category</label>
+                                    <label class="control-label col-md-2" for="platform_name">Platform</label>
                                     <div class="col-md-10">
-                                        <p id="pc_id" class="form-control-static">
-                                            <?=$project['pc_name'];?><br/>
-                                            (<a href="<?=site_url('admin/project_category/browse');?>" target="_blank">View Project Categories</a>)
+                                        <p id="platform_name" class="form-control-static">
+                                            <?=$project['platform_name'];?><br/>
+                                            <?php if($project['platform_name']):?>
+                                            (<a href="<?=site_url('admin/platform/view/' . $project['platform_id']);?>" target="_blank">View Platform</a>)
+                                            <?php endif; ?>
                                         </p>
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="pc_name">Category</label>
+                                    <div class="col-md-10">
+                                        <p id="pc_name" class="form-control-static">
+                                            <?=$project['pc_name'];?><br/>
+                                            <?php if($project['pc_name']): ?>
+                                            (<a href="<?=site_url('admin/project_category/browse');?>" target="_blank">View Project Categories</a>)
+                                            <?php endif; ?>
+                                        </p>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset>
+                                <legend>Identifiers</legend>
 
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="project_name">Name</label>

@@ -27,19 +27,13 @@ class Project_category_model extends CI_Model
 
     public function get_all_ids()
     {
-        if($projects = $this->get_all())
+        $projects = $this->get_all('pc_name', 'ASC');
+        $id_array = array();
+        foreach($projects as $project)
         {
-            $id_array = array();
-            foreach($projects as $project)
-            {
-                $id_array[] = $project['pc_id'];
-            }
-            return $id_array;
+            $id_array[] = $project['pc_id'];
         }
-        else
-        {
-            return FALSE;
-        }
+        return $id_array;
     }
 
     public function get_by_id($pc_id=FALSE)

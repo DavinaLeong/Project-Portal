@@ -30,11 +30,7 @@
     <ol type="1">
         <li><span class="text-success"><i class="fa fa-check-circle"></i></span> Platform Module</li>
         <li><span class="text-success"><i class="fa fa-check-circle"></i></span> Project Category Module</li>
-        <li><span class="text-danger"><i class="fa fa-times-circle"></i></span> Project Module
-            <ol type="a">
-                <li>Implement Platform field</li>
-            </ol>
-        </li>
+        <li><span class="text-success"><i class="fa fa-check-circle"></i></span> Project Module</li>
         <li><span class="text-danger"><i class="fa fa-times-circle"></i></span> Link Category Module</li>
         <li><span class="text-danger"><i class="fa fa-times-circle"></i></span> Link Module</li>
     </ol>
