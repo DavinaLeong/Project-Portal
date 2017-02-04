@@ -44,7 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="sidebar-nav navbar-collapse">
 
             <ul class="nav" id="side-menu">
-                <!-- platform module start -->
+                <!-- platform module -->
                 <li>
                     <a href="#"><i class="fa fa-desktop fa-fw"></i> Platforms<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
@@ -57,7 +57,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </ul>
                 </li>
 
-                <!-- project-category module start -->
+                <!-- project-category module -->
                 <li>
                     <a href="#"><i class="fa fa-tags fa-fw"></i> Project Categories<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
@@ -70,7 +70,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </ul>
                 </li>
 
-                <!-- project module start -->
+                <!-- project module -->
                 <li>
                     <a href="#"><i class="fa fa-sitemap fa-fw"></i> Project<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
@@ -79,6 +79,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </li>
                         <li>
                             <a href="<?=site_url('admin/project/create');?>"><i class="fa fa-plus fa-fw"></i> Create Project</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- link-category model -->
+                <li>
+                    <a href="#"><i class="fa fa-tag fa-fw"></i> Link Categories<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="<?=site_url('admin/link_category/browse');?>"><i class="fa fa-file-text-o fa-fw"></i> Browse Link Categories</a>
+                        </li>
+                        <li>
+                            <a href="<?=site_url('admin/link_category/create');?>"><i class="fa fa-plus fa-fw"></i> Create Link Category</a>
                         </li>
                     </ul>
                 </li>

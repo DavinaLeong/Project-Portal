@@ -29,10 +29,10 @@ class Link_category extends CI_Controller
 	{
 		$this->User_log_model->validate_access();
 		$data = array(
-			'link_categories' => $this->Link_category_model->get_all(),
+			'link_categories' => $this->Link_category_model->get_all_project(),
 			'create_uri' => 'admin/link_category/create'
 		);
-		$this->load->view('admin/link_category/create_page', $data);
+		$this->load->view('admin/link_category/browse_page', $data);
 	}
 
 	public function create()
@@ -45,7 +45,7 @@ class Link_category extends CI_Controller
 			{
 				$this->User_log_model->log_message('Link Category created. | lc_id: ' . $lc_id);
 				$this->session->set_userdata('message', 'Link Category created. <a href="' . site_url() . 'admin/link_category/create">Create another.</a>');
-				redirect('admin/link_category/view/' . $lc_id);
+				redirect('admin/link_category/browse');
 			}
 			else
 			{
@@ -64,7 +64,7 @@ class Link_category extends CI_Controller
 		$id_array_str = implode(',', $this->Project_model->get_all_ids());
 		$this->form_validation->set_rules('project_id', 'Project', 'trim|required|in_list[' . $id_array_str . ']');
 		$this->form_validation->set_rules('lc_name', 'Name', 'trim|required|max_length[512]');
-		$this->form_validation->set_rules('lc_description', 'Description'. 'trim|required|max_length[512]');
+		$this->form_validation->set_rules('lc_description', 'Description'. 'trim|max_length[512]');
 	}
 
 	private function _prepare_create_array()
@@ -74,26 +74,6 @@ class Link_category extends CI_Controller
 		$link_category['lc_name'] = $this->input->post('lc_name');
 		$link_category['lc_description'] = $this->input->post('lc_description');
 		return $link_category;
-	}
-
-	public function view($lc_id)
-	{
-		$this->User_log_model->validate_access();
-		$link_category = $this->Link_category_model->get_by_id($lc_id);
-		if($link_category)
-		{
-			$data = array(
-				'link_category' => $link_category,
-				'delete_modal_header' => 'Delete Link Category Record',
-				'delete_uri' => 'admin/link_category/delete/' . $lc_id
-			);
-			$this->load->view('admin/link_category/view_page', $data);
-		}
-		else
-		{
-			$this->session->set_userdata('message', 'Link Category record not found.');
-			redirect('admin/link_category/browse');
-		}
 	}
 
 	public function edit($lc_id)
@@ -109,7 +89,7 @@ class Link_category extends CI_Controller
 				{
 					$this->User_log_model->log_message('Link Category updated. | lc_id: ' . $lc_id);
 					$this->session->set_userdata('message', 'Link Category updated.');
-					redirect('admin/link_category/view/' . $lc_id);
+					redirect('admin/link_category/browse');
 				}
 				else
 				{
@@ -134,9 +114,9 @@ class Link_category extends CI_Controller
 	private function _set_rules_edit()
 	{
 		$id_array_str = implode(',', $this->Project_model->get_all_ids());
-		$this->form_validation->set_rules('project_id', 'Project', 'trim|required|in_list[$' . $id_array_str . ']');
+		$this->form_validation->set_rules('project_id', 'Project', 'trim|required|in_list[' . $id_array_str . ']');
 		$this->form_validation->set_rules('lc_name', 'Name', 'trim|required|max_length[512]');
-		$this->form_validation->set_rules('lc_description', 'Description'. 'trim|required|max_length[512]');
+		$this->form_validation->set_rules('lc_description', 'Description'. 'trim|max_length[512]');
 	}
 
 	private function _prepare_edit_array($link_category)
@@ -149,20 +129,19 @@ class Link_category extends CI_Controller
 
 	public function delete($lc_id)
 	{
-		if($this->Project_category_model->get_by_id(($lc_id)))
+		if($this->Link_category_model->get_by_id(($lc_id)))
 		{
-			if($this->Project_category_model->delete_by_id($lc_id))
+			if($this->Link_category_model->delete_by_id($lc_id))
 			{
 				$this->User_log_model->log_message('Link Category deleted. | lc_id: ' . $lc_id);
-				$this->session->set_userdata('message', 'Link Category delete.');
-				redirect('admin/link_category/browse');
+				$this->session->set_userdata('message', 'Link Category deleted.');
 			}
 			else
 			{
 				$this->User_log_model->log_message('Unable to delete Link Category. | lc_id: ' . $lc_id);
 				$this->session->set_userdata('message', 'Unable to delete Link Category.');
-				redirect('admin/link_category/view/' . $lc_id);
 			}
+			redirect('admin/link_category/browse');
 		}
 		else
 		{

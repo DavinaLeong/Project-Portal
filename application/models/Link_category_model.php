@@ -50,7 +50,7 @@ class Link_category_model extends CI_Model
     {
         if($lc_id)
         {
-            $quest = $this->db->get_wher(TABLE_LINK_CATEGORY, array('lc_id' => $lc_id));
+            $quest = $this->db->get_where(TABLE_LINK_CATEGORY, array('lc_id' => $lc_id));
             return $quest->row_array();
         }
         else
