@@ -54,15 +54,20 @@
                             </thead>
                             <tbody>
                             <?php foreach($project_categories as $key=>$project_category): ?>
-                                <tr class="clickable" onclick="goto_view(<?=$project_category['pc_id'];?>)">
+                                <tr>
                                     <td><?=$project_category['pc_name'];?></td>
                                     <td><?=$project_category['pc_description'];?></td>
                                     <td data-sort="<?=format_dd_mm_yyyy_hh_ii_ss($project_category['date_added']);?>"
                                         ><?=format_dd_mmm_yyyy($project_category['date_added']);?></td>
                                     <td data-sort="<?=format_dd_mm_yyyy_hh_ii_ss($project_category['last_updated']);?>"
                                         ><?=format_rfc($project_category['last_updated']);?></td>
-                                    <td><button class="btn btn-default" onclick="save_delete_id(<?=$project_category['pc_id'];?>)"
-                                            data-toggle="modal" data-target="#delete_modal"><i class="fa fa-trash fa-fw"></i></button></td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a class="btn btn-default" href="<?=site_url('admin/project_category/edit/' . $project_category['pc_id']);?>" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil-square-o fa-fw"></i></a>
+                                            <button class="btn btn-default" onclick="save_delete_id(<?=$project_category['pc_id'];?>)"
+                                                    data-toggle="modal" data-target="#delete_modal"><i class="fa fa-trash fa-fw" data-toggle="tooltip" title="Delete"></i></button>
+                                        </div>
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>
@@ -110,11 +115,6 @@
             "responsive": true
         });
     });
-
-    function goto_view(record_id)
-    {
-        location.href = '<?=site_url("admin/project_category/edit");?>/' + record_id;
-    }
 
     var delete_pc_id = 0;
     function save_delete_id(delete_id)
