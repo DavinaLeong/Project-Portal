@@ -39,6 +39,8 @@
  *
  *
  * --- CUSTOM LIBRARIES ---
+ * @property Link_model $Link_model
+ * @property Link_category_model $Link_category_model
  * @property Migration_model $Migration_model
  * @property Platform_model $Platform_model
  * @property Project_model $Project_model
@@ -89,6 +91,8 @@ class MY_Controller extends CI_Controller {};
  *
  *
  * --- CUSTOM LIBRARIES ---
+ * @property Link_model $Link_model
+ * @property Link_category_model $Link_category_model
  * @property Migration_model $Migration_model
  * @property Platform_model $Platform_model
  * @property Project_model $Project_model
@@ -138,6 +142,8 @@ class CI_Model {};
  *
  *
  * --- CUSTOM LIBRARIES ---
+ * @property Link_model $Link_model
+ * @property Link_category_model $Link_category_model
  * @property Migration_model $Migration_model
  * @property Platform_model $Platform_model
  * @property Project_model $Project_model

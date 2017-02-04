@@ -161,17 +161,26 @@ class Platform extends CI_Controller
         $this->User_log_model->validate_access();
         if($this->Platform_model->get_by_id($platform_id))
         {
-            if($this->Platform_model->delete_by_id($platform_id))
+            $this->load->model('Project_model');
+            if($this->Project_model->get_by_platform_id($platform_id))
             {
-                $this->User_log_model->log_message('Platform deleted. | platform_id: ' . $platform_id);
-                $this->session->set_userdata('message', 'Platform deleted.');
-                redirect('admin/platform/browse');
+                $this->session->set_userdata('message', 'Unable to delete Platform as there are existing Projects associated it.');
+                redirect('admin/platform/view/' . $platform_id);
             }
             else
             {
-                $this->User_log_model->log_message('Unable to delete Platform. | platform_id: ' . $platform_id);
-                $this->session->set_userdata('message', 'Unable to delete Platform.');
-                redirect('admin/platform/view/' . $platform_id);
+                if($this->Platform_model->delete_by_id($platform_id))
+                {
+                    $this->User_log_model->log_message('Platform deleted. | platform_id: ' . $platform_id);
+                    $this->session->set_userdata('message', 'Platform deleted.');
+                    redirect('admin/platform/browse');
+                }
+                else
+                {
+                    $this->User_log_model->log_message('Unable to delete Platform. | platform_id: ' . $platform_id);
+                    $this->session->set_userdata('message', 'Unable to delete Platform.');
+                    redirect('admin/platform/view/' . $platform_id);
+                }
             }
         }
         else
