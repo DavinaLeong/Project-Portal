@@ -25,6 +25,16 @@ class Link_category_model extends CI_Model
         return $query->result_array();
     }
 
+    public function get_all_project($column='last_updated', $direction='DESC')
+    {
+        $this->db->select(TABLE_LINK_CATEGORY . '.*, ' . TABLE_PROJECT . '.project_name');
+        $this->db->from(TABLE_LINK_CATEGORY);
+        $this->db->join(TABLE_PROJECT, TABLE_LINK_CATEGORY . '.project_id = ' . TABLE_PROJECT . '.project_id', 'left');
+        $this->db->order_by($column, $direction);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
     public function get_all_ids()
     {
         $link_categories = $this->get_all('lc_name', 'ASC');
@@ -42,6 +52,23 @@ class Link_category_model extends CI_Model
         {
             $quest = $this->db->get_wher(TABLE_LINK_CATEGORY, array('lc_id' => $lc_id));
             return $quest->row_array();
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
+    public function get_by_id_project($lc_id=FALSE)
+    {
+        if($lc_id)
+        {
+            $this->db->select(TABLE_LINK_CATEGORY . '.*, ' . TABLE_PROJECT . '.project_name');
+            $this->db->from(TABLE_LINK_CATEGORY);
+            $this->db->join(TABLE_PROJECT, TABLE_LINK_CATEGORY . '.project_id = ' . TABLE_PROJECT . '.project_id', 'left');
+            $this->db->where(TABLE_LINK_CATEGORY . '.lc_id = ', $lc_id);
+            $query = $this->db->get();
+            return $query->row_array();
         }
         else
         {
@@ -136,14 +163,6 @@ class Link_category_model extends CI_Model
         {
             return FALSE;
         }
-    }
-
-    public function _status_array()
-    {
-        return array(
-            'Draft',
-            'Publish'
-        );
     }
 
 } // end Link_category_model class
