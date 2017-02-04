@@ -121,15 +121,23 @@ class Project_category extends CI_Controller
         $this->User_log_model->validate_access();
         if($this->Project_category_model->get_by_id($pc_id))
         {
-            if($this->Project_category_model->delete_by_id($pc_id))
+            $this->load->model('Project_model');
+            if($this->Project_model->get_by_pc_id($pc_id))
             {
-                $this->User_log_model->log_message('Project Category deleted. | pc_id: ' . $pc_id);
-                $this->session->set_userdata('message', 'Project Category deleted.');
+                $this->session->set_userdata('message', 'Unable to delete Project Category as there are existing Projects associated with it.');
             }
             else
             {
-                $this->User_log_model->log_message('Unable to delete Project Category. | pc_id: ' . $pc_id);
-                $this->session->set_userdata('message', 'Unable to delete Project Category.');
+                if($this->Project_category_model->delete_by_id($pc_id))
+                {
+                    $this->User_log_model->log_message('Project Category deleted. | pc_id: ' . $pc_id);
+                    $this->session->set_userdata('message', 'Project Category deleted.');
+                }
+                else
+                {
+                    $this->User_log_model->log_message('Unable to delete Project Category. | pc_id: ' . $pc_id);
+                    $this->session->set_userdata('message', 'Unable to delete Project Category.');
+                }
             }
             redirect('admin/project_category/browse');
         }
