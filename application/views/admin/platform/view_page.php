@@ -12,12 +12,13 @@
 ***********************************************************************************/
 /**
  * @var $platform
+ * @var $projects
  */
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
 <?php $this->load->view('admin/_snippets/meta'); ?>
-<?php $this->load->view('admin/_snippets/head_resources'); ?>
+<?php $this->load->view('admin/_snippets/head_resources_datatables'); ?>
 </head>
 <body>
 <div id="wrapper">
@@ -102,6 +103,31 @@
                             </fieldset>
                         </form>
 
+                        <div class="teble-responsive">
+                            <h2 class="page-header">Projects</h2>
+
+                            <table id="table-projects" class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach($projects as $project): ?>
+                                <tr class="clickable" onclick="goto_view(<?=$project['project_id'];?>)">
+                                    <td><?=$project['project_id'];?></td>
+                                    <td><?=$project['project_name'];?></td>
+                                    <td><?=$project['project_description'];?></td>
+                                    <td><span class="label label-default label-<?=strtolower($project['project_status']);?>"><?=$project['project_status'];?></span></td>
+                                </tr>
+                                <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                 </div>
 
@@ -112,6 +138,20 @@
     </div>
 </div>
 </div>
-<?php $this->load->view('admin/_snippets/body_resources') ;?>
+<?php $this->load->view('admin/_snippets/body_resources_datatables') ;?>
+<script>
+    $(document).ready(function()
+    {
+        $('#table-projects').DataTable({
+            "order": [[0, 'asc']],
+            "responsive": true
+        });
+    });
+
+    function goto_view(record_id)
+    {
+        window.open('<?=site_url("admin/project/view");?>/' + record_id);
+    }
+</script>
 </body>
 </html>

@@ -86,7 +86,7 @@ class Link_category extends CI_Controller
             $data = array(
                 'link_category' => $link_category,
                 'links' => array(), //$this->Link_model->get_by_lc_id($lc_id),
-                'delete_header_modal' => 'Delete Link Category Record',
+                'delete_modal_header' => 'Delete Link Category Record',
                 'delete_uri' => 'admin/link_category/delete/' . $lc_id
             );
             $this->load->view('admin/link_category/view_page', $data);

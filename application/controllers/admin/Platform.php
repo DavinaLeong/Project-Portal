@@ -89,6 +89,7 @@ class Platform extends CI_Controller
             $this->load->model('Project_model');
             $data = array(
                 'platform' => $platform,
+                'projects' => $this->Project_model->get_by_platform_id($platform_id, 'project_id', 'DESC'),
                 'delete_modal_header' => 'Delete Platform Record',
                 'delete_uri' => 'admin/platform/delete/' . $platform_id
             );

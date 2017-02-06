@@ -72,7 +72,7 @@
                                         <p id="pc_name" class="form-control-static">
                                             <?=$project['pc_name'];?><br/>
                                             <?php if($project['pc_name']): ?>
-                                            (<a href="<?=site_url('admin/project_category/browse');?>" target="_blank">View Project Categories</a>)
+                                            (<a href="<?=site_url('admin/project_category/view/' . $project['pc_id']);?>" target="_blank">View Project Category</a>)
                                             <?php endif; ?>
                                         </p>
                                     </div>

@@ -91,7 +91,7 @@
 
                         <div class="table-responsive">
                             <h2 class="page-header">Projects</h2>
-                            <table id="table-projects" class="table table-hovered">
+                            <table id="table-projects" class="table table-hover">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
@@ -102,7 +102,7 @@
                                 </thead>
                                 <tbody>
                                 <?php foreach($projects as $project): ?>
-                                <tr>
+                                <tr class="clickable" onclick="goto_view(<?=$project['project_id'];?>)">
                                     <td><?=$project['project_id'];?></td>
                                     <td><?=$project['project_name'];?></td>
                                     <td><?=$project['project_description'];?></td>
@@ -132,6 +132,11 @@
             "responsive": true
         });
     });
+
+    function goto_view(record_id)
+    {
+        window.open('<?=site_url("admin/project/view");?>/' + record_id);
+    }
 </script>
 </body>
 </html>
