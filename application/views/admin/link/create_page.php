@@ -75,6 +75,17 @@
                                         <p class="help-block">Exclude 'http://' from URL.</p>
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="use_https">Use HTTPS</label>
+                                    <div class="col-md-10">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" id="use_https" name="use_https" value="1" <?=set_checkbox('use_https', 1); ?> /> Yes
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
                             </fieldset>
 
                             <fieldset>

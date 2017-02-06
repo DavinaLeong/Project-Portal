@@ -37,7 +37,7 @@
 
         <div class="row">
             <div id="main" class="col-lg-12">
-                <h1 class="page-header text-info"><i class="fa fa-plus fa-fw"></i> Edit Link</h1>
+                <h1 class="page-header text-info"><i class="fa fa-pencil-square-o fa-fw"></i> Edit Link</h1>
 
                 <div class="row">
                     <div class="col-md-10">
@@ -75,6 +75,17 @@
                                         <input class="form-control" type="url" id="url" name="url"
                                                value="<?=set_value('url', $link['url']);?>" required maxlength="512" />
                                         <p class="help-block">Exclude 'http://' from URL.</p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="use_https">Use HTTPS</label>
+                                    <div class="col-md-10">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" id="use_https" name="use_https" value="1" <?=set_checkbox('use_https', 1, ($link['use_https'] == 1)); ?> /> Yes
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </fieldset>

@@ -101,6 +101,7 @@ class Link_model extends CI_Model
                 'lc_id' => $link['lc_id'],
                 'label' => $link['label'],
                 'url' => $link['url'],
+                'use_https' => $link['use_https'],
                 'link_status' => $link['link_status']
             );
 
@@ -123,6 +124,7 @@ class Link_model extends CI_Model
                 'lc_id' => $link['lc_id'],
                 'label' => $link['label'],
                 'url' => $link['url'],
+                'use_https' => $link['use_https'],
                 'link_status' => $link['link_status']
             );
 

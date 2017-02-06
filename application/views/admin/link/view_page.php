@@ -13,6 +13,7 @@
 /**
  * @var $link
  */
+$output_url = ($link['use_https'] == 1 ? 'https' : 'http') . '://' . $link['url'];
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,7 +74,15 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="url">URL</label>
                                     <div class="col-md-10">
-                                        <p id="url" class="form-control-static"><a href="http://<?=$link['url'];?>" target="_blank"><?=$link['url'];?></a></p>
+                                        <p id="url" class="form-control-static"><a href="<?=$output_url;?>" target="_blank"><?=$link['url'];?></a><br/>
+                                        <small>Output URL: <?=$output_url;?></small></p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="use_https">Use HTTPS</label>
+                                    <div class="col-md-10">
+                                        <p id="use_https" class="form-control-static"><?= $link['use_https'] == 1 ? 'Yes' : 'No';?></p>
                                     </div>
                                 </div>
                             </fieldset>
