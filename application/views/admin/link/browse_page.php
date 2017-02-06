@@ -47,6 +47,7 @@
                             <tr>
                                 <th>Label</th>
                                 <th>URL</th>
+                                <th>Use HTTPS</th>
                                 <th>Status</th>
                                 <th>Last Updated</th>
                             </tr>
@@ -56,6 +57,7 @@
                                 <tr class="clickable" onclick="goto_view(<?=$link['link_id'];?>)">
                                     <td><?=$link['label'];?></td>
                                     <td><?=$link['url'];?></td>
+                                    <td><?=$link['use_https'] == 1 ? 'Yes' : 'No';?></td>
                                     <td><span class="label label-default label-<?=strtolower($link['link_status']);?>"><?=$link['link_status'];?></span></td>
                                     <td data-sort="<?=format_dd_mm_yyyy_hh_ii_ss($link['last_updated']);?>"
                                         ><?=$link['last_updated'];?></td>

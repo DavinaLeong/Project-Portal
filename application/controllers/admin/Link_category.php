@@ -82,10 +82,10 @@ class Link_category extends CI_Controller
         $link_category = $this->Link_category_model->get_by_id($lc_id);
         if($link_category)
         {
-            //$this->load->model('Link_model');
+            $this->load->model('Link_model');
             $data = array(
                 'link_category' => $link_category,
-                'links' => array(), //$this->Link_model->get_by_lc_id($lc_id),
+                'links' => $this->Link_model->get_by_lc_id($lc_id),
                 'delete_modal_header' => 'Delete Link Category Record',
                 'delete_uri' => 'admin/link_category/delete/' . $lc_id
             );
@@ -153,17 +153,27 @@ class Link_category extends CI_Controller
 	{
 		if($this->Link_category_model->get_by_id(($lc_id)))
 		{
-			if($this->Link_category_model->delete_by_id($lc_id))
-			{
-				$this->User_log_model->log_message('Link Category deleted. | lc_id: ' . $lc_id);
-				$this->session->set_userdata('message', 'Link Category deleted.');
-			}
-			else
-			{
-				$this->User_log_model->log_message('Unable to delete Link Category. | lc_id: ' . $lc_id);
-				$this->session->set_userdata('message', 'Unable to delete Link Category.');
-			}
-			redirect('admin/link_category/browse');
+			$this->load->model('Link_model');
+            if($this->Link_model->get_by_lc_id($lc_id))
+            {
+                $this->session->set_userdata('message', 'Unable to delete Link Category as there are existing Link records associated with it.');
+                redirect('admin/link_category/view/' . $lc_id);
+            }
+            else
+            {
+                if($this->Link_category_model->delete_by_id($lc_id))
+                {
+                    $this->User_log_model->log_message('Link Category deleted. | lc_id: ' . $lc_id);
+                    $this->session->set_userdata('message', 'Link Category deleted.');
+                    redirect('admin/link_category/browse');
+                }
+                else
+                {
+                    $this->User_log_model->log_message('Unable to delete Link Category. | lc_id: ' . $lc_id);
+                    $this->session->set_userdata('message', 'Unable to delete Link Category.');
+                    redirect('admin/link_category/view/' . $lc_id);
+                }
+            }
 		}
 		else
 		{

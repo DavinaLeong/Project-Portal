@@ -95,8 +95,8 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Description</th>
+                                    <th>Label</th>
+                                    <th>Output URL</th>
                                     <th>Status</th>
                                 </tr>
                                 </thead>
@@ -104,8 +104,8 @@
                                 <?php foreach($links as $link): ?>
                                 <tr>
                                     <td><?=$link['link_id'];?></td>
-                                    <td><?=$link['link_name'];?></td>
-                                    <td><?=$link['link_description'];?></td>
+                                    <td><?=$link['label'];?></td>
+                                    <td><a href="<?=($link['use_https'] == 1 ? 'https' : 'http') . '://' . $link['url'];?>" target="_blank"><?=($link['use_https'] == 1 ? 'https' : 'http') . '://' . $link['url'];?></a></td>
                                     <td><span class="label label-default label-<?=strtolower($link['link_status']);?>"><?=$link['link_status'];?></span></td>
                                 </tr>
                                 <?php endforeach;?>

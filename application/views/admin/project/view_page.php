@@ -67,7 +67,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-2" for="pc_name">Category</label>
+                                    <label class="control-label col-md-2" for="pc_name">Project Category</label>
                                     <div class="col-md-10">
                                         <p id="pc_name" class="form-control-static">
                                             <?=$project['pc_name'];?><br/>

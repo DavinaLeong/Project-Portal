@@ -56,7 +56,7 @@ $output_url = ($link['use_https'] == 1 ? 'https' : 'http') . '://' . $link['url'
                                 <legend>Record Details</legend>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-2">Category</label>
+                                    <label class="control-label col-md-2">Link Category</label>
                                     <div class="col-md-10">
                                         <p class="form-control-static">
                                             <a id="lc_name" href="<?=site_url('admin/link_category/view/' . $link['lc_id']);?>" target="_blank" data-toggle="tooltip" title="Link Category"><?=$link['lc_name'];?></a> (<a id="project_name" href="<?=site_url('admin/project/view/' . $link['project_id']);?>" target="_blank" data-toggle="tooltip" title="Project"><?=$link['project_name'];?></a>)
