@@ -46,6 +46,18 @@ class Project extends CI_Controller
             {
                 $this->User_log_model->log_message('Project created. | project_id: ' . $project_id);
                 $this->session->set_userdata('message', 'Project created. <a href="' . site_url() . 'admin/project/create">Create another.</a>');
+
+                // unset other selected projects
+                if($this->input->post('selected_project') == 1)
+                {
+                    if($selected_project = $this->Project_model->get_by_pc_id_selected_project($this->input->post('pc_id')))
+                    {
+                        $selected_project['selected_project'] = 0;
+                        $this->Project_model->update($selected_project);
+                        $this->User_log_model->log_message('Selected project changed. | pc_id: ' . $selected_project['pc_id']);
+                    }
+                }
+
                 redirect('admin/project/view/' . $project_id);
             }
             else
@@ -74,6 +86,7 @@ class Project extends CI_Controller
         $this->form_validation->set_rules('project_name', 'Name', 'trim|required|max_length[512]');
         $this->form_validation->set_rules('project_icon', 'Icon', 'trim|max_length[512]');
         $this->form_validation->set_rules('project_description', 'Description', 'trim|required|max_length[512]');
+        $this->form_validation->set_rules('selected_project', 'Selected Project', 'trim|in_list[1]');
 
         $status_str = implode(',', $this->Project_model->_status_array());
         $this->form_validation->set_rules('project_status', 'Status',
@@ -88,6 +101,7 @@ class Project extends CI_Controller
         $project['project_name'] = $this->input->post('project_name');
         $project['project_icon'] = $this->input->post('project_icon');
         $project['project_description'] = $this->input->post('project_description');
+        $project['selected_project'] = $this->input->post('selected_project');
         $project['project_status'] = $this->input->post('project_status');
         return $project;
     }
@@ -121,10 +135,23 @@ class Project extends CI_Controller
             $this->_set_rules_edit_project();
             if($this->form_validation->run())
             {
+                $old_selected_project = $project['selected_project'];
                 if($this->Project_model->update($this->_prepare_edit_project_array($project)))
                 {
                     $this->User_log_model->log_message('Project updated. | project_id: ' . $project_id);
                     $this->session->set_userdata('message', 'Project updated.');
+
+                    // unset other selected projects
+                    if($this->input->post('selected_project') == 1 && $this->input->post('selected_project') !== $old_selected_project)
+                    {
+                        if($selected_project = $this->Project_model->get_by_pc_id_selected_project($this->input->post('pc_id')))
+                        {
+                            $selected_project['selected_project'] = 0;
+                            $this->Project_model->update($selected_project);
+                            $this->User_log_model->log_message('Selected project changed. | pc_id: ' . $selected_project['pc_id']);
+                        }
+                    }
+
                     redirect('admin/project/view/' . $project_id);
                 }
                 else
@@ -160,6 +187,7 @@ class Project extends CI_Controller
         $this->form_validation->set_rules('project_name', 'Name', 'trim|required|max_length[512]');
         $this->form_validation->set_rules('project_icon', 'Icon', 'trim|max_length[512]');
         $this->form_validation->set_rules('project_description', 'Description', 'trim|required|max_length[512]');
+        $this->form_validation->set_rules('selected_project', 'Selected Project', 'trim|in_list[1]');
 
         $status_str = implode(',', $this->Project_model->_status_array());
         $this->form_validation->set_rules('project_status', 'Status',
@@ -173,6 +201,7 @@ class Project extends CI_Controller
         $project['project_name'] = $this->input->post('project_name');
         $project['project_icon'] = $this->input->post('project_icon');
         $project['project_description'] = $this->input->post('project_description');
+        $project['selected_project'] = $this->input->post('selected_project') == 1 ? 1 : 0;
         $project['project_status'] = $this->input->post('project_status');
         return $project;
     }

@@ -126,6 +126,43 @@ class Project_model extends CI_Model
 		}
 	}
 
+	public function get_by_pc_id_selected_project($pc_id=FALSE)
+	{
+		if($pc_id)
+		{
+			$query = $this->db->get_where(TABLE_PROJECT,
+				array(
+					'pc_id' => $pc_id,
+					'selected_project' => 1)
+				);
+			return $query->row_array();
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+
+	public function get_by_pc_id_selected_project_platform_project_category($pc_id=FALSE)
+	{
+		if($pc_id)
+		{
+			$this->db->select(TABLE_PROJECT . '.*, ' . TABLE_PLATFORM . '.platform_name, ' . TABLE_PROJECT_CATEGORY . '.pc_name');
+			$this->db->from(TABLE_PROJECT);
+			$this->db->join(TABLE_PLATFORM, TABLE_PROJECT . '.platform_id = ' . TABLE_PLATFORM . '.platform_id', 'left');
+			$this->db->join(TABLE_PROJECT_CATEGORY, TABLE_PROJECT . '.pc_id = ' . TABLE_PROJECT_CATEGORY . '.pc_id', 'left');
+			$this->db->where(TABLE_PROJECT . '.pc_id = ', $pc_id);
+			$this->db->where(TABLE_PROJECT . '.selected_project = ', 1);
+
+			$query = $this->db->get();
+			return $query->result_array();
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+
     public function get_by_platform_id($platform_id=FALSE,
                                        $column='last_updated',
                                        $direction='DESC')
@@ -174,6 +211,7 @@ class Project_model extends CI_Model
                 'project_name' => $project['project_name'],
 				'project_description' => $project['project_description'],
                 'project_icon' => $project['project_icon'],
+				'selected_project' => $project['selected_project'],
 				'project_status' => $project['project_status']
 			);
 
@@ -198,6 +236,7 @@ class Project_model extends CI_Model
                 'project_name' => $project['project_name'],
 				'project_description' => $project['project_description'],
                 'project_icon' => $project['project_icon'],
+				'selected_project' => $project['selected_project'],
 				'project_status' => $project['project_status']
 			);
 
