@@ -72,7 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                 <!-- project module -->
                 <li>
-                    <a href="#"><i class="fa fa-sitemap fa-fw"></i> Project<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-sitemap fa-fw"></i> Projects<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
                             <a href="<?=site_url('admin/project/browse');?>"><i class="fa fa-file-text-o fa-fw"></i> Browse Projects</a>
@@ -92,6 +92,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </li>
                         <li>
                             <a href="<?=site_url('admin/link_category/create');?>"><i class="fa fa-plus fa-fw"></i> Create Link Category</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- link model -->
+                <li>
+                    <a href="#"><i class="fa fa-link fa-fw"></i> Links<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="<?=site_url('admin/link/browse');?>"><i class="fa fa-file-text-o fa-fw"></i> Browse Links</a>
+                        </li>
+                        <li>
+                            <a href="<?=site_url('admin/link/create');?>"><i class="fa fa-plus fa-fw"></i> Create Link</a>
                         </li>
                     </ul>
                 </li>
