@@ -28,12 +28,15 @@
 <div class="container">
     <h1 class="page-header">TODO List</h1>
     <ol type="1">
+        <li><span class="text-success"><i class="fa fa-check-circle"></i></span> Setup Environment</li>
+        <li><span class="text-success"><i class="fa fa-check-circle"></i></span> Authenticate Module &amp; Login</li>
         <li><span class="text-success"><i class="fa fa-check-circle"></i></span> Platform Module</li>
         <li><span class="text-success"><i class="fa fa-check-circle"></i></span> Project Category Module</li>
         <li><span class="text-success"><i class="fa fa-check-circle"></i></span> Project Module</li>
         <li><span class="text-success"><i class="fa fa-check-circle"></i></span> Link Category Module</li>
-        <li><span class="text-danger"><i class="fa fa-times-circle"></i></span> Link Module</li>
+        <li><span class="text-success"><i class="fa fa-check-circle"></i></span> Link Module</li>
         <li><span class="text-success"><i class="fa fa-check-circle"></i></span> Tables of Sub-Tables on View Page</li>
+        <li><span class="text-danger"><i class="fa fa-times-circle"></i></span> Touch-up and Unit Test</li>
     </ol>
 </div>
 </body>
