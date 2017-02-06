@@ -76,6 +76,28 @@ class Link_category extends CI_Controller
 		return $link_category;
 	}
 
+    public function view($lc_id)
+    {
+        $this->User_log_model->validate_access();
+        $link_category = $this->Link_category_model->get_by_id($lc_id);
+        if($link_category)
+        {
+            //$this->load->model('Link_model');
+            $data = array(
+                'link_category' => $link_category,
+                'links' => array(), //$this->Link_model->get_by_lc_id($lc_id),
+                'delete_header_modal' => 'Delete Link Category Record',
+                'delete_uri' => 'admin/link_category/delete/' . $lc_id
+            );
+            $this->load->view('admin/link_category/view_page', $data);
+        }
+        else
+        {
+            $this->session->set_userdata('message', 'Link Category record not found.');
+            redirect('admin/link_project/browse');
+        }
+    }
+
 	public function edit($lc_id)
 	{
 		$this->User_log_model->validate_access();
