@@ -58,13 +58,15 @@ class Project_category extends CI_Controller
     private function _set_rules_create()
     {
         $this->form_validation->set_rules('pc_name', 'Name', 'trim|required|max_length[512]');
-        $this->form_validation->set_rules('pc_description', 'Description'. 'trim|required|max_length[512]');
+        $this->form_validation->set_rules('pc_icon', 'Icon', 'trim|required|max_length[512]');
+        $this->form_validation->set_rules('pc_description', 'Description'. 'trim|max_length[512]');
     }
 
     private function _prepare_create_array()
     {
         $project_category = array();
         $project_category['pc_name'] = $this->input->post('pc_name');
+        $project_category['pc_icon'] = $this->input->post('pc_icon');
         $project_category['pc_description'] = $this->input->post('pc_description');
         return $project_category;
     }
@@ -104,7 +106,7 @@ class Project_category extends CI_Controller
                 {
                     $this->User_log_model->log_message('Project Category updated. | pc_id: ' . $pc_id);
                     $this->session->set_userdata('message', 'Project Category updated.');
-                    redirect('admin/project_category/browse');
+                    redirect('admin/project_category/view/' . $pc_id);
                 }
                 else
                 {
@@ -128,12 +130,14 @@ class Project_category extends CI_Controller
     private function _set_rules_edit()
     {
         $this->form_validation->set_rules('pc_name', 'Name', 'trim|required|max_length[512]');
-        $this->form_validation->set_rules('pc_description', 'Description', 'trim|required|max_length[512]');
+        $this->form_validation->set_rules('pc_icon', 'Icon', 'trim|required|max_length[512]');
+        $this->form_validation->set_rules('pc_description', 'Description', 'trim|max_length[512]');
     }
 
     private function _prepare_edit_array($project_category)
     {
         $project_category['pc_name'] = $this->input->post('pc_name');
+        $project_category['pc_icon'] = $this->input->post('pc_icon');
         $project_category['pc_description'] = $this->input->post('pc_description');
         return $project_category;
     }

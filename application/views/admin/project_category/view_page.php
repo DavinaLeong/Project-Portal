@@ -63,6 +63,13 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label class="control-label col-md-2" for="pc_icon">Icon</label>
+                                    <div class="col-md-10">
+                                        <p id="pc_icon" class="form-control-static"><i class="fa <?=$project_category['pc_icon'];?> fa-fw"></i> (<?=$project_category['pc_icon'];?>)</p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <label class="control-label col-md-2" for="pc_description">Description</label>
                                     <div class="col-md-10">
                                         <p id="pc_description" class="form-control-static"><?=$project_category['pc_description'];?></p>

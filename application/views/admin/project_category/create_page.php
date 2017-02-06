@@ -52,6 +52,14 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label class="control-label col-md-2" for="pc_icon">Icon <span class="text-danger">*</span></label>
+                                    <div class="col-md-10">
+                                        <input class="form-control" type="text" id="pc_icon" name="pc_icon"
+                                               value="<?=set_value('pc_icon');?>" maxlength="512" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <label class="control-label col-md-2" for="pc_description">Description <span class="text-danger">*</span></label>
                                     <div class="col-md-10">
                                         <input class="form-control" type="text" id="pc_description"
