@@ -69,6 +69,28 @@ class Project_category extends CI_Controller
         return $project_category;
     }
 
+    public function view($pc_id)
+    {
+        $this->User_log_model->validate_access();
+        $project_category = $this->Project_category_model->get_by_id($pc_id);
+        if($project_category)
+        {
+            $this->load->model('Project_model');
+            $data = array(
+                'project_category' => $project_category,
+                'projects' => $this->Project_model->get_by_pc_id($pc_id, 'project_id', 'ASC'),
+                'delete_modal_header' => 'Delete Project Category Record',
+                'delete_uri' => 'admin/project_category/delete/' . $pc_id
+            );
+            $this->load->view('admin/project_category/view_page', $data);
+        }
+        else
+        {
+            $this->session->set_userdata('message', 'Project Category not found.');
+            redirect('admin/project_category/browse');
+        }
+    }
+
     public function edit($pc_id)
     {
         $this->User_log_model->validate_access();
