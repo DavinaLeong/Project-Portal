@@ -3,7 +3,7 @@
 	- File Info -
 		File name		: view_page.php
 		Author(s)		: DAVINA Leong Shi Yun
-		Date Created	: 31 Jan 2016
+		Date Created	: 06 Feb 2016
 
 	- Contact Info -
 		Email	: leong.shi.yun@gmail.com
@@ -11,8 +11,8 @@
 
 ***********************************************************************************/
 /**
- * @var $platform
- * @var $projects
+ * @var $link_category
+ * @var $links
  */
 ?><!DOCTYPE html>
 <html lang="en">
@@ -28,19 +28,19 @@
     <div class="container-fluid">
         <ol class="breadcrumb">
             <li><a href="<?=site_url('admin/authenticate/start');?>">Home</a></li>
-            <li><a href="<?=site_url('admin/platform/browse');?>">Platforms</a></li>
-            <li class="active">Platform ID: <?=$platform['platform_id'];?></li>
+            <li><a href="<?=site_url('admin/link_category/browse');?>">Link Categories</a></li>
+            <li class="active">Link Category ID: <?=$link_category['lc_id'];?></li>
         </ol>
 
         <div class="row">
             <div id="main" class="col-lg-12">
-                <h1 class="page-header text-info"><i class="fa fa-eye fa-fw"></i> View Platform&nbsp;
+                <h1 class="page-header text-info"><i class="fa fa-eye fa-fw"></i> View Link Category&nbsp;
                     <div class="btn-group">
                         <button id="action_btn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-gavel fa-fw"></i> Action <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a id="edit_record" href="<?=site_url('admin/platform/edit/' . $platform['platform_id']);?>"><i class="fa fa-pencil-square-o fa-fw"></i> Edit Record</a></li>
+                            <li><a id="edit_record" href="<?=site_url('admin/link_category/edit/' . $link_category['lc_id']);?>"><i class="fa fa-pencil-square-o fa-fw"></i> Edit Record</a></li>
                             <li><a id="delete_record" class="clickable" data-toggle="modal" data-target="#delete_modal"><i class="fa fa-trash fa-fw"></i> Delete Record</a></li>
                         </ul>
                     </div>
@@ -56,23 +56,16 @@
                                 <legend>Details</legend>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-2" for="platform_name">Name</label>
+                                    <label class="control-label col-md-2" for="lc_name">Name</label>
                                     <div class="col-md-10">
-                                        <p id="platform_name" class="form-control-static"><?=$platform['platform_name'];?></p>
+                                        <p id="lc_name" class="form-control-static"><?=$link_category['lc_name'];?></p>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-2" for="platform_description">Description</label>
+                                    <label class="control-label col-md-2" for="lc_description">Description</label>
                                     <div class="col-md-10">
-                                        <p id="platform_description" class="form-control-static"><?=$platform['platform_description'];?></p>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="control-label col-md-2" for="platform_icon">Icon</label>
-                                    <div class="col-md-10">
-                                        <p id="platform_icon" class="form-control-static"><i class="fa <?=$platform['platform_icon'];?> fa-fw"></i> <small>(<?=$platform['platform_icon'];?>)</small></p>
+                                        <p id="lc_description" class="form-control-static"><?=$link_category['lc_description'];?></p>
                                     </div>
                                 </div>
                             </fieldset>
@@ -81,32 +74,24 @@
                                 <legend>Admin</legend>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-2" for="platform_status">Status</label>
+                                    <label class="control-label col-md-2" for="link_category_status">Date Added</label>
                                     <div class="col-md-10">
-                                        <p id="platform_status" class="form-control-static"><span class="label label-default label-<?=strtolower($platform['platform_status']);?>"><?=$platform['platform_status'];?></span></p>
+                                        <p id="date_added" class="form-control-static"><?=format_dd_mm_yyyy_hh_ii_ss($link_category['date_added']);?></p>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-2" for="platform_status">Date Added</label>
+                                    <label class="control-label col-md-2" for="link_category_status">Last Updated</label>
                                     <div class="col-md-10">
-                                        <p id="date_added" class="form-control-static"><?=format_dd_mm_yyyy_hh_ii_ss($platform['date_added']);?></p>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="control-label col-md-2" for="platform_status">Last Updated</label>
-                                    <div class="col-md-10">
-                                        <p id="last_updated" class="form-control-static"><?=format_rfc($platform['last_updated']);?></p>
+                                        <p id="last_updated" class="form-control-static"><?=format_rfc($link_category['last_updated']);?></p>
                                     </div>
                                 </div>
                             </fieldset>
                         </form>
 
-                        <div class="teble-responsive">
-                            <h2 class="page-header">Projects</h2>
-
-                            <table id="table-projects" class="table table-hover">
+                        <div class="table-responsive">
+                            <h2 class="page-header">Links</h2>
+                            <table id="table-links" class="table table-hovered">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
@@ -116,14 +101,14 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach($projects as $project): ?>
-                                <tr class="clickable" onclick="goto_view(<?=$project['project_id'];?>)">
-                                    <td><?=$project['project_id'];?></td>
-                                    <td><?=$project['project_name'];?></td>
-                                    <td><?=$project['project_description'];?></td>
-                                    <td><span class="label label-default label-<?=strtolower($project['project_status']);?>"><?=$project['project_status'];?></span></td>
+                                <?php foreach($links as $link): ?>
+                                <tr>
+                                    <td><?=$link['link_id'];?></td>
+                                    <td><?=$link['link_name'];?></td>
+                                    <td><?=$link['link_description'];?></td>
+                                    <td><span class="label label-default label-<?=strtolower($link['link_status']);?>"><?=$link['link_status'];?></span></td>
                                 </tr>
-                                <?php endforeach; ?>
+                                <?php endforeach;?>
                                 </tbody>
                             </table>
                         </div>
@@ -142,16 +127,11 @@
 <script>
     $(document).ready(function()
     {
-        $('#table-projects').DataTable({
+        $('#table-links').DataTable({
             "order": [[0, 'asc']],
             "responsive": true
         });
     });
-
-    function goto_view(record_id)
-    {
-        window.open('<?=site_url("admin/project/view");?>/' + record_id);
-    }
 </script>
 </body>
 </html>
