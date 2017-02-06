@@ -20,7 +20,7 @@ class Migration_Add_lcid_field_to_link_table extends CI_Migration
 	public function up()
 	{
         $this->load->model('Migration_model');
-        echo '<h1>Migration: Add \'lc_id\' Field</h1>';
+        echo '<h1>Migration: Add \'lc_id\' Field to Link table</h1>';
         echo '<hr/>';
         echo '<p>Running Up Script...</p>';
         echo '<p style="text-align: center;">- start of script -</p>';
@@ -32,7 +32,7 @@ class Migration_Add_lcid_field_to_link_table extends CI_Migration
 	public function down()
 	{
         $this->load->model('Migration_model');
-        echo '<h1>Migration: Add \'lc_id\' Field</h1>';
+        echo '<h1>Migration: Add \'lc_id\' Field to Link table</h1>';
         echo '<hr/>';
         echo '<p>Running Down Script...</p>';
         echo '<p style="text-align: center;">- start of script -</p>';
