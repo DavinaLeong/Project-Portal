@@ -44,7 +44,7 @@
 
                         <form id="form" class="form-horizontal" method="post" data-parsley-validate>
                             <fieldset>
-                                <legend>Details</legend>
+                                <legend>Record Details</legend>
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="project_id">Link <span class="text-danger">*</span></label>
                                     <div class="col-md-10">

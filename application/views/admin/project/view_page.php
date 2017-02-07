@@ -102,6 +102,13 @@
                                         <p id="project_icon" class="form-control-static"><i class="fa <?=$project['project_icon'];?> fa-fw"></i> <small>(<?=$project['project_icon'];?>)</small></p>
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="selected_project">Selected Project</label>
+                                    <div class="col-md-10">
+                                        <p id="selected_project" class="form-control-static"><?=$project['selected_project'] == 1 ? '<span class="text-primary">Yes</span>' : 'No';?></p>
+                                    </div>
+                                </div>
                             </fieldset>
 
                             <fieldset>

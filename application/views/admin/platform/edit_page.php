@@ -41,12 +41,12 @@
                 <div class="row">
                     <div class="col-md-10">
 
-                        <?php $this->load->view('validation_errors_box'); ?>
-                        <?php $this->load->view('message_box'); ?>
+                        <?php $this->load->view('admin/_snippets/validation_errors_box'); ?>
+                        <?php $this->load->view('admin/_snippets/message_box'); ?>
 
                         <form id="form" class="form-horizontal" method="post" data-parsley-validate>
                             <fieldset>
-                                <legend>Details</legend>
+                                <legend>Record Details</legend>
 
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="platform_name">Name <span class="text-danger">*</span></label>

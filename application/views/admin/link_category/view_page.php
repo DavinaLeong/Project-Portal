@@ -53,7 +53,7 @@
 
                         <form id="form" class="form-horizontal">
                             <fieldset>
-                                <legend>Details</legend>
+                                <legend>Record Details</legend>
 
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="lc_name">Name</label>

@@ -45,6 +45,9 @@ class Migration_Add_missing_fields extends CI_Migration
 	private function _up_script()
 	{
 		$sql = "
+            ALTER TABLE `platform` ADD COLUMN `platform_status` VARCHAR(512) NOT NULL;
+            UPDATE `platform` SET `platform_status` = 'Publish' WHERE `platform_status` = '';
+
 			ALTER TABLE `project_category` ADD COLUMN `pc_icon` VARCHAR(512) DEFAULT NULL;
 
 			ALTER TABLE `project` ADD COLUMN `selected_project` INT(1) NOT NULL DEFAULT 0;
@@ -55,6 +58,8 @@ class Migration_Add_missing_fields extends CI_Migration
 	private function _down_script()
 	{
 		$sql = "
+            ALTER TABLE `platform` DROP COLUMN `platform_status`;
+
 			ALTER TABLE `project_category` DROP COLUMN `pc_icon`;
 
 			ALTER TABLE `project` DROP COLUMN `selected_project`;
