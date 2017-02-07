@@ -95,6 +95,17 @@
                                         <input class="form-control" type="text" id="project_icon" name="project_icon" value="<?=set_value('project_icon', $project['project_icon']);?>" maxlength="512" />
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="selected_project">Selected Project</label>
+                                    <div class="col-md-10">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" id="selected_project" name="selected_project" value="1" <?=set_checkbox('selected_project', 1, ($project['selected_project'] == 1)); ?> /> Yes
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
                             </fieldset>
 
                             <fieldset>

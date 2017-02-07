@@ -135,20 +135,23 @@ class Project extends CI_Controller
             $this->_set_rules_edit_project();
             if($this->form_validation->run())
             {
-                $old_selected_project = $project['selected_project'];
+                $old_selected_project_value = $project['selected_project'];
                 if($this->Project_model->update($this->_prepare_edit_project_array($project)))
                 {
                     $this->User_log_model->log_message('Project updated. | project_id: ' . $project_id);
                     $this->session->set_userdata('message', 'Project updated.');
 
                     // unset other selected projects
-                    if($this->input->post('selected_project') == 1 && $this->input->post('selected_project') !== $old_selected_project)
+                    if($this->input->post('selected_project') == 1 && $this->input->post('selected_project') !== $old_selected_project_value)
                     {
                         if($selected_project = $this->Project_model->get_by_pc_id_selected_project($this->input->post('pc_id')))
                         {
-                            $selected_project['selected_project'] = 0;
-                            $this->Project_model->update($selected_project);
-                            $this->User_log_model->log_message('Selected project changed. | pc_id: ' . $selected_project['pc_id']);
+                            if($selected_project['project_id'] !== $project_id)
+                            {
+                                $selected_project['selected_project'] = 0;
+                                $this->Project_model->update($selected_project);
+                                $this->User_log_model->log_message('Selected project changed. | pc_id: ' . $selected_project['pc_id']);
+                            }
                         }
                     }
 
