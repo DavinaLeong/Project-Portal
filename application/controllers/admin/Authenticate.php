@@ -95,4 +95,10 @@ class Authenticate extends CI_Controller
         $this->load->view('admin/authenticate/start_page');
     }
 
+    public function tasks()
+    {
+        $this->User_log_model->validate_access();
+        $this->load->view('admin/authenticate/tasks_page');
+    }
+
 } // end Test controller class
