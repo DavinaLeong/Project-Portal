@@ -23,7 +23,7 @@
     }
 
     body {
-        background: url('<?=RESOURCES_FOLDER;?>pp/images/login-background.jpg') center no-repeat #000;
+        background: url('<?=RESOURCES_FOLDER;?>pp/dist/images/login-background.jpg') center no-repeat #000;
         background-size: cover;
     }
 </style>
@@ -34,7 +34,7 @@
         <div class="col-md-4 col-md-offset-4">
             <div class="login-panel panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title text-center"><img data-toggle="tooltip" title="<?=ADMIN_SITE_NAME;?>" src="<?=RESOURCES_FOLDER;?>pp/images/pp_logo.png" alt="site logo" width="64" height="64" /></h3>
+                    <h3 class="panel-title text-center"><img data-toggle="tooltip" title="<?=ADMIN_SITE_NAME;?>" src="<?=RESOURCES_FOLDER;?>pp/dist/images/pp_logo.png" alt="site logo" width="64" height="64" /></h3>
                 </div>
                 <div class="panel-body">
                     <?php $this->load->view('admin/_snippets/validation_errors_box'); ?>

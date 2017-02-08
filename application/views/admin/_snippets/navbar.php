@@ -21,7 +21,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="<?=site_url('admin/authenticate/start');?>"><img src="<?=RESOURCES_FOLDER;?>pp/images/pp_logo.png" alt="Site Logo" height="16px" /> <?=ADMIN_SITE_NAME;?></a>
+        <a class="navbar-brand" href="<?=site_url('admin/authenticate/start');?>"><img src="<?=RESOURCES_FOLDER;?>pp/dist/images/pp_logo.png" alt="Site Logo" height="16px" /> <?=ADMIN_SITE_NAME;?></a>
     </div>
     <!-- navbar-header end -->
 
