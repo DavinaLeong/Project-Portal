@@ -41,7 +41,7 @@ function format_mm_dd_yyyy($datetime_str, $seperator='-')
     return $datetime->format('m' . $seperator . 'd' . $seperator . 'Y');
 }
 
-function format_yyyy_dd_mm($datetime_str, $seperator='-')
+function format_yyyy_mm_dd($datetime_str, $seperator='-')
 {
     $datetime = new DateTime($datetime_str, new DateTimeZone(DATETIME_ZONE));
     return $datetime->format('Y' . $seperator . 'm' . $seperator . 'd');
@@ -51,6 +51,12 @@ function format_dd_mm_yyyy_hh_ii_ss($datetime_str)
 {
     $datetime = new DateTime($datetime_str, new DateTimeZone(DATETIME_ZONE));
     return $datetime->format('d-m-Y H:i:s');
+}
+
+function format_yyyy_mm_dd_hh_ii_ss($datetime_str)
+{
+    $datetime = new DateTime($datetime_str, new DateTimeZone(DATETIME_ZONE));
+    return $datetime->format('Y-m-d H:i:s');
 }
 
 function format_dd_mmm_yyyy($datetime_str)

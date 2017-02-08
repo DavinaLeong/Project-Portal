@@ -93,6 +93,48 @@ class Link_model extends CI_Model
         }
     }
 
+    public function get_links_by_project_id($project_id=FALSE, $column='label', $direction='ASC')
+    {
+        if($project_id)
+        {
+            $this->db->select(TABLE_LINK . '.*, ' . TABLE_LINK_CATEGORY . '.lc_name');
+            $this->db->from(TABLE_PROJECT);
+            $this->db->join(TABLE_LINK_CATEGORY, TABLE_PROJECT . '.project_id = ' . TABLE_LINK_CATEGORY . '.project_id', 'left');
+            $this->db->join(TABLE_LINK, TABLE_LINK_CATEGORY . '.lc_id = ' . TABLE_LINK . '.lc_id', 'left');
+            $this->db->where(TABLE_PROJECT . '.project_id = ' . $project_id);
+            $this->db->order_by($column, $direction);
+
+            $query = $this->db->get();
+            return $query->result_array();
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
+    public function get_links_by_project_id_status($project_id=FALSE, $status='Publish',
+                                                   $column='label', $direction='ASC')
+    {
+        if($project_id && $status)
+        {
+            $this->db->select(TABLE_LINK . '*, ' . TABLE_LINK_CATEGORY . '.lc_name');
+            $this->db->from(TABLE_PROJECT);
+            $this->db->join(TABLE_LINK_CATEGORY, TABLE_PROJECT . '.project_id = ' . TABLE_LINK_CATEGORY . '.project_id', 'left');
+            $this->db->join(TABLE_LINK, TABLE_LINK_CATEGORY . '.lc_id = ' . TABLE_LINK . '.lc_id', 'left');
+            $this->db->where(TABLE_PROJECT . '.project_id = ' . $project_id);
+            $this->db->where(TABLE_LINK . '.link_status = ', $status);
+            $this->db->order_by($column, $direction);
+
+            $query = $this->db->get();
+            return $query->result_array();
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
     public function insert($link=FALSE)
     {
         if($link)

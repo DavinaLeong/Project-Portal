@@ -112,8 +112,12 @@ class Project extends CI_Controller
         $project = $this->Project_model->get_by_id_platform_project_category($project_id);
         if($project)
         {
+            $this->load->model('Link_category_model');
+            $this->load->model('Link_model');
             $data = array(
                 'project' => $project,
+                'link_categories' => $this->Link_category_model->get_by_project_id($project_id, 'lc_name', 'ASC'),
+                'links' => $this->Link_model->get_links_by_project_id($project_id),
                 'delete_modal_header' => 'Delete Project Record',
                 'delete_uri' => 'admin/project/delete/' . $project_id
             );
@@ -214,17 +218,25 @@ class Project extends CI_Controller
         $this->User_log_model->validate_access();
         if($this->Project_model->get_by_id($project_id))
         {
-            if($this->Project_model->delete_by_id($project_id))
+            $this->load->model('Link_category_model');
+            if($this->Link_category_model->get_by_project_id($project_id))
             {
-                $this->User_log_model->log_message('Project deleted. | project_id: ' . $project_id);
-                $this->session->set_userdata('message', 'Project deleted.');
-                redirect('admin/project/browse');
+                $this->session->set_userdata('message', 'Unable to delete Project as there are existing Link Categories associated with it.');
             }
             else
             {
-                $this->User_log_model->log_message('Unable to delete Project. | project_id: ' . $project_id);
-                $this->session->set_userdata('message', 'Unable to delete Project.');
-                redirect('admin/project/view/' . $project_id);
+                if($this->Project_model->delete_by_id($project_id))
+                {
+                    $this->User_log_model->log_message('Project deleted. | project_id: ' . $project_id);
+                    $this->session->set_userdata('message', 'Project deleted.');
+                    redirect('admin/project/browse');
+                }
+                else
+                {
+                    $this->User_log_model->log_message('Unable to delete Project. | project_id: ' . $project_id);
+                    $this->session->set_userdata('message', 'Unable to delete Project.');
+                    redirect('admin/project/view/' . $project_id);
+                }
             }
         }
         else

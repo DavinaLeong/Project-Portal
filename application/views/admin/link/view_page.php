@@ -75,7 +75,7 @@ $output_url = ($link['use_https'] == 1 ? 'https' : 'http') . '://' . $link['url'
                                     <label class="control-label col-md-2" for="url">URL</label>
                                     <div class="col-md-10">
                                         <p id="url" class="form-control-static"><a href="<?=$output_url;?>" target="_blank"><?=$link['url'];?></a><br/>
-                                        <small>Output URL: <?=$output_url;?></small></p>
+                                        <small>Output URL: <i><?=$output_url;?></i></small></p>
                                     </div>
                                 </div>
 
