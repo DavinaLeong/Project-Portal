@@ -44,6 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="sidebar-nav navbar-collapse">
 
             <ul class="nav" id="side-menu">
+                <li><a href="<?=site_url();?>"><i class="fa fa-file fa-fw"></i> Front Page</a></li>
                 <li><a href="<?=site_url('admin/authenticate/tasks');?>"><i class="fa fa-tasks fa-fw"></i> Tasks</a></li>
                 <!-- platform module -->
                 <li>

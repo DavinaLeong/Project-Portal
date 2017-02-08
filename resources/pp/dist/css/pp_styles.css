@@ -1,0 +1,122 @@
+/**********************************************************************************
+	- File Info -
+		File name		: pp_styles.php
+		Author(s)		: DAVINA Leong Shi Yun
+		Date Created	: 08 Feb 2017
+
+	- Contact Info -
+		Email	: leong.shi.yun@gmail.com
+		Mobile	: (+65) 9369 3752 [Singapore]
+
+***********************************************************************************/
+td
+{
+    width: 25%;
+}
+
+.placeholder,
+.placeholder a
+{
+    color: #999;
+    font-style: italic;
+}
+
+.placeholder a:hover
+{
+    color: #777;
+}
+
+.btn-work-log
+{
+    color: #fff;
+    background-color: #5633B7;
+    border-color: #4D2EA4;
+}
+
+.btn-work-log:focus,
+.btn-work-log.focus
+{
+    color: #fff;
+    background-color: #442890;
+    border-color: #1E1240;
+}
+.btn-work-log:hover {
+    color: #fff;
+    background-color: #442890;
+    border-color: #362074;
+}
+.btn-work-log:active,
+.btn-work-log.active,
+.open > .dropdown-toggle.btn-work-log
+{
+    color: #fff;
+    background-color: #442890;
+    border-color: #362074;
+}
+.btn-work-log:active:hover,
+.btn-work-log.active:hover,
+.open > .dropdown-toggle.btn-work-log:hover,
+.btn-work-log:active:focus,
+.btn-work-log.active:focus,
+.open > .dropdown-toggle.btn-work-log:focus,
+.btn-work-log:active.focus,
+.btn-work-log.active.focus,
+.open > .dropdown-toggle.btn-work-log.focus
+{
+    color: #fff;
+    background-color: #362074;
+    border-color: #1E1240;
+}
+.btn-work-log:active,
+.btn-work-log.active,
+.open > .dropdown-toggle.btn-work-log
+{
+    background-image: none;
+}
+.btn-work-log.disabled,
+.btn-work-log[disabled],
+fieldset[disabled] .btn-work-log,
+.btn-work-log.disabled:hover,
+.btn-work-log[disabled]:hover,
+fieldset[disabled] .btn-work-log:hover,
+.btn-work-log.disabled:focus,
+.btn-work-log[disabled]:focus,
+fieldset[disabled] .btn-work-log:focus,
+.btn-work-log.disabled.focus,
+.btn-work-log[disabled].focus,
+fieldset[disabled] .btn-work-log.focus,
+.btn-work-log.disabled:active,
+.btn-work-log[disabled]:active,
+fieldset[disabled] .btn-work-log:active,
+.btn-work-log.disabled.active,
+.btn-work-log[disabled].active,
+fieldset[disabled] .btn-work-log.active
+{
+    background-color: #5633B7;
+    border-color: #4D2EA4;
+}
+.btn-work-log .badge
+{
+    color: #5633B7;
+    background-color: #fff;
+}
+
+.panel-title > a,
+.panel-title > a:hover,
+.panel-title > a:active,
+.panel-title > a:visited
+{
+    text-decoration: none;
+}
+
+.panel-title > a
+{
+    border: thick solid #f5f5f5;
+    border-radius: 3px;
+}
+
+.panel-title > a:hover {
+    border: thick solid #ddd;
+    border-radius: 3px;
+    background: #ddd;
+}
