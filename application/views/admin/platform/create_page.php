@@ -107,7 +107,11 @@
 <script>
     var element = React.createElement(
         IconField,
-        { "platform_icon": "<?=set_value('platform_icon');?>" }
+        {
+            "icon_name": "<?=set_value('platform_icon');?>",
+            "field_name": "platform_icon",
+            "required": true
+        }
     );
 
     ReactDOM.render(

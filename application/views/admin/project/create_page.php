@@ -85,14 +85,6 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-2" for="project_icon">Icon</label>
-                                    <div class="col-md-10">
-                                        <input class="form-control" type="text" id="project_icon" name="project_icon"
-                                               value="<?=set_value('project_icon');?>" maxlength="512" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
                                     <label class="control-label col-md-2" for="project_description">Description <span class="text-danger">*</span></label>
                                     <div class="col-md-10">
                                         <input class="form-control" type="text" id="project_description"
@@ -100,6 +92,8 @@
                                                required maxlength="512" />
                                     </div>
                                 </div>
+
+                                <div id="IconField"></div>
 
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="selected_project">Selected Project</label>
@@ -149,5 +143,22 @@
 </div>
 <?php $this->load->view('admin/_snippets/body_resources') ;?>
 <script src="<?=RESOURCES_FOLDER;?>parsleyjs/parsley.min.js"></script>
+<?php $this->load->view('admin/_snippets/react_min_resources'); ?>
+<script src="<?=RESOURCES_FOLDER;?>pp/dist/js/IconField.min.js"></script>
+<script>
+    var element = React.createElement(
+        IconField,
+        {
+            "icon_name": "<?=set_value('project_icon');?>",
+            "field_name": "project_icon",
+            "required": false
+        }
+    );
+
+    ReactDOM.render(
+        element,
+        document.getElementById('IconField')
+    );
+</script>
 </body>
 </html>

@@ -51,18 +51,13 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-2" for="pc_icon">Icon <span class="text-danger">*</span></label>
-                                    <div class="col-md-10">
-                                        <input class="form-control" type="text" id="pc_icon" name="pc_icon" value="<?=set_value('pc_icon', $project_category['pc_icon']);?>" required maxlength="512" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
                                     <label class="control-label col-md-2" for="pc_description">Description <span class="text-danger">*</span></label>
                                     <div class="col-md-10">
                                         <input class="form-control" type="text" id="pc_description" name="pc_description" value="<?=set_value('pc_description', $project_category['pc_description']);?>" maxlength="512" />
                                     </div>
                                 </div>
+
+                                <div id="IconField"></div>
                             </fieldset>
 
                             <fieldset>
@@ -103,5 +98,22 @@
 </div>
 <?php $this->load->view('admin/_snippets/body_resources') ;?>
 <script src="<?=RESOURCES_FOLDER;?>parsleyjs/parsley.min.js"></script>
+<?php $this->load->view('admin/_snippets/react_min_resources'); ?>
+<script src="<?=RESOURCES_FOLDER;?>pp/dist/js/IconField.min.js"></script>
+<script>
+    var element = React.createElement(
+        IconField,
+        {
+            "icon_name": "<?=set_value('pc_icon', $project_category['pc_icon']);?>",
+            "field_name": "pc_icon",
+            "required": false
+        }
+    );
+
+    ReactDOM.render(
+        element,
+        document.getElementById('IconField')
+    );
+</script>
 </body>
 </html>
