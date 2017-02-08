@@ -9,9 +9,15 @@
 		Mobile	: (+65) 9369 3752 [Singapore]
 
 ***********************************************************************************/
-var gulp = require('gulp');
-var debug = require('gulp-debug');
-var del = require('del');
+var gulp = require("gulp");
+var sourcemaps = require("gulp-sourcemaps");
+var uglify = require("gulp-uglify");
+var plumber = require("gulp-plumber");
+var rename = require("gulp-rename");
+var babel = require("gulp-babel");
+var del = require("del");
+var react = require("react");
+var react_dom = require("react-dom");
 
 const NODE_PATH = './node_modules/';
 const VENDOR_PATH = './';
@@ -22,12 +28,12 @@ gulp.task('dev-default', ['update-vendor', 'dev-watch']);
 
 gulp.task('watch', function()
 {
-    gulp.watch('./pp/src/jsx/**/*.jsx', ['jsx', 'js']);
+    gulp.watch('./pp/src/jsx/**/*.jsx', ['jsx']);
 });
 
 gulp.task('dev-watch', function()
 {
-    gulp.watch('./pp/src/jsx/**/*.jsx', ['dev-jsx', 'js']);
+    gulp.watch('./pp/src/jsx/**/*.jsx', ['dev-jsx']);
 });
 // === Main end ===
 
@@ -114,22 +120,6 @@ gulp.task('clean-vendor', function()
 // === Vendor end ===
 
 // === React JS start ===
-gulp.src('update-jsx', ['jsx', 'js']);
-
-gulp.src('update-dev-jsx', ['dev-jsx', 'js']);
-
-gulp.task('js', function()
-{
-    gulp.src('./pp/src/js/**.js')
-        .pipe(plumber({errorHandler:function(err) {
-            console.log(err);
-        }}))
-        .pipe(uglify())
-        .pipe(sourcemaps.write())
-        .pipe(rename({suffix: '.min'}))
-        .pipe(gulp.dest('./pp/dist/js'));
-});
-
 gulp.task('jsx', function()
 {
     gulp.src('./pp/src/jsx/**.jsx')
@@ -144,7 +134,7 @@ gulp.task('jsx', function()
         .pipe(rename({
             suffix: '.min',
             extname: '.js'}))
-        .pipe(gulp.dest('./pp/src/js/'));
+        .pipe(gulp.dest('./pp/dist/js/'));
 });
 
 gulp.task('dev-jsx', function()
@@ -158,12 +148,8 @@ gulp.task('dev-jsx', function()
             'presets':['es2015', 'react'],
             'plugins':['syntax-object-rest-spread']
         }))
-        .pipe(uglify())
         .pipe(sourcemaps.write())
-        .pipe(rename({
-            suffix: '.min',
-            extname: '.js'}))
-        .pipe(gulp.dest('./pp/src/js/'));
+        .pipe(gulp.dest('./pp/dist/js/'));
 });
 
 gulp.task('clean-js', function()
@@ -172,7 +158,9 @@ gulp.task('clean-js', function()
 
     del.sync([
         './pp/dist/js/**',
-        '!' + './pp/dist/js'
+        './pp/src/js/**',
+        '!' + './pp/dist/js',
+        '!' + './pp/src/js'
     ]);
 
     console.log('--- task: delete ENDED ---');

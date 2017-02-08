@@ -18,7 +18,7 @@
 <head>
 <?php $this->load->view('admin/_snippets/meta'); ?>
 <?php $this->load->view('admin/_snippets/head_resources'); ?>
-<link href="<?=RESOURCES_FOLDER;?>pp/pp_parsley.css" rel="stylesheet" type="text/css">
+<link href="<?=RESOURCES_FOLDER;?>pp/dist/css/pp_parsley.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div id="wrapper">
@@ -71,6 +71,7 @@
                                                required maxlength="512" />
                                     </div>
                                 </div>
+                                <div id="IconField"></div>
                             </fieldset>
 
                             <fieldset>
@@ -107,7 +108,16 @@
     </div>
 </div>
 </div>
-<?php $this->load->view('admin/_snippets/body_resources') ;?>
+<?php $this->load->view('admin/_snippets/body_resources'); ?>
 <script src="<?=RESOURCES_FOLDER;?>parsleyjs/parsley.min.js"></script>
+<?php $this->load->view('admin/_snippets/react_resources'); ?>
+<script src="<?=RESOURCES_FOLDER;?>pp/dist/js/IconField.js"></script>
+<script>
+    var element = React.createElement(IconField);
+    ReactDOM.render(
+        element,
+        document.getElementById('IconField')
+    );
+</script>
 </body>
 </html>

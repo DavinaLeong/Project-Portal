@@ -1,7 +1,5 @@
-cls
-
 cd "../resources"
 
-call gulp dev-jsx
+call npm list
 
 cd "../cmd_scripts"

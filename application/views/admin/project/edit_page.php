@@ -21,7 +21,7 @@
 <head>
 <?php $this->load->view('admin/_snippets/meta'); ?>
 <?php $this->load->view('admin/_snippets/head_resources'); ?>
-<link href="<?=RESOURCES_FOLDER;?>pp/pp_parsley.css" rel="stylesheet" type="text/css">
+<link href="<?=RESOURCES_FOLDER;?>pp/dist/css/pp_parsley.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div id="wrapper">
