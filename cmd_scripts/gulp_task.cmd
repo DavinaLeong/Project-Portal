@@ -2,6 +2,6 @@ cls
 
 cd "../resources"
 
-call gulp dev-jsx
+call gulp jsx
 
 cd "../cmd_scripts"

@@ -26,12 +26,12 @@ const VENDOR_PATH = './';
 gulp.task('default', ['update-vendor', 'watch']);
 gulp.task('dev-default', ['update-vendor', 'dev-watch']);
 
-gulp.task('watch', function()
+gulp.task('watch', ['jsx'], function()
 {
     gulp.watch('./pp/src/jsx/**/*.jsx', ['jsx']);
 });
 
-gulp.task('dev-watch', function()
+gulp.task('dev-watch', ['dev-jsx'], function()
 {
     gulp.watch('./pp/src/jsx/**/*.jsx', ['dev-jsx']);
 });

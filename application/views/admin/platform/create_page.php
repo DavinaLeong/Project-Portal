@@ -63,14 +63,6 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-2" for="platform_icon">Icon <span class="text-danger">*</span></label>
-                                    <div class="col-md-10">
-                                        <input class="form-control" type="text" id="platform_icon"
-                                               name="platform_icon" value="<?=set_value('platform_icon');?>"
-                                               required maxlength="512" />
-                                    </div>
-                                </div>
                                 <div id="IconField"></div>
                             </fieldset>
 
@@ -110,10 +102,14 @@
 </div>
 <?php $this->load->view('admin/_snippets/body_resources'); ?>
 <script src="<?=RESOURCES_FOLDER;?>parsleyjs/parsley.min.js"></script>
-<?php $this->load->view('admin/_snippets/react_resources'); ?>
-<script src="<?=RESOURCES_FOLDER;?>pp/dist/js/IconField.js"></script>
+<?php $this->load->view('admin/_snippets/react_min_resources'); ?>
+<script src="<?=RESOURCES_FOLDER;?>pp/dist/js/IconField.min.js"></script>
 <script>
-    var element = React.createElement(IconField);
+    var element = React.createElement(
+        IconField,
+        { "platform_icon": "<?=set_value('platform_icon');?>" }
+    );
+
     ReactDOM.render(
         element,
         document.getElementById('IconField')
