@@ -19,7 +19,7 @@
 <head>
 <?php $this->load->view('admin/_snippets/meta'); ?>
 <?php $this->load->view('admin/_snippets/head_resources'); ?>
-<link href="<?=RESOURCES_FOLDER;?>pp/pp_parsley.css" rel="stylesheet" type="text/css">
+<link href="<?=RESOURCES_FOLDER;?>pp/dist/css/pp_parsley.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div id="wrapper">
@@ -41,12 +41,12 @@
                 <div class="row">
                     <div class="col-md-10">
 
-                        <?php $this->load->view('validation_errors_box'); ?>
-                        <?php $this->load->view('message_box'); ?>
+                        <?php $this->load->view('admin/_snippets/validation_errors_box'); ?>
+                        <?php $this->load->view('admin/_snippets/message_box'); ?>
 
                         <form id="form" class="form-horizontal" method="post" data-parsley-validate>
                             <fieldset>
-                                <legend>Details</legend>
+                                <legend>Record Details</legend>
 
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="platform_name">Name <span class="text-danger">*</span></label>
@@ -62,12 +62,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-2" for="platform_icon">Icon <span class="text-danger">*</span></label>
-                                    <div class="col-md-10">
-                                        <input class="form-control" type="text" id="platform_icon" name="platform_icon" value="<?=set_value('platform_icon', $platform['platform_icon']);?>" required maxlength="512" />
-                                    </div>
-                                </div>
+                                <div id="IconField"></div>
                             </fieldset>
 
                             <fieldset>
@@ -120,5 +115,22 @@
 </div>
 <?php $this->load->view('admin/_snippets/body_resources') ;?>
 <script src="<?=RESOURCES_FOLDER;?>parsleyjs/parsley.min.js"></script>
+<?php $this->load->view('admin/_snippets/react_min_resources'); ?>
+<script src="<?=RESOURCES_FOLDER;?>pp/dist/js/IconField.min.js"></script>
+<script>
+    var element = React.createElement(
+        IconField,
+        {
+            "icon_name": "<?=set_value('platform_icon', $platform['platform_icon']);?>",
+            "field_name": "platform_icon",
+            "required": true
+        }
+    );
+
+    ReactDOM.render(
+        element,
+        document.getElementById('IconField')
+    );
+</script>
 </body>
 </html>

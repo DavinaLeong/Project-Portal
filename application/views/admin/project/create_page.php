@@ -20,7 +20,7 @@
 <head>
 <?php $this->load->view('admin/_snippets/meta'); ?>
 <?php $this->load->view('admin/_snippets/head_resources'); ?>
-<link href="<?=RESOURCES_FOLDER;?>pp/pp_parsley.css" rel="stylesheet" type="text/css">
+<link href="<?=RESOURCES_FOLDER;?>pp/dist/css/pp_parsley.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div id="wrapper">
@@ -61,10 +61,10 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-2" for="pc_id">Category <span class="text-danger">*</span></label>
+                                    <label class="control-label col-md-2" for="pc_id">Project Category <span class="text-danger">*</span></label>
                                     <div class="col-md-10">
                                         <select class="form-control" id="pc_id" name="pc_id" required>
-                                            <option id="pc_id_0" value="">-- Select Category --</option>
+                                            <option id="pc_id_0" value="">-- Select Project Category --</option>
                                             <?php foreach($project_categories as $key=> $project_category): ?>
                                                 <option id="pc_id_<?=$key+1;?>" value="<?=$project_category['pc_id'];?>" <?=set_select('pc_id', $project_category['pc_id']);?>><?=$project_category['pc_name'];?></option>
                                             <?php endforeach; ?>
@@ -85,19 +85,24 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-2" for="project_icon">Icon</label>
-                                    <div class="col-md-10">
-                                        <input class="form-control" type="text" id="project_icon" name="project_icon"
-                                               value="<?=set_value('project_icon');?>" maxlength="512" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
                                     <label class="control-label col-md-2" for="project_description">Description <span class="text-danger">*</span></label>
                                     <div class="col-md-10">
                                         <input class="form-control" type="text" id="project_description"
                                                name="project_description" value="<?=set_value('project_description');?>"
                                                required maxlength="512" />
+                                    </div>
+                                </div>
+
+                                <div id="IconField"></div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="selected_project">Selected Project</label>
+                                    <div class="col-md-10">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" id="selected_project" name="selected_project" value="1" <?=set_checkbox('selected_project', 1); ?> /> Yes
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </fieldset>
@@ -138,5 +143,22 @@
 </div>
 <?php $this->load->view('admin/_snippets/body_resources') ;?>
 <script src="<?=RESOURCES_FOLDER;?>parsleyjs/parsley.min.js"></script>
+<?php $this->load->view('admin/_snippets/react_min_resources'); ?>
+<script src="<?=RESOURCES_FOLDER;?>pp/dist/js/IconField.min.js"></script>
+<script>
+    var element = React.createElement(
+        IconField,
+        {
+            "icon_name": "<?=set_value('project_icon');?>",
+            "field_name": "project_icon",
+            "required": false
+        }
+    );
+
+    ReactDOM.render(
+        element,
+        document.getElementById('IconField')
+    );
+</script>
 </body>
 </html>

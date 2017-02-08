@@ -67,6 +67,7 @@ class Link extends CI_Controller
         $this->form_validation->set_rules('lc_id', 'Category', 'trim|required|in_list[' . $id_str . ']');
         $this->form_validation->set_rules('label', 'Label', 'trim|required|max_length[512]');
         $this->form_validation->set_rules('url', 'URL', 'trim|required|valid_url|max_length[512]');
+        $this->form_validation->set_rules('use_https', 'Use HTTPS', 'trim|in_list[1]');
         $status_str = implode(',', $this->Link_model->_status_array());
         $this->form_validation->set_rules('link_status', 'Status', 'trim|required|in_list[' . $status_str . ']');
     }
@@ -77,6 +78,7 @@ class Link extends CI_Controller
         $link['lc_id'] = $this->input->post('lc_id');
         $link['label'] = $this->input->post('label');
         $link['url'] = $this->input->post('url');
+        $link['use_https'] = $this->input->post('use_https') == 1 ? 1 : 0;
         $link['link_status'] = $this->input->post('link_status');
         return $link;
     }
@@ -143,6 +145,7 @@ class Link extends CI_Controller
         $this->form_validation->set_rules('lc_id', 'Category', 'trim|required|in_list[' . $id_str . ']');
         $this->form_validation->set_rules('label', 'Label', 'trim|required|max_length[512]');
         $this->form_validation->set_rules('url', 'URL', 'trim|required|valid_url|max_length[512]');
+        $this->form_validation->set_rules('use_https', 'Use HTTPS', 'trim|in_list[1]');
         $status_str = implode(',', $this->Link_model->_status_array());
         $this->form_validation->set_rules('link_status', 'Status', 'trim|required|in_list[' . $status_str . ']');
     }
@@ -152,6 +155,7 @@ class Link extends CI_Controller
         $link['lc_id'] = $this->input->post('lc_id');
         $link['label'] = $this->input->post('label');
         $link['url'] = $this->input->post('url');
+        $link['use_https'] = $this->input->post('use_https') == 1 ? 1 : 0;
         $link['link_status'] = $this->input->post('link_status');
         return $link;
     }

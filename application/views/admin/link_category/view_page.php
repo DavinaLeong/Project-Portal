@@ -53,7 +53,7 @@
 
                         <form id="form" class="form-horizontal">
                             <fieldset>
-                                <legend>Details</legend>
+                                <legend>Record Details</legend>
 
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="lc_name">Name</label>
@@ -88,34 +88,41 @@
                                 </div>
                             </fieldset>
                         </form>
+                    </div>
+                </div>
+                <div class="space-vert-50"></div>
 
+                <!-- Link panel start -->
+                <div id="links" class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Links</h2>
+                    </div>
+                    <div class="panel-body">
                         <div class="table-responsive">
-                            <h2 class="page-header">Links</h2>
                             <table id="table-links" class="table table-hovered">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Description</th>
+                                    <th>Label</th>
+                                    <th>Output URL</th>
                                     <th>Status</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <?php foreach($links as $link): ?>
-                                <tr>
-                                    <td><?=$link['link_id'];?></td>
-                                    <td><?=$link['link_name'];?></td>
-                                    <td><?=$link['link_description'];?></td>
-                                    <td><span class="label label-default label-<?=strtolower($link['link_status']);?>"><?=$link['link_status'];?></span></td>
-                                </tr>
+                                    <tr>
+                                        <td><?=$link['link_id'];?></td>
+                                        <td><?=$link['label'];?></td>
+                                        <td><a href="<?=($link['use_https'] == 1 ? 'https' : 'http') . '://' . $link['url'];?>" target="_blank"><?=($link['use_https'] == 1 ? 'https' : 'http') . '://' . $link['url'];?></a></td>
+                                        <td><span class="label label-default label-<?=strtolower($link['link_status']);?>"><?=$link['link_status'];?></span></td>
+                                    </tr>
                                 <?php endforeach;?>
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
-
+                <!-- Link panel end -->
             </div>
         </div>
         <?php $this->load->view('admin/_snippets/generic_delete_modal'); ?>

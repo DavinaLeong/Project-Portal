@@ -35,7 +35,7 @@
 
                 <div class="row">
                     <div class="col-md-2 text-center">
-                        <img src="<?=RESOURCES_FOLDER;?>pp/images/pp_logo.png" alt="Site Logo" />
+                        <img src="<?=RESOURCES_FOLDER;?>pp/dist/images/pp_logo.png" alt="Site Logo" />
                     </div>
                     <div class="col-md-10">
                         <h2>About</h2>

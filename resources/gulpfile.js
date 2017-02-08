@@ -9,16 +9,35 @@
 		Mobile	: (+65) 9369 3752 [Singapore]
 
 ***********************************************************************************/
-var gulp = require('gulp');
-var debug = require('gulp-debug');
-var del = require('del');
+var gulp = require("gulp");
+var sourcemaps = require("gulp-sourcemaps");
+var uglify = require("gulp-uglify");
+var plumber = require("gulp-plumber");
+var rename = require("gulp-rename");
+var babel = require("gulp-babel");
+var del = require("del");
+var react = require("react");
+var react_dom = require("react-dom");
 
 const NODE_PATH = './node_modules/';
 const VENDOR_PATH = './';
 
-gulp.task('default', ['update-vendor']);
+// === Main start ===
+gulp.task('default', ['update-vendor', 'watch']);
+gulp.task('dev-default', ['update-vendor', 'dev-watch']);
 
-// === manage vendor resources started ===
+gulp.task('watch', ['jsx'], function()
+{
+    gulp.watch('./pp/src/jsx/**/*.jsx', ['jsx']);
+});
+
+gulp.task('dev-watch', ['dev-jsx'], function()
+{
+    gulp.watch('./pp/src/jsx/**/*.jsx', ['dev-jsx']);
+});
+// === Main end ===
+
+// === Vendor start ===
 gulp.task('update-vendor', ['clean-vendor', 'copy-vendor']);
 
 gulp.task('copy-vendor', function()
@@ -77,6 +96,13 @@ gulp.task('copy-vendor', function()
         .pipe(debug({title: 'parsley js'}))
         .pipe(gulp.dest(VENDOR_PATH + 'parsleyjs'));
 	console.log('~ copied ParsleyJs files.');
+
+    // --- React JS ---
+    gulp.src([
+        NODE_PATH + 'react/dist/**.js',
+        NODE_PATH + 'react-dom/dist/**.js'
+    ]).pipe(gulp.dest(VENDOR_PATH + 'react'));
+    console.log('Copied React files');
 });
 
 gulp.task('clean-vendor', function()
@@ -87,7 +113,56 @@ gulp.task('clean-vendor', function()
 		VENDOR_PATH + 'jquery/**',
 		VENDOR_PATH + 'parsleyjs/**',
 		VENDOR_PATH + 'sb-admin-2/**',
+        VENDOR_PATH + 'react/!**',
 		'!' + VENDOR_PATH
 	]);
 });
-// === manage vendor resources end ===
+// === Vendor end ===
+
+// === React JS start ===
+gulp.task('jsx', function()
+{
+    gulp.src('./pp/src/jsx/**.jsx')
+        .pipe(plumber({errorHandler:function(err) {
+            console.log(err);
+        }}))
+        .pipe(babel({
+            'presets':['es2015', 'react'],
+            'plugins':['syntax-object-rest-spread']
+        }))
+        .pipe(uglify())
+        .pipe(rename({
+            suffix: '.min',
+            extname: '.js'}))
+        .pipe(gulp.dest('./pp/dist/js/'));
+});
+
+gulp.task('dev-jsx', function()
+{
+    gulp.src('./pp/src/jsx/**.jsx')
+        .pipe(sourcemaps.init())
+        .pipe(plumber({errorHandler:function(err) {
+            console.log(err);
+        }}))
+        .pipe(babel({
+            'presets':['es2015', 'react'],
+            'plugins':['syntax-object-rest-spread']
+        }))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('./pp/dist/js/'));
+});
+
+gulp.task('clean-js', function()
+{
+    console.log('--- task: delete STARTED ---');
+
+    del.sync([
+        './pp/dist/js/**',
+        './pp/src/js/**',
+        '!' + './pp/dist/js',
+        '!' + './pp/src/js'
+    ]);
+
+    console.log('--- task: delete ENDED ---');
+});
+// === React JS end ===

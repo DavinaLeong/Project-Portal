@@ -40,7 +40,7 @@ class Project_category_model extends CI_Model
     {
         if($pc_id)
         {
-            $query = $this->db->get(TABLE_PROJECT_CATEGORY, array('pc_id' => $pc_id));
+            $query = $this->db->get_where(TABLE_PROJECT_CATEGORY, array('pc_id' => $pc_id));
             return $query->row_array();
         }
         else
@@ -55,6 +55,7 @@ class Project_category_model extends CI_Model
         {
             $temp_array = array(
                 'pc_name' => $pc['pc_name'],
+                'pc_icon' => $pc['pc_icon'],
                 'pc_description' => $pc['pc_description']
             );
 
@@ -75,6 +76,7 @@ class Project_category_model extends CI_Model
         {
             $temp_array = array(
                 'pc_name' => $pc['pc_name'],
+                'pc_icon' => $pc['pc_icon'],
                 'pc_description' => $pc['pc_description']
             );
 

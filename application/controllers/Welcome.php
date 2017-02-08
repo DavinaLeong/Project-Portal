@@ -23,9 +23,4 @@ class Welcome extends CI_Controller {
 		//$this->load->view('welcome_message');
         redirect('welcome/todo');
 	}
-
-    public function todo()
-    {
-        $this->load->view('todo_page');
-    }
 }

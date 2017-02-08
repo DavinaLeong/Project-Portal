@@ -20,7 +20,7 @@
 <head>
 <?php $this->load->view('admin/_snippets/meta'); ?>
 <?php $this->load->view('admin/_snippets/head_resources'); ?>
-<link href="<?=RESOURCES_FOLDER;?>pp/pp_parsley.css" rel="stylesheet" type="text/css">
+<link href="<?=RESOURCES_FOLDER;?>pp/dist/css/pp_parsley.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div id="wrapper">
@@ -37,7 +37,7 @@
 
         <div class="row">
             <div id="main" class="col-lg-12">
-                <h1 class="page-header text-info"><i class="fa fa-plus fa-fw"></i> Edit Link</h1>
+                <h1 class="page-header text-info"><i class="fa fa-pencil-square-o fa-fw"></i> Edit Link</h1>
 
                 <div class="row">
                     <div class="col-md-10">
@@ -50,10 +50,10 @@
                                 <legend>Record Details</legend>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-2" for="lc_id">Category <span class="text-danger">*</span></label>
+                                    <label class="control-label col-md-2" for="lc_id">Link Category <span class="text-danger">*</span></label>
                                     <div class="col-md-10">
                                         <select class="form-control" id="lc_id" name="lc_id" required>
-                                            <option id="lc_id_0" value="">-- Select Category --</option>
+                                            <option id="lc_id_0" value="">-- Select Link Category --</option>
                                             <?php foreach($link_categories as $key=> $link_category): ?>
                                                 <option id="lc_id_<?=$key+1;?>" value="<?=$link_category['lc_id'];?>" <?=set_select('lc_id', $link_category['lc_id'], ($link['lc_id'] == $link['lc_id']));?>><?=$link_category['project_name'];?>: <?=$link_category['lc_name'];?></option>
                                             <?php endforeach; ?>
@@ -75,6 +75,17 @@
                                         <input class="form-control" type="url" id="url" name="url"
                                                value="<?=set_value('url', $link['url']);?>" required maxlength="512" />
                                         <p class="help-block">Exclude 'http://' from URL.</p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="use_https">Use HTTPS</label>
+                                    <div class="col-md-10">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" id="use_https" name="use_https" value="1" <?=set_checkbox('use_https', 1, ($link['use_https'] == 1)); ?> /> Yes
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </fieldset>

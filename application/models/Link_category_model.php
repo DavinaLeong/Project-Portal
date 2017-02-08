@@ -81,7 +81,7 @@ class Link_category_model extends CI_Model
         if($project_id)
         {
             $this->db->order_by($column, $direction);
-            $query = $this->db->get_where(TABLE_LINK_CATEGORY, array('project_id', $direction));
+            $query = $this->db->get_where(TABLE_LINK_CATEGORY, array('project_id' => $project_id));
             return $query->result_array();
         }
         else

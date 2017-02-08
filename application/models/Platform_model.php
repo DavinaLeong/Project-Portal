@@ -101,7 +101,7 @@ class Platform_model extends CI_Model
             );
 
             $this->db->set('last_updated', now('c'));
-            $this->db->update(TABLE_PLATFORM, $temp_array, array('platform_id', $platform['platform_id']));
+            $this->db->update(TABLE_PLATFORM, $temp_array, array('platform_id' => $platform['platform_id']));
             return $this->db->affected_rows();
         }
         else

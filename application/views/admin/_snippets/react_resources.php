@@ -1,30 +1,15 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**********************************************************************************
 	- File Info -
-		File name		: pp_styles.css
+		File name		: react_resources.php
 		Author(s)		: DAVINA Leong Shi Yun
-		Date Created	: 27 Jan 2016
+		Date Created	: 08 Feb 2016
 
 	- Contact Info -
 		Email	: leong.shi.yun@gmail.com
 		Mobile	: (+65) 9369 3752 [Singapore]
 
 ***********************************************************************************/
-.navbar-brand img {
-    display: inline;
-}
-
-.clickable {
-    cursor: pointer;
-}
-
-#main {
-    min-height: 750px;
-}
-
-.label-publish {
-    background-color: #090;
-}
-
-.label-draft {
-    background-color: #c00;
-}
+?><script src="<?=RESOURCES_FOLDER;?>react/react.js"></script>
+<script src="<?=RESOURCES_FOLDER;?>react/react-dom.js"></script>
