@@ -29,3 +29,7 @@
     background-color: #c00;
 }
 
+.space-vert-50 {
+    display: block;
+    height: 50px;
+}

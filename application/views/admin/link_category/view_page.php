@@ -88,9 +88,17 @@
                                 </div>
                             </fieldset>
                         </form>
+                    </div>
+                </div>
+                <div class="space-vert-50"></div>
 
+                <!-- Link panel start -->
+                <div id="links" class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Links</h2>
+                    </div>
+                    <div class="panel-body">
                         <div class="table-responsive">
-                            <h2 class="page-header">Links</h2>
                             <table id="table-links" class="table table-hovered">
                                 <thead>
                                 <tr>
@@ -102,20 +110,19 @@
                                 </thead>
                                 <tbody>
                                 <?php foreach($links as $link): ?>
-                                <tr>
-                                    <td><?=$link['link_id'];?></td>
-                                    <td><?=$link['label'];?></td>
-                                    <td><a href="<?=($link['use_https'] == 1 ? 'https' : 'http') . '://' . $link['url'];?>" target="_blank"><?=($link['use_https'] == 1 ? 'https' : 'http') . '://' . $link['url'];?></a></td>
-                                    <td><span class="label label-default label-<?=strtolower($link['link_status']);?>"><?=$link['link_status'];?></span></td>
-                                </tr>
+                                    <tr>
+                                        <td><?=$link['link_id'];?></td>
+                                        <td><?=$link['label'];?></td>
+                                        <td><a href="<?=($link['use_https'] == 1 ? 'https' : 'http') . '://' . $link['url'];?>" target="_blank"><?=($link['use_https'] == 1 ? 'https' : 'http') . '://' . $link['url'];?></a></td>
+                                        <td><span class="label label-default label-<?=strtolower($link['link_status']);?>"><?=$link['link_status'];?></span></td>
+                                    </tr>
                                 <?php endforeach;?>
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
-
+                <!-- Link panel end -->
             </div>
         </div>
         <?php $this->load->view('admin/_snippets/generic_delete_modal'); ?>

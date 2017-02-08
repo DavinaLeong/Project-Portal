@@ -141,59 +141,72 @@
                         <!-- View Form end -->
                     </div>
                 </div>
+                <div class="space-vert-50"></div>
 
                 <!-- Link Categories start -->
-                <h2 class="page-header">Link Categories</h2>
-                <div class="table-responsive">
-                    <table id="table-lc" class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Last Updated</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php foreach($link_categories as $link_category): ?>
-                        <tr class="clickable" onclick="goto_lc_view(<?=$link_category['lc_id'];?>)">
-                            <td><?=$link_category['lc_name'];?></td>
-                            <td><?=$link_category['lc_description'];?></td>
-                            <td data-sort="<?=format_yyyy_mm_dd_hh_ii_ss($link_category['last_updated']);?>"><?=format_dd_mm_yyyy_hh_ii_ss($link_category['last_updated']);?></td>
-                        </tr>
-                        <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                <div id="lc-panel" class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Link Categories</h2>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table id="table-lc" class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Last Updated</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach($link_categories as $link_category): ?>
+                                    <tr class="clickable" onclick="goto_lc_view(<?=$link_category['lc_id'];?>)">
+                                        <td><?=$link_category['lc_name'];?></td>
+                                        <td><?=$link_category['lc_description'];?></td>
+                                        <td data-sort="<?=format_yyyy_mm_dd_hh_ii_ss($link_category['last_updated']);?>"><?=format_dd_mm_yyyy_hh_ii_ss($link_category['last_updated']);?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
                 <!-- Link Categories end -->
 
                 <!-- Link start -->
-                <h2 class="page-header">Links</h2>
-                <div class="table-responsive">
-                    <table id="table-links" class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>Label</th>
-                            <th>Category</th>
-                            <th>Output URL</th>
-                            <th>Status</th>
-                            <th>Last Updated</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                        foreach($links as $link):
-                            $output_url = ($link['use_https'] == 1 ? 'https' : 'http') . '://' . $link['url'];
-                            ?>
-                            <tr class="clickable" onclick="goto_link_view(<?=$link['link_id'];?>)">
-                                <td><?=$link['label'];?></td>
-                                <td><?=$link['lc_name'];?></td>
-                                <td><a href="<?=$output_url;?>" target="_blank"><?=$output_url;?></a></td>
-                                <td><span class="label label-default label-<?=strtolower($link['link_status']);?>"><?=$link['link_status'];?></span></td>
-                                <td data-sort="<?=format_yyyy_mm_dd_hh_ii_ss($link['last_updated']);?>"><?=format_dd_mm_yyyy_hh_ii_ss($link['last_updated']);?></td>
-                            </tr>
-                        <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                <div id="links-panel" class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Links</h2>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table id="table-links" class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Label</th>
+                                    <th>Category</th>
+                                    <th>Output URL</th>
+                                    <th>Status</th>
+                                    <th>Last Updated</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                foreach($links as $link):
+                                    $output_url = ($link['use_https'] == 1 ? 'https' : 'http') . '://' . $link['url'];
+                                    ?>
+                                    <tr class="clickable" onclick="goto_link_view(<?=$link['link_id'];?>)">
+                                        <td><?=$link['label'];?></td>
+                                        <td><?=$link['lc_name'];?></td>
+                                        <td><a href="<?=$output_url;?>" target="_blank"><?=$output_url;?></a></td>
+                                        <td><span class="label label-default label-<?=strtolower($link['link_status']);?>"><?=$link['link_status'];?></span></td>
+                                        <td data-sort="<?=format_yyyy_mm_dd_hh_ii_ss($link['last_updated']);?>"><?=format_dd_mm_yyyy_hh_ii_ss($link['last_updated']);?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
                 <!-- Link end -->
 

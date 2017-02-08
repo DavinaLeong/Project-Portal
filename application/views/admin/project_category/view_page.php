@@ -51,6 +51,7 @@
                 <div class="row">
                     <div class="col-md-10">
 
+                        <!-- From start -->
                         <form id="form" class="form-horizontal">
                             <fieldset>
                                 <legend>Record Details</legend>
@@ -95,9 +96,19 @@
                                 </div>
                             </fieldset>
                         </form>
+                        <!-- Form end -->
+                    </div>
+                </div>
 
+                <div class="space-vert-50"></div>
+
+                <!-- Projects table start -->
+                <div id="projects-panel" class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Projects</h2>
+                    </div>
+                    <div class="panel-body">
                         <div class="table-responsive">
-                            <h2 class="page-header">Projects</h2>
                             <table id="table-projects" class="table table-hover">
                                 <thead>
                                 <tr>
@@ -109,19 +120,19 @@
                                 </thead>
                                 <tbody>
                                 <?php foreach($projects as $project): ?>
-                                <tr class="clickable" onclick="goto_view(<?=$project['project_id'];?>)">
-                                    <td><?=$project['project_id'];?></td>
-                                    <td><?=$project['project_name'];?></td>
-                                    <td><?=$project['project_description'];?></td>
-                                    <td><span class="label label-default label-<?=strtolower($project['project_status']);?>"><?=$project['project_status'];?></span></td>
-                                </tr>
+                                    <tr class="clickable" onclick="goto_view(<?=$project['project_id'];?>)">
+                                        <td><?=$project['project_id'];?></td>
+                                        <td><?=$project['project_name'];?></td>
+                                        <td><?=$project['project_description'];?></td>
+                                        <td><span class="label label-default label-<?=strtolower($project['project_status']);?>"><?=$project['project_status'];?></span></td>
+                                    </tr>
                                 <?php endforeach;?>
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
+                <!-- Projects table end -->
 
             </div>
         </div>
