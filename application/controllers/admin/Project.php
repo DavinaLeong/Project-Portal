@@ -67,7 +67,7 @@ class Project extends CI_Controller
         }
 
         $data = array(
-			'project_categories' => $this->Project_category_model->get_all('pc_name', 'ASC'),
+			'project_categories' => $this->Project_category_model->get_all_platform('pc_name', 'ASC'),
             'status_options' => $this->Project_model->_status_array()
         );
         $this->load->view('admin/project/create_page', $data);
@@ -80,7 +80,7 @@ class Project extends CI_Controller
 
         $this->form_validation->set_rules('project_name', 'Name', 'trim|required|max_length[512]');
         $this->form_validation->set_rules('project_icon', 'Icon', 'trim|max_length[512]');
-        $this->form_validation->set_rules('project_description', 'Description', 'trim|required|max_length[512]');
+        $this->form_validation->set_rules('project_description', 'Description', 'trim|max_length[512]');
         $this->form_validation->set_rules('selected_project', 'Selected Project', 'trim|in_list[1]');
 
         $status_str = implode(',', $this->Project_model->_status_array());
@@ -95,7 +95,7 @@ class Project extends CI_Controller
         $project['project_name'] = $this->input->post('project_name');
         $project['project_icon'] = $this->input->post('project_icon');
         $project['project_description'] = $this->input->post('project_description');
-        $project['selected_project'] = $this->input->post('selected_project');
+        $project['selected_project'] = $this->input->post('selected_project') == 1 ? 1 : 0;
         $project['project_status'] = $this->input->post('project_status');
         return $project;
     }
@@ -164,7 +164,7 @@ class Project extends CI_Controller
 
             $data = array(
                 'project' => $project,
-                'project_categories' => $this->Project_category_model->get_all('pc_name', 'ASC'),
+                'project_categories' => $this->Project_category_model->get_all_platform('pc_name', 'ASC'),
                 'status_options' => $this->Project_model->_status_array()
             );
             $this->load->view('admin/project/edit_page', $data);
@@ -183,7 +183,7 @@ class Project extends CI_Controller
 
         $this->form_validation->set_rules('project_name', 'Name', 'trim|required|max_length[512]');
         $this->form_validation->set_rules('project_icon', 'Icon', 'trim|max_length[512]');
-        $this->form_validation->set_rules('project_description', 'Description', 'trim|required|max_length[512]');
+        $this->form_validation->set_rules('project_description', 'Description', 'trim|max_length[512]');
         $this->form_validation->set_rules('selected_project', 'Selected Project', 'trim|in_list[1]');
 
         $status_str = implode(',', $this->Project_model->_status_array());

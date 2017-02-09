@@ -60,7 +60,7 @@
                                     <label class="control-label col-md-2" for="pc_name">Project Category</label>
                                     <div class="col-md-10">
                                         <p id="pc_name" class="form-control-static">
-                                            <?=$project['pc_name'];?><br/>
+                                            <i class="fa <?=$project['pc_icon'];?> fa-fw"></i> <?=$project['pc_name'];?><br/>
                                             <?php if($project['pc_name']): ?>
                                                 (<a href="<?=site_url('admin/project_category/view/' . $project['pc_id']);?>" target="_blank">View Project Category</a>)
                                             <?php endif; ?>

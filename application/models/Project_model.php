@@ -53,7 +53,7 @@ class Project_model extends CI_Model
 	{
 		if($project_id)
 		{
-			$this->db->select(TABLE_PROJECT . '.*, ' . TABLE_PROJECT_CATEGORY . '.pc_name');
+			$this->db->select(TABLE_PROJECT . '.*, ' . TABLE_PROJECT_CATEGORY . '.pc_name, ' . TABLE_PROJECT_CATEGORY . '.pc_icon');
 			$this->db->from(TABLE_PROJECT);
 			$this->db->join(TABLE_PROJECT_CATEGORY, TABLE_PROJECT . '.pc_id = ' . TABLE_PROJECT_CATEGORY . '.pc_id', 'left');
 			$this->db->where(TABLE_PROJECT . '.project_id = ', $project_id);
@@ -72,7 +72,7 @@ class Project_model extends CI_Model
                                   $direction='DESC')
     {
         $this->db->order_by($column, $direction);
-        $query = $this->db->get(TABLE_PROJECT, array('project_status' => $status));
+        $query = $this->db->get_where(TABLE_PROJECT, array('project_status' => $status));
         return $query->result_array();
     }
 

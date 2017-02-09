@@ -33,7 +33,7 @@ class Project_category_model extends CI_Model
         $this->db->order_by($column, $direction);
 
         $query = $this->db->get();
-        return $query->result_arry();
+        return $query->result_array();
     }
 
     public function get_all_ids()

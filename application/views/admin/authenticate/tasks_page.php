@@ -41,7 +41,7 @@
                     <li><span class="text-success"><i class="fa fa-check-circle"></i></span> Link Module</li>
                     <li><span class="text-success"><i class="fa fa-check-circle"></i></span> Tables of Sub-Tables on View Page</li>
                     <li><span class="text-success"><i class="fa fa-check-circle"></i></span> Touch-up</li>
-                    <li><span class="text-danger"><i class="fa fa-times-circle"></i></span> React Icon Field</li>
+                    <li><span class="text-success"><i class="fa fa-check-circle"></i></span> React Icon Field</li>
                     <li><span class="text-danger"><i class="fa fa-times-circle"></i></span> Front Page</li>
                     <li><span class="text-danger"><i class="fa fa-times-circle"></i></span> Populate DB</li>
                     <li><span class="text-danger"><i class="fa fa-times-circle"></i></span> Unit Testing</li>
