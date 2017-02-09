@@ -17,7 +17,6 @@ class Project extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('Project_model');
-		$this->load->model('Platform_model');
 		$this->load->model('Project_category_model');
 	}
 	
@@ -68,7 +67,6 @@ class Project extends CI_Controller
         }
 
         $data = array(
-            'platforms' => $this->Platform_model->get_by_status('Publish', 'platform_name', 'ASC'),
 			'project_categories' => $this->Project_category_model->get_all('pc_name', 'ASC'),
             'status_options' => $this->Project_model->_status_array()
         );
@@ -77,9 +75,6 @@ class Project extends CI_Controller
 
     private function _set_rules_create_project()
     {
-        $platform_id_str = implode(',', $this->Platform_model->get_by_status_ids());
-        $this->form_validation->set_rules('platform_id', 'Platform', 'trim|required|in_list[' . $platform_id_str . ']');
-
 		$pc_ids_str = implode(',', $this->Project_category_model->get_all_ids());
 		$this->form_validation->set_rules('pc_id', 'Category', 'trim|required|in_list[' . $pc_ids_str . ']');
 
@@ -96,7 +91,6 @@ class Project extends CI_Controller
     private function _prepare_create_project_array()
     {
         $project = array();
-        $project['platform_id'] = $this->input->post('platform_id');
         $project['pc_id'] = $this->input->post('pc_id');
         $project['project_name'] = $this->input->post('project_name');
         $project['project_icon'] = $this->input->post('project_icon');
@@ -109,7 +103,7 @@ class Project extends CI_Controller
     public function view($project_id)
     {
         $this->User_log_model->validate_access();
-        $project = $this->Project_model->get_by_id_platform_project_category($project_id);
+        $project = $this->Project_model->get_by_id_project_category($project_id);
         if($project)
         {
             $this->load->model('Link_category_model');
@@ -170,7 +164,6 @@ class Project extends CI_Controller
 
             $data = array(
                 'project' => $project,
-                'platforms' => $this->Platform_model->get_by_status('Publish', 'platform_name', 'ASC'),
                 'project_categories' => $this->Project_category_model->get_all('pc_name', 'ASC'),
                 'status_options' => $this->Project_model->_status_array()
             );
@@ -185,9 +178,6 @@ class Project extends CI_Controller
 
     private function _set_rules_edit_project()
     {
-        $platform_id_str = implode(',', $this->Platform_model->get_by_status_ids());
-        $this->form_validation->set_rules('platform_id', 'Platform', 'trim|required|in_list[' . $platform_id_str . ']');
-
         $pc_ids_str = implode(',', $this->Project_category_model->get_all_ids());
         $this->form_validation->set_rules('pc_id', 'Category', 'trim|required|in_list[' . $pc_ids_str . ']');
 
@@ -203,7 +193,6 @@ class Project extends CI_Controller
 
     private function _prepare_edit_project_array($project)
     {
-        $project['platform_id'] = $this->input->post('platform_id');
         $project['pc_id'] = $this->input->post('pc_id');
         $project['project_name'] = $this->input->post('project_name');
         $project['project_icon'] = $this->input->post('project_icon');

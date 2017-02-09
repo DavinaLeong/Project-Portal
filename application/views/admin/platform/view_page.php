@@ -12,7 +12,7 @@
 ***********************************************************************************/
 /**
  * @var $platform
- * @var $projects
+ * @var $project_categories
  */
 ?><!DOCTYPE html>
 <html lang="en">
@@ -109,10 +109,10 @@
 
                 <div class="space-vert-50"></div>
 
-                <!-- Projects table start -->
+                <!-- Project Categories table start -->
                 <div id="projects-panel" class="panel panel-default">
                     <div class="panel-heading">
-                        <h2 class="panel-title">Projects</h2>
+                        <h2 class="panel-title">Project Categories</h2>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -122,16 +122,14 @@
                                     <th>ID</th>
                                     <th>Name</th>
                                     <th>Description</th>
-                                    <th>Status</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach($projects as $project): ?>
-                                    <tr class="clickable" onclick="goto_view(<?=$project['project_id'];?>)">
-                                        <td><?=$project['project_id'];?></td>
-                                        <td><?=$project['project_name'];?></td>
-                                        <td><?=$project['project_description'];?></td>
-                                        <td><span class="label label-default label-<?=strtolower($project['project_status']);?>"><?=$project['project_status'];?></span></td>
+                                <?php foreach($project_categories as $project_category): ?>
+                                    <tr class="clickable" onclick="goto_view(<?=$project_category['pc_id'];?>)">
+                                        <td><?=$project_category['pc_id'];?></td>
+                                        <td><?=$project_category['pc_name'];?></td>
+                                        <td><?=$project_category['pc_description'];?></td>
                                     </tr>
                                 <?php endforeach; ?>
                                 </tbody>
@@ -160,7 +158,7 @@
 
     function goto_view(record_id)
     {
-        window.open('<?=site_url("admin/project/view");?>/' + record_id);
+        window.open('<?=site_url("admin/project_category/view");?>/' + record_id);
     }
 </script>
 </body>

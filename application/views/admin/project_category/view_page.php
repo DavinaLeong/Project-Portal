@@ -57,6 +57,13 @@
                                 <legend>Record Details</legend>
 
                                 <div class="form-group">
+                                    <label class="control-label col-md-2" for="platform">Platform</label>
+                                    <div class="col-md-10">
+                                        <p id="platform" class="form-control-static"><i class="fa <?=$project_category['platform_icon'];?> fa-fw"></i> <?=$project_category['platform_name'];?></p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <label class="control-label col-md-2" for="pc_name">Name</label>
                                     <div class="col-md-10">
                                         <p id="pc_name" class="form-control-static"><?=$project_category['pc_name'];?></p>

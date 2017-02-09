@@ -54,19 +54,7 @@
                         <!-- View Form start -->
                         <form id="form" class="form-horizontal">
                             <fieldset>
-                                <legend>Grouping</legend>
-
-                                <div class="form-group">
-                                    <label class="control-label col-md-2" for="platform_name">Platform</label>
-                                    <div class="col-md-10">
-                                        <p id="platform_name" class="form-control-static">
-                                            <?=$project['platform_name'];?><br/>
-                                            <?php if($project['platform_name']):?>
-                                            (<a href="<?=site_url('admin/platform/view/' . $project['platform_id']);?>" target="_blank">View Platform</a>)
-                                            <?php endif; ?>
-                                        </p>
-                                    </div>
-                                </div>
+                                <legend>Record Details</legend>
 
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="pc_name">Project Category</label>
@@ -74,15 +62,11 @@
                                         <p id="pc_name" class="form-control-static">
                                             <?=$project['pc_name'];?><br/>
                                             <?php if($project['pc_name']): ?>
-                                            (<a href="<?=site_url('admin/project_category/view/' . $project['pc_id']);?>" target="_blank">View Project Category</a>)
+                                                (<a href="<?=site_url('admin/project_category/view/' . $project['pc_id']);?>" target="_blank">View Project Category</a>)
                                             <?php endif; ?>
                                         </p>
                                     </div>
                                 </div>
-                            </fieldset>
-
-                            <fieldset>
-                                <legend>Identifiers</legend>
 
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="project_name">Name</label>
