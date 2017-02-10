@@ -54,7 +54,7 @@ class Link_category extends CI_Controller
 			}
 		}
 		$data = array(
-			'projects' => $this->Project_model->get_by_status('Publish', 'project_name', 'ASC')
+			'projects' => $this->Project_model->get_by_status_platform('Publish', 'project_name', 'ASC')
 		);
 		$this->load->view('admin/link_category/create_page', $data);
 	}
@@ -79,7 +79,7 @@ class Link_category extends CI_Controller
     public function view($lc_id)
     {
         $this->User_log_model->validate_access();
-        $link_category = $this->Link_category_model->get_by_id($lc_id);
+        $link_category = $this->Link_category_model->get_by_id_project_platform($lc_id);
         if($link_category)
         {
             $this->load->model('Link_model');
@@ -122,7 +122,7 @@ class Link_category extends CI_Controller
 
 			$data = array(
 				'link_category' => $link_category,
-				'projects' => $this->Project_model->get_by_status('Publish', 'project_name', 'ASC')
+				'projects' => $this->Project_model->get_by_status_platform('Publish', 'project_name', 'ASC')
 			);
 			$this->load->view('admin/link_category/edit_page', $data);
 		}

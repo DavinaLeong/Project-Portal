@@ -36,6 +36,18 @@ class Project_model extends CI_Model
 		return $id_array;
     }
 
+    public function get_all_platform($column='last_updated', $direction='DESC')
+    {
+        $this->db->select(TABLE_PROJECT . '.*, ' . TABLE_PLATFORM . '.platform_name, ' . TABLE_PLATFORM . '.platform_icon');
+        $this->db->from(TABLE_PROJECT);
+        $this->db->join(TABLE_PROJECT_CATEGORY, TABLE_PROJECT . '.pc_id = ' . TABLE_PROJECT_CATEGORY . '.pc_id', 'left');
+        $this->db->join(TABLE_PLATFORM, TABLE_PROJECT_CATEGORY . '.platform_id = ' . TABLE_PLATFORM . '.platform_id', 'left');
+        $this->db->order_by(TABLE_PROJECT . '.' . $column, $direction);
+
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
 	public function get_by_id($project_id=FALSE)
 	{
 		if($project_id)
@@ -73,6 +85,21 @@ class Project_model extends CI_Model
     {
         $this->db->order_by($column, $direction);
         $query = $this->db->get_where(TABLE_PROJECT, array('project_status' => $status));
+        return $query->result_array();
+    }
+
+    public function get_by_status_platform($status = 'Publish',
+                                           $column='last_updated',
+                                           $direction='DESC')
+    {
+        $this->db->select(TABLE_PROJECT . '.*, ' . TABLE_PLATFORM . '.platform_name, ' . TABLE_PLATFORM . '.platform_icon');
+        $this->db->from(TABLE_PROJECT);
+        $this->db->join(TABLE_PROJECT_CATEGORY, TABLE_PROJECT . '.pc_id = ' . TABLE_PROJECT_CATEGORY . '.pc_id', 'left');
+        $this->db->join(TABLE_PLATFORM, TABLE_PROJECT_CATEGORY . '.platform_id = ' . TABLE_PLATFORM . '.platform_id', 'left');
+        $this->db->where(TABLE_PROJECT . '.project_status = ', $status);
+        $this->db->order_by(TABLE_PROJECT . '.' . $column, $direction);
+
+        $query = $this->db->get();
         return $query->result_array();
     }
 
