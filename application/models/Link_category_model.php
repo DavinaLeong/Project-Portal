@@ -128,6 +128,19 @@ class Link_category_model extends CI_Model
         }
     }
 
+    public function get_by_project_id_lc_name($project_id=FALSE, $lc_name=FALSE)
+    {
+        if($project_id && $lc_name)
+        {
+            $query = $this->db->get_where(TABLE_LINK_CATEGORY, array('project_id' => $project_id, 'lc_name' => $lc_name));
+            return $query->row_array();
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
     public function insert($link_category=FALSE)
     {
         if($link_category)

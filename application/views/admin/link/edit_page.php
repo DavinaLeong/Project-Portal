@@ -69,25 +69,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-2" for="url">URL <span class="text-danger">*</span></label>
-                                    <div class="col-md-10">
-                                        <input class="form-control" type="url" id="url" name="url"
-                                               value="<?=set_value('url', $link['url']);?>" required maxlength="512" />
-                                        <p class="help-block">Exclude 'http://' from URL.</p>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="control-label col-md-2" for="use_https">Use HTTPS</label>
-                                    <div class="col-md-10">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" id="use_https" name="use_https" value="1" <?=set_checkbox('use_https', 1, ($link['use_https'] == 1)); ?> /> Yes
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
+                                <div id="UrlField"></div>
                             </fieldset>
 
                             <fieldset>
@@ -140,5 +122,21 @@
 </div>
 <?php $this->load->view('admin/_snippets/body_resources') ;?>
 <script src="<?=RESOURCES_FOLDER;?>parsleyjs/parsley.min.js"></script>
+<?php $this->load->view('admin/_snippets/react_min_resources'); ?>
+<script src="<?=RESOURCES_FOLDER;?>pp/dist/js/UrlField.min.js"></script>
+<script>
+    var element = React.createElement(
+        UrlField,
+        {
+            "url": "<?=set_value('url', $link['url']);?>",
+            "use_https": "<?=set_value('use_https', $link['use_https']);?>"
+        }
+    );
+
+    ReactDOM.render(
+        element,
+        document.getElementById('UrlField')
+    );
+</script>
 </body>
 </html>

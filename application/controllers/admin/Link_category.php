@@ -45,7 +45,7 @@ class Link_category extends CI_Controller
 			{
 				$this->User_log_model->log_message('Link Category created. | lc_id: ' . $lc_id);
 				$this->session->set_userdata('message', 'Link Category created. <a href="' . site_url() . 'admin/link_category/create">Create another.</a>');
-				redirect('admin/link_category/browse');
+				redirect('admin/link_category/view/' . $lc_id);
 			}
 			else
 			{
@@ -63,9 +63,30 @@ class Link_category extends CI_Controller
 	{
 		$id_array_str = implode(',', $this->Project_model->get_all_ids());
 		$this->form_validation->set_rules('project_id', 'Project', 'trim|required|in_list[' . $id_array_str . ']');
-		$this->form_validation->set_rules('lc_name', 'Name', 'trim|required|max_length[512]');
+		$this->form_validation->set_rules('lc_name', 'Name', 'trim|required|max_length[512]|callback_validate_lc_name');
 		$this->form_validation->set_rules('lc_description', 'Description'. 'trim|max_length[512]');
 	}
+
+    public function validate_lc_name($lc_name)
+    {
+        if( ! $lc_name)
+        {
+            $this->form_validation->set_message('validate_lc_name', 'The {field} is required.');
+            return FALSE;
+        }
+        else
+        {
+            if($this->Link_category_model->get_by_project_id_lc_name($this->input->post('project_id'), $lc_name))
+            {
+                $this->form_validation->set_message('validate_lc_name', 'The {field} value is already in use. Either pick a new {field} or a different Project.');
+                return FALSE;
+            }
+            else
+            {
+                return TRUE;
+            }
+        }
+    }
 
 	private function _prepare_create_array()
 	{
@@ -104,14 +125,14 @@ class Link_category extends CI_Controller
 		$link_category = $this->Link_category_model->get_by_id($lc_id);
 		if($link_category)
 		{
-			$this->_set_rules_edit();
+			$this->_set_rules_edit($link_category);
 			if($this->form_validation->run())
 			{
 				if($this->Link_category_model->update($this->_prepare_edit_array($link_category)))
 				{
 					$this->User_log_model->log_message('Link Category updated. | lc_id: ' . $lc_id);
 					$this->session->set_userdata('message', 'Link Category updated.');
-					redirect('admin/link_category/browse');
+					redirect('admin/link_category/view/' . $lc_id);
 				}
 				else
 				{
@@ -133,11 +154,18 @@ class Link_category extends CI_Controller
 		}
 	}
 
-	private function _set_rules_edit()
+	private function _set_rules_edit($link_category)
 	{
 		$id_array_str = implode(',', $this->Project_model->get_all_ids());
 		$this->form_validation->set_rules('project_id', 'Project', 'trim|required|in_list[' . $id_array_str . ']');
-		$this->form_validation->set_rules('lc_name', 'Name', 'trim|required|max_length[512]');
+		if($this->input->post('project_id') == $link_category['project_id'])
+        {
+            $this->form_validation->set_rules('lc_name', 'Name', 'trim|required|max_length[512]');
+        }
+        else
+        {
+            $this->form_validation->set_rules('lc_name', 'Name', 'trim|required|max_length[512]|callback_validate_lc_name');
+        }
 		$this->form_validation->set_rules('lc_description', 'Description'. 'trim|max_length[512]');
 	}
 
