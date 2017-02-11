@@ -56,6 +56,24 @@
                                 <legend>Record Details</legend>
 
                                 <div class="form-group">
+                                    <label class="control-label col-md-2" for="platform">Platform</label>
+                                    <div class="col-md-10">
+                                        <p id="platform" class="form-control-static">
+                                            <i class="fa <?=$link_category['platform_icon'];?> fa-fw"></i> <?=$link_category['platform_name'];?>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="project">Project</label>
+                                    <div class="col-md-10">
+                                        <p id="project" class="form-control-static">
+                                            <i class="fa <?=$link_category['project_icon'];?> fa-fw"></i> <?=$link_category['project_name'];?>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <label class="control-label col-md-2" for="lc_name">Name</label>
                                     <div class="col-md-10">
                                         <p id="lc_name" class="form-control-static"><?=$link_category['lc_name'];?></p>

@@ -52,7 +52,7 @@
                                         <select class="form-control" id="project_id" name="project_id" required>
                                             <option id="project_id_0" value="">-- Select Link --</option>
                                             <?php foreach($projects as $key=> $project): ?>
-                                                <option id="project_id_<?=$key+1;?>" value="<?=$project['project_id'];?>" <?=set_select('project_id', $project['project_id'], ($link_category['project_id'] == $project['project_id']));?>><?=$project['project_name'];?></option>
+                                                <option id="project_id_<?=$key+1;?>" value="<?=$project['project_id'];?>" <?=set_select('project_id', $project['project_id'], ($link_category['project_id'] == $project['project_id']));?>><?=$project['project_name'];?> (<?=$project['platform_name'];?>)</option>
                                             <?php endforeach ;?>
                                         </select>
                                     </div>

@@ -44,7 +44,7 @@ class Link extends CI_Controller
             if($link_id = $this->Link_model->insert($this->_prepare_create_array()))
             {
                 $this->User_log_model->log_message('Link created. | link_id: ' . $link_id);
-                $this->session->set_userdata('message', 'Link created.');
+                $this->session->set_userdata('message', 'Link created. <a href="' . site_url() . '/admin/link/create">Create another.</a>');
                 redirect('admin/link/view/' . $link_id);
             }
             else
@@ -55,7 +55,7 @@ class Link extends CI_Controller
         }
 
         $data = array(
-            'link_categories' => $this->Link_category_model->get_all_project('project.project_name', 'ASC'),
+            'link_categories' => $this->Link_category_model->get_all_project_platform('project.project_name', 'ASC'),
             'status_options' => $this->Link_model->_status_array()
         );
         $this->load->view('admin/link/create_page', $data);
@@ -127,7 +127,7 @@ class Link extends CI_Controller
 
             $data = array(
                 'link' => $link,
-                'link_categories' => $this->Link_category_model->get_all_project('project.project_name', 'ASC'),
+                'link_categories' => $this->Link_category_model->get_all_project_platform('project.project_name', 'ASC'),
                 'status_options' => $this->Link_model->_status_array()
             );
             $this->load->view('admin/link/edit_page', $data);

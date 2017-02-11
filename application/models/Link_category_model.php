@@ -35,6 +35,20 @@ class Link_category_model extends CI_Model
         return $query->result_array();
     }
 
+    public function get_all_project_platform($column='last_updated', $direction='DESC')
+    {
+        $this->db->select(TABLE_LINK_CATEGORY . '.*, ' .
+            TABLE_PROJECT . '.project_name, ' . TABLE_PROJECT . '.project_icon, ' .
+            TABLE_PLATFORM . '.platform_name, ' . TABLE_PLATFORM . '.platform_icon');
+        $this->db->from(TABLE_LINK_CATEGORY);
+        $this->db->join(TABLE_PROJECT, TABLE_PROJECT . '.project_id = ' . TABLE_LINK_CATEGORY . '.project_id', 'left');
+        $this->db->join(TABLE_PROJECT_CATEGORY, TABLE_PROJECT_CATEGORY . '.pc_id = ' . TABLE_PROJECT . '.pc_id', 'left');
+        $this->db->join(TABLE_PLATFORM, TABLE_PLATFORM . '.platform_id = ' . TABLE_PROJECT_CATEGORY . '.platform_id', 'left');
+        $this->db->order_by($column, $direction);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
     public function get_all_ids()
     {
         $link_categories = $this->get_all('lc_name', 'ASC');
@@ -63,10 +77,34 @@ class Link_category_model extends CI_Model
     {
         if($lc_id)
         {
-            $this->db->select(TABLE_LINK_CATEGORY . '.*, ' . TABLE_PROJECT . '.project_name');
+            $this->db->select(TABLE_LINK_CATEGORY . '.*, ' .
+                TABLE_PROJECT . '.project_name, ' . TABLE_PROJECT . '.project_icon, ' .
+                TABLE_PLATFORM . '.platform_name, ' . TABLE_PLATFORM . '.platform_icon');
             $this->db->from(TABLE_LINK_CATEGORY);
             $this->db->join(TABLE_PROJECT, TABLE_LINK_CATEGORY . '.project_id = ' . TABLE_PROJECT . '.project_id', 'left');
             $this->db->where(TABLE_LINK_CATEGORY . '.lc_id = ', $lc_id);
+            $query = $this->db->get();
+            return $query->row_array();
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
+    public function get_by_id_project_platform($lc_id=FALSE)
+    {
+        if($lc_id)
+        {
+            $this->db->select(TABLE_LINK_CATEGORY . '.*, ' .
+                TABLE_PROJECT . '.project_name, ' . TABLE_PROJECT . '.project_icon, ' .
+                TABLE_PLATFORM . '.platform_name, ' . TABLE_PLATFORM . '.platform_icon');
+            $this->db->from(TABLE_LINK_CATEGORY);
+            $this->db->join(TABLE_PROJECT, TABLE_PROJECT . '.project_id = ' . TABLE_LINK_CATEGORY . '.project_id', 'left');
+            $this->db->join(TABLE_PROJECT_CATEGORY, TABLE_PROJECT_CATEGORY . '.pc_id = ' . TABLE_PROJECT . '.pc_id', 'left');
+            $this->db->join(TABLE_PLATFORM, TABLE_PLATFORM . '.platform_id = ' . TABLE_PROJECT_CATEGORY . '.platform_id', 'left');
+            $this->db->where(TABLE_LINK_CATEGORY . '.lc_id = ', $lc_id);
+
             $query = $this->db->get();
             return $query->row_array();
         }
@@ -83,6 +121,19 @@ class Link_category_model extends CI_Model
             $this->db->order_by($column, $direction);
             $query = $this->db->get_where(TABLE_LINK_CATEGORY, array('project_id' => $project_id));
             return $query->result_array();
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
+    public function get_by_project_id_lc_name($project_id=FALSE, $lc_name=FALSE)
+    {
+        if($project_id && $lc_name)
+        {
+            $query = $this->db->get_where(TABLE_LINK_CATEGORY, array('project_id' => $project_id, 'lc_name' => $lc_name));
+            return $query->row_array();
         }
         else
         {

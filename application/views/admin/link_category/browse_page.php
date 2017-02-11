@@ -49,11 +49,12 @@
                                 <th>Project</th>
                                 <th>Date Added</th>
                                 <th>Last Updated</th>
+                                <th>&nbsp;</th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php foreach($link_categories as $key=> $link_category): ?>
-                                <tr class="clickable" onclick="goto_view(<?=$link_category['lc_id'];?>)">
+                                <tr>
                                     <td><?=$link_category['lc_name'];?></td>
                                     <td><?=$link_category['lc_description'];?></td>
                                     <td><a href="<?=site_url('admin/project/view/' . $link_category['project_id']);?>" target="_blank"><?=$link_category['project_name'];?></a></td>
@@ -61,6 +62,7 @@
                                     ><?=format_dd_mmm_yyyy($link_category['date_added']);?></td>
                                     <td data-sort="<?=format_dd_mm_yyyy_hh_ii_ss($link_category['last_updated']);?>"
                                     ><?=format_rfc($link_category['last_updated']);?></td>
+                                    <td><a class="btn btn-default" href="<?=site_url('admin/link_category/view/' . $link_category['lc_id']);?>"><i class="fa fa-eye fa-fw"></i></a></td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>

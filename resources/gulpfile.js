@@ -62,6 +62,7 @@ gulp.task('copy-vendor', function()
         .pipe(gulp.dest(VENDOR_PATH + 'bootstrap/fonts'));
 	console.log('~ copied Bootstrap files.');
 
+
     // --- Bootstrap Theme ---
     gulp.src(NODE_PATH + 'bootstrap/dist/css/bootstrap-theme.min.css')
         .pipe(debug({title: 'bootstrap css'}))
@@ -106,6 +107,7 @@ gulp.task('copy-vendor', function()
         .pipe(debug({title: 'parsley js'}))
         .pipe(gulp.dest(VENDOR_PATH + 'parsleyjs'));
 	console.log('~ copied ParsleyJs files.');
+
 
     // --- React JS ---
     gulp.src([
