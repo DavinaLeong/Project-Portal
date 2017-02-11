@@ -45,7 +45,7 @@ class Link_category extends CI_Controller
 			{
 				$this->User_log_model->log_message('Link Category created. | lc_id: ' . $lc_id);
 				$this->session->set_userdata('message', 'Link Category created. <a href="' . site_url() . 'admin/link_category/create">Create another.</a>');
-				redirect('admin/link_category/browse');
+				redirect('admin/link_category/view/' . $lc_id);
 			}
 			else
 			{
@@ -111,7 +111,7 @@ class Link_category extends CI_Controller
 				{
 					$this->User_log_model->log_message('Link Category updated. | lc_id: ' . $lc_id);
 					$this->session->set_userdata('message', 'Link Category updated.');
-					redirect('admin/link_category/browse');
+					redirect('admin/link_category/view/' . $lc_id);
 				}
 				else
 				{
