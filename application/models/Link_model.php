@@ -18,6 +18,12 @@ class Link_model extends CI_Model
         return $this->db->count_all(TABLE_LINK);
     }
 
+    public function count_by_status($status='Publish')
+    {
+        $query = $this->db->get_where(TABLE_LINK, array('link_status' => $status));
+        return count($query->result_array());
+    }
+
     public function get_all($column='last_updated', $direction='DESC')
     {
         $this->db->order_by($column, $direction);
@@ -79,7 +85,9 @@ class Link_model extends CI_Model
         return $id_array;
     }
 
-    public function get_by_lc_id($lc_id=FALSE, $column='last_updated', $direction='DESC')
+    public function get_by_lc_id($lc_id=FALSE,
+                                 $column='last_updated',
+                                 $direction='DESC')
     {
         if($lc_id)
         {
@@ -93,7 +101,30 @@ class Link_model extends CI_Model
         }
     }
 
-    public function get_links_by_project_id($project_id=FALSE, $column='label', $direction='ASC')
+    public function get_by_lc_id_status($lc_id=FALSE,
+                                        $status='Publish',
+                                 $column='last_updated',
+                                 $direction='DESC')
+    {
+        if($lc_id && $status)
+        {
+            $this->db->order_by($column, $direction);
+            $query = $this->db->get_where(TABLE_LINK,
+                array(
+                    'lc_id' => $lc_id,
+                    'link_status' => $status
+                ));
+            return $query->result_array();
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
+    public function get_links_by_project_id($project_id=FALSE,
+                                            $column='label',
+                                            $direction='ASC')
     {
         if($project_id)
         {

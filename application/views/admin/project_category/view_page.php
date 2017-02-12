@@ -127,7 +127,7 @@
                                 </thead>
                                 <tbody>
                                 <?php foreach($projects as $project): ?>
-                                    <tr class="clickable" onclick="goto_view(<?=$project['project_id'];?>)">
+                                    <tr id="project_row_<?=$project['project_id'];?>" class="clickable" onclick="goto_view(<?=$project['project_id'];?>)">
                                         <td><?=$project['project_id'];?></td>
                                         <td><?=$project['project_name'];?></td>
                                         <td><?=$project['project_description'];?></td>

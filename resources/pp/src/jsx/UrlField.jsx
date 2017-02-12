@@ -29,11 +29,12 @@ var UrlField = React.createClass({
                     <div className="col-md-10">
                         <div className="input-group">
                             <span className="input-group-addon"><b>{http_text}</b></span>
-                            <input className="form-control" type="url" id="url" name="url" value={this.state.url} required onChange={this.onUrlChange} />
+                            <input className="form-control" type="text" id="url" name="url" value={this.state.url} required onChange={this.onUrlChange} data-parsley-errors-container="#url_errors" />
                             <span className="input-group-addon">
-                                <input type="checkbox" id="use_https" name="use_https" value="1" checked={this.state.use_https == 1 ? 'checked' : '' } onChange={this.onUseHttpsChange} /> Use HTTPS
+                                <input type="checkbox" id="use_https" name="use_https" value="1" checked={this.state.use_https == 1 ? 'checked' : '' } onChange={this.onUseHttpsChange} data-parsley-errors-container="#url_errors" /> Use HTTPS
                             </span>
                         </div>
+                        <p id="url_errors">&nbsp;</p>
                         <p className="help-block">Exclude 'http://' from url.</p>
                     </div>
                 </div>

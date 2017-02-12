@@ -54,7 +54,7 @@
                             </thead>
                             <tbody>
                             <?php foreach($links as $key=>$link): ?>
-                                <tr class="clickable" onclick="goto_view(<?=$link['link_id'];?>)">
+                                <tr id="link_row_<?=$link['link_id'];?>" class="clickable" onclick="goto_view(<?=$link['link_id'];?>)">
                                     <td><?=$link['label'];?></td>
                                     <td><?=$link['url'];?></td>
                                     <td><?=$link['use_https'] == 1 ? 'Yes' : 'No';?></td>
@@ -81,7 +81,8 @@
     {
         $('#dataTable').DataTable({
             "order": [[3, 'desc']],
-            "responsive": true
+            "responsive": true,
+            "pageLength": 25
         });
     });
 

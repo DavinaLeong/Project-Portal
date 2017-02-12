@@ -120,3 +120,13 @@ fieldset[disabled] .btn-work-log.active
     border-radius: 3px;
     background: #ddd;
 }
+
+.col-project {
+    border: thin solid #ddd;
+    height: 200px;
+    overflow-y: auto;
+}
+
+.selected-project {
+    background: #d9edf7;
+}

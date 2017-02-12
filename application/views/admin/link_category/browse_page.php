@@ -54,7 +54,7 @@
                             </thead>
                             <tbody>
                             <?php foreach($link_categories as $key=> $link_category): ?>
-                                <tr>
+                                <tr id="lc_row_<?=$link_category['lc_id'];?>">
                                     <td><?=$link_category['lc_name'];?></td>
                                     <td><?=$link_category['lc_description'];?></td>
                                     <td><a href="<?=site_url('admin/project/view/' . $link_category['project_id']);?>" target="_blank"><?=$link_category['project_name'];?></a></td>
@@ -62,7 +62,12 @@
                                     ><?=format_dd_mmm_yyyy($link_category['date_added']);?></td>
                                     <td data-sort="<?=format_dd_mm_yyyy_hh_ii_ss($link_category['last_updated']);?>"
                                     ><?=format_rfc($link_category['last_updated']);?></td>
-                                    <td><a class="btn btn-default" href="<?=site_url('admin/link_category/view/' . $link_category['lc_id']);?>"><i class="fa fa-eye fa-fw"></i></a></td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a id="view_lc_<?=$link_category['lc_id'];?>" class="btn btn-default" href="<?=site_url('admin/link_category/view/' . $link_category['lc_id']);?>" data-toggle="tooltip" title="view Link Category record"><i class="fa fa-eye fa-fw"></i></a>
+                                            <a id="view_project_<?=$link_category['lc_id'];?>" class="btn btn-default" href="<?=site_url('admin/project/view/' . $link_category['project_id']);?>" target="_blank" data-toggle="tooltip" title="view Project record"><i class="fa fa-sitemap fa-fw"></i></a>
+                                        </div>
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>
@@ -83,7 +88,8 @@
     {
         $('#dataTable').DataTable({
             "order": [[2, 'desc']],
-            "responsive": true
+            "responsive": true,
+            "pageLength": 25
         });
     });
 

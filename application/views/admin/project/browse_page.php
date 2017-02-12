@@ -54,7 +54,7 @@
                             </thead>
                             <tbody>
                             <?php foreach($projects as $key=> $project): ?>
-                                <tr class="clickable" onclick="goto_view(<?=$project['project_id'];?>)">
+                                <tr id="project_row_<?=$project['project_id'];?>" class="clickable" onclick="goto_view(<?=$project['project_id'];?>)">
                                     <td><i class="fa <?=$project['project_icon'];?> fa-fw"></i> <?=$project['project_name'];?></td>
                                     <td><?=$project['project_description'];?></td>
                                     <td><?=$project['selected_project'] == 1 ? '<span class="text-primary">Yes</span>' : 'No';?></td>

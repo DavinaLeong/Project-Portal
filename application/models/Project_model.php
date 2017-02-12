@@ -130,6 +130,27 @@ class Project_model extends CI_Model
 		}
 	}
 
+	public function get_by_pc_id_status($pc_id=FALSE,
+										$status='Publish',
+								 $column='last_updated',
+								 $direction='DESC')
+	{
+		if($pc_id && $status)
+		{
+			$this->db->order_by($column, $direction);
+			$query = $this->db->get_where(TABLE_PROJECT,
+				array(
+					'pc_id' => $pc_id,
+					'project_status' => $status
+				));
+			return $query->result_array();
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+
 	public function get_by_pc_id_project_category($pc_id=FALSE,
 								 $column='last_updated',
 								 $direction='DESC')

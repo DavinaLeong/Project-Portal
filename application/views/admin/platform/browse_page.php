@@ -53,7 +53,7 @@
                             </thead>
                             <tbody>
                             <?php foreach($platforms as $key=>$platform): ?>
-                                <tr class="clickable" onclick="goto_view(<?=$platform['platform_id'];?>)">
+                                <tr id="platform_row_<?=$platform['platform_id'];?>" class="clickable" onclick="goto_view(<?=$platform['platform_id'];?>)">
                                     <td><i class="fa <?=$platform['platform_icon'];?> fa-fw"></i> <?=$platform['platform_name'];?></td>
                                     <td><?=$platform['platform_description'];?></td>
                                     <td><span class="label label-default label-<?=strtolower($platform['platform_status']);?>"><?=$platform['platform_status'];?></span></td>

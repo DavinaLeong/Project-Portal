@@ -53,7 +53,7 @@
                             </thead>
                             <tbody>
                             <?php foreach($project_categories as $key=>$project_category): ?>
-                                <tr class="clickable" onclick="goto_view(<?=$project_category['pc_id'];?>)">
+                                <tr id="pc_row_<?-$project_category['pc_id'];?>" class="clickable" onclick="goto_view(<?=$project_category['pc_id'];?>)">
                                     <td><i class="fa <?=$project_category['pc_icon'];?> fa-fw"></i> <?=$project_category['pc_name'];?></td>
                                     <td><?=$project_category['pc_description'];?></td>
                                     <td data-sort="<?=format_dd_mm_yyyy_hh_ii_ss($project_category['date_added']);?>"

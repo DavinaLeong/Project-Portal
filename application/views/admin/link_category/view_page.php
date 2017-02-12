@@ -117,22 +117,32 @@
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <table id="table-links" class="table table-hovered">
+                            <table id="table-links" class="table table-striped">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>Label</th>
                                     <th>Output URL</th>
                                     <th>Status</th>
+                                    <th>&nbsp;</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach($links as $link): ?>
-                                    <tr>
+                                <?php
+                                foreach($links as $link):
+                                    $output_url = ($link['use_https'] == 1 ? 'https' : 'http') . '://' . $link['url'];
+                                    ?>
+                                    <tr id="link_row_<?=$link['link_id'];?>">
                                         <td><?=$link['link_id'];?></td>
                                         <td><?=$link['label'];?></td>
-                                        <td><a href="<?=($link['use_https'] == 1 ? 'https' : 'http') . '://' . $link['url'];?>" target="_blank"><?=($link['use_https'] == 1 ? 'https' : 'http') . '://' . $link['url'];?></a></td>
+                                        <td><a href="<?=$output_url;?>" target="_blank"><?=($link['use_https'] == 1 ? 'https' : 'http') . '://' . $link['url'];?></a></td>
                                         <td><span class="label label-default label-<?=strtolower($link['link_status']);?>"><?=$link['link_status'];?></span></td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a id="view_link_<?=$link['link_id'];?>" class="btn btn-default" href="<?=site_url('admin/link/view/' . $link['link_id']);?>" target="_blank"><i class="fa fa-eye fa-fw"></i></a>
+                                                <a id="view_link_url_<?=$link['link_id'];?>" class="btn btn-default" href="<?=$output_url;?>" target="_blank"><i class="fa fa-link fa-fw"></i></a>
+                                            </div>
+                                        </td>
                                     </tr>
                                 <?php endforeach;?>
                                 </tbody>
