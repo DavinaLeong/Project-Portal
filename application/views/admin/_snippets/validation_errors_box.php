@@ -16,13 +16,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div id="validation_error_box" class="alert alert-danger" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
         </button>
-        <div class="row">
-            <div class="col-xs-1">
-                <i class="fa fa-exclamation-circle"></i>
-            </div>
-            <div class="col-xs-11">
-                <?=validation_errors();?>
-            </div>
-        </div>
+        <i class="fa fa-exclamation-circle"></i> <?=validation_errors();?>
     </div>
 <?php endif;?>

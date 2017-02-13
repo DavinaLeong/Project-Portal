@@ -47,15 +47,17 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Description</th>
+                                <th>Selected Project</th>
                                 <th>Status</th>
                                 <th>Last Updated</th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php foreach($projects as $key=> $project): ?>
-                                <tr class="clickable" onclick="goto_view(<?=$project['project_id'];?>)">
-                                    <td><?=$project['project_name'];?></td>
+                                <tr id="project_row_<?=$project['project_id'];?>" class="clickable" onclick="goto_view(<?=$project['project_id'];?>)">
+                                    <td><i class="fa <?=$project['project_icon'];?> fa-fw"></i> <?=$project['project_name'];?></td>
                                     <td><?=$project['project_description'];?></td>
+                                    <td><?=$project['selected_project'] == 1 ? '<span class="text-primary">Yes</span>' : 'No';?></td>
                                     <td><span class="label label-default label-<?=strtolower($project['project_status']);?>"><?=$project['project_status'];?></span></td>
                                     <td data-sort="<?=format_dd_mm_yyyy_hh_ii_ss($project['last_updated']);?>"
                                         ><?=$project['last_updated'];?></td>
@@ -78,8 +80,9 @@
     $(document).ready(function()
     {
         $('#dataTable').DataTable({
-            "order": [[3, 'desc']],
-            "responsive": true
+            "order": [[4, 'desc']],
+            "responsive": true,
+            "pageLength": 25
         });
     });
 

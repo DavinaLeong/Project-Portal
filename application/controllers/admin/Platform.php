@@ -86,10 +86,10 @@ class Platform extends CI_Controller
         $platform = $this->Platform_model->get_by_id($platform_id);
         if($platform)
         {
-            $this->load->model('Project_model');
+            $this->load->model('Project_category_model');
             $data = array(
                 'platform' => $platform,
-                'projects' => $this->Project_model->get_by_platform_id($platform_id, 'project_id', 'DESC'),
+                'project_categories' => $this->Project_category_model->get_by_platform_id($platform_id, 'platform_id', 'DESC'),
                 'delete_modal_header' => 'Delete Platform Record',
                 'delete_uri' => 'admin/platform/delete/' . $platform_id
             );
@@ -162,10 +162,10 @@ class Platform extends CI_Controller
         $this->User_log_model->validate_access();
         if($this->Platform_model->get_by_id($platform_id))
         {
-            $this->load->model('Project_model');
-            if($this->Project_model->get_by_platform_id($platform_id))
+            $this->load->model('Project_category_model');
+            if($this->Project_category_model->get_by_platform_id($platform_id))
             {
-                $this->session->set_userdata('message', 'Unable to delete Platform as there are existing Projects associated it.');
+                $this->session->set_userdata('message', 'Unable to delete Platform as there are existing Project Categories associated it.');
                 redirect('admin/platform/view/' . $platform_id);
             }
             else

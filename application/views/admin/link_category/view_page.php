@@ -56,6 +56,24 @@
                                 <legend>Record Details</legend>
 
                                 <div class="form-group">
+                                    <label class="control-label col-md-2" for="platform">Platform</label>
+                                    <div class="col-md-10">
+                                        <p id="platform" class="form-control-static">
+                                            <i class="fa <?=$link_category['platform_icon'];?> fa-fw"></i> <?=$link_category['platform_name'];?>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="project">Project</label>
+                                    <div class="col-md-10">
+                                        <p id="project" class="form-control-static">
+                                            <i class="fa <?=$link_category['project_icon'];?> fa-fw"></i> <?=$link_category['project_name'];?>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <label class="control-label col-md-2" for="lc_name">Name</label>
                                     <div class="col-md-10">
                                         <p id="lc_name" class="form-control-static"><?=$link_category['lc_name'];?></p>
@@ -99,22 +117,32 @@
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <table id="table-links" class="table table-hovered">
+                            <table id="table-links" class="table table-striped">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>Label</th>
                                     <th>Output URL</th>
                                     <th>Status</th>
+                                    <th>&nbsp;</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach($links as $link): ?>
-                                    <tr>
+                                <?php
+                                foreach($links as $link):
+                                    $output_url = ($link['use_https'] == 1 ? 'https' : 'http') . '://' . $link['url'];
+                                    ?>
+                                    <tr id="link_row_<?=$link['link_id'];?>">
                                         <td><?=$link['link_id'];?></td>
                                         <td><?=$link['label'];?></td>
-                                        <td><a href="<?=($link['use_https'] == 1 ? 'https' : 'http') . '://' . $link['url'];?>" target="_blank"><?=($link['use_https'] == 1 ? 'https' : 'http') . '://' . $link['url'];?></a></td>
+                                        <td><a href="<?=$output_url;?>" target="_blank"><?=($link['use_https'] == 1 ? 'https' : 'http') . '://' . $link['url'];?></a></td>
                                         <td><span class="label label-default label-<?=strtolower($link['link_status']);?>"><?=$link['link_status'];?></span></td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a id="view_link_<?=$link['link_id'];?>" class="btn btn-default" href="<?=site_url('admin/link/view/' . $link['link_id']);?>" target="_blank"><i class="fa fa-eye fa-fw"></i></a>
+                                                <a id="view_link_url_<?=$link['link_id'];?>" class="btn btn-default" href="<?=$output_url;?>" target="_blank"><i class="fa fa-link fa-fw"></i></a>
+                                            </div>
+                                        </td>
                                     </tr>
                                 <?php endforeach;?>
                                 </tbody>

@@ -9,15 +9,16 @@
 		Mobile	: (+65) 9369 3752 [Singapore]
 
 ***********************************************************************************/
-var gulp = require("gulp");
-var sourcemaps = require("gulp-sourcemaps");
-var uglify = require("gulp-uglify");
-var plumber = require("gulp-plumber");
-var rename = require("gulp-rename");
-var babel = require("gulp-babel");
-var del = require("del");
-var react = require("react");
-var react_dom = require("react-dom");
+var gulp = require('gulp');
+var sourcemaps = require('gulp-sourcemaps');
+var uglify = require('gulp-uglify');
+var plumber = require('gulp-plumber');
+var rename = require('gulp-rename');
+var babel = require('gulp-babel');
+var del = require('del');
+var debug = require('gulp-debug');
+var react = require('react');
+var react_dom = require('react-dom');
 
 const NODE_PATH = './node_modules/';
 const VENDOR_PATH = './';
@@ -49,7 +50,7 @@ gulp.task('copy-vendor', function()
 	console.log('~ copied jQuery files.');
 
 
-	// --- Twitter Bootstrap ---
+	// --- Bootstrap ---
 	gulp.src(NODE_PATH + 'bootstrap/dist/css/bootstrap.min.css')
         .pipe(debug({title: 'bootstrap css'}))
         .pipe(gulp.dest(VENDOR_PATH + 'bootstrap/css'));
@@ -60,6 +61,16 @@ gulp.task('copy-vendor', function()
         .pipe(debug({title: 'bootstrap fonts'}))
         .pipe(gulp.dest(VENDOR_PATH + 'bootstrap/fonts'));
 	console.log('~ copied Bootstrap files.');
+
+
+    // --- Bootstrap Theme ---
+    gulp.src(NODE_PATH + 'bootstrap/dist/css/bootstrap-theme.min.css')
+        .pipe(debug({title: 'bootstrap css'}))
+        .pipe(gulp.dest(VENDOR_PATH + 'bootstrap/css'));
+    gulp.src(NODE_PATH + 'bootstrap/dist/js/bootstrap-theme.min.js')
+        .pipe(debug({title: 'bootstrap js'}))
+        .pipe(gulp.dest(VENDOR_PATH + 'bootstrap/js'));
+    console.log('~ copied Bootstrap Theme files.');
 
 
 	// --- Font-Awesome ---
@@ -96,6 +107,7 @@ gulp.task('copy-vendor', function()
         .pipe(debug({title: 'parsley js'}))
         .pipe(gulp.dest(VENDOR_PATH + 'parsleyjs'));
 	console.log('~ copied ParsleyJs files.');
+
 
     // --- React JS ---
     gulp.src([

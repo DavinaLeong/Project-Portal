@@ -45,19 +45,7 @@
 
                         <form id="form" class="form-horizontal" method="post" data-parsley-validate>
                             <fieldset>
-                                <legend>Grouping</legend>
-
-                                <div class="form-group">
-                                    <label class="control-label col-md-2" for="platform_id">Platform <span class="text-danger">*</span></label>
-                                    <div class="col-md-10">
-                                        <select class="form-control" id="platform_id" name="platform_id" required>
-                                            <option id="platform_id_0" value="">-- Select Platform --</option>
-                                            <?php foreach($platforms as $key=>$platform): ?>
-                                                <option id="platform_id<?=$key+1;?>" value="<?=$platform['platform_id'];?>" <?=set_select('platform_id', $platform['platform_id'], ($project['platform_id'] == $platform['platform_id']));?>><?=$platform['platform_name'];?></option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </div>
-                                </div>
+                                <legend>Record Details</legend>
 
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="pc_id">Project Category <span class="text-danger">*</span></label>
@@ -65,15 +53,11 @@
                                         <select class="form-control" id="pc_id" name="pc_id" required>
                                             <option id="pc_id_0" value="">-- Select Project Category --</option>
                                             <?php foreach($project_categories as $key=>$project_category): ?>
-                                                <option id="pc_id_<?=$key+1;?>" value="<?=$project_category['pc_id'];?>" <?=set_select('pc_id', $project_category['pc_id'], ($project['pc_id'] == $project_category['pc_id']));?>><?=$project_category['pc_name'];?></option>
+                                                <option id="pc_id_<?=$key+1;?>" value="<?=$project_category['pc_id'];?>" <?=set_select('pc_id', $project_category['pc_id'], ($project['pc_id'] == $project_category['pc_id']));?>><?=$project_category['pc_name'];?> (<?=$project_category['platform_name'];?>)</option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
                                 </div>
-                            </fieldset>
-
-                            <fieldset>
-                                <legend>Identifiers</legend>
 
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="project_name">Name <span class="text-danger">*</span></label>
@@ -83,9 +67,11 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-2" for="project_description">Description <span class="text-danger">*</span></label>
+                                    <label class="control-label col-md-2" for="project_description">Description</label>
                                     <div class="col-md-10">
-                                        <input class="form-control" type="text" id="project_description" name="project_description" value="<?=set_value('project_description', $project['project_description']);?>" required maxlength="512" />
+                                        <input class="form-control" type="text" id="project_description" name="project_description"
+                                               value="<?=set_value('project_description', $project['project_description']);?>"
+                                               maxlength="512" />
                                     </div>
                                 </div>
 
