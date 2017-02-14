@@ -4,4 +4,4 @@ cd "../application/tests"
 
 call phpunit
 
-cd "../application/tests"
+cd "../../cmd_scripts"

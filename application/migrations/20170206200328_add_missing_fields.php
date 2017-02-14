@@ -16,30 +16,40 @@
  */
 class Migration_Add_missing_fields extends CI_Migration
 {
-	// Public Functions ----------------------------------------------------------------
-	public function up()
-	{
-		$this->load->model('Migration_model');
-		echo '<h1>Migration: Add Missing Fields</h1>';
-		echo '<hr/>';
-		echo '<p>Running Up Script...</p>';
-		echo '<p style="text-align: center;">- start of script -</p>';
-		echo '<div style="border: thin solid #ddd; border-radius: 2px; background: #eee; padding:5px;"><code>';
-		echo $this->Migration_model->run_parsed_sql($this->_up_script())['output_str'];
-		echo '</code></div>';
-	}
+    // Public Functions ----------------------------------------------------------------
+    public function up()
+    {
+        $this->load->model('Migration_model');
+        $output = $this->Migration_model->run_parsed_sql($this->_up_script())['output_str'];
 
-	public function down()
-	{
-		$this->load->model('Migration_model');
-		echo '<h1>Migration: Add Missing Fields</h1>';
-		echo '<hr/>';
-		echo '<p>Running Down Script...</p>';
-		echo '<p style="text-align: center;">- start of script -</p>';
-		echo '<div style="border: thin solid #ddd; border-radius: 2px; background: #eee; padding:5px;"><code>';
-		echo $this->Migration_model->run_parsed_sql($this->_down_script())['output_str'];
-		echo '</code></div>';
-	}
+        if(ENVIRONMENT !== 'testing')
+        {
+            echo '<h1>Migration: Init Tables</h1>';
+            echo '<hr/>';
+            echo '<p>Running Up Script...</p>';
+            echo '<p style="text-align: center;">- start of script -</p>';
+            echo '<div style="border: thin solid #ddd; border-radius: 2px; background: #eee; padding:5px;"><code>';
+            echo $output;
+            echo '</code></div>';
+        }
+    }
+
+    public function down()
+    {
+        $this->load->model('Migration_model');
+        $output = $this->Migration_model->run_parsed_sql($this->_down_script())['output_str'];
+
+        if(ENVIRONMENT !== 'testing')
+        {
+            echo '<h1>Migration: Init Tables</h1>';
+            echo '<hr/>';
+            echo '<p>Running Up Script...</p>';
+            echo '<p style="text-align: center;">- start of script -</p>';
+            echo '<div style="border: thin solid #ddd; border-radius: 2px; background: #eee; padding:5px;"><code>';
+            echo $output;
+            echo '</code></div>';
+        }
+    }
 	
 	// Private Functions ---------------------------------------------------------------
 	private function _up_script()

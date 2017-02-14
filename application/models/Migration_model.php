@@ -67,7 +67,7 @@ class Migration_model extends CI_Model
     public function reset()
     {
         $this->load->library('migration');
-        $this->migration->version('20170126210232');
+        $this->migration->version('20170209092304');
         $this->migration->current();
     }
 
