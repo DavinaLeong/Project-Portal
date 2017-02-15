@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	- File Info -
 		File name		: head_resources_datatables.php
 		Author(s)		: DAVINA Leong Shi Yun
-		Date Created	: 01 Feb 2016
+		Date Created	: 01 Feb 2017
 
 	- Contact Info -
 		Email	: leong.shi.yun@gmail.com
