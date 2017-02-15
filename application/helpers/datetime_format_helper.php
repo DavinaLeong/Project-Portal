@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**********************************************************************************
 	- File Info -
-		File name		: datetime_formatter.jpg
+		File name		: datetime_format_helper.jpg
 		Author(s)		: DAVINA Leong Shi Yun
 		Date Created	: 26 Jan 2017
 
@@ -10,7 +10,7 @@
 		Mobile	: (+65) 9369 3752 [Singapore]
 
 ***********************************************************************************/
-
+//@codeCoverageIgnoreStart
 function now($format=SYSTEM_DATE_FORMAT)
 {
     $now = new DateTime('now', new DateTimeZone(DATETIME_ZONE));
@@ -94,3 +94,4 @@ function format_migration($datetime_str)
     $datetime = new DateTime($datetime_str, new DateTimeZone(DATETIME_ZONE));
     return $datetime->format('YmdHis');
 }
+//@codeCoverageIgnoreEnd
