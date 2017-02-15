@@ -13,11 +13,11 @@
 			<directory suffix=".php">../controllers</directory>
 			<directory suffix=".php">../models</directory>
 			<directory suffix=".php">../libraries</directory>
-			<directory suffix=".php">../helpers</directory>
       <exclude>
-        <directory suffix=".php">../views</directory>
+        <directory suffix=".php">../helpers</directory>
         <directory suffix=".php">../hooks</directory>
         <directory suffix=".php">../migrations</directory>
+        <directory suffix=".php">../views</directory>
       </exclude>
 		</whitelist>
 	</filter>

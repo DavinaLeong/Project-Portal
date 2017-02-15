@@ -13,6 +13,9 @@
 
 class User_model_test extends TestCase
 {
+    const TEST_USERNAME = 'admin';
+    const TEST_PASSWORD = 'password';
+
     public function setUp()
     {
         $this->resetInstance();
@@ -21,13 +24,39 @@ class User_model_test extends TestCase
         $CI->Migration_model->reset();
     }
 
+    #region Helper Functions
     private function _load_ci()
     {
         $CI =& get_instance();
         $CI->load->model('User_model');
+        $CI->load->helper('datetime_format');
         return $CI;
     }
 
+    private function _reset_db($CI, $do_echo=FALSE)
+    {
+        if($do_echo) echo "\n~~~ truncate table " . TABLE_USER . " ~~~";
+
+        //delete user record and reset auto_increment
+        $CI->load->database();
+        $CI->db->truncate(TABLE_USER);
+        $admin = array(
+            'username' => 'admin',
+            'name' => 'Default Admin',
+            'password_hash' => password_hash($this::TEST_PASSWORD, PASSWORD_DEFAULT),
+            'access' => 'A',
+            'status' => 'Activated'
+        );
+
+        if($do_echo)
+        {
+            echo "\n||| insert_id " . $CI->User_model->insert($admin);
+            echo "\n||| count_all: " . $CI->User_model->count_all() . "\n";
+        }
+    }
+    #endregion
+
+    #region Test Functions
     public function test_count_all()
     {
         $CI = $this->_load_ci();
@@ -48,14 +77,63 @@ class User_model_test extends TestCase
         $user = $CI->User_model->get_by_user_id(1);
         $this->assertEquals('admin', $user['username']);
         $this->assertEquals('Default Admin', $user['name']);
+        $this->assertFalse($CI->User_model->get_by_user_id(FALSE));
     }
 
     public function test_get_by_username()
     {
         $CI = $this->_load_ci();
-        $user = $CI->User_model->get_by_username('admin');
+        $user = $CI->User_model->get_by_username($this::TEST_USERNAME);
         $this->assertEquals(1, $user['user_id']);
         $this->assertEquals('Default Admin', $user['name']);
+        $this->assertFalse($CI->User_model->get_by_username(FALSE));
+    }
+
+    public function test_insert()
+    {
+        $CI = $this->_load_ci();
+        $insert_user = array(
+            'username' => 'davina_leong',
+            'name' => 'Davina Leong',
+            'password_hash' => password_hash($this::TEST_PASSWORD, PASSWORD_DEFAULT),
+            'access' => 'A',
+            'status' => 'Activated'
+        );
+
+        $insert_id = $CI->User_model->insert($insert_user);
+        $this->assertEquals(2, $insert_id);
+        $this->assertEquals(2, $CI->User_model->count_all());
+        $this->assertFalse($CI->User_model->insert(FALSE));
+
+        $this->_reset_db($CI, $insert_id);
+    }
+
+    public function test_update()
+    {
+        $CI = $this->_load_ci();
+        $test_name = 'Davina Leong';
+        $insert_user = array(
+            'username' => 'davina_leong',
+            'name' => $test_name,
+            'password_hash' => password_hash($this::TEST_PASSWORD, PASSWORD_DEFAULT),
+            'access' => 'A',
+            'status' => 'Activated'
+        );
+        $insert_id = $CI->User_model->insert($insert_user);
+        $this->assertContains($test_name, $CI->User_model->get_by_user_id($insert_id));
+
+        $update_user = array(
+            'user_id' => $insert_id,
+            'username' => 'davina_lsy',
+            'name' => $test_name,
+            'password_hash' => password_hash($this::TEST_PASSWORD, PASSWORD_DEFAULT),
+            'access' => 'A',
+            'status' => 'Activated'
+        );
+        $CI->User_model->update($update_user);
+        $this->assertNull($CI->User_model->get_by_username('davina_leong'));
+        $this->assertContains($test_name, $CI->User_model->get_by_username('davina_lsy'));
+        $this->assertFalse($CI->User_model->update(FALSE));
     }
 
     public function test_access_array()
@@ -74,5 +152,6 @@ class User_model_test extends TestCase
         $this->assertCount(2, $statuses);
         $this->assertContains('Activated', $statuses);
     }
+    #endregion
 
 } //end User_model_test class

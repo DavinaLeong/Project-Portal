@@ -1,0 +1,11 @@
+This is for running a test function to see if it's working / running properly.
+
+Copy & paste this to the top of the test function in question.
+/**
+ * @group totest
+ */
+
+And run this command:
+phpunit --group totest
+
+Alternatively, just cd to "./cmd_scripts" and run the "unit_totest.cmd" script.
