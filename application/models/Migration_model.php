@@ -10,7 +10,7 @@
 		Mobile	: (+65) 9369 3752 [Singapore]
 
 ***********************************************************************************/
-
+//@codeCoverageIgnoreStart
 class Migration_model extends CI_Model
 {
     public function run_parsed_sql($sql)
@@ -78,3 +78,4 @@ class Migration_model extends CI_Model
     }
 
 } // end Migration_model class
+//@codeCoverageIgnoreEnd

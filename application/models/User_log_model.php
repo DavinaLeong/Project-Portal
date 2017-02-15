@@ -10,7 +10,7 @@
 		Mobile	: (+65) 9369 3752 [Singapore]
 
 ***********************************************************************************/
-
+//@codeCoverageIgnoreStart
 class User_log_model extends CI_Model
 {
     public function get_all()
@@ -84,3 +84,4 @@ class User_log_model extends CI_Model
     }
 
 } // end User_log_model class
+//@codeCoverageIgnoreEnd
