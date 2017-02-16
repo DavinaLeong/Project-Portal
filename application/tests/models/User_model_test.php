@@ -19,25 +19,23 @@ class User_model_test extends TestCase
     public function setUp()
     {
         $this->resetInstance();
-        $CI =& get_instance();
+        $CI = $this->_load_ci();
         $CI->load->model('Migration_model');
         $CI->Migration_model->reset();
+
+        $CI->load->model('User_model');
+        $CI->load->helper('datetime_format');
     }
 
     #region Helper Functions
     private function _load_ci()
     {
         $CI =& get_instance();
-        $CI->load->model('User_model');
-        $CI->load->helper('datetime_format');
         return $CI;
     }
 
-    private function _reset_db($CI, $do_echo=FALSE)
+    private function _truncate_table($CI, $do_echo=FALSE)
     {
-        if($do_echo) echo "\n~~~ truncate table " . TABLE_USER . " ~~~";
-
-        //delete user record and reset auto_increment
         $CI->load->database();
         $CI->db->truncate(TABLE_USER);
         $admin = array(
@@ -50,6 +48,7 @@ class User_model_test extends TestCase
 
         if($do_echo)
         {
+            echo "\n--- truncated table " . TABLE_USER . " ---";
             echo "\n||| insert_id " . $CI->User_model->insert($admin);
             echo "\n||| count_all: " . $CI->User_model->count_all() . "\n";
         }
@@ -61,6 +60,7 @@ class User_model_test extends TestCase
     {
         $CI = $this->_load_ci();
         $this->assertEquals(1, $CI->User_model->count_all());
+        $this->_truncate_table($CI);
     }
 
     public function test_get_all()
@@ -69,6 +69,7 @@ class User_model_test extends TestCase
         $users = $CI->User_model->get_all();
         $this->assertEquals('admin', $users[0]['username']);
         $this->assertEquals('Default Admin', $users[0]['name']);
+        $this->_truncate_table($CI);
     }
 
     public function test_get_by_user_id()
@@ -78,6 +79,7 @@ class User_model_test extends TestCase
         $this->assertEquals('admin', $user['username']);
         $this->assertEquals('Default Admin', $user['name']);
         $this->assertFalse($CI->User_model->get_by_user_id(FALSE));
+        $this->_truncate_table($CI);
     }
 
     public function test_get_by_username()
@@ -87,6 +89,7 @@ class User_model_test extends TestCase
         $this->assertEquals(1, $user['user_id']);
         $this->assertEquals('Default Admin', $user['name']);
         $this->assertFalse($CI->User_model->get_by_username(FALSE));
+        $this->_truncate_table($CI);
     }
 
     public function test_insert()
@@ -104,8 +107,7 @@ class User_model_test extends TestCase
         $this->assertEquals(2, $insert_id);
         $this->assertEquals(2, $CI->User_model->count_all());
         $this->assertFalse($CI->User_model->insert(FALSE));
-
-        $this->_reset_db($CI, $insert_id);
+        $this->_truncate_table($CI, $insert_id);
     }
 
     public function test_update()
@@ -130,10 +132,11 @@ class User_model_test extends TestCase
             'access' => 'A',
             'status' => 'Activated'
         );
-        $CI->User_model->update($update_user);
+        $this->assertEquals(1, $CI->User_model->update($update_user));
         $this->assertNull($CI->User_model->get_by_username('davina_leong'));
         $this->assertContains($test_name, $CI->User_model->get_by_username('davina_lsy'));
         $this->assertFalse($CI->User_model->update(FALSE));
+        $this->_truncate_table($CI);
     }
 
     public function test_access_array()

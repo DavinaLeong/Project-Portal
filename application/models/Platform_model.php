@@ -118,14 +118,18 @@ class Platform_model extends CI_Model
             {
                 if($this->count_all() <= 0)
                 {
+                    //@codeCoverageIgnoreStart
                     $this->db->truncate(TABLE_PLATFORM);
                 }
+                //@codeCoverageIgnoreEnd
                 return TRUE;
             }
+            //@codeCoverageIgnoreStart
             else
             {
                 return FALSE;
             }
+            //@codeCoverageIgnoreEnd
         }
         else
         {
