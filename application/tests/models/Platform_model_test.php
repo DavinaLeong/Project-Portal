@@ -25,6 +25,11 @@ class Platform_model_test extends TestCase
         $this->_truncate_table($CI);
     }
 
+    public function tearDown()
+    {
+        $this->_truncate_table($this->_load_ci());
+    }
+
     #region Helper Functions
     private function _load_ci()
     {
@@ -79,7 +84,6 @@ class Platform_model_test extends TestCase
         $CI = $this->_load_ci();
         $this->_insert_records($CI);
         $this->assertEquals(3, $CI->Platform_model->count_all());
-        $this->_truncate_table($CI);
     }
 
     public function test_get_all()
@@ -89,7 +93,6 @@ class Platform_model_test extends TestCase
         $platforms = $CI->Platform_model->get_all();
         $this->assertCount(3, $platforms);
         $this->assertEquals('Acer Predator', $platforms[0]['platform_name']);
-        $this->_truncate_table($CI);
     }
 
     public function test_get_all_ids()
@@ -97,7 +100,6 @@ class Platform_model_test extends TestCase
         $CI = $this->_load_ci();
         $this->_insert_records($CI);
         $this->assertCount(3, $CI->Platform_model->get_all_ids());
-        $this->_truncate_table($CI);
     }
 
     public function test_get_by_status()
@@ -114,7 +116,6 @@ class Platform_model_test extends TestCase
         $platforms = $CI->Platform_model->get_by_status('Draft');
         $this->assertCount(1, $platforms);
         $this->assertEquals($platform['platform_name'], $platforms[0]['platform_name']);
-        $this->_truncate_table($CI);
     }
 
     public function test_get_by_status_ids()
@@ -131,7 +132,6 @@ class Platform_model_test extends TestCase
         $platforms = $CI->Platform_model->get_by_status_ids('Draft');
         $this->assertCount(1, $platforms);
         $this->assertContains(4, $platforms);
-        $this->_truncate_table($CI);
     }
 
     public function test_get_by_id()
@@ -141,7 +141,6 @@ class Platform_model_test extends TestCase
         $this->assertEquals('Acer Predator', $CI->Platform_model->get_by_id(1)['platform_name']);
         $this->assertEquals('fa-laptop', $CI->Platform_model->get_by_id(2)['platform_icon']);
         $this->assertFalse($CI->Platform_model->get_by_id(FALSE));
-        $this->_truncate_table($CI);
     }
 
     public function test_insert()
@@ -157,7 +156,6 @@ class Platform_model_test extends TestCase
         $this->assertEquals(1, $insert_id);
         $this->assertEquals(1, $CI->Platform_model->count_all());
         $this->assertFalse($CI->Platform_model->insert(FALSE));
-        $this->_truncate_table($CI);
     }
 
     public function test_update()
@@ -178,7 +176,6 @@ class Platform_model_test extends TestCase
         $this->assertEquals(1, $CI->Platform_model->update($update));
         $this->assertEquals('Main home desktop computer', $CI->Platform_model->get_by_id($insert_id)['platform_description']);
         $this->assertFalse($CI->Platform_model->update(FALSE));
-        $this->_truncate_table($CI);
     }
 
     public function test_delete_by_id()
@@ -190,7 +187,6 @@ class Platform_model_test extends TestCase
         $this->assertEquals(1, $CI->Platform_model->delete_by_id($platform_id));
         $this->assertNull($CI->Platform_model->get_by_id($platform_id));
         $this->assertFalse($CI->Platform_model->delete_by_id(FALSE));
-        $this->_truncate_table($CI);
     }
 
     public function test_status_array()

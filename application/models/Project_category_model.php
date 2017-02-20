@@ -141,17 +141,20 @@ class Project_category_model extends CI_Model
         {
             if($var = $this->db->delete(TABLE_PROJECT_CATEGORY, array('pc_id' => $pc_id)))
             {
-                var_dump($var);
                 if($this->count_all() <= 0)
                 {
+                    //@codeCoverageIgnoreStart
                     $this->db->truncate(TABLE_PROJECT_CATEGORY);
                 }
+                //@codeCoverageIgnoreEnd
                 return TRUE;
             }
+            //@codeCoverageIgnoreStart
             else
             {
                 return FALSE;
             }
+            //@codeCoverageIgnoreEnd
         }
         else
         {
@@ -165,17 +168,20 @@ class Project_category_model extends CI_Model
         {
             if($var = $this->db->delete(TABLE_PROJECT_CATEGORY, array('platform_id' => $platform_id)))
             {
-                var_dump($var);
                 if($this->count_all() <= 0)
                 {
+                    //@codeCoverageIgnoreStart
                     $this->db->truncate(TABLE_PROJECT_CATEGORY);
                 }
+                //@codeCoverageIgnoreEnd
                 return TRUE;
             }
+            //@codeCoverageIgnoreStart
             else
             {
                 return FALSE;
             }
+            //@codeCoverageIgnoreEnd
         }
         else
         {

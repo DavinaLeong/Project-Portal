@@ -27,6 +27,11 @@ class User_model_test extends TestCase
         $CI->load->helper('datetime_format');
     }
 
+    public function tearDown()
+    {
+        $this->_truncate_table($this->_load_ci());
+    }
+
     #region Helper Functions
     private function _load_ci()
     {
@@ -60,7 +65,6 @@ class User_model_test extends TestCase
     {
         $CI = $this->_load_ci();
         $this->assertEquals(1, $CI->User_model->count_all());
-        $this->_truncate_table($CI);
     }
 
     public function test_get_all()
@@ -69,7 +73,6 @@ class User_model_test extends TestCase
         $users = $CI->User_model->get_all();
         $this->assertEquals('admin', $users[0]['username']);
         $this->assertEquals('Default Admin', $users[0]['name']);
-        $this->_truncate_table($CI);
     }
 
     public function test_get_by_user_id()
@@ -79,7 +82,6 @@ class User_model_test extends TestCase
         $this->assertEquals('admin', $user['username']);
         $this->assertEquals('Default Admin', $user['name']);
         $this->assertFalse($CI->User_model->get_by_user_id(FALSE));
-        $this->_truncate_table($CI);
     }
 
     public function test_get_by_username()
@@ -89,7 +91,6 @@ class User_model_test extends TestCase
         $this->assertEquals(1, $user['user_id']);
         $this->assertEquals('Default Admin', $user['name']);
         $this->assertFalse($CI->User_model->get_by_username(FALSE));
-        $this->_truncate_table($CI);
     }
 
     public function test_insert()
@@ -107,7 +108,6 @@ class User_model_test extends TestCase
         $this->assertEquals(2, $insert_id);
         $this->assertEquals(2, $CI->User_model->count_all());
         $this->assertFalse($CI->User_model->insert(FALSE));
-        $this->_truncate_table($CI, $insert_id);
     }
 
     public function test_update()
@@ -136,7 +136,6 @@ class User_model_test extends TestCase
         $this->assertNull($CI->User_model->get_by_username('davina_leong'));
         $this->assertContains($test_name, $CI->User_model->get_by_username('davina_lsy'));
         $this->assertFalse($CI->User_model->update(FALSE));
-        $this->_truncate_table($CI);
     }
 
     public function test_access_array()
