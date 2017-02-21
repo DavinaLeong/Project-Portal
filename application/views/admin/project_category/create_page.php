@@ -11,6 +11,7 @@
 
 ***********************************************************************************/
 /**
+ * @var $platform_id
  * @var $platforms
  * @var $status_options
  */
@@ -50,7 +51,7 @@
                                         <select class="form-control" id="platform_id" name="platform_id" required>
                                             <option id="platform_id_0" value="">-- Select Platform --</option>
                                             <?php foreach($platforms as $key=>$platform): ?>
-                                                <option id="platform_id<?=$key+1;?>" value="<?=$platform['platform_id'];?>" <?=set_select('platform_id', $platform['platform_id']);?>><?=$platform['platform_name'];?></option>
+                                                <option id="platform_id<?=$key+1;?>" value="<?=$platform['platform_id'];?>" <?=set_select('platform_id', $platform['platform_id'], ($platform['platform_id'] == $platform_id));?>><?=$platform['platform_name'];?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>

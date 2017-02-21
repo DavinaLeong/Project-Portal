@@ -35,7 +35,7 @@ class Link_category extends CI_Controller
 		$this->load->view('admin/link_category/browse_page', $data);
 	}
 
-	public function create()
+	public function create($project_id='')
 	{
 		$this->User_log_model->validate_access();
 		$this->_set_rules_create();
@@ -54,6 +54,7 @@ class Link_category extends CI_Controller
 			}
 		}
 		$data = array(
+            'project_id' => $project_id,
 			'projects' => $this->Project_model->get_by_status_platform('Publish', 'project_name', 'ASC')
 		);
 		$this->load->view('admin/link_category/create_page', $data);

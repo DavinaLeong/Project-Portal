@@ -130,7 +130,16 @@
                 <!-- Link Categories start -->
                 <div id="lc-panel" class="panel panel-default">
                     <div class="panel-heading">
-                        <h2 class="panel-title">Link Categories</h2>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <h2 class="panel-title">Link Categories</h2>
+                            </div>
+                            <div class="col-xs-6">
+                                <button id="new_lc_btn" class="btn btn-default pull-right" onclick="goto_create(<?=$project['project_id'];?>)">
+                                    <i class="fa fa-plus fa-fw"></i> Create Record
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -224,6 +233,11 @@
     function goto_lc_view(record_id)
     {
         window.open('<?=site_url("admin/link_category/view");?>/' + record_id);
+    }
+
+    function goto_create(project_id)
+    {
+        location.href = '<?=site_url("admin/link_category/create");?>' + '/' + project_id;
     }
 
     function goto_link_view(record_id)

@@ -112,7 +112,16 @@
                 <!-- Project Categories table start -->
                 <div id="projects-panel" class="panel panel-default">
                     <div class="panel-heading">
-                        <h2 class="panel-title">Project Categories</h2>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <h2 class="panel-title">Project Categories</h2>
+                            </div>
+                            <div class="col-xs-6">
+                                <button id="create_new_pc" class="btn btn-default pull-right" type="button" onclick="goto_create(<?=$platform['platform_id'];?>)">
+                                    <i class="fa fa-plus fa-fw"></i> Create Record
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -159,6 +168,11 @@
     function goto_view(record_id)
     {
         window.open('<?=site_url("admin/project_category/view");?>/' + record_id);
+    }
+
+    function goto_create(platform_id)
+    {
+        location.href = '<?=site_url('admin/project_category/create');?>' + '/' + platform_id;
     }
 </script>
 </body>

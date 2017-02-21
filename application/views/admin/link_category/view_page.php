@@ -113,7 +113,16 @@
                 <!-- Link panel start -->
                 <div id="links" class="panel panel-default">
                     <div class="panel-heading">
-                        <h2 class="panel-title">Links</h2>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <h2 class="panel-title">Links</h2>
+                            </div>
+                            <div class="col-xs-6">
+                                <button id="new_link_btn" class="btn btn-default pull-right" type="button" onclick="goto_create(<?=$link_category['lc_id'];?>)">
+                                    <i class="fa fa-plus fa-fw"></i> Create Record
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -167,6 +176,11 @@
             "responsive": true
         });
     });
+
+    function goto_create(lc_id)
+    {
+        location.href = '<?=site_url("admin/link/create");?>' + '/' + lc_id;
+    }
 </script>
 </body>
 </html>

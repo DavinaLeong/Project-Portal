@@ -35,7 +35,7 @@ class Project extends CI_Controller
         $this->load->view('admin/project/browse_page', $data);
     }
 
-    public function create()
+    public function create($pc_id='')
     {
         $this->User_log_model->validate_access();
         $this->_set_rules_create_project();
@@ -67,6 +67,7 @@ class Project extends CI_Controller
         }
 
         $data = array(
+            'pc_id' => $pc_id,
 			'project_categories' => $this->Project_category_model->get_all_platform('pc_name', 'ASC'),
             'status_options' => $this->Project_model->_status_array()
         );
