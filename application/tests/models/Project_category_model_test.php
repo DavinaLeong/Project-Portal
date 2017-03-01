@@ -16,201 +16,190 @@ class Project_category_model_test extends TestCase
 	public function setUp()
 	{
 		$this->resetInstance();
-		$CI = $this->_load_ci();
+		$CI =& get_instance();
 		$CI->load->model('Migration_model');
 		$CI->Migration_model->reset();
 
 		$CI->load->model('Project_category_model');
 		$CI->load->helper('datetime_format');
+		$this->_truncate_table();
 	}
 
 	public function tearDown()
 	{
-		$this->_truncate_table($this->_load_ci());
+		$this->_truncate_table();
 	}
 
 	#region Helper Functions
-	private function _load_ci()
+	private function _insert_records($do_echo=FALSE)
 	{
 		$CI =& get_instance();
-		return $CI;
-	}
-
-	private function _insert_records($CI)
-	{
 		$CI->load->model('Platform_model');
-		$desktop_id = $CI->Platform_model->insert(
+
+		$platforms = array(
 			array(
-				'platform_name' => 'Desktop',
-				'platform_description' => 'Acer Predator',
-				'platform_icon' => 'fa fa-desktop',
-				'platform_status' => 'Active'
+				'platform_name' => 'Platform 1',
+				'platform_icon' => 'fa-flag',
+				'platform_description' => 'Test Platform 1',
+				'platform_status' => 'Published'
+			),
+			array(
+				'platform_name' => 'Platform 2',
+				'platform_icon' => 'fa-flag',
+				'platform_description' => 'Test Platform 2',
+				'platform_status' => 'Published'
 			)
 		);
-		$laptop_id = $CI->Platform_model->insert(
-			array(
-				'platform_name' => 'Laptop',
-				'platform_description' => 'Lenovo',
-				'platform_icon' => 'fa fa-laptop',
-				'platform_status' => 'Active'
-			)
-		);
+		foreach($platforms as $platform)
+		{
+			$CI->Platform_model->insert($platform);
+		}
 
 		$project_categories = array(
 			array(
-				'pc_name' => 'Resources',
-				'pc_description' => 'Links to commonly used resources.',
-				'pc_icon' => 'fa-book',
-				'platform_id' => $desktop_id
+				'pc_name' => 'Project Category 1',
+				'platform_id' => 1,
+				'pc_icon' => 'fa-flag',
+				'pc_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+				'pc_status' => 'Published'
 			),
 			array(
-				'pc_name' => 'Personal Projects',
-				'pc_description' => 'Links to self-made locally hosted projects.',
-				'pc_icon' => 'fa-user',
-				'platform_id' => $desktop_id
+				'pc_name' => 'Project Category 2',
+				'platform_id' => 1,
+				'pc_icon' => 'fa-flag',
+				'pc_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+				'pc_status' => 'Draft'
 			),
 			array(
-				'pc_name' => 'Work Projects',
-				'pc_description' => 'Links to Work projects on localhost.',
-				'pc_icon' => 'fa-building',
-				'platform_id' => $desktop_id
-			),
-			array(
-				'pc_name' => 'Resources',
-				'pc_description' => 'Links to commonly used resources.',
-				'pc_icon' => 'fa-book',
-				'platform_id' => $laptop_id
-			),
+				'pc_name' => 'Project Category 3',
+				'platform_id' => 2,
+				'pc_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+				'pc_icon' => 'fa-flag',
+				'pc_status' => 'Published'
+			)
 		);
 
-		return array(
-			$desktop_id, $laptop_id
-		);
+		foreach($project_categories as $project_category)
+		{
+			$CI->Project_category_model->insert($project_category);
+		}
+
+		if($do_echo) echo "\n---- inserted records: " . $CI->Project_category_model->count_all();
 	}
 
-	private function _truncate_table($CI, $do_echo=TRUE)
+	private function _truncate_table($do_echo=FALSE)
 	{
+		$CI =& get_instance();
 		$CI->load->database();
+		$CI->db->truncate(TABLE_PLATFORM);
 		$CI->db->truncate(TABLE_PROJECT_CATEGORY);
 		if($do_echo)
-		{
-			echo "\n--- truncated table " . TABLE_PROJECT_CATEGORY . " ---\n";
-			echo "\n||| count_all: " . $CI->Project_category_model->count_all();
-		}
+        {
+            echo "\n--- truncated table " . TABLE_PROJECT_CATEGORY . " ---";
+            echo "\n||| count_all: " . $CI->Project_category_model->count_all() . "\n";
+        }
 	}
 	#endregion
-
+	
 	#region Test Functions
 	public function test_count_all()
 	{
-		$CI = $this->_load_ci();
-		$this->_insert_records($CI);
-		$this->assertEqual(4, $CI->Project_category_model->count_all());
-		$this->_truncate_table($CI);
+		$this->_insert_records();
+		$CI =& get_instance();
+		$this->assertEquals(3, $CI->Project_category_model->count_all());
 	}
 
 	public function test_get_all()
 	{
-		$CI = $this->_load_ci();
-		$this->_insert_records($CI);
-		$this->assertCount(4, $CI->Project_category_model->get_all());
+		$this->_insert_records();
+		$CI =& get_instance();
+		$this->assertCount(3, $CI->Project_category_model->get_all());
 	}
 
 	public function test_get_all_platform()
 	{
-		$CI = $this->_load_ci();
-		$this->_insert_records($CI);
-		$this->assertEqual(1, $CI->Project_category_model->get_all_platform(2));
+		$this->_insert_records();
+		$CI =& get_instance();
+		$this->assertCount(3, $CI->Project_category_model->get_all_platform());
 	}
 
 	public function test_get_all_ids()
 	{
-		$CI = $this->_load_ci();
-		$this->_insert_records($CI);
-		$this->assertCount(4, $CI->Project_category_model->get_all_ids());
+		$this->_insert_records();
+		$CI =& get_instance();
+		$this->assertCount(3, $CI->Project_category_model->get_all_ids());
 	}
 
 	public function test_get_by_id()
 	{
-		$CI = $this->_load_ci();
-		$this->_insert_records($CI);
-
-		$project_category = $CI->Project_category_model->get_by_id(2);
-		$this->assertEqual('Resources', $project_category['pc_name']);
-		$this->assertEqual(2, $project_category['platform_id']);
-		$this->assertFalse($CI->Project_category_model->get_by_id(FALSE));
+		$this->_insert_records();
+		$CI =& get_instance();
+		$this->assertEquals('Project Category 1', $CI->Project_category_model->get_by_id(1)['pc_name']);
 	}
 
 	public function test_get_by_id_platform()
 	{
-		$CI = $this->_load_ci();
-		$this->_insert_records($CI);
-
-		$project_category = $CI->Project_category_model->get_by_id_platform(2);
-		$this->assertEqual('Resources', $project_category['pc_name']);
-		$this->assertEqual('Laptop', $project_category['platform_name']);
-		$this->assertFalse($CI->Project_category_model->get_by_id_platform(FALSE));
+		$this->_insert_records();
+		$CI =& get_instance();
+		$this->assertEquals('Platform 1', $CI->Project_category_model->get_by_id_platform(1)['platform_name']);
 	}
-
+	
 	public function test_get_by_platform_id()
 	{
-		$CI = $this->_load_ci();
-		$this->_insert_records($CI);
-
-		$project_categories = $CI->Project_category_model->get_by_platform_id(1);
-		$this->assertCount(3, $project_categories);
-		$this->assertContains('Desktop', $project_categories);
+		$this->_insert_records();
+		$CI =& get_instance();
+		$this->assertCount(2, $CI->Project_category_model->get_by_platform_id(1));
 	}
-
+	
 	public function test_insert()
 	{
-		$CI = $this->_load_ci();
-		$this->_insert_records($CI);
-
-		$insert = array(
-			'pc_name' => 'Personal Projects',
-			'pc_description' => '',
-			'pc_icon' => 'fa-user',
-			'platform_id' => 2
+		$CI =& get_instance();
+		$project_category = array(
+			'pc_name' => 'Project Category 1',
+			'platform_id' => 1,
+			'pc_icon' => 'fa-flag',
+			'pc_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+			'pc_status' => 'Published'
 		);
-		$insert_id = $CI->Project_category_model->insert($insert);
-		$this->assertEqual(5, $insert_id);
+		$this->assertEquals(1, $CI->Project_category_model->insert($project_category));
+
 		$this->assertFalse($CI->Project_category_model->insert(FALSE));
 	}
-
+	
 	public function test_update()
 	{
-		$CI = $this->_load_ci();
+		$CI =& get_instance();
 		$insert = array(
-			'pc_name' => 'Personal Projects',
-			'pc_description' => '',
-			'pc_icon' => 'fa-user',
-			'platform_id' => 2
+			'pc_name' => 'Project Category 1',
+			'platform_id' => 1,
+			'pc_icon' => 'fa-flag',
+			'pc_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+			'pc_status' => 'Published'
 		);
-		$insert_id = $CI->Project_category_model->insert($insert);
+		$insert['pc_id'] = $CI->Project_category_model->insert($insert);
 
 		$update = $insert;
-		$update['pc_id'] = $insert_id;
-		$update['pc_name'] = 'Personal Projects';
-		$this->assertEqual(1, $CI->Project_category_model->update($update));
+		$update['pc_name'] = 'Project Category 999';
+		$this->assertEquals(1, $CI->Project_category_model->update($update));
+
 		$this->assertFalse($CI->Project_category_model->update(FALSE));
 	}
 
 	public function test_delete_by_id()
 	{
-		$CI = $this->_load_ci();
-		$this->_insert_records($CI);
+		$this->_insert_records();
+		$CI =& get_instance();
+		$this->assertEquals(1, $CI->Project_category_model->delete_by_id(1));
 
-		$this->assertEqual(1, $CI->Project_category_model->delete_by_id(1));
 		$this->assertFalse($CI->Project_category_model->delete_by_id(FALSE));
 	}
 
-	public function test_delete_by_id_platform()
+	public function test_delete_by_platform_id()
 	{
-		$CI = $this->_load_ci();
-		$this->_insert_records($CI);
+		$this->_insert_records();
+		$CI =& get_instance();
+		$this->assertEquals(2, $CI->Project_category_model->delete_by_platform_id(1));
 
-		$this->assertEqual(3, $CI->Project_category_model->delete_by_platform_id(1));
 		$this->assertFalse($CI->Project_category_model->delete_by_platform_id(FALSE));
 	}
 	#endregion
