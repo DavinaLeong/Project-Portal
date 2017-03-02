@@ -14,6 +14,9 @@
 class Link_category_test_model extends TestCase
 {
     const DO_ECHO = TRUE;
+
+    const STATUS_PUBLISH = 'PUBLISH';
+    const STATUS_DRAFT = 'DRAFT';
     
     public function setUp()
     {
@@ -83,6 +86,35 @@ class Link_category_test_model extends TestCase
         $CI =& get_instance();
         $this->_insert_records();
         $this->assertEquals(3, $CI->Link_category_model->count_all());
+    }
+
+    public function test_get_all()
+    {
+        if($this::DO_ECHO) echo "\n+++ test_get_all +++\n";
+        $CI =& get_instance();
+        $this->_insert_records();
+        $this->assertCount(3, $CI->Link_category_model->get_all());
+    }
+
+    public function test_get_all_project()
+    {
+        if($this::DO_ECHO) echo "\n+++ test_get_all_project +++\n";
+        $CI =& get_instance();
+        $this->_insert_records();
+
+        $CI->load->model('Project_model');
+        $CI->Project_model->insert(
+            array(
+                'pc_id' => 1,
+                'project_name' => 'Project 1',
+                'project_description' => 'Lorem Ipsum',
+                'project_icon' => 'fa-flag',
+                'selected_project' => 0,
+                'project_status' => $this::STATUS_PUBLISH
+            )
+        );
+
+        $this->assertCount(3, $CI->Link_category_model->get_all_project());
     }
     #endregion
 
