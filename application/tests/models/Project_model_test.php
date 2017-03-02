@@ -3,7 +3,7 @@
 	- File Info -
 		File name		: Project_model_test.jpg
 		Author(s)		: DAVINA Leong Shi Yun
-		Date Created	: 18 Feb 2017
+		Date Created	: 01 Mar 2017
 
 	- Contact Info -
 		Email	: leong.shi.yun@gmail.com
@@ -12,7 +12,7 @@
 ***********************************************************************************/
 class Project_model_test extends TestCase
 {
-	const DO_ECHO = TRUE;
+	const DO_ECHO = FALSE;
 
 	const STATUS_PUBLISH = 'Publish';
 	const STATUS_DRAFT = 'Draft';
