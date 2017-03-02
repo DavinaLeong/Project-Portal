@@ -12,6 +12,11 @@
 ***********************************************************************************/
 class Project_model_test extends TestCase
 {
+	const DO_ECHO = TRUE;
+
+	const STATUS_PUBLISH = 'Publish';
+	const STATUS_DRAFT = 'Draft';
+
 	public function setUp()
 	{
 		$this->resetInstance();
@@ -40,7 +45,7 @@ class Project_model_test extends TestCase
 				'project_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
 				'project_icon' => 'fa-flag',
 				'selected_project' => 1,
-				'project_status' => 'Publish'
+				'project_status' => $this::STATUS_PUBLISH
 			),
 			array(
 				'pc_id' => 1,
@@ -48,7 +53,7 @@ class Project_model_test extends TestCase
 				'project_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
 				'project_icon' => 'fa-flag',
 				'selected_project' => 0,
-				'project_status' => 'Publish'
+				'project_status' => $this::STATUS_PUBLISH
 			),
 			array(
 				'pc_id' => 1,
@@ -56,15 +61,15 @@ class Project_model_test extends TestCase
 				'project_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
 				'project_icon' => 'fa-flag',
 				'selected_project' => 0,
-				'project_status' => 'Publish'
+				'project_status' => $this::STATUS_PUBLISH
 			),
 			array(
 				'pc_id' => 2,
 				'project_name' => 'Project 4',
 				'project_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
 				'project_icon' => 'fa-flag',
-				'selected_project' => 0,
-				'project_status' => 'Publish'
+				'selected_project' => 1,
+				'project_status' => $this::STATUS_PUBLISH
 			),
 			array(
 				'pc_id' => 1,
@@ -72,7 +77,7 @@ class Project_model_test extends TestCase
 				'project_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
 				'project_icon' => 'fa-flag',
 				'selected_project' => 0,
-				'project_status' => 'Draft'
+				'project_status' => $this::STATUS_DRAFT
 			)
 		);
 
@@ -101,6 +106,7 @@ class Project_model_test extends TestCase
 	#region Test Functions
 	public function test_count_all()
 	{
+		if($this::DO_ECHO) echo "\n+++ test_count_all +++";
 		$this->_insert_records();
 		$CI =& get_instance();
 		$this->assertEquals(5, $CI->Project_model->count_all());
@@ -108,6 +114,7 @@ class Project_model_test extends TestCase
 
 	public function test_get_all()
 	{
+		if($this::DO_ECHO) echo "\n+++ test_get_all +++";
 		$this->_insert_records();
 		$CI =& get_instance();
 		$this->assertCount(5, $CI->Project_model->get_all());
@@ -115,6 +122,7 @@ class Project_model_test extends TestCase
 
 	public function test_get_all_ids()
 	{
+		if($this::DO_ECHO) echo "\n+++ test_get_all_ids +++";
 		$this->_insert_records();
 		$CI =& get_instance();
 		$this->assertCount(5, $CI->Project_model->get_all_ids());
@@ -122,6 +130,7 @@ class Project_model_test extends TestCase
 
 	public function test_get_all_platform()
 	{
+		if($this::DO_ECHO) echo "\n+++ test_get_all_platform +++";
 		$this->_insert_records();
 		$CI =& get_instance();
 		$this->assertCount(5, $CI->Project_model->get_all_platform());
@@ -129,17 +138,21 @@ class Project_model_test extends TestCase
 
 	public function test_get_by_id()
 	{
+		if($this::DO_ECHO) echo "\n+++ test_get_by_id +++";
 		$this->_insert_records();
 		$CI =& get_instance();
 		$this->assertEquals('Project 1', $CI->Project_model->get_by_id(1)['project_name']);
+
+		$this->assertFalse($CI->Project_model->get_by_id(FALSE));
 	}
 
 	public function test_get_by_id_project_category()
 	{
+		if($this::DO_ECHO) echo "\n+++ test_get_by_id_project_category +++";
 		$this->_insert_records();
 		$CI =& get_instance();
-		$CI->load->model('Project_category_model');
 
+		$CI->load->model('Project_category_model');
 		$project_category = array(
 			'pc_name' => 'Project Category 1',
 			'pc_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
@@ -149,6 +162,7 @@ class Project_model_test extends TestCase
 		$project_category['pc_id'] = $CI->Project_category_model->insert($project_category);
 
 		$this->assertEquals('Project Category 1', $CI->Project_model->get_by_id_project_category(1)['pc_name']);
+		$this->assertFalse($CI->Project_model->get_by_id_project_category(FALSE));
 
 		$CI->load->database();
 		$CI->db->truncate(TABLE_PROJECT_CATEGORY);
@@ -156,6 +170,7 @@ class Project_model_test extends TestCase
 
 	public function test_get_by_status()
 	{
+		if($this::DO_ECHO) echo "\n+++ test_get_by_status +++";
 		$this->_insert_records();
 		$CI =& get_instance();
 		$this->assertCount(4, $CI->Project_model->get_by_status('Publish'));
@@ -163,6 +178,7 @@ class Project_model_test extends TestCase
 
 	public function test_get_by_status_platform()
 	{
+		if($this::DO_ECHO) echo "\n+++ test_get_by_status_platform +++";
 		$this->_insert_records();
 		$CI =& get_instance();
 
@@ -173,9 +189,9 @@ class Project_model_test extends TestCase
 			'platform_name' => 'Platform 1',
 			'platform_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
 			'platform_icon' => 'fa-flag',
-			'platform_status' => 'Publish'
+			'platform_status' => $this::STATUS_PUBLISH
 		);
-		$CI->Platform_model->insert($platform);
+		$platform['platform_id'] = $CI->Platform_model->insert($platform);
 
 		$project_category = array(
 			'pc_name' => 'Project Category 1',
@@ -196,9 +212,181 @@ class Project_model_test extends TestCase
 
 	public function test_get_by_status_ids()
 	{
+		if($this::DO_ECHO) echo "\n+++ test_get_by_status_ids +++";
 		$this->_insert_records();
 		$CI =& get_instance();
 		$this->assertCount(4, $CI->Project_model->get_by_status_ids('Publish'));
+	}
+
+	public function test_get_by_pc_id()
+	{
+		if($this::DO_ECHO) echo "\n+++ test_get_by_pc_id +++";
+		$this->_insert_records();
+		$CI =& get_instance();
+		$this->assertCount(4, $CI->Project_model->get_by_pc_id(1));
+		$this->assertFalse($CI->Project_model->get_by_pc_id(FALSE));
+	}
+
+	public function test_get_by_pc_id_status()
+	{
+		if($this::DO_ECHO) echo "\n+++ test_get_by_pc_id_status +++";
+		$this->_insert_records();
+		$CI =& get_instance();
+		$this->assertCount(3, $CI->Project_model->get_by_pc_id_status(1, 'Publish'));
+		$this->assertFalse($CI->Project_model->get_by_pc_id_status(FALSE));
+	}
+
+	public function test_get_by_pc_id_project_category()
+	{
+		if($this::DO_ECHO) echo "\n+++ test_get_by_pc_id_project_category +++";
+		$this->_insert_records();
+		$CI =& get_instance();
+
+		$CI->load->model('Project_category_model');
+		$project_categories = array(
+			array(
+				'pc_name' => 'Project Category 1',
+				'pc_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+				'pc_icon' => 'fa-flag',
+				'platform_id' => 1
+			),
+			array(
+				'pc_name' => 'Project Category 2',
+				'pc_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+				'pc_icon' => 'fa-flag',
+				'platform_id' => 1
+			)
+		);
+		foreach($project_categories as $key=>$project_category)
+		{
+			$project_categories[$key]['pc_id'] = $CI->Project_category_model->insert($project_category);
+		}
+
+		$this->assertCount(4, $CI->Project_model->get_by_pc_id_project_category(1));
+		$this->assertContains('Project Category 1', $CI->Project_model->get_by_pc_id_project_category(1)[0]);
+		$this->assertFalse($CI->Project_model->get_by_pc_id_project_category(FALSE));
+	}
+
+	public function test_get_by_pc_id_selected_project()
+	{
+		if($this::DO_ECHO) echo "\n+++ test_get_by_pc_id_selected_project +++";
+		$this->_insert_records();
+		$CI =& get_instance();
+		$this->assertEquals('Project 1', $CI->Project_model->get_by_pc_id_selected_project(1)['project_name']);
+		$this->assertEquals('Project 4', $CI->Project_model->get_by_pc_id_selected_project(2)['project_name']);
+
+		$this->assertFalse($CI->Project_model->get_by_pc_id_selected_project(FALSE));
+	}
+
+	public function test_get_by_pc_id_selected_project_project_category()
+	{
+		if($this::DO_ECHO) echo "\n+++ test_get_by_pc_id_selected_project_project_category +++";
+		$this->_insert_records();
+		$CI =& get_instance();
+
+        $CI->load->model('Project_category_model');
+        $project_category = array(
+            'pc_name' => 'Project Category 1',
+            'pc_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+            'pc_icon' => 'fa-flag',
+            'platform_id' => 1
+        );
+        $project_category['pc_id'] = $CI->Project_category_model->insert($project_category);
+
+		$this->assertEquals('Project 1', $CI->Project_model->get_by_pc_id_selected_project_project_category(1)[0]['project_name']);
+		$this->assertEquals('Project Category 1', $CI->Project_model->get_by_pc_id_selected_project_project_category(1)[0]['pc_name']);
+
+		$this->assertEquals('Project 4', $CI->Project_model->get_by_pc_id_selected_project_project_category(2)[0]['project_name']);
+		$this->assertEquals('Project Category 2', $CI->Project_model->get_by_pc_id_selected_project_project_category(2)[0]['pc_name']);
+
+		$this->assertFalse($CI->Project_model->get_by_pc_id_selected_project_project_category(FALSE));
+	}
+
+    public function test_insert()
+    {
+        if($this::DO_ECHO) echo "\n+++ test_insert +++";
+        $CI =& get_instance();
+
+        $project = array(
+            'pc_id' => 1,
+            'project_name' => 'Lorem Ipsum',
+            'project_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+            'project_icon' => 'fa-flag',
+            'selected_project' => 1,
+            'project_status' => $this::STATUS_PUBLISH
+        );
+
+        $this->assertEquals(1, $CI->Project_model->insert($project));
+        $this->assertEquals(1, $CI->Project_model->count_all());
+
+        $this->assertFalse($CI->Project_model->insert(FALSE));
+    }
+
+    public function test_update()
+    {
+    	if($this::DO_ECHO) echo "\n+++ test_update +++";
+    	$CI =& get_instance();
+
+    	$project = array(
+            'pc_id' => 1,
+            'project_name' => 'Lorem Ipsum',
+            'project_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+            'project_icon' => 'fa-flag',
+            'selected_project' => 1,
+            'project_status' => $this::STATUS_PUBLISH
+        );
+        $project['project_id'] = $CI->Project_model->insert($project);
+        $project['project_name'] = 'Hello World';
+
+        $this->assertEquals(1, $CI->Project_model->update($project));
+
+        $this->assertFalse($CI->Project_model->update(FALSE));
+    }
+
+    public function test_delete_by_id()
+    {
+    	if($this::DO_ECHO) echo "\n+++ test_delete_by_id +++";
+    	$CI =& get_instance();
+
+    	$project = array(
+            'pc_id' => 1,
+            'project_name' => 'Lorem Ipsum',
+            'project_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+            'project_icon' => 'fa-flag',
+            'selected_project' => 1,
+            'project_status' => $this::STATUS_PUBLISH
+        );
+        $project['project_id'] = $CI->Project_model->insert($project);
+
+        $this->assertEquals(1, $CI->Project_model->delete_by_id(1));
+
+        $this->assertFalse($CI->Project_model->delete_by_id(FALSE));
+    }
+
+    public function test_delete_by_pc_id()
+    {
+    	if($this::DO_ECHO) echo "\n+++ test_delete_by_pc_id +++";
+    	$CI =& get_instance();
+
+    	$project = array(
+            'pc_id' => 1,
+            'project_name' => 'Lorem Ipsum',
+            'project_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+            'project_icon' => 'fa-flag',
+            'selected_project' => 1,
+            'project_status' => $this::STATUS_PUBLISH
+        );
+        $project['project_id'] = $CI->Project_model->insert($project);
+
+        $this->assertEquals(1, $CI->Project_model->delete_by_pc_id(1));
+
+        $this->assertFalse($CI->Project_model->delete_by_pc_id(FALSE));
+    }
+
+	public function test_status_array()
+	{
+		$CI =& get_instance();
+		$this->assertCount(2, $CI->Project_model->_status_array());
 	}
 	#endregion
 
