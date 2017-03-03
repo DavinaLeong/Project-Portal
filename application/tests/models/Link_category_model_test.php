@@ -33,6 +33,7 @@ class Link_category_test_model extends TestCase
     public function tearDown()
     {
         $this->_truncate_table();
+        $this->_truncate_super_tables();
     }
 
     #region Helper Functions
@@ -178,7 +179,6 @@ class Link_category_test_model extends TestCase
         $this->_insert_records();
 
         $this->assertCount(3, $CI->Link_category_model->get_all_project());
-        $this->_truncate_super_tables();
     }
 
     public function test_get_all_project_platform()
@@ -190,8 +190,6 @@ class Link_category_test_model extends TestCase
         $this->_insert_records();
 
         $this->assertCount(3, $CI->Link_category_model->get_all_project_platform());
-        $this->_truncate_table();
-        $this->_truncate_super_tables();
     }
 
     public function test_get_all_ids()
@@ -203,8 +201,6 @@ class Link_category_test_model extends TestCase
         $this->_insert_records();
 
         $this->assertCount(3, $CI->Link_category_model->get_all_ids());
-        $this->_truncate_table();
-        $this->_truncate_super_tables();
     }
 
     public function test_get_by_id()
@@ -215,8 +211,6 @@ class Link_category_test_model extends TestCase
 
         $this->assertEquals('Link Category 1', $CI->Link_category_model->get_by_id(1)['lc_name']);
         $this->assertFalse($CI->Link_category_model->get_by_id(FALSE));
-
-        $this->_truncate_table();
     }
 
     public function test_get_by_id_project()
@@ -229,9 +223,6 @@ class Link_category_test_model extends TestCase
 
         $this->assertEquals('Link Category 1', $CI->Link_category_model->get_by_id_project(1)['lc_name']);
         $this->assertFalse($CI->Link_category_model->get_by_id_project(FALSE));
-
-        $this->_truncate_table();
-        $this->_insert_super_records();
     }
 
     public function test_get_by_id_project_platform()
@@ -244,9 +235,6 @@ class Link_category_test_model extends TestCase
 
         $this->assertEquals('Link Category 1', $CI->Link_category_model->get_by_id_project_platform(1)['lc_name']);
         $this->assertFalse($CI->Link_category_model->get_by_id_project_platform(FALSE));
-
-        $this->_truncate_table();
-        $this->_insert_super_records();
     }
 
     public function test_get_by_project_id()
@@ -259,9 +247,6 @@ class Link_category_test_model extends TestCase
 
         $this->assertCount(2, $CI->Link_category_model->get_by_project_id(1));
         $this->assertFalse($CI->Link_category_model->get_by_project_id(FALSE));
-
-        $this->_truncate_table();
-        $this->_insert_super_records();
     }
 
     public function test_get_by_project_id_lc_name()
@@ -274,9 +259,6 @@ class Link_category_test_model extends TestCase
 
         $this->assertEquals('Lorem ipsum', $CI->Link_category_model->get_by_project_id_lc_name(1, 'Link Category 1')['lc_description']);
         $this->assertFalse($CI->Link_category_model->get_by_project_id_lc_name(FALSE));
-
-        $this->_truncate_table();
-        $this->_truncate_super_tables();
     }
 
     public function test_insert()
@@ -292,8 +274,6 @@ class Link_category_test_model extends TestCase
         $link_category['lc_id'] = $CI->Link_category_model->insert($link_category);
         $this->assertEquals(1, $link_category['lc_id']);
         $this->assertFalse($CI->Link_category_model->insert(FALSE));
-        
-        $this->_truncate_table();
     }
 
     public function test_update()
@@ -311,8 +291,6 @@ class Link_category_test_model extends TestCase
 
         $this->assertEquals(1, $CI->Link_category_model->update($link_category));
         $this->assertFalse($CI->Link_category_model->update(FALSE));
-
-        $this->_truncate_table();
     }
 
     public function test_delete_by_id()
@@ -329,8 +307,6 @@ class Link_category_test_model extends TestCase
 
         $this->assertEquals(1, $CI->Link_category_model->delete_by_id($link_category['lc_id']));
         $this->assertFalse($CI->Link_category_model->delete_by_id(FALSE));
-
-        $this->_truncate_table();
     }
 
     public function test_delete_by_project_id()
@@ -341,8 +317,6 @@ class Link_category_test_model extends TestCase
 
         $this->assertEquals(2, $CI->Link_category_model->delete_by_project_id(1));
         $this->assertFalse($CI->Link_category_model->delete_by_project_id(FALSE));
-
-        $this->_truncate_table();
     }
     #endregion
 
