@@ -48,12 +48,12 @@ class Link_category_test_model extends TestCase
             array(
                 'project_id' => 1,
                 'lc_name' => 'Link Category 2',
-                'lc_description' => 'Lorem ipsum',
+                'lc_description' => 'Hello World',
             ),
             array(
                 'project_id' => 2,
                 'lc_name' => 'Link Category 3',
-                'lc_description' => 'Lorem ipsum',
+                'lc_description' => 'Hello Earth',
             )
         );
 
@@ -65,16 +65,89 @@ class Link_category_test_model extends TestCase
         if($do_echo) echo "\n--- inserted records: " . $CI->Link_category_model->count_all();
     }
 
+    private function _insert_super_records($do_echo=FALSE)
+    {
+        $CI =& get_instance();
+        $CI->load->model('Platform_model');
+        $platform = array(
+            'platform_name' => 'Project 1',
+            'platform_icon' => 'fa-flag',
+            'platform_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+            'platform_status' => $this::STATUS_PUBLISH
+        );
+        $CI->Platform_model->insert($platform);
+
+        $CI->load->model('Project_category_model');
+        $project_category = array(
+            'platform_id' => 1,
+            'pc_name' => 'Project Category 1',
+            'pc_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+            'pc_icon' => 'fa-flag'
+        );
+        $CI->Project_category_model->insert($project_category);
+
+        $CI->load->model('Project_model');
+        $projects = array(
+            array(
+                'pc_id' => 1,
+                'project_name' => 'Project 1',
+                'project_icon' => 'fa-flag',
+                'project_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                'selected_project' => 1,
+                'project_status' => $this::STATUS_PUBLISH
+            ),
+            array(
+                'pc_id' => 1,
+                'project_name' => 'Project 2',
+                'project_icon' => 'fa-flag',
+                'project_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                'selected_project' => 0,
+                'project_status' => $this::STATUS_PUBLISH
+            )
+        );
+        foreach($projects as $project)
+        {
+            $CI->Project_model->insert($project);
+        }
+    }
+
     private function _truncate_table($do_echo=FALSE)
     {
         $CI =& get_instance();
         $CI->load->database();
-        $CI->db->truncate(TABLE_LINK_CATEGORY);
 
+        $CI->db->truncate(TABLE_LINK_CATEGORY);
         if($do_echo)
         {
             echo "\n--- truncated table " . TABLE_LINK_CATEGORY . " ---";
             echo "\n||| count_all: " . $CI->Link_category_model->count_all() . "\n";
+        }
+    }
+
+    private function _truncate_super_tables($do_echo=FALSE)
+    {
+        $CI =& get_instance();
+        $CI->load->database();
+
+        $CI->db->truncate(TABLE_PROJECT);
+        if($do_echo)
+        {
+            echo "\n--- truncated table " . TABLE_PROJECT . " ---";
+            echo "\n||| count_all: " . $CI->Project_model->count_all() . "\n";
+        }
+
+        $CI->db->truncate(TABLE_PROJECT_CATEGORY);
+        if($do_echo)
+        {
+            echo "\n--- truncated table " . TABLE_PROJECT_CATEGORY . " ---";
+            echo "\n||| count_all: " . $CI->Project_category_model->count_all() . "\n";
+        }
+
+        $CI->db->truncate(TABLE_PROJECT);
+        if($do_echo)
+        {
+            echo "\n--- truncated table " . TABLE_PROJECT . " ---";
+            echo "\n||| count_all: " . $CI->Project_model->count_all() . "\n";
         }
     }
     #endregion
@@ -100,21 +173,176 @@ class Link_category_test_model extends TestCase
     {
         if($this::DO_ECHO) echo "\n+++ test_get_all_project +++\n";
         $CI =& get_instance();
+
+        $this->_insert_super_records();
         $this->_insert_records();
 
-        $CI->load->model('Project_model');
-        $CI->Project_model->insert(
-            array(
-                'pc_id' => 1,
-                'project_name' => 'Project 1',
-                'project_description' => 'Lorem Ipsum',
-                'project_icon' => 'fa-flag',
-                'selected_project' => 0,
-                'project_status' => $this::STATUS_PUBLISH
-            )
-        );
-
         $this->assertCount(3, $CI->Link_category_model->get_all_project());
+        $this->_truncate_super_tables();
+    }
+
+    public function test_get_all_project_platform()
+    {
+        if($this::DO_ECHO) echo "\n+++ test_get_all_project_platform +++\n";
+        $CI =& get_instance();
+
+        $this->_insert_super_records();
+        $this->_insert_records();
+
+        $this->assertCount(3, $CI->Link_category_model->get_all_project_platform());
+        $this->_truncate_table();
+        $this->_truncate_super_tables();
+    }
+
+    public function test_get_all_ids()
+    {
+        if($this::DO_ECHO) echo "\n+++ test_get_all_ids +++\n";
+        $CI =& get_instance();
+
+        $this->_insert_super_records();
+        $this->_insert_records();
+
+        $this->assertCount(3, $CI->Link_category_model->get_all_ids());
+        $this->_truncate_table();
+        $this->_truncate_super_tables();
+    }
+
+    public function test_get_by_id()
+    {
+        if($this::DO_ECHO) echo "\n+++ test_get_by_id +++\n";
+        $CI =& get_instance();
+        $this->_insert_records();
+
+        $this->assertEquals('Link Category 1', $CI->Link_category_model->get_by_id(1)['lc_name']);
+        $this->assertFalse($CI->Link_category_model->get_by_id(FALSE));
+
+        $this->_truncate_table();
+    }
+
+    public function test_get_by_id_project()
+    {
+        if($this::DO_ECHO) echo "\n+++ test_get_by_id_project +++\n";
+        $CI =& get_instance();
+
+        $this->_insert_super_records();
+        $this->_insert_records();
+
+        $this->assertEquals('Link Category 1', $CI->Link_category_model->get_by_id_project(1)['lc_name']);
+        $this->assertFalse($CI->Link_category_model->get_by_id_project(FALSE));
+
+        $this->_truncate_table();
+        $this->_insert_super_records();
+    }
+
+    public function test_get_by_id_project_platform()
+    {
+        if($this::DO_ECHO) echo "\n+++ test_get_by_id_project_platform +++\n";
+        $CI =& get_instance();
+
+        $this->_insert_super_records();
+        $this->_insert_records();
+
+        $this->assertEquals('Link Category 1', $CI->Link_category_model->get_by_id_project_platform(1)['lc_name']);
+        $this->assertFalse($CI->Link_category_model->get_by_id_project_platform(FALSE));
+
+        $this->_truncate_table();
+        $this->_insert_super_records();
+    }
+
+    public function test_get_by_project_id()
+    {
+        if($this::DO_ECHO) echo "\n+++ test_get_by_project_id +++\n";
+        $CI =& get_instance();
+
+        $this->_insert_super_records();
+        $this->_insert_records();
+
+        $this->assertCount(2, $CI->Link_category_model->get_by_project_id(1));
+        $this->assertFalse($CI->Link_category_model->get_by_project_id(FALSE));
+
+        $this->_truncate_table();
+        $this->_insert_super_records();
+    }
+
+    public function test_get_by_project_id_lc_name()
+    {
+        if($this::DO_ECHO) echo "\n+++ test_get_by_project_id_lc_name +++\n";
+        $CI =& get_instance();
+
+        $this->_insert_super_records();
+        $this->_insert_records();
+
+        $this->assertEquals('Lorem ipsum', $CI->Link_category_model->get_by_project_id_lc_name(1, 'Link Category 1')['lc_description']);
+        $this->assertFalse($CI->Link_category_model->get_by_project_id_lc_name(FALSE));
+
+        $this->_truncate_table();
+        $this->_truncate_super_tables();
+    }
+
+    public function test_insert()
+    {
+        if($this::DO_ECHO) echo "\n+++ test_insert +++\n";
+        $CI =& get_instance();
+
+        $link_category = array(
+            'project_id' => 1,
+            'lc_name' => 'Lorem Ipsum',
+            'lc_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+        );
+        $link_category['lc_id'] = $CI->Link_category_model->insert($link_category);
+        $this->assertEquals(1, $link_category['lc_id']);
+        $this->assertFalse($CI->Link_category_model->insert(FALSE));
+        
+        $this->_truncate_table();
+    }
+
+    public function test_update()
+    {
+        if($this::DO_ECHO) echo "\n+++ test_update +++\n";
+        $CI =& get_instance();
+
+        $link_category = array(
+            'project_id' => 1,
+            'lc_name' => 'Lorem Ipsum',
+            'lc_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+        );
+        $link_category['lc_id'] = $CI->Link_category_model->insert($link_category);
+        $link_category['lc_name'] = 'Hello World';
+
+        $this->assertEquals(1, $CI->Link_category_model->update($link_category));
+        $this->assertFalse($CI->Link_category_model->update(FALSE));
+
+        $this->_truncate_table();
+    }
+
+    public function test_delete_by_id()
+    {
+        if($this::DO_ECHO) echo "\n+++ test_delete_by_id +++\n";
+        $CI =& get_instance();
+
+        $link_category = array(
+            'project_id' => 1,
+            'lc_name' => 'Lorem Ipsum',
+            'lc_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+        );
+        $link_category['lc_id'] = $CI->Link_category_model->insert($link_category);
+
+        $this->assertEquals(1, $CI->Link_category_model->delete_by_id($link_category['lc_id']));
+        $this->assertFalse($CI->Link_category_model->delete_by_id(FALSE));
+
+        $this->_truncate_table();
+    }
+
+    public function test_delete_by_project_id()
+    {
+        if($this::DO_ECHO) echo "\n+++ test_delete_by_project_id +++\n";
+        $CI =& get_instance();
+        $this->_insert_records();
+
+        $this->assertEquals(2, $CI->Link_category_model->delete_by_project_id(1));
+        $this->assertFalse($CI->Link_category_model->delete_by_project_id(FALSE));
+
+        $this->_truncate_table();
     }
     #endregion
 
