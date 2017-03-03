@@ -15,8 +15,8 @@ class Link_model_test extends TestCase
 {
     const DO_ECHO = TRUE;
 
-    const STATUS_PUBLISH = 'PUBLISH';
-    const STATUS_DRAFT = 'DRAFT';
+    const STATUS_PUBLISH = 'Publish';
+    const STATUS_DRAFT = 'Draft';
 
     public function setUp()
     {
@@ -97,6 +97,7 @@ class Link_model_test extends TestCase
             'platform_status' => $this::STATUS_PUBLISH
         );
         $CI->Platform_model->insert($platform);
+        if($do_echo) echo "\ninsert platforms: " . $CI->Platform_model->count_all() . "\n";
 
         $CI->load->model('Project_category_model');
         $project_category = array(
@@ -106,9 +107,10 @@ class Link_model_test extends TestCase
             'pc_icon' => 'fa-flag'
         );
         $CI->Project_category_model->insert($project_category);
+        if($do_echo) echo "\ninsert project categories: " . $CI->Project_category_model->count_all() . "\n";
 
         $CI->load->model('Project_model');
-        $projects = array(
+        $project = array(
             'pc_id' => 1,
             'project_name' => 'Project 1',
             'project_icon' => 'fa-flag',
@@ -117,6 +119,7 @@ class Link_model_test extends TestCase
             'project_status' => $this::STATUS_PUBLISH
         );
         $CI->Project_model->insert($project);
+        if($do_echo) echo "\ninsert projects: " . $CI->Project_model->count_all() . "\n";
 
         $CI->load->model('Link_category_model');
         $link_categories = array(
@@ -131,6 +134,11 @@ class Link_model_test extends TestCase
                 'lc_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
             ),
         );
+        foreach($link_categories as $link_category)
+        {
+            $CI->Link_category_model->insert($link_category);
+        }
+        if($do_echo) echo "\ninsert link categories: " . $CI->Link_category_model->count_all() . "\n";
     }
 
     private function _truncate_table($do_echo=FALSE)
@@ -151,11 +159,11 @@ class Link_model_test extends TestCase
         $CI =& get_instance();
         $CI->load->database();
 
-        $CI->db->truncate(TABLE_PROJECT);
+        $CI->db->truncate(TABLE_PLATFORM);
         if($do_echo)
         {
-            echo "\n--- truncated table " . TABLE_PROJECT . " ---";
-            echo "\n||| count_all: " . $CI->Project_model->count_all() . "\n";
+            echo "\n--- truncated table " . TABLE_PLATFORM . " ---";
+            echo "\n||| count_all: " . $CI->Platform_model->count_all() . "\n";
         }
 
         $CI->db->truncate(TABLE_PROJECT_CATEGORY);
@@ -208,37 +216,80 @@ class Link_model_test extends TestCase
 
     public function test_get_all_link_category()
     {
-        $this->markTestIncomplete();
+        if($this::DO_ECHO) echo "\n+++ test_get_all_link_category +++\n";
+        $CI =& get_instance();
+
+        $this->_insert_super_records();
+        $this->_insert_records();
+
+        $this->assertCount(5, $CI->Link_model->get_all_link_category());
     }
 
     public function test_get_by_id()
     {
-        $this->markTestIncomplete();
+        if($this::DO_ECHO) echo "\n+++ test_get_by_id +++\n";
+        $CI =& get_instance();
+
+        $this->_insert_records();
+        $this->assertEquals('Link 1', $CI->Link_model->get_by_id(1)['label']);
+        $this->assertFalse($CI->Link_model->get_by_id(FALSE));
     }
 
     public function test_get_by_id_link_category_project()
     {
-        $this->markTestIncomplete();
+        if($this::DO_ECHO) echo "\n+++ test_get_by__id_link_category_project +++\n";
+        $CI =& get_instance();
+
+        $this->_insert_super_records();
+        $this->_insert_records();
+
+        $link = $CI->Link_model->get_by_id_link_category_project(1);
+        $this->assertEquals('Link Category 1', $link['lc_name']);
+        $this->assertEquals('Project 1', $link['project_name']);
+
+        $this->assertFalse($CI->Link_model->get_by_id_link_category_project(FALSE));
     }
 
     public function test_get_by_status()
     {
-        $this->markTestIncomplete();
+        if($this::DO_ECHO) echo "\n+++ test_get_by_status ++++\n";
+        $CI =& get_instance();
+
+        $this->_insert_records();
+        $this->assertCount(4, $CI->Link_model->get_by_status($this::STATUS_PUBLISH));
     }
 
     public function test_get_by_status_ids()
     {
-        $this->markTestIncomplete();
+        if($this::DO_ECHO) echo "\n+++ test_get_by_status ++++\n";
+        $CI =& get_instance();
+
+        $this->_insert_records();
+        $this->assertCount(4, $CI->Link_model->get_by_status_ids($this::STATUS_PUBLISH));
     }
 
     public function test_get_by_lc_id()
     {
-        $this->markTestIncomplete();
+        if($this::DO_ECHO) echo "\n+++ test_get_by_lc_id +++\n";
+        $CI =& get_instance();
+
+        $this->_insert_super_records();
+        $this->_insert_records();
+
+        $this->assertCount(3, $CI->Link_model->get_by_lc_id(1));
+        $this->assertFalse($CI->Link_model->get_by_lc_id(FALSE));
     }
 
     public function test_get_lc_id_status()
     {
-        $this->markTestIncomplete();
+        if($this::DO_ECHO) echo "\n+++ test_get_lc_id_status +++\n";
+        $CI =& get_instance();
+
+        $this->_insert_super_records();
+        $this->_insert_records();
+
+        $this->assertCount(1, $CI->Link_model->get_by_lc_id_status(2, $this::STATUS_PUBLISH));
+        $this->assertFalse($CI->Link_model->get_by_lc_id_status(FALSE));
     }
 
     public function test_get_links_by_project_id()
