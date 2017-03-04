@@ -156,7 +156,7 @@ class Link_model extends CI_Model
     {
         if($project_id && $status)
         {
-            $this->db->select(TABLE_LINK . '*, ' . TABLE_LINK_CATEGORY . '.lc_name');
+            $this->db->select(TABLE_LINK . '.*, ' . TABLE_LINK_CATEGORY . '.lc_name');
             $this->db->from(TABLE_PROJECT);
             $this->db->join(TABLE_LINK_CATEGORY, TABLE_PROJECT . '.project_id = ' . TABLE_LINK_CATEGORY . '.project_id', 'left');
             $this->db->join(TABLE_LINK, TABLE_LINK_CATEGORY . '.lc_id = ' . TABLE_LINK . '.lc_id', 'left');
@@ -223,11 +223,13 @@ class Link_model extends CI_Model
         if($link_id)
         {
             $this->db->delete(TABLE_LINK, array('link_id' => $link_id));
+            //@codeCoverageIgnoreStart
             if($this->count_all() <= 0)
             {
                 $this->db->truncate(TABLE_LINK);
             }
             return TRUE;
+            //@codeCoverageIgnoreEnd
         }
         else
         {
@@ -240,11 +242,13 @@ class Link_model extends CI_Model
         if($lc_id)
         {
             $this->db->delete(TABLE_LINK, array('lc_id' => $lc_id));
+            //@codeCoverageIgnoreStart
             if($this->count_all() <= 0)
             {
                 $this->db->truncate(TABLE_LINK);
             }
             return TRUE;
+            //@codeCoverageIgnoreEnd
         }
         else
         {

@@ -13,7 +13,7 @@
 
 class Link_model_test extends TestCase
 {
-    const DO_ECHO = TRUE;
+    const DO_ECHO = FALSE;
 
     const STATUS_PUBLISH = 'Publish';
     const STATUS_DRAFT = 'Draft';
@@ -237,7 +237,7 @@ class Link_model_test extends TestCase
 
     public function test_get_by_id_link_category_project()
     {
-        if($this::DO_ECHO) echo "\n+++ test_get_by__id_link_category_project +++\n";
+        if($this::DO_ECHO) echo "\n+++ test_get_by_id_link_category_project +++\n";
         $CI =& get_instance();
 
         $this->_insert_super_records();
@@ -261,7 +261,7 @@ class Link_model_test extends TestCase
 
     public function test_get_by_status_ids()
     {
-        if($this::DO_ECHO) echo "\n+++ test_get_by_status ++++\n";
+        if($this::DO_ECHO) echo "\n+++ test_get_by_status_ids ++++\n";
         $CI =& get_instance();
 
         $this->_insert_records();
@@ -288,38 +288,85 @@ class Link_model_test extends TestCase
         $this->_insert_super_records();
         $this->_insert_records();
 
-        $this->assertCount(1, $CI->Link_model->get_by_lc_id_status(2, $this::STATUS_PUBLISH));
+        $this->assertCount(2, $CI->Link_model->get_by_lc_id_status(2, $this::STATUS_PUBLISH));
         $this->assertFalse($CI->Link_model->get_by_lc_id_status(FALSE));
     }
 
     public function test_get_links_by_project_id()
     {
-        $this->markTestIncomplete();
+        if($this::DO_ECHO) echo "\n+++ get_links_by_project_id +++\n";
+        $CI =& get_instance();
+
+        $this->_insert_super_records();
+        $this->_insert_records();
+
+        $this->assertCount(5, $CI->Link_model->get_links_by_project_id(1));
+        $this->assertFalse($CI->Link_model->get_links_by_project_id(FALSE));
     }
 
     public function test_get_links_by_project_id_status()
     {
-        $this->markTestIncomplete();
+        if($this::DO_ECHO) echo "\n+++ test_get_links_by_project_id_status +++\n";
+        $CI =& get_instance();
+
+        $this->_insert_super_records();
+        $this->_insert_records();
+
+        $this->assertCount(4, $CI->Link_model->get_links_by_project_id_status(1, $this::STATUS_PUBLISH));
+        $this->assertFalse($CI->Link_model->get_links_by_project_id_status(FALSE));
     }
 
     public function test_insert()
     {
-        $this->markTestIncomplete();
+        if($this::DO_ECHO) echo "\n+++ test_insert +++\n";
+        $CI =& get_instance();
+
+        $link = array(
+            'lc_id' => 1,
+            'label' => 'Google',
+            'url' => 'google.com',
+            'use_https' => 0,
+            'link_status' => $this::STATUS_PUBLISH
+        );
+        $this->assertEquals(1, $CI->Link_model->insert($link));
+        $this->assertFalse($CI->Link_model->insert(FALSE));
     }
 
     public function test_update()
     {
-        $this->markTestIncomplete();
+        if($this::DO_ECHO) echo "\n+++ test_updated +++\n";
+        $CI =& get_instance();
+
+        $link = array(
+            'lc_id' => 1,
+            'label' => 'Google',
+            'url' => 'google.com',
+            'use_https' => 0,
+            'link_status' => $this::STATUS_PUBLISH
+        );
+        $link['link_id'] = $CI->Link_model->insert($link);
+
+        $link['url'] = 'google.com.sg';
+        $this->assertEquals(1, $CI->Link_model->update($link));
+        $this->assertFalse($CI->Link_model->update(FALSE));
     }
 
     public function test_delete_by_id()
     {
-        $this->markTestIncomplete();
+        if($this::DO_ECHO) echo "\n+++ test_delete_by_id +++\n";
+        $CI =& get_instance();
+        $this->_insert_records();
+        $this->assertEquals(1, $CI->Link_model->delete_by_id(1));
+        $this->assertFalse($CI->Link_model->delete_by_id(FALSE));
     }
 
     public function test_delete_by_lc_id()
     {
-        $this->markTestIncomplete();
+        if($this::DO_ECHO) echo "\n+++ test_delete_by_ic_id +++\n";
+        $CI =& get_instance();
+        $this->_insert_records();
+        $this->assertEquals(3, $CI->Link_model->delete_by_lc_id(1));
+        $this->assertFalse($CI->Link_model->delete_by_lc_id(FALSE));
     }
 
     public function test_status_array()
