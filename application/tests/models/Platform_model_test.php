@@ -13,32 +13,29 @@
 
 class Platform_model_test extends TestCase
 {
+    const DO_ECHO = FALSE;
+
     public function setUp()
     {
         $this->resetInstance();
-        $CI = $this->_load_ci();
+        $CI =& get_instance();
         $CI->load->model('Migration_model');
         $CI->Migration_model->reset();
 
         $CI->load->model('Platform_model');
         $CI->load->helper('datetime_format');
-        $this->_truncate_table($CI);
+        $this->_truncate_table();
     }
 
     public function tearDown()
     {
-        $this->_truncate_table($this->_load_ci());
+        $this->_truncate_table();
     }
 
     #region Helper Functions
-    private function _load_ci()
+    private function _insert_records($do_echo=FALSE)
     {
         $CI =& get_instance();
-        return $CI;
-    }
-
-    private function _insert_records($CI)
-    {
         $platforms = array(
             array(
                 'platform_name' => 'Acer Predator',
@@ -63,17 +60,18 @@ class Platform_model_test extends TestCase
         {
             $CI->Platform_model->insert($platform);
         }
-        echo "\n--- no of records: " . $CI->Platform_model->count_all() . " ---\n";
+        if($do_echo) echo "\n||| inserted platforms: " . $CI->Platform_model->count_all() . "\n";
     }
 
-    private function _truncate_table($CI, $do_echo=FALSE)
+    private function _truncate_table($do_echo=FALSE)
     {
+        $CI =& get_instance();
         $CI->load->database();
         $CI->db->truncate(TABLE_PLATFORM);
         if($do_echo)
         {
             echo "\n--- truncated table " . TABLE_PLATFORM . " ---";
-            echo "\n||| count_all: " . $CI->Platform_model->count_all() . "\n";
+            echo "\n||| count all: " . $CI->Platform_model->count_all() . "\n";
         }
     }
     #endregion
@@ -81,15 +79,17 @@ class Platform_model_test extends TestCase
     #region Test Functions
     public function test_count_all()
     {
-        $CI = $this->_load_ci();
-        $this->_insert_records($CI);
+        if($this::DO_ECHO) echo "\n+++ test_count_all +++\n";
+        $CI =& get_instance();
+        $this->_insert_records();
         $this->assertEquals(3, $CI->Platform_model->count_all());
     }
 
     public function test_get_all()
     {
-        $CI = $this->_load_ci();
-        $this->_insert_records($CI);
+        if($this::DO_ECHO) echo "\n+++ test_get_all +++\n";
+        $CI =& get_instance();
+        $this->_insert_records();
         $platforms = $CI->Platform_model->get_all();
         $this->assertCount(3, $platforms);
         $this->assertEquals('Acer Predator', $platforms[0]['platform_name']);
@@ -97,15 +97,17 @@ class Platform_model_test extends TestCase
 
     public function test_get_all_ids()
     {
-        $CI = $this->_load_ci();
-        $this->_insert_records($CI);
+        if($this::DO_ECHO) echo "\n+++ test_get_all_ids +++\n";
+        $CI =& get_instance();
+        $this->_insert_records();
         $this->assertCount(3, $CI->Platform_model->get_all_ids());
     }
 
     public function test_get_by_status()
     {
-        $CI = $this->_load_ci();
-        $this->_insert_records($CI);
+        if($this::DO_ECHO) echo "\n+++ test_get_by_status +++\n";
+        $CI =& get_instance();
+        $this->_insert_records();
         $platform = array(
             'platform_name' => 'MacBook Air',
             'platform_icon' => 'fa-laptop',
@@ -120,8 +122,9 @@ class Platform_model_test extends TestCase
 
     public function test_get_by_status_ids()
     {
-        $CI = $this->_load_ci();
-        $this->_insert_records($CI);
+        if($this::DO_ECHO) echo "\n+++ test_get_by_status_ids +++\n";
+        $CI =& get_instance();
+        $this->_insert_records();
         $platform = array(
             'platform_name' => 'MacBook Air',
             'platform_icon' => 'fa-laptop',
@@ -136,8 +139,9 @@ class Platform_model_test extends TestCase
 
     public function test_get_by_id()
     {
-        $CI = $this->_load_ci();
-        $this->_insert_records($CI);
+        if($this::DO_ECHO) echo "\n+++ test_get_by_id +++\n";
+        $CI =& get_instance();
+        $this->_insert_records();
         $this->assertEquals('Acer Predator', $CI->Platform_model->get_by_id(1)['platform_name']);
         $this->assertEquals('fa-laptop', $CI->Platform_model->get_by_id(2)['platform_icon']);
         $this->assertFalse($CI->Platform_model->get_by_id(FALSE));
@@ -145,7 +149,8 @@ class Platform_model_test extends TestCase
 
     public function test_insert()
     {
-        $CI = $this->_load_ci();
+        if($this::DO_ECHO) echo "\n+++ test_insert +++\n";
+        $CI =& get_instance();
         $insert = array(
             'platform_name' => 'Acer Predator',
             'platform_icon' => 'fa-desktop',
@@ -160,7 +165,8 @@ class Platform_model_test extends TestCase
 
     public function test_update()
     {
-        $CI = $this->_load_ci();
+        if($this::DO_ECHO) echo "\n+++ test_update +++\n";
+        $CI =& get_instance();
         $insert = array(
             'platform_name' => 'Acer Predator',
             'platform_icon' => 'fa-desktop',
@@ -180,8 +186,9 @@ class Platform_model_test extends TestCase
 
     public function test_delete_by_id()
     {
-        $CI = $this->_load_ci();
-        $this->_insert_records($CI);
+        if($this::DO_ECHO) echo "\n+++ test_delete_by_id +++\n";
+        $CI =& get_instance();
+        $this->_insert_records();
         $platform_id = 3;
         $this->assertContains('Surface Pro', $CI->Platform_model->get_by_id($platform_id));
         $this->assertEquals(1, $CI->Platform_model->delete_by_id($platform_id));
@@ -191,7 +198,8 @@ class Platform_model_test extends TestCase
 
     public function test_status_array()
     {
-        $CI = $this->_load_ci();
+        if($this::DO_ECHO) echo "\n+++ test_status_array +++\n";
+        $CI =& get_instance();
         $this->assertCount(2, $CI->Platform_model->_status_array());
         $this->assertContains('Draft', $CI->Platform_model->_status_array());
     }

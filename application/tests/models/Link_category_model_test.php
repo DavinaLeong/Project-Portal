@@ -13,7 +13,7 @@
 
 class Link_category_test_model extends TestCase
 {
-    const DO_ECHO = TRUE;
+    const DO_ECHO = FALSE;
 
     const STATUS_PUBLISH = 'PUBLISH';
     const STATUS_DRAFT = 'DRAFT';
@@ -63,7 +63,7 @@ class Link_category_test_model extends TestCase
             $CI->Link_category_model->insert($link_category);
         }
 
-        if($do_echo) echo "\n--- inserted records: " . $CI->Link_category_model->count_all();
+        if($do_echo) echo "\n||| inserted link categories: " . $CI->Link_category_model->count_all() . "\n";
     }
 
     private function _insert_super_records($do_echo=FALSE)
@@ -77,6 +77,7 @@ class Link_category_test_model extends TestCase
             'platform_status' => $this::STATUS_PUBLISH
         );
         $CI->Platform_model->insert($platform);
+        if($do_echo) echo "\n||| inserted platforms: " . $CI->Platform_model->count_all();
 
         $CI->load->model('Project_category_model');
         $project_category = array(
@@ -86,6 +87,7 @@ class Link_category_test_model extends TestCase
             'pc_icon' => 'fa-flag'
         );
         $CI->Project_category_model->insert($project_category);
+        if($do_echo) echo "\n||| inserted project categories: " . $CI->Project_category_model->count_all();
 
         $CI->load->model('Project_model');
         $projects = array(
@@ -110,6 +112,7 @@ class Link_category_test_model extends TestCase
         {
             $CI->Project_model->insert($project);
         }
+        if($do_echo) echo "\n||| inserted projects: " . $CI->Project_model->count_all() . "\n";
     }
 
     private function _truncate_table($do_echo=FALSE)
@@ -133,22 +136,22 @@ class Link_category_test_model extends TestCase
         $CI->db->truncate(TABLE_PROJECT);
         if($do_echo)
         {
-            echo "\n--- truncated table " . TABLE_PROJECT . " ---";
-            echo "\n||| count_all: " . $CI->Project_model->count_all() . "\n";
+            echo "\n--- truncated table " . TABLE_PLATFORM . " ---";
+            echo "\n||| count all: " . $CI->Platform_model->count_all() . "\n";
         }
 
         $CI->db->truncate(TABLE_PROJECT_CATEGORY);
         if($do_echo)
         {
             echo "\n--- truncated table " . TABLE_PROJECT_CATEGORY . " ---";
-            echo "\n||| count_all: " . $CI->Project_category_model->count_all() . "\n";
+            echo "\n||| count all: " . $CI->Project_category_model->count_all() . "\n";
         }
 
         $CI->db->truncate(TABLE_PROJECT);
         if($do_echo)
         {
             echo "\n--- truncated table " . TABLE_PROJECT . " ---";
-            echo "\n||| count_all: " . $CI->Project_model->count_all() . "\n";
+            echo "\n||| count all: " . $CI->Project_model->count_all() . "\n";
         }
     }
     #endregion

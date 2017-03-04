@@ -83,7 +83,7 @@ class Link_model_test extends TestCase
             $CI->Link_model->insert($link);
         }
 
-        if($do_echo) echo "\n--- inserted records: " . $CI->Link_model->count_all();
+        if($do_echo) echo "\n||| inserted records: " . $CI->Link_model->count_all() . "\n";
     }
 
     private function _insert_super_records($do_echo=FALSE)
@@ -97,7 +97,7 @@ class Link_model_test extends TestCase
             'platform_status' => $this::STATUS_PUBLISH
         );
         $CI->Platform_model->insert($platform);
-        if($do_echo) echo "\ninsert platforms: " . $CI->Platform_model->count_all() . "\n";
+        if($do_echo) echo "\n||| insert platforms: " . $CI->Platform_model->count_all();
 
         $CI->load->model('Project_category_model');
         $project_category = array(
@@ -107,7 +107,7 @@ class Link_model_test extends TestCase
             'pc_icon' => 'fa-flag'
         );
         $CI->Project_category_model->insert($project_category);
-        if($do_echo) echo "\ninsert project categories: " . $CI->Project_category_model->count_all() . "\n";
+        if($do_echo) echo "\n||| insert project categories: " . $CI->Project_category_model->count_all();
 
         $CI->load->model('Project_model');
         $project = array(
@@ -119,7 +119,7 @@ class Link_model_test extends TestCase
             'project_status' => $this::STATUS_PUBLISH
         );
         $CI->Project_model->insert($project);
-        if($do_echo) echo "\ninsert projects: " . $CI->Project_model->count_all() . "\n";
+        if($do_echo) echo "\n||| insert projects: " . $CI->Project_model->count_all();
 
         $CI->load->model('Link_category_model');
         $link_categories = array(
@@ -138,7 +138,7 @@ class Link_model_test extends TestCase
         {
             $CI->Link_category_model->insert($link_category);
         }
-        if($do_echo) echo "\ninsert link categories: " . $CI->Link_category_model->count_all() . "\n";
+        if($do_echo) echo "\n||| insert link categories: " . $CI->Link_category_model->count_all() . "\n";
     }
 
     private function _truncate_table($do_echo=FALSE)

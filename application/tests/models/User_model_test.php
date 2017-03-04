@@ -13,34 +13,32 @@
 
 class User_model_test extends TestCase
 {
+    const DO_ECHO = FALSE;
+
     const TEST_USERNAME = 'admin';
     const TEST_PASSWORD = 'password';
 
     public function setUp()
     {
         $this->resetInstance();
-        $CI = $this->_load_ci();
+        $CI =& get_instance();
         $CI->load->model('Migration_model');
         $CI->Migration_model->reset();
 
         $CI->load->model('User_model');
         $CI->load->helper('datetime_format');
+        $this->_truncate_table();
     }
 
     public function tearDown()
     {
-        $this->_truncate_table($this->_load_ci());
+        $this->_truncate_table();
     }
 
     #region Helper Functions
-    private function _load_ci()
+    private function _truncate_table($do_echo=FALSE)
     {
         $CI =& get_instance();
-        return $CI;
-    }
-
-    private function _truncate_table($CI, $do_echo=FALSE)
-    {
         $CI->load->database();
         $CI->db->truncate(TABLE_USER);
         $admin = array(
@@ -50,12 +48,13 @@ class User_model_test extends TestCase
             'access' => 'A',
             'status' => 'Activated'
         );
+        $CI->User_model->insert($admin);
 
         if($do_echo)
         {
             echo "\n--- truncated table " . TABLE_USER . " ---";
-            echo "\n||| insert_id " . $CI->User_model->insert($admin);
-            echo "\n||| count_all: " . $CI->User_model->count_all() . "\n";
+            echo "\n||| insert id: " . $CI->User_model->insert($admin);
+            echo "\n||| inserted users: " . $CI->User_model->count_all() . "\n";
         }
     }
     #endregion
@@ -63,13 +62,15 @@ class User_model_test extends TestCase
     #region Test Functions
     public function test_count_all()
     {
-        $CI = $this->_load_ci();
+        if($this::DO_ECHO) echo "\n+++ test_count_all +++\n";
+        $CI =& get_instance();
         $this->assertEquals(1, $CI->User_model->count_all());
     }
 
     public function test_get_all()
     {
-        $CI = $this->_load_ci();
+        if($this::DO_ECHO) echo "\n+++ test_get_all +++\n";
+        $CI =& get_instance();
         $users = $CI->User_model->get_all();
         $this->assertEquals('admin', $users[0]['username']);
         $this->assertEquals('Default Admin', $users[0]['name']);
@@ -77,7 +78,8 @@ class User_model_test extends TestCase
 
     public function test_get_by_user_id()
     {
-        $CI = $this->_load_ci();
+        if($this::DO_ECHO) echo "\n+++ test_get_by_user_id +++\n";
+        $CI =& get_instance();
         $user = $CI->User_model->get_by_user_id(1);
         $this->assertEquals('admin', $user['username']);
         $this->assertEquals('Default Admin', $user['name']);
@@ -86,7 +88,8 @@ class User_model_test extends TestCase
 
     public function test_get_by_username()
     {
-        $CI = $this->_load_ci();
+        if($this::DO_ECHO) echo "\n+++ test_get_by_username +++\n";
+        $CI =& get_instance();
         $user = $CI->User_model->get_by_username($this::TEST_USERNAME);
         $this->assertEquals(1, $user['user_id']);
         $this->assertEquals('Default Admin', $user['name']);
@@ -95,7 +98,8 @@ class User_model_test extends TestCase
 
     public function test_insert()
     {
-        $CI = $this->_load_ci();
+        if($this::DO_ECHO) echo "\n+++ test_insert +++\n";
+        $CI =& get_instance();
         $insert_user = array(
             'username' => 'davina_leong',
             'name' => 'Davina Leong',
@@ -112,7 +116,8 @@ class User_model_test extends TestCase
 
     public function test_update()
     {
-        $CI = $this->_load_ci();
+        if($this::DO_ECHO) echo "\n+++ test_update +++\n";
+        $CI =& get_instance();
         $test_name = 'Davina Leong';
         $insert_user = array(
             'username' => 'davina_leong',
@@ -140,7 +145,8 @@ class User_model_test extends TestCase
 
     public function test_access_array()
     {
-        $CI = $this->_load_ci();
+        if($this::DO_ECHO) echo "\n+++ test_access_array +++\n";
+        $CI =& get_instance();
         $accesses = $CI->User_model->_access_array();
         $this->assertCount(3, $accesses);
         $this->assertContains('A', $accesses);
@@ -149,7 +155,8 @@ class User_model_test extends TestCase
 
     public function test_status_array()
     {
-        $CI = $this->_load_ci();
+        if($this::DO_ECHO) echo "\n+++ test_status_array +++\n";
+        $CI =& get_instance();
         $statuses = $CI->User_model->_status_array();
         $this->assertCount(2, $statuses);
         $this->assertContains('Activated', $statuses);

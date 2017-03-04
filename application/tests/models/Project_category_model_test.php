@@ -13,6 +13,8 @@
 
 class Project_category_model_test extends TestCase
 {
+	const DO_ECHO = FALSE;
+
 	public function setUp()
 	{
 		$this->resetInstance();
@@ -54,6 +56,7 @@ class Project_category_model_test extends TestCase
 		{
 			$CI->Platform_model->insert($platform);
 		}
+		if($do_echo) echo "\n||| inserted platforms: " . $CI->Platform_model->count_all();
 
 		$project_categories = array(
 			array(
@@ -83,8 +86,7 @@ class Project_category_model_test extends TestCase
 		{
 			$CI->Project_category_model->insert($project_category);
 		}
-
-		if($do_echo) echo "\n---- inserted records: " . $CI->Project_category_model->count_all();
+		if($do_echo) echo "\n||| inserted project categories: " . $CI->Project_category_model->count_all() . "\n";
 	}
 
 	private function _truncate_table($do_echo=FALSE)
@@ -104,6 +106,7 @@ class Project_category_model_test extends TestCase
 	#region Test Functions
 	public function test_count_all()
 	{
+		if($this::DO_ECHO) echo "\n+++ test_count_all +++\n";
 		$this->_insert_records();
 		$CI =& get_instance();
 		$this->assertEquals(3, $CI->Project_category_model->count_all());
@@ -111,6 +114,7 @@ class Project_category_model_test extends TestCase
 
 	public function test_get_all()
 	{
+		if($this::DO_ECHO) echo "\n+++ test_get_all +++\n";
 		$this->_insert_records();
 		$CI =& get_instance();
 		$this->assertCount(3, $CI->Project_category_model->get_all());
@@ -118,6 +122,7 @@ class Project_category_model_test extends TestCase
 
 	public function test_get_all_platform()
 	{
+		if($this::DO_ECHO) echo "\n+++ test_get_all_platform +++\n";
 		$this->_insert_records();
 		$CI =& get_instance();
 		$this->assertCount(3, $CI->Project_category_model->get_all_platform());
@@ -125,6 +130,7 @@ class Project_category_model_test extends TestCase
 
 	public function test_get_all_ids()
 	{
+		if($this::DO_ECHO) echo "\n+++ test_get_all_ids +++\n";
 		$this->_insert_records();
 		$CI =& get_instance();
 		$this->assertCount(3, $CI->Project_category_model->get_all_ids());
@@ -132,27 +138,34 @@ class Project_category_model_test extends TestCase
 
 	public function test_get_by_id()
 	{
+		if($this::DO_ECHO) echo "\n+++ test_get_by_id +++\n";
 		$this->_insert_records();
 		$CI =& get_instance();
 		$this->assertEquals('Project Category 1', $CI->Project_category_model->get_by_id(1)['pc_name']);
+		$this->assertFalse($CI->Project_category_model->get_by_id(FALSE));
 	}
 
 	public function test_get_by_id_platform()
 	{
+		if($this::DO_ECHO) echo "\n+++ test_get_by_id_platform +++\n";
 		$this->_insert_records();
 		$CI =& get_instance();
 		$this->assertEquals('Platform 1', $CI->Project_category_model->get_by_id_platform(1)['platform_name']);
+		$this->assertFalse($CI->Project_category_model->get_by_id_platform(FALSE));
 	}
 	
 	public function test_get_by_platform_id()
 	{
+		if($this::DO_ECHO) echo "\n+++ test_get_by_platform_id +++\n";
 		$this->_insert_records();
 		$CI =& get_instance();
 		$this->assertCount(2, $CI->Project_category_model->get_by_platform_id(1));
+		$this->assertFalse($CI->Project_category_model->get_by_platform_id(FALSE));
 	}
 	
 	public function test_insert()
 	{
+		if($this::DO_ECHO) echo "\n+++ test_insert +++\n";
 		$CI =& get_instance();
 		$project_category = array(
 			'pc_name' => 'Project Category 1',
@@ -168,6 +181,7 @@ class Project_category_model_test extends TestCase
 	
 	public function test_update()
 	{
+		if($this::DO_ECHO) echo "\n+++ test_update +++\n";
 		$CI =& get_instance();
 		$insert = array(
 			'pc_name' => 'Project Category 1',
@@ -187,6 +201,7 @@ class Project_category_model_test extends TestCase
 
 	public function test_delete_by_id()
 	{
+		if($this::DO_ECHO) echo "\n+++ test_delete_by_id +++\n";
 		$this->_insert_records();
 		$CI =& get_instance();
 		$this->assertEquals(1, $CI->Project_category_model->delete_by_id(1));
@@ -196,6 +211,7 @@ class Project_category_model_test extends TestCase
 
 	public function test_delete_by_platform_id()
 	{
+		if($this::DO_ECHO) echo "\n+++ test_delete_by_platform_id +++\n";
 		$this->_insert_records();
 		$CI =& get_instance();
 		$this->assertEquals(2, $CI->Project_category_model->delete_by_platform_id(1));

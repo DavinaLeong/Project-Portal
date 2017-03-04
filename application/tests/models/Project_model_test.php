@@ -85,8 +85,7 @@ class Project_model_test extends TestCase
 		{
 			$CI->Project_model->insert($project);
 		}
-
-		if($do_echo) echo "\n--- inserted records: " . $CI->Project_model->count_all();
+		if($do_echo) echo "\n||| inserted projects: " . $CI->Project_model->count_all() . "\n";
 	}
 
 	private function _truncate_table($do_echo=FALSE)
