@@ -10,7 +10,7 @@
 		Mobile	: (+65) 9369 3752 [Singapore]
 
 ***********************************************************************************/
-
+//@codeCoverageIgnoreStart
 class Admin extends CI_Controller
 {
 	public function __construct()
@@ -30,3 +30,4 @@ class Admin extends CI_Controller
     }
 	
 } // end Admin controller class
+//@codeCoverageIgnoreEnd

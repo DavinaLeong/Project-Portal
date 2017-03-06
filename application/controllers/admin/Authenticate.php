@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**********************************************************************************
 	- File Info -
-		File name		: Authenticate.jpg
+		File name		: Authenticate.php
 		Author(s)		: DAVINA Leong Shi Yun
 		Date Created	: 27 Jan 2017
 
@@ -22,7 +22,9 @@ class Authenticate extends CI_Controller
 	public function index()
 	{
 	    redirect('admin/authenticate/start');
+		//@codeCoverageIgnoreStart
 	}
+	//@codeCoverageIgnoreEnd
 
     public function login()
     {
@@ -50,7 +52,9 @@ class Authenticate extends CI_Controller
 						$this->User_log_model->log_message('User has logged in.');
 						$this->session->set_userdata('message', 'Login successful.');
 						redirect('admin/authenticate/start');
+						//@codeCoverageIgnoreStart
 					}
+					//@codeCoverageIgnoreEnd
 					else
 					{
 						$this->session->set_userdata('message', 'Password is incorrect.');
@@ -87,7 +91,9 @@ class Authenticate extends CI_Controller
     public function logout()
     {
 		redirect('admin/authenticate/login');
+		//@codeCoverageIgnoreStart
     }
+	//@codeCoverageIgnoreEnd
 
     public function start()
     {
