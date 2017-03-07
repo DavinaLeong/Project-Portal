@@ -22,7 +22,9 @@ class Platform extends CI_Controller
 	public function index()
 	{
 	    redirect('admin/platform/browse');
+        //@codeCoverageIgnoreStart
 	}
+    //@codeCoverageIgnoreEnd
 
     public function browse()
     {
@@ -45,6 +47,7 @@ class Platform extends CI_Controller
                 $this->User_log_model->log_message('Platform created. | platform_id: ' . $platform_id);
                 $this->session->set_userdata('message', 'Platform created. <a href="' . site_url() . 'admin/platform/create">Create another.</a>');
                 redirect('admin/platform/view/' . $platform_id);
+                //@codeCoverageIgnoreStart
             }
             else
             {
@@ -52,6 +55,7 @@ class Platform extends CI_Controller
                 $this->session->set_userdata('message', 'Unable to create Platform.');
             }
         }
+        //@codeCoverageIgnoreEnd
 
         $data = array(
             'status_options' => $this->Platform_model->_status_array()
@@ -116,6 +120,7 @@ class Platform extends CI_Controller
                     $this->User_log_model->log_message('Platform updated. | platform_id: ' . $platform_id);
                     $this->session->set_userdata('message', 'Platform updated.');
                     redirect('admin/platform/view/' . $platform_id);
+                    //@codeCoverageIgnoreStart
                 }
                 else
                 {
@@ -123,6 +128,7 @@ class Platform extends CI_Controller
                     $this->session->set_userdata('message', 'Unable to update Platform.');
                 }
             }
+            //@codeCoverageIgnoreEnd
 
             $data = array(
                 'platform' => $platform,
@@ -167,7 +173,9 @@ class Platform extends CI_Controller
             {
                 $this->session->set_userdata('message', 'Unable to delete Platform as there are existing Project Categories associated it.');
                 redirect('admin/platform/view/' . $platform_id);
+                //@codeCoverageIgnoreStart
             }
+            //@codeCoverageIgnoreEnd
             else
             {
                 if($this->Platform_model->delete_by_id($platform_id))
@@ -175,6 +183,7 @@ class Platform extends CI_Controller
                     $this->User_log_model->log_message('Platform deleted. | platform_id: ' . $platform_id);
                     $this->session->set_userdata('message', 'Platform deleted.');
                     redirect('admin/platform/browse');
+                    //@codeCoverageIgnoreStart
                 }
                 else
                 {
@@ -184,11 +193,14 @@ class Platform extends CI_Controller
                 }
             }
         }
+        //@codeCoverageIgnoreEnd
         else
         {
             $this->session->set_userdata('message', 'Platform not found.');
             redirect('admin/platform/browse');
         }
+        //@codeCoverageIgnoreStart
     }
+    //@codeCoverageIgnoreEnd
 	
 } // end Platform controller class
