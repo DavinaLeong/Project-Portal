@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**********************************************************************************
 	- File Info -
-		File name		: Link_category_model.jpg
+		File name		: Link_category_model.php
 		Author(s)		: DAVINA Leong Shi Yun
 		Date Created	: 04 Feb 2017
 

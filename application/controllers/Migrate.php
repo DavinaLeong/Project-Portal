@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**********************************************************************************
 	- File Info -
-		File name		: Migrate.jpg
+		File name		: Migrate.php
 		Author(s)		: DAVINA Leong Shi Yun
 		Date Created	: 26 Jan 2017
 

@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**********************************************************************************
 	- File Info -
-		File name		: Platform_model.jpg
+		File name		: Platform_model.php
 		Author(s)		: DAVINA Leong Shi Yun
 		Date Created	: 31 Jan 2017
 
