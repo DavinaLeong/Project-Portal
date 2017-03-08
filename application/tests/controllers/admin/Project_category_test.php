@@ -13,7 +13,7 @@
 
 class Project_category_test extends TestCase
 {
-    const DO_ECHO = TRUE;
+    const DO_ECHO = FALSE;
     const PC_DESCRIPTION = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
 
     const STATUS_PUBLISH = 'Publish';
@@ -288,6 +288,173 @@ class Project_category_test extends TestCase
 
         $output = $this->request('POST', 'admin/project_category/browse');
         $this->assertContains('Project Category not found.', $output);
+        #endregion
+    }
+
+    public function test_edit()
+    {
+        if($this::DO_ECHO) echo "\n+++ test_edit +++\n";
+
+        #region Valid Record
+        $this->_insert_super_records();
+        $project_category = $this->_insert_record();
+        
+        $output = $this->request('POST', 'admin/project_category/edit/' . $project_category['pc_id']);
+        $this->assertResponseCode(200);
+        $this->assertContains('Edit Project Category', $output);
+        $this->assertContains($project_category['pc_name'], $output);
+
+        $this->_truncate_super_table();
+        #endregion
+
+        #region Invalid Record
+        $this->request('POST', 'admin/project_category/edit/' . 999);
+        $this->assertResponseCode(302);
+        $this->assertRedirect('admin/project_category/browse');
+
+        $output = $this->request('POST', 'admin/project_category/browse');
+        $this->assertContains('Project Category not found.', $output);
+        #endregion
+    }
+
+    public function test_edit_validation()
+    {
+        if($this::DO_ECHO) echo "\n+++ test_edit_validation +++\n";
+
+        $CI =& get_instance();
+        $CI->load->model('Platform_model');
+        $this->_insert_super_records();
+
+        $project_category = $this->_insert_record();
+        $url = 'admin/project_category/edit/' . $project_category['pc_id'];
+
+        #region Project ID
+        $output = $this->request('POST', $url,
+            array(
+                'platform_id' => '',
+                'pc_name' => $project_category['pc_name'],
+                'pc_description' => $project_category['pc_description'],
+                'pc_icon' => $project_category['pc_icon']
+            )
+        );
+        $this->assertResponseCode(200);
+        $this->assertContains('The Platform field is required.', $output);
+
+        $output = $this->request('POST', $url,
+            array(
+                'platform_id' => 2,
+                'pc_name' => $project_category['pc_name'],
+                'pc_description' => $project_category['pc_description'],
+                'pc_icon' => $project_category['pc_icon']
+            )
+        );
+        $this->assertResponseCode(200);
+        $this->assertContains('The Platform field must be one of: ' . $this->_platform_ids_str() . '.', $output);
+        #endregion
+
+        #region PC Name
+        $output = $this->request('POST', $url,
+            array(
+                'platform_id' => $project_category['platform_id'],
+                'pc_name' => '',
+                'pc_description' => $project_category['pc_description'],
+                'pc_icon' => $project_category['pc_icon']
+            )
+        );
+        $this->assertResponseCode(200);
+        $this->assertContains('The Name field is required.', $output);
+        #endregion
+
+        #region PC Name
+        $output = $this->request('POST', $url,
+            array(
+                'platform_id' => $project_category['platform_id'],
+                'pc_name' => $project_category['pc_name'],
+                'pc_description' => $project_category['pc_description'],
+                'pc_icon' => ''
+            )
+        );
+        $this->assertResponseCode(200);
+        $this->assertContains('The Icon field is required.', $output);
+        #endregion
+
+        #region PC Description
+        $output = $this->request('POST', $url,
+            array(
+                'platform_id' => $project_category['platform_id'],
+                'pc_name' => $project_category['pc_name'],
+                'pc_description' => '',
+                'pc_icon' => $project_category['pc_icon']
+            )
+        );
+        $this->assertResponseCode(302);
+        $this->assertRedirect('admin/project_category/view/1');
+        #endregion
+    }
+
+    public function test_delete()
+    {
+        if($this::DO_ECHO) echo "\n+++ test_delete +++\n";
+
+        #region Valid Record
+        $project_category = $this->_insert_record();
+        $this->request('POST', 'admin/project_category/delete/' . $project_category['pc_id']);
+        $this->assertResponseCode(302);
+        $this->assertRedirect('admin/project_category/browse');
+
+        $output = $this->request('GET', 'admin/project_category/browse');
+        $this->assertContains('Project Category deleted.', $output);
+        #endregion
+
+        #region Invalid Record
+        $this->request('GET', 'admin/project_category/delete/' . 999);
+        $this->assertResponseCode(302);
+        $this->assertRedirect('admin/project_category/browse');
+
+        $output = $this->request('GET', 'admin/project_category/browse');
+        $this->assertContains('Project Category not found.', $output);
+        #endregion
+    }
+
+    public function test_delete_with_sub_records()
+    {
+        if($this::DO_ECHO) echo "\n+++ test_delete_with_sub_records +++\n";
+
+        $project_category = $this->_insert_record();
+        #region Insert Records
+        $CI =& get_instance();
+        $CI->load->model('Project_model');
+        $project = array(
+            'pc_id' => $project_category['pc_id'],
+            'project_name' => 'Project 1',
+            'project_description' => $this::PC_DESCRIPTION,
+            'project_icon' => 'fa-flag',
+            'selected_project' => 0,
+            'project_status' => $this::STATUS_PUBLISH
+        );
+        $CI->Project_model->insert($project);
+        #endregion
+
+        #region Assert Delete
+        $view_url = 'admin/project_category/view/' . $project_category['pc_id'];
+
+        $this->request('GET', 'admin/project_category/delete/' . $project_category['pc_id']);
+        $this->assertResponseCode(302);
+        $this->assertRedirect($view_url);
+
+        $output = $this->request('GET', $view_url);
+        $this->assertContains('Unable to delete Project Category as there are existing Projects associated with it.', $output);
+        #endregion
+
+        #region Clean Up
+        $CI =& get_instance();
+        $CI->load->database();
+        $CI->db->truncate(TABLE_PROJECT);
+        if($this::DO_ECHO)
+        {
+            echo "\n--- truncated table " . TABLE_PROJECT;
+            echo "\n||| project count: " . $CI->Project_model->count_all() . "\n";
+        }
         #endregion
     }
     #endregion

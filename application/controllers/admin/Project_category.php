@@ -23,7 +23,9 @@ class Project_category extends CI_Controller
 	public function index()
 	{
 	    redirect('admin/project_category/browse');
+        //@codeCoverageIgnoreStart
 	}
+    //@codeCoverageIgnoreEnd
 
     public function browse()
     {
@@ -46,6 +48,7 @@ class Project_category extends CI_Controller
                 $this->User_log_model->log_message('Project Category created. | pc_id: ' . $pc_id);
                 $this->session->set_userdata('message', 'Project Category created. <a href="' . site_url() . '/admin/project_category/create">Create another.</a>');
                 redirect('admin/project_category/view/' . $pc_id);
+                //@codeCoverageIgnoreStart
             }
             else
             {
@@ -53,6 +56,7 @@ class Project_category extends CI_Controller
                 $this->session->set_userdata('Unable to create Project Category.');
             }
         }
+        //@codeCoverageIgnoreEnd
         $data = array(
             'platforms' => $this->Platform_model->get_all('platform_name', 'ASC')
         );
@@ -115,6 +119,7 @@ class Project_category extends CI_Controller
                     $this->User_log_model->log_message('Project Category updated. | pc_id: ' . $pc_id);
                     $this->session->set_userdata('message', 'Project Category updated.');
                     redirect('admin/project_category/view/' . $pc_id);
+                    //@codeCoverageIgnoreStart
                 }
                 else
                 {
@@ -122,6 +127,7 @@ class Project_category extends CI_Controller
                     $this->session->set_userdata('message', 'Unable to updated Project Category.');
                 }
             }
+            //@codeCoverageIgnoreEnd
 
             $data = array(
                 'platforms' => $this->Platform_model->get_all('platform_name', 'ACS'),
@@ -165,27 +171,35 @@ class Project_category extends CI_Controller
             {
                 $this->session->set_userdata('message',
                     'Unable to delete Project Category as there are existing Projects associated with it.');
+                redirect('admin/project_category/view/' . $pc_id);
+                //@codeCoverageIgnoreStart
             }
+            //@codeCoverageIgnoreEnd
             else
             {
                 if($this->Project_category_model->delete_by_id($pc_id))
                 {
                     $this->User_log_model->log_message('Project Category deleted. | pc_id: ' . $pc_id);
                     $this->session->set_userdata('message', 'Project Category deleted.');
+                    redirect('admin/project_category/browse');
+                    //@codeCoverageIgnoreStart
                 }
                 else
                 {
                     $this->User_log_model->log_message('Unable to delete Project Category. | pc_id: ' . $pc_id);
                     $this->session->set_userdata('message', 'Unable to delete Project Category.');
+                    redirect('admin/project_category/view/' . $pc_id);
                 }
             }
-            redirect('admin/project_category/browse');
         }
+        //@codeCoverageIgnoreEnd
         else
         {
-            $this->session->set_userdata('message', 'Project Category record not found.');
+            $this->session->set_userdata('message', 'Project Category not found.');
             redirect('admin/project_category/browse');
         }
+        //@codeCoverageIgnoreStart
     }
+    //@codeCoverageIgnoreEnd
 	
 } // end Project_category controller class
