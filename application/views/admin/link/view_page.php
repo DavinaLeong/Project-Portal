@@ -46,10 +46,9 @@ $output_url = ($link['use_https'] == 1 ? 'https' : 'http') . '://' . $link['url'
                     </div>
                 </h1>
 
-                <?php $this->load->view('admin/_snippets/message_box'); ?>
-
                 <div class="row">
                     <div class="col-md-10">
+                        <?php $this->load->view('admin/_snippets/message_box'); ?>
 
                         <form id="form" class="form-horizontal">
                             <fieldset>

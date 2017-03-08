@@ -45,7 +45,7 @@ class Project_category extends CI_Controller
             {
                 $this->User_log_model->log_message('Project Category created. | pc_id: ' . $pc_id);
                 $this->session->set_userdata('message', 'Project Category created. <a href="' . site_url() . '/admin/project_category/create">Create another.</a>');
-                redirect('admin/project_category/browse');
+                redirect('admin/project_category/view/' . $pc_id);
             }
             else
             {

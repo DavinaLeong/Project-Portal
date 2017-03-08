@@ -77,7 +77,7 @@ class Platform_test extends TestCase
         if($do_echo)
         {
             echo "\n--- platform inserted ---";
-            echo "\n||| platform count: " . $CI->Platform_model->count_all();
+            echo "\n||| count: " . $CI->Platform_model->count_all();
             echo "\n||| platform id: " . $platform['platform_id'] . "\n";
         }
 
@@ -93,7 +93,7 @@ class Platform_test extends TestCase
         if($do_echo)
         {
             echo "\n--- truncated table: " . TABLE_PLATFORM;
-            echo "\n||| platform count: " . $CI->Platform_model->count_all() . "\n";
+            echo "\n||| count: " . $CI->Platform_model->count_all() . "\n";
         }
     }
     #endregion
