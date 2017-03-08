@@ -71,7 +71,7 @@ class Project_category_test extends TestCase
             'pc_icon' => 'fa-flag',
             'pc_description' => $this::PC_DESCRIPTION,
         );
-        $project_category['platform_id'] = $CI->Project_category_model->insert($platform);
+        $project_category['pc_id'] = $CI->Project_category_model->insert($project_category);
 
         if($do_echo)
         {
@@ -262,6 +262,32 @@ class Project_category_test extends TestCase
         );
         $this->assertResponseCode(302);
         $this->assertRedirect('admin/project_category/view/1');
+        #endregion
+    }
+
+    public function test_view()
+    {
+        if($this::DO_ECHO) echo "\n+++ test_view +++\n";
+
+        #region Valid Record
+        $this->_insert_super_records();
+        $project_category = $this->_insert_record();
+
+        $output = $this->request('POST', 'admin/project_category/view/' . $project_category['pc_id']);
+        $this->assertResponseCode(200);
+        $this->assertContains('View Project Category', $output);
+        $this->assertContains($project_category['pc_name'], $output);
+
+        $this->_truncate_super_table();
+        #endregion
+
+        #region Invalid Record
+        $this->request('POST', 'admin/project_category/view/' . 999);
+        $this->assertResponseCode(302);
+        $this->assertRedirect('admin/project_category/browse');
+
+        $output = $this->request('POST', 'admin/project_category/browse');
+        $this->assertContains('Project Category not found.', $output);
         #endregion
     }
     #endregion
