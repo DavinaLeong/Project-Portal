@@ -95,10 +95,17 @@ class Project_category_model_test extends TestCase
 		$CI->load->database();
 		$CI->db->truncate(TABLE_PLATFORM);
 		$CI->db->truncate(TABLE_PROJECT_CATEGORY);
+
 		if($do_echo)
         {
             echo "\n--- truncated table " . TABLE_PROJECT_CATEGORY . " ---";
             echo "\n||| count_all: " . $CI->Project_category_model->count_all() . "\n";
+        }
+
+		$CI->db->truncate(TABLE_USER_LOG);
+        if($do_echo)
+        {
+            echo "\n--- truncated user log table ---\n";
         }
 	}
 	#endregion

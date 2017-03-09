@@ -68,10 +68,17 @@ class Platform_model_test extends TestCase
         $CI =& get_instance();
         $CI->load->database();
         $CI->db->truncate(TABLE_PLATFORM);
+        
         if($do_echo)
         {
             echo "\n--- truncated table " . TABLE_PLATFORM . " ---";
             echo "\n||| count all: " . $CI->Platform_model->count_all() . "\n";
+        }
+
+        $CI->db->truncate(TABLE_USER_LOG);
+        if($do_echo)
+        {
+            echo "\n--- truncated user log table ---\n";
         }
     }
     #endregion

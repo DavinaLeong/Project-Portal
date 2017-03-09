@@ -115,6 +115,12 @@ class Project_category_test extends TestCase
             echo "\n--- truncated table: " . TABLE_PROJECT_CATEGORY;
             echo "\n||| count: " . $CI->Project_category_model->count_all() . "\n";
         }
+
+        $CI->db->truncate(TABLE_USER_LOG);
+        if($do_echo)
+        {
+            echo "\n--- truncated user log table ---\n";
+        }
     }
 
     private function _truncate_super_table($do_echo=FALSE)

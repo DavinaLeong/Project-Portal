@@ -99,6 +99,12 @@ class Project_model_test extends TestCase
             echo "\n--- truncated table " . TABLE_PROJECT . " ---";
             echo "\n||| count_all: " . $CI->Project_model->count_all() . "\n";
         }
+
+		$CI->db->truncate(TABLE_USER_LOG);
+        if($do_echo)
+        {
+            echo "\n--- truncated user log table ---\n";
+        }
 	}
 	#endregion
 	

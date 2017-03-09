@@ -126,6 +126,12 @@ class Link_category_test_model extends TestCase
             echo "\n--- truncated table " . TABLE_LINK_CATEGORY . " ---";
             echo "\n||| count_all: " . $CI->Link_category_model->count_all() . "\n";
         }
+
+        $CI->db->truncate(TABLE_USER_LOG);
+        if($do_echo)
+        {
+            echo "\n--- truncated user log table ---\n";
+        }
     }
 
     private function _truncate_super_tables($do_echo=FALSE)

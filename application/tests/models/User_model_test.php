@@ -56,6 +56,12 @@ class User_model_test extends TestCase
             echo "\n||| insert id: " . $CI->User_model->insert($admin);
             echo "\n||| inserted users: " . $CI->User_model->count_all() . "\n";
         }
+
+        $CI->db->truncate(TABLE_USER_LOG);
+        if($do_echo)
+        {
+            echo "\n--- truncated user log table ---\n";
+        }
     }
     #endregion
 

@@ -80,6 +80,12 @@ class Authenticate_test extends TestCase
 			echo "\n--- truncated table " . TABLE_USER;
 			echo "\n||| count users: " . $CI->User_model->count_all() . "\n";
 		}
+
+		$CI->db->truncate(TABLE_USER_LOG);
+        if($do_echo)
+        {
+            echo "\n--- truncated user log table ---\n";
+        }
 	}
 	#endregion
 
