@@ -13,7 +13,7 @@
 
 class Project_test extends TestCase
 {
-    const DO_ECHO = TRUE;
+    const DO_ECHO = FALSE;
 
     const STATUS_PUBLISH = 'Publish';
     const STATUS_DRAFT = 'Draft';
@@ -569,8 +569,7 @@ class Project_test extends TestCase
 
         #region Valid Record
         $project = $this->_insert_records();
-        $output = $this->request('GET', 'admin/project/delete/' . $project['project_id']);
-        echo "\n hello | " . $output;
+        $this->request('GET', 'admin/project/delete/' . $project['project_id']);
         $this->assertResponseCode(302);
         $this->assertRedirect('admin/project/browse');
 
@@ -606,7 +605,7 @@ class Project_test extends TestCase
         #endregion
 
         #region Assert Delete
-        $view_url = 'admin/projece/view/' . $project['project_id'];
+        $view_url = 'admin/project/view/' . $project['project_id'];
 
         $this->request('GET', 'admin/project/delete/' . $project['project_id']);
         $this->assertResponseCode(302);
@@ -624,7 +623,8 @@ class Project_test extends TestCase
         if($this::DO_ECHO)
         {
             echo "\n--- truncated table " . TABLE_LINK_CATEGORY;
-            echo "\n||| link category count: " . $CI->Link_cateogory_model->count_all();
+            $CI->load->model('Link_category_model');
+            echo "\n||| link category count: " . $CI->Link_category_model->count_all();
         }
         #endregion
     }
