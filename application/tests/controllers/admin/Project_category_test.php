@@ -14,7 +14,7 @@
 class Project_category_test extends TestCase
 {
     const DO_ECHO = FALSE;
-    const PC_DESCRIPTION = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+    const DESCRIPTION = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
 
     const STATUS_PUBLISH = 'Publish';
     const STATUS_DRAFT = 'Draft';
@@ -50,7 +50,7 @@ class Project_category_test extends TestCase
         );
 
         $this->request('GET', 'admin/authenticate/start');
-        if($do_echo) echo "\*** logged in ***\n";
+        if($do_echo) echo "\n*** logged in ***\n";
     }
 
     private function _logout($do_echo=FALSE)
@@ -69,7 +69,7 @@ class Project_category_test extends TestCase
             'platform_id' => 1,
             'pc_name' => 'Project Category 1',
             'pc_icon' => 'fa-flag',
-            'pc_description' => $this::PC_DESCRIPTION,
+            'pc_description' => $this::DESCRIPTION,
         );
         $project_category['pc_id'] = $CI->Project_category_model->insert($project_category);
 
@@ -90,7 +90,7 @@ class Project_category_test extends TestCase
         $platform = array(
             'platform_name' => 'Platform 1',
             'platform_icon' => 'fa-flag',
-            'platform_description' => $this::PC_DESCRIPTION,
+            'platform_description' => $this::DESCRIPTION,
             'platform_status' => $this::STATUS_PUBLISH
         );
         $platform['platform_id'] = $CI->Platform_model->insert($platform);
@@ -175,7 +175,7 @@ class Project_category_test extends TestCase
         $project_category = array(
             'platform_id' => 1,
             'pc_name' => 'Project Category 1',
-            'pc_description' => $this::PC_DESCRIPTION,
+            'pc_description' => $this::DESCRIPTION,
             'pc_icon' => 'fa-flag'
         );
         $this->request('POST', 'admin/project_category/create', $project_category);
@@ -194,7 +194,7 @@ class Project_category_test extends TestCase
         $platform = array(
             'platform_name' => 'Platform 1',
             'platform_icon' => 'fa-flag',
-            'platform_description' => $this::PC_DESCRIPTION,
+            'platform_description' => $this::DESCRIPTION,
             'platform_status' => $this::STATUS_PUBLISH
         );
         $CI->Platform_model->insert($platform);
@@ -203,7 +203,7 @@ class Project_category_test extends TestCase
         $project_category = array(
             'platform_id' => 1,
             'pc_name' => 'Project Category 1',
-            'pc_description' => $this::PC_DESCRIPTION,
+            'pc_description' => $this::DESCRIPTION,
             'pc_icon' => 'fa-flag'
         );
 
@@ -433,7 +433,7 @@ class Project_category_test extends TestCase
         $project = array(
             'pc_id' => $project_category['pc_id'],
             'project_name' => 'Project 1',
-            'project_description' => $this::PC_DESCRIPTION,
+            'project_description' => $this::DESCRIPTION,
             'project_icon' => 'fa-flag',
             'selected_project' => 0,
             'project_status' => $this::STATUS_PUBLISH

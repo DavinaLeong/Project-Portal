@@ -14,11 +14,10 @@
 class Project_test extends TestCase
 {
     const DO_ECHO = FALSE;
+    const DESCRIPTION = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
 
     const STATUS_PUBLISH = 'Publish';
     const STATUS_DRAFT = 'Draft';
-
-    const DESCRIPTION = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
 
     public function setUp()
     {

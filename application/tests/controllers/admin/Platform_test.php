@@ -14,11 +14,10 @@
 class Platform_test extends TestCase
 {
     const DO_ECHO = FALSE;
+    const DESCRIPTION = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
 
     const STATUS_PUBLISH = 'Publish';
     const STATUS_DRAFT = 'Draft';
-
-    const PLATFORM_DESCRIPTION = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
 
     public function setUp()
     {
@@ -69,7 +68,7 @@ class Platform_test extends TestCase
         $platform = array(
             'platform_name' => 'Platform 1',
             'platform_icon' => 'fa-flag',
-            'platform_description' => $this::PLATFORM_DESCRIPTION,
+            'platform_description' => $this::DESCRIPTION,
             'platform_status' => $this::STATUS_PUBLISH
         );
         $platform['platform_id'] = $CI->Platform_model->insert($platform);
@@ -135,7 +134,7 @@ class Platform_test extends TestCase
             array(
                 'platform_name' => 'Platform 1',
                 'platform_icon' => 'fa-flag',
-                'platform_description' => $this::PLATFORM_DESCRIPTION,
+                'platform_description' => $this::DESCRIPTION,
                 'platform_status' => $this::STATUS_PUBLISH
             )
         );
@@ -154,7 +153,7 @@ class Platform_test extends TestCase
             array(
                 'platform_name' => '',
                 'platform_icon' => 'fa-flag',
-                'platform_description' => $this::PLATFORM_DESCRIPTION,
+                'platform_description' => $this::DESCRIPTION,
                 'platform_status' => $this::STATUS_PUBLISH
             )
         );
@@ -167,7 +166,7 @@ class Platform_test extends TestCase
             array(
                 'platform_name' => 'Platform 1',
                 'platform_icon' => '',
-                'platform_description' => $this::PLATFORM_DESCRIPTION,
+                'platform_description' => $this::DESCRIPTION,
                 'platform_status' => $this::STATUS_PUBLISH
             )
         );
@@ -193,7 +192,7 @@ class Platform_test extends TestCase
             array(
                 'platform_name' => 'Platform 1',
                 'platform_icon' => 'fa-flag',
-                'platform_description' => $this::PLATFORM_DESCRIPTION,
+                'platform_description' => $this::DESCRIPTION,
                 'platform_status' => ''
             )
         );
@@ -204,7 +203,7 @@ class Platform_test extends TestCase
             array(
                 'platform_name' => 'Platform 1',
                 'platform_icon' => 'fa-flag',
-                'platofmr_description' => $this::PLATFORM_DESCRIPTION,
+                'platofmr_description' => $this::DESCRIPTION,
                 'platform_status' => 'Hello'
             )
         );
@@ -290,7 +289,7 @@ class Platform_test extends TestCase
             array(
                 'platform_name' => '',
                 'platform_icon' => 'fa-flag',
-                'platform_description' => $this::PLATFORM_DESCRIPTION,
+                'platform_description' => $this::DESCRIPTION,
                 'platform_status' => $this::STATUS_PUBLISH
             )
         );
@@ -303,7 +302,7 @@ class Platform_test extends TestCase
             array(
                 'platform_name' => 'Platform 1',
                 'platform_icon' => '',
-                'platform_description' => $this::PLATFORM_DESCRIPTION,
+                'platform_description' => $this::DESCRIPTION,
                 'platform_status' => $this::STATUS_PUBLISH
             )
         );
@@ -329,7 +328,7 @@ class Platform_test extends TestCase
             array(
                 'platform_name' => 'Platform 1',
                 'platform_icon' => 'fa-flag',
-                'platform_description' => $this::PLATFORM_DESCRIPTION,
+                'platform_description' => $this::DESCRIPTION,
                 'platform_status' => ''
             )
         );
@@ -340,7 +339,7 @@ class Platform_test extends TestCase
             array(
                 'platform_name' => 'Platform 1',
                 'platform_icon' => 'fa-flag',
-                'platofmr_description' => $this::PLATFORM_DESCRIPTION,
+                'platofmr_description' => $this::DESCRIPTION,
                 'platform_status' => 'Hello'
             )
         );
@@ -387,7 +386,7 @@ class Platform_test extends TestCase
         $project_category = array(
             'platform_id' => $platform['platform_id'],
             'pc_name' => 'Project Category 1',
-            'pc_description' => $this::PLATFORM_DESCRIPTION,
+            'pc_description' => $this::DESCRIPTION,
             'pc_icon' => 'fa-flag'
         );
         $project_category['pc_id'] = $CI->Project_category_model->insert($project_category);
