@@ -13,7 +13,7 @@
 
 class Link_category_test extends TestCase
 {
-    const DO_ECHO = TRUE;
+    const DO_ECHO = FALSE;
 
     const DESCRIPTION = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
 
@@ -234,8 +234,8 @@ class Link_category_test extends TestCase
         $output = $this->request('POST', $url,
             array(
                 'project_id' => '',
-                'lc_name' => 'Link Category 1',
-                'lc_description' => $this::DESCRIPTION
+                'lc_name' => $link_category['lc_name'],
+                'lc_description' => $link_category['lc_description']
             )
         );
         $this->assertResponseCode(200);
@@ -244,8 +244,8 @@ class Link_category_test extends TestCase
         $output = $this->request('POST', $url,
             array(
                 'project_id' => 2,
-                'lc_name' => 'Link Category 1',
-                'lc_description' => $this::DESCRIPTION
+                'lc_name' => $link_category['lc_name'],
+                'lc_description' => $link_category['lc_description']
             )
         );
         $this->assertResponseCode(200);
@@ -258,9 +258,9 @@ class Link_category_test extends TestCase
         #region Name
         $output = $this->request('POST', $url,
             array(
-                'project_id' => 1,
+                'project_id' => $link_category['project_ic'],
                 'lc_name' => '',
-                'lc_description' => $this::DESCRIPTION
+                'lc_description' => $link_category['lc_description']
             )
         );
         $this->assertResponseCode(200);
@@ -270,8 +270,8 @@ class Link_category_test extends TestCase
         #region Description
         $output = $this->request('POST', $url,
             array(
-                'project_id' => 1,
-                'lc_name' => 'Link Category 1',
+                'project_id' => $link_category['project_id'],
+                'lc_name' => $link_category['lc_name'],
                 'lc_description' => ''
             )
         );
@@ -357,8 +357,8 @@ class Link_category_test extends TestCase
         $output = $this->request('POST', $url,
             array(
                 'project_id' => '',
-                'lc_name' => 'Link Category 1',
-                'lc_description' => $this::DESCRIPTION
+                'lc_name' => $link_category['lc_name'],
+                'lc_description' => $link_category['lc_description']
             )
         );
         $this->assertResponseCode(200);
@@ -367,8 +367,8 @@ class Link_category_test extends TestCase
         $output = $this->request('POST', $url,
             array(
                 'project_id' => 2,
-                'lc_name' => 'Link Category 1',
-                'lc_description' => $this::DESCRIPTION
+                'lc_name' => $link_category['lc_name'],
+                'lc_description' => $link_category['lc_description']
             )
         );
         $this->assertResponseCode(200);
@@ -381,9 +381,9 @@ class Link_category_test extends TestCase
         #region Name
         $output = $this->request('POST', $url,
             array(
-                'project_id' => 1,
+                'project_id' => $link_category['project_id'],
                 'lc_name' => '',
-                'lc_description' => $this::DESCRIPTION
+                'lc_description' => $link_category['lc_description']
             )
         );
         $this->assertResponseCode(200);
@@ -393,8 +393,8 @@ class Link_category_test extends TestCase
         #region Description
         $output = $this->request('POST', $url,
             array(
-                'project_id' => 1,
-                'lc_name' => 'Link Category 1',
+                'project_id' => $link_category['project_id'],
+                'lc_name' => $link_category['lc_name'],
                 'lc_description' => ''
             )
         );

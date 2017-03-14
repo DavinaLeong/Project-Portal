@@ -116,6 +116,12 @@ class Link_test extends TestCase
             'lc_name' => 'Link Category 1',
             'lc_description' => $this::DESCRIPTION
         );
+        $link_category['lc_id'] = $CI->Link_category_model->insert($link_category);
+        if($do_echo)
+        {
+            echo "\n--- inserted link categories records ---";
+            echo "\n||| link category count: " . $CI->Link_category_model->count_all() . "\n";
+        }
         #endregion
 
         return array(
@@ -202,39 +208,166 @@ class Link_test extends TestCase
     {
         if($this::DO_ECHO) echo "\n+++ test_index +++\n";
 
-        $this->markTestIncomplete();
+        $this->request('GET', 'admin/link/index');
+        $this->assertResponseCode(302);
+        $this->request('GET', 'admin/link/browse');
     }
 
     public function test_browse()
     {
         if($this::DO_ECHO) echo "\n+++ test_browse +++\n";
 
-        $this->markTestIncomplete();
+        $output = $this->request('GET', 'admin/link/browse');
+        $this->assertResponseCode(200);
+        $this->assertContains('Browse Links', $output);
     }
 
     public function test_create()
     {
         if($this::DO_ECHO) echo "\n+++ test_create +++\n";
 
-        $this->markTestIncomplete();
+        $output = $this->request('GET', 'admin/link/create');
+        $this->assertResponseCode(200);
+        $this->assertContains('Create Link', $output);
+
+        $records = $this->_insert_super_records();
+        $this->request('POST', 'admin/link/create',
+            array(
+                'lc_id' => $records['link_category']['lc_id'],
+                'label' => 'Link 1',
+                'url' => 'www.link-1.com',
+                'use_https' => FALSE,
+                'link_status' => $this::STATUS_PUBLISH
+            )
+        );
+        $this->assertResponseCode(302);
+        $this->assertRedirect('admin/link/view/1');
     }
 
     public function test_create_validation()
     {
         if($this::DO_ECHO) echo "\n+++ test_create_validation +++\n";
 
-        $this->markTestIncomplete();
+        $records = $this->_insert_super_records();
+        $url = 'admin/link/create';
+        $link = array(
+            'lc_id' => $records['link_category']['lc_id'],
+            'label' => 'Link 1',
+            'url' => 'www.link-1.com',
+            'use_https' => FALSE,
+            'link_status' => $this::STATUS_PUBLISH
+        );
 
-        #region Project ID
+        #region Link Category ID
+        $output = $this->request('POST', $url,
+            array(
+                'lc_id' => '',
+                'label' => $link['label'],
+                'url' => $link['url'],
+                'use_https' => $link['use_https'],
+                'link_status' => $link['link_status']
+            )
+        );
+        $this->assertResponseCode(200);
+        $this->assertContains('The Category field is required.', $output);
 
+        $CI =& get_instance();
+        $CI->load->model('Link_category_model');
+        $ids_str = implode(',', $CI->Link_category_model->get_all_ids());
+        $output = $this->request('POST', $url,
+            array(
+                'lc_id' => 2,
+                'label' => $link['label'],
+                'url' => $link['url'],
+                'use_https' => $link['use_https'],
+                'link_status' => $link['link_status']
+            )
+        );
+        $this->assertResponseCode(200);
+        $this->assertContains('The Category field must be one of: ' . $ids_str . '.', $output);
         #endregion
 
-        #region Name
-
+        #region Label
+        $output = $this->request('POST', $url,
+            array(
+                'lc_id' => $link['lc_id'],
+                'label' => '',
+                'url' => $link['url'],
+                'use_https' => $link['use_https'],
+                'link_status' => $link['link_status']
+            )
+        );
+        $this->assertResponseCode(200);
+        $this->assertContains('The Label field is required.', $output);
         #endregion
 
-        #region Description
+        #region Url
+        $output = $this->request('POST', $url,
+            array(
+                'lc_id' => $link['lc_id'],
+                'label' => $link['label'],
+                'url' => '',
+                'use_https' => $link['use_https'],
+                'link_status' => $link['link_status']
+            )
+        );
+        $this->assertResponseCode(200);
+        $this->assertContains('The URL field is required.', $output);
 
+        $output = $this->request('POST', $url,
+            array(
+                'lc_id' => $link['lc_id'],
+                'label' => $link['label'],
+                'url' => 'Lorem Ipsum',
+                'use_https' => $link['use_https'],
+                'link_status' => $link['link_status']
+            )
+        );
+        $this->assertResponseCode(200);
+        $this->assertContains('The URL field must contain a valid URL.', $output);
+        #endregion
+
+        #region Use HTTPS
+        $output = $this->request('POST', $url,
+            array(
+                'lc_id' => $link['lc_id'],
+                'label' => $link['label'],
+                'url' => $link['url'],
+                'use_https' => 2,
+                'link_status' => $link['link_status']
+            )
+        );
+        $this->assertResponseCode(200);
+        $this->assertContains('The Use HTTPS field must be one of: 0,1.', $output);
+        #endregion
+
+        #region Status
+        $output = $this->request('POST', $url,
+            array(
+                'lc_id' => $link['lc_id'],
+                'label' => $link['label'],
+                'url' => $link['url'],
+                'use_https' => $link['use_https'],
+                'link_status' => ''
+            )
+        );
+        $this->assertResponseCode(200);
+        $this->assertContains('The Status field is required.', $output);
+
+        $CI =& get_instance();
+        $CI->load->model('Link_model');
+        $status_str = implode(',', $CI->Link_model->_status_array());
+        $output = $this->request('POST', $url,
+            array(
+                'lc_id' => $link['lc_id'],
+                'label' => $link['label'],
+                'url' => $link['url'],
+                'use_https' => $link['use_https'],
+                'link_status' => ''
+            )
+        );
+        $this->assertResponseCode(200);
+        $this->assertContains('The Status field must be one of: ' . $status_str . '.', $output);
         #endregion
     }
 

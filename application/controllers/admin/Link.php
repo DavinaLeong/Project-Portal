@@ -67,7 +67,7 @@ class Link extends CI_Controller
         $this->form_validation->set_rules('lc_id', 'Category', 'trim|required|in_list[' . $id_str . ']');
         $this->form_validation->set_rules('label', 'Label', 'trim|required|max_length[512]');
         $this->form_validation->set_rules('url', 'URL', 'trim|required|valid_url|max_length[512]');
-        $this->form_validation->set_rules('use_https', 'Use HTTPS', 'trim|in_list[1]');
+        $this->form_validation->set_rules('use_https', 'Use HTTPS', 'trim|in_list[0,1]');
         $status_str = implode(',', $this->Link_model->_status_array());
         $this->form_validation->set_rules('link_status', 'Status', 'trim|required|in_list[' . $status_str . ']');
     }
@@ -145,7 +145,7 @@ class Link extends CI_Controller
         $this->form_validation->set_rules('lc_id', 'Category', 'trim|required|in_list[' . $id_str . ']');
         $this->form_validation->set_rules('label', 'Label', 'trim|required|max_length[512]');
         $this->form_validation->set_rules('url', 'URL', 'trim|required|valid_url|max_length[512]');
-        $this->form_validation->set_rules('use_https', 'Use HTTPS', 'trim|in_list[1]');
+        $this->form_validation->set_rules('use_https', 'Use HTTPS', 'trim|in_list[0,1]');
         $status_str = implode(',', $this->Link_model->_status_array());
         $this->form_validation->set_rules('link_status', 'Status', 'trim|required|in_list[' . $status_str . ']');
     }
