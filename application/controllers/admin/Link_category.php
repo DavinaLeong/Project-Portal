@@ -114,8 +114,8 @@ class Link_category extends CI_Controller
         }
         else
         {
-            $this->session->set_userdata('message', 'Link Category record not found.');
-            redirect('admin/link_project/browse');
+            $this->session->set_userdata('message', 'Link Category not found.');
+            redirect('admin/link_category/browse');
         }
     }
 
@@ -149,7 +149,7 @@ class Link_category extends CI_Controller
 		}
 		else
 		{
-			$this->session->set_userdata('message', 'Link Category record not found.');
+			$this->session->set_userdata('message', 'Link Category not found.');
 			redirect('admin/link_category/browse');
 		}
 	}
@@ -205,7 +205,7 @@ class Link_category extends CI_Controller
 		}
 		else
 		{
-			$this->session->set_userdata('message', 'Unable to delete Link Category.');
+			$this->session->set_userdata('message', 'Link Category not found.');
 			redirect('admin/link_category/browse');
 		}
 	}
