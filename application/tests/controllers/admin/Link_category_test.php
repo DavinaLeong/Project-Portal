@@ -258,7 +258,7 @@ class Link_category_test extends TestCase
         #region Name
         $output = $this->request('POST', $url,
             array(
-                'project_id' => $link_category['project_ic'],
+                'project_id' => $link_category['project_id'],
                 'lc_name' => '',
                 'lc_description' => $link_category['lc_description']
             )
