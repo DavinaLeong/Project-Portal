@@ -13,7 +13,7 @@
 
 class Link_test extends TestCase
 {
-    const DO_ECHO = TRUE;
+    const DO_ECHO = FALSE;
 
     const DESCRIPTION = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
 
@@ -135,19 +135,21 @@ class Link_test extends TestCase
     private function _insert_records($do_echo=FALSE)
     {
         $CI =& get_instance();
-        $CI->load->model('Link_category_model');
-        $link_category = array(
-            'project_id' => 1,
-            'lc_name' => 'Link Category 1',
-            'lc_description' => $this::DESCRIPTION
+        $CI->load->model('Link_model');
+        $link = array(
+            'lc_id' => 1,
+            'label' => 'Link 1',
+            'url' => 'www.link-1.com',
+            'use_https' => FALSE,
+            'link_status' => $this::STATUS_PUBLISH
         );
-        $link_category['lc_id'] = $CI->Link_category_model->insert($link_category);
+        $link['link_id'] = $CI->Link_model->insert($link);
         if($do_echo)
         {
-            echo "\n--- inserted link category records ---";
-            echo "\n||| link category count: " . $CI->Link_category_model->count_all() . "\n";
+            echo "\n--- inserted link records ---";
+            echo "\n||| link count: " . $CI->Link_model->count_all() . "\n";
         }
-        return $link_category;
+        return $link;
     }
 
     private function _truncate_super_tables($do_echo=FALSE)
@@ -191,14 +193,13 @@ class Link_test extends TestCase
     private function _truncate_table($do_echo=FALSE)
     {
         $CI =& get_instance();
-        $CI->load->model('Link_category_model');
 
-        $CI->db->truncate(TABLE_LINK_CATEGORY);
+        $CI->db->truncate(TABLE_LINK);
         if($do_echo)
         {
-            echo "\n--- truncated " . TABLE_LINK_CATEGORY;
-            $CI->load->model('Link_category_model');
-            echo "\n||| link category mode: " . $CI->Link_category_model->count_all() . "\n";
+            echo "\n--- truncated " . TABLE_LINK;
+            $CI->load->model('Link_model');
+            echo "\n||| link mode: " . $CI->Link_model->count_all() . "\n";
         }
     }
     #endregion
@@ -363,7 +364,7 @@ class Link_test extends TestCase
                 'label' => $link['label'],
                 'url' => $link['url'],
                 'use_https' => $link['use_https'],
-                'link_status' => ''
+                'link_status' => 'Hello'
             )
         );
         $this->assertResponseCode(200);
@@ -375,13 +376,21 @@ class Link_test extends TestCase
     {
         if($this::DO_ECHO) echo "\n+++ test_view +++\n";
 
-        $this->markTestIncomplete();
         #region Valid Record
-
+        $link = $this->_insert_records();
+        $output = $this->request('GET', 'admin/link/view/' . $link['link_id']);
+        $this->assertResponseCode(200);
+        $this->assertContains('View Link', $output);
+        $this->assertContains($link['label'], $output);
         #endregion
 
         #region Invalid Records
+        $this->request('GET', 'admin/link/view/' . 999);
+        $this->assertResponseCode(302);
+        $this->assertRedirect('admin/link/browse');
 
+        $output = $this->request('GET', 'admin/link/browse');
+        $this->assertContains('Link not found.', $output);
         #endregion
     }
 
@@ -389,13 +398,42 @@ class Link_test extends TestCase
     {
         if($this::DO_ECHO) echo "\n+++ test_edit +++\n";
 
-        $this->markTestIncomplete();
         #region Valid Record
+        $this->_insert_super_records();
+        $link = $this->_insert_records();
 
+        $edit_url = 'admin/link/edit/' . $link['link_id'];
+        $view_url = 'admin/link/view/' . $link['link_id'];
+
+        $output = $this->request('GET', 'admin/link/edit/' . $link['link_id']);
+        $this->assertResponseCode(200);
+        $this->assertContains('Edit Link', $output);
+        $this->assertContains($link['label'], $output);
+
+        $new_label = 'Lorem Ipsum';
+        $this->request('POST', $edit_url,
+            array(
+                'lc_id' => $link['lc_id'],
+                'label' => $new_label,
+                'url' => $link['url'],
+                'use_https' => $link['use_https'],
+                'link_status' => $link['link_status']
+            )
+        );
+        $this->assertResponseCode(302);
+        $this->assertRedirect($view_url);
+
+        $output = $this->request('GET', $view_url);
+        $this->assertContains($new_label, $output);
         #endregion
 
         #region Invalid Records
+        $this->request('GET', 'admin/link/edit/' . 999);
+        $this->assertResponseCode(302);
+        $this->assertRedirect('admin/link/browse');
 
+        $output = $this->request('GET', 'admin/link/browse');
+        $this->assertContains('Link not found.', $output);
         #endregion
     }
 
@@ -403,17 +441,120 @@ class Link_test extends TestCase
     {
         if($this::DO_ECHO) echo "\n+++ test_edit_validation +++\n";
 
-        $this->markTestIncomplete();
-        #region Project ID
+        $records = $this->_insert_super_records();
+        $link = $this->_insert_records();
+        $url = 'admin/link/edit/' . $link['link_id'];
 
+        #region Link Category ID
+        $output = $this->request('POST', $url,
+            array(
+                'lc_id' => '',
+                'label' => $link['label'],
+                'url' => $link['url'],
+                'use_https' => $link['use_https'],
+                'link_status' => $link['link_status']
+            )
+        );
+        $this->assertResponseCode(200);
+        $this->assertContains('The Category field is required.', $output);
+
+        $CI =& get_instance();
+        $CI->load->model('Link_category_model');
+        $ids_str = implode(',', $CI->Link_category_model->get_all_ids());
+        $output = $this->request('POST', $url,
+            array(
+                'lc_id' => 2,
+                'label' => $link['label'],
+                'url' => $link['url'],
+                'use_https' => $link['use_https'],
+                'link_status' => $link['link_status']
+            )
+        );
+        $this->assertResponseCode(200);
+        $this->assertContains('The Category field must be one of: ' . $ids_str . '.', $output);
         #endregion
 
-        #region Name
-
+        #region Label
+        $output = $this->request('POST', $url,
+            array(
+                'lc_id' => $link['lc_id'],
+                'label' => '',
+                'url' => $link['url'],
+                'use_https' => $link['use_https'],
+                'link_status' => $link['link_status']
+            )
+        );
+        $this->assertResponseCode(200);
+        $this->assertContains('The Label field is required.', $output);
         #endregion
 
-        #region Description
+        #region Url
+        $output = $this->request('POST', $url,
+            array(
+                'lc_id' => $link['lc_id'],
+                'label' => $link['label'],
+                'url' => '',
+                'use_https' => $link['use_https'],
+                'link_status' => $link['link_status']
+            )
+        );
+        $this->assertResponseCode(200);
+        $this->assertContains('The URL field is required.', $output);
 
+        $output = $this->request('POST', $url,
+            array(
+                'lc_id' => $link['lc_id'],
+                'label' => $link['label'],
+                'url' => 'Lorem Ipsum',
+                'use_https' => $link['use_https'],
+                'link_status' => $link['link_status']
+            )
+        );
+        $this->assertResponseCode(200);
+        $this->assertContains('The URL field must contain a valid URL.', $output);
+        #endregion
+
+        #region Use HTTPS
+        $output = $this->request('POST', $url,
+            array(
+                'lc_id' => $link['lc_id'],
+                'label' => $link['label'],
+                'url' => $link['url'],
+                'use_https' => 2,
+                'link_status' => $link['link_status']
+            )
+        );
+        $this->assertResponseCode(200);
+        $this->assertContains('The Use HTTPS field must be one of: 0,1.', $output);
+        #endregion
+
+        #region Status
+        $output = $this->request('POST', $url,
+            array(
+                'lc_id' => $link['lc_id'],
+                'label' => $link['label'],
+                'url' => $link['url'],
+                'use_https' => $link['use_https'],
+                'link_status' => ''
+            )
+        );
+        $this->assertResponseCode(200);
+        $this->assertContains('The Status field is required.', $output);
+
+        $CI =& get_instance();
+        $CI->load->model('Link_model');
+        $status_str = implode(',', $CI->Link_model->_status_array());
+        $output = $this->request('POST', $url,
+            array(
+                'lc_id' => $link['lc_id'],
+                'label' => $link['label'],
+                'url' => $link['url'],
+                'use_https' => $link['use_https'],
+                'link_status' => 'Hello'
+            )
+        );
+        $this->assertResponseCode(200);
+        $this->assertContains('The Status field must be one of: ' . $status_str . '.', $output);
         #endregion
     }
 
@@ -421,21 +562,24 @@ class Link_test extends TestCase
     {
         if($this::DO_ECHO) echo "\n+++ test_delete +++\n";
 
-        $this->markTestIncomplete();
-        #region Valid Record
+       #region Valid Record
+        $link = $this->_insert_records();
+        $this->request('GET', 'admin/link/delete/' . $link['link_id']);
+        $this->assertResponseCode(302);
+        $this->assertRedirect('admin/link/browse');
 
+        $output = $this->request('GET', 'admin/link/browse');
+        $this->assertContains('Link deleted.', $output);
         #endregion
 
-        #region Invalid Records
+        #region Invalid Record
+        $this->request('GET', 'admin/link/delete/' . 999);
+        $this->assertResponseCode(302);
+        $this->assertRedirect('admin/link/browse');
 
+        $output = $this->request('GET', 'admin/link/browse');
+        $this->assertContains('Link not found.', $output);
         #endregion
-    }
-
-    public function test_delete_with_sub_records()
-    {
-        if($this::DO_ECHO) echo "\n+++ test_delete_with_sub_records +++\n";
-
-        $this->markTestIncomplete();
     }
     #endregion
 

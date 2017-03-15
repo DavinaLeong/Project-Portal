@@ -98,7 +98,7 @@ class Link extends CI_Controller
         }
         else
         {
-            $this->session->set_userdata('message', 'Link record not found.');
+            $this->session->set_userdata('message', 'Link not found.');
             redirect('admin/link/browse');
         }
     }
@@ -134,7 +134,7 @@ class Link extends CI_Controller
         }
         else
         {
-            $this->session->set_userdata('message', 'Link record not found.');
+            $this->session->set_userdata('message', 'Link not found.');
             redirect('admin/link/browse');
         }
     }
@@ -179,7 +179,7 @@ class Link extends CI_Controller
         }
         else
         {
-            $this->session->set_userdata('message', 'Link record not found.');
+            $this->session->set_userdata('message', 'Link not found.');
             redirect('admin/link/browse');
         }
     }

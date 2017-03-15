@@ -10,7 +10,7 @@
 		Mobile	: (+65) 9369 3752 [Singapore]
 
 ***********************************************************************************/
-
+//@codeCoverageIgnoreStart
 class Migrate extends CI_Controller
 {
 	public function __construct()
@@ -42,3 +42,4 @@ class Migrate extends CI_Controller
 	}
 	
 } // end Migrate controller class
+//@codeCoverageIgnoreEnd
