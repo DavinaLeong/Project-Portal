@@ -13,7 +13,7 @@
 
 class Page_test extends TestCase
 {
-    const DO_ECHO = TRUE;
+    const DO_ECHO = FALSE;
 
     public function setUp()
     {
