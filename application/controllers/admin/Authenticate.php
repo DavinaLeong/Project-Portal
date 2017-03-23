@@ -31,6 +31,11 @@ class Authenticate extends CI_Controller
         if($this->session->userdata('user_id') || $this->session->userdata('access'))
 		{
 			$this->User_log_model->log_message('User has been logged out.');
+            $this->session->unset_userdata('post_platform_id');
+            $this->session->unset_userdata('post_pc_id');
+            $this->session->unset_userdata('post_project_id');
+            $this->session->unset_userdata('post_lc_id');
+
 			$this->session->unset_userdata('user_id');
 			$this->session->unset_userdata('username'
 		);

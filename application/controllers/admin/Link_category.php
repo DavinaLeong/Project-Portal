@@ -43,8 +43,10 @@ class Link_category extends CI_Controller
 		{
 			if($lc_id = $this->Link_category_model->insert($this->_prepare_create_array()))
 			{
+                $this->session->set_userdata('post_project_id', $this->input->post('project_id'));
 				$this->User_log_model->log_message('Link Category created. | lc_id: ' . $lc_id);
-				$this->session->set_userdata('message', 'Link Category created. <a href="' . site_url() . 'admin/link_category/create">Create another.</a>');
+				$this->session->set_userdata('message', 'Link Category created. <a href="' . site_url() .
+                    'admin/link_category/create/' . $this->session->userdata('post_project_id') . '">Create another.</a>');
 				redirect('admin/link_category/view/' . $lc_id);
 			}
 			else

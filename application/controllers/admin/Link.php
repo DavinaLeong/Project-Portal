@@ -43,8 +43,10 @@ class Link extends CI_Controller
         {
             if($link_id = $this->Link_model->insert($this->_prepare_create_array()))
             {
+                $this->session->set_userdata('post_lc_id', $this->input->post('lc_id'));
                 $this->User_log_model->log_message('Link created. | link_id: ' . $link_id);
-                $this->session->set_userdata('message', 'Link created. <a href="' . site_url() . '/admin/link/create">Create another.</a>');
+                $this->session->set_userdata('message', 'Link created. <a href="' . site_url() .
+                    '/admin/link/create/' . $this->session->userdata('post_lc_id') . '">Create another.</a>');
                 redirect('admin/link/view/' . $link_id);
             }
             else
