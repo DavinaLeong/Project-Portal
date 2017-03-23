@@ -123,7 +123,7 @@ fieldset[disabled] .btn-work-log.active
 
 .col-project {
     border: thin solid #ddd;
-    height: 200px;
+    height: 250px;
     overflow-y: auto;
 }
 
