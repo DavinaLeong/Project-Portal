@@ -1,9 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**********************************************************************************
 	- File Info -
-		File name		: Platform_model.jpg
+		File name		: Platform_model.php
 		Author(s)		: DAVINA Leong Shi Yun
-		Date Created	: 31 Jan 2016
+		Date Created	: 31 Jan 2017
 
 	- Contact Info -
 		Email	: leong.shi.yun@gmail.com
@@ -118,14 +118,18 @@ class Platform_model extends CI_Model
             {
                 if($this->count_all() <= 0)
                 {
+                    //@codeCoverageIgnoreStart
                     $this->db->truncate(TABLE_PLATFORM);
                 }
+                //@codeCoverageIgnoreEnd
                 return TRUE;
             }
+            //@codeCoverageIgnoreStart
             else
             {
                 return FALSE;
             }
+            //@codeCoverageIgnoreEnd
         }
         else
         {

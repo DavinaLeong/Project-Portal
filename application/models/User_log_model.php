@@ -1,16 +1,16 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**********************************************************************************
 	- File Info -
-		File name		: User_log_model.jpg
+		File name		: User_log_model.php
 		Author(s)		: DAVINA Leong Shi Yun
-		Date Created	: 26 Jan 2016
+		Date Created	: 26 Jan 2017
 
 	- Contact Info -
 		Email	: leong.shi.yun@gmail.com
 		Mobile	: (+65) 9369 3752 [Singapore]
 
 ***********************************************************************************/
-
+//@codeCoverageIgnoreStart
 class User_log_model extends CI_Model
 {
     public function get_all()
@@ -84,3 +84,4 @@ class User_log_model extends CI_Model
     }
 
 } // end User_log_model class
+//@codeCoverageIgnoreEnd

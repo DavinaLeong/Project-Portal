@@ -1,9 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**********************************************************************************
 	- File Info -
-		File name		: Link_model.jpg
+		File name		: Link_model.php
 		Author(s)		: DAVINA Leong Shi Yun
-		Date Created	: 06 Feb 2016
+		Date Created	: 06 Feb 2017
 
 	- Contact Info -
 		Email	: leong.shi.yun@gmail.com
@@ -68,7 +68,7 @@ class Link extends CI_Controller
         $this->form_validation->set_rules('lc_id', 'Category', 'trim|required|in_list[' . $id_str . ']');
         $this->form_validation->set_rules('label', 'Label', 'trim|required|max_length[512]');
         $this->form_validation->set_rules('url', 'URL', 'trim|required|valid_url|max_length[512]');
-        $this->form_validation->set_rules('use_https', 'Use HTTPS', 'trim|in_list[1]');
+        $this->form_validation->set_rules('use_https', 'Use HTTPS', 'trim|in_list[0,1]');
         $status_str = implode(',', $this->Link_model->_status_array());
         $this->form_validation->set_rules('link_status', 'Status', 'trim|required|in_list[' . $status_str . ']');
     }
@@ -99,7 +99,7 @@ class Link extends CI_Controller
         }
         else
         {
-            $this->session->set_userdata('message', 'Link record not found.');
+            $this->session->set_userdata('message', 'Link not found.');
             redirect('admin/link/browse');
         }
     }
@@ -135,7 +135,7 @@ class Link extends CI_Controller
         }
         else
         {
-            $this->session->set_userdata('message', 'Link record not found.');
+            $this->session->set_userdata('message', 'Link not found.');
             redirect('admin/link/browse');
         }
     }
@@ -146,7 +146,7 @@ class Link extends CI_Controller
         $this->form_validation->set_rules('lc_id', 'Category', 'trim|required|in_list[' . $id_str . ']');
         $this->form_validation->set_rules('label', 'Label', 'trim|required|max_length[512]');
         $this->form_validation->set_rules('url', 'URL', 'trim|required|valid_url|max_length[512]');
-        $this->form_validation->set_rules('use_https', 'Use HTTPS', 'trim|in_list[1]');
+        $this->form_validation->set_rules('use_https', 'Use HTTPS', 'trim|in_list[0,1]');
         $status_str = implode(',', $this->Link_model->_status_array());
         $this->form_validation->set_rules('link_status', 'Status', 'trim|required|in_list[' . $status_str . ']');
     }
@@ -180,7 +180,7 @@ class Link extends CI_Controller
         }
         else
         {
-            $this->session->set_userdata('message', 'Link record not found.');
+            $this->session->set_userdata('message', 'Link not found.');
             redirect('admin/link/browse');
         }
     }

@@ -1,9 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**********************************************************************************
 	- File Info -
-		File name		: Link_category.jpg
+		File name		: Link_category.php
 		Author(s)		: DAVINA Leong Shi Yun
-		Date Created	: 04 Feb 2016
+		Date Created	: 04 Feb 2017
 
 	- Contact Info -
 		Email	: leong.shi.yun@gmail.com
@@ -115,8 +115,8 @@ class Link_category extends CI_Controller
         }
         else
         {
-            $this->session->set_userdata('message', 'Link Category record not found.');
-            redirect('admin/link_project/browse');
+            $this->session->set_userdata('message', 'Link Category not found.');
+            redirect('admin/link_category/browse');
         }
     }
 
@@ -150,7 +150,7 @@ class Link_category extends CI_Controller
 		}
 		else
 		{
-			$this->session->set_userdata('message', 'Link Category record not found.');
+			$this->session->set_userdata('message', 'Link Category not found.');
 			redirect('admin/link_category/browse');
 		}
 	}
@@ -206,7 +206,7 @@ class Link_category extends CI_Controller
 		}
 		else
 		{
-			$this->session->set_userdata('message', 'Unable to delete Link Category.');
+			$this->session->set_userdata('message', 'Link Category not found.');
 			redirect('admin/link_category/browse');
 		}
 	}

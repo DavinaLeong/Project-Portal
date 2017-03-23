@@ -1,9 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**********************************************************************************
 	- File Info -
-		File name		: Link_category_model.jpg
+		File name		: Link_category_model.php
 		Author(s)		: DAVINA Leong Shi Yun
-		Date Created	: 04 Feb 2016
+		Date Created	: 04 Feb 2017
 
 	- Contact Info -
 		Email	: leong.shi.yun@gmail.com
@@ -78,8 +78,7 @@ class Link_category_model extends CI_Model
         if($lc_id)
         {
             $this->db->select(TABLE_LINK_CATEGORY . '.*, ' .
-                TABLE_PROJECT . '.project_name, ' . TABLE_PROJECT . '.project_icon, ' .
-                TABLE_PLATFORM . '.platform_name, ' . TABLE_PLATFORM . '.platform_icon');
+                TABLE_PROJECT . '.project_name, ' . TABLE_PROJECT . '.project_icon, ');
             $this->db->from(TABLE_LINK_CATEGORY);
             $this->db->join(TABLE_PROJECT, TABLE_LINK_CATEGORY . '.project_id = ' . TABLE_PROJECT . '.project_id', 'left');
             $this->db->where(TABLE_LINK_CATEGORY . '.lc_id = ', $lc_id);
@@ -206,8 +205,10 @@ class Link_category_model extends CI_Model
             $this->db->delete(TABLE_LINK_CATEGORY, array('project_id' => $project_id));
             if($this->count_all() <= 0)
             {
+                //@codeCoverageIgnoreStart
                 $this->db->truncate(TABLE_LINK_CATEGORY);
             }
+            //@codeCoverageIgnoreEnd
             return TRUE;
         }
         else

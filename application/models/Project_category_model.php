@@ -1,9 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**********************************************************************************
 	- File Info -
-		File name		: Project_category_model.jpg
+		File name		: Project_category_model.php
 		Author(s)		: DAVINA Leong Shi Yun
-		Date Created	: 01 Feb 2016
+		Date Created	: 01 Feb 2017
 
 	- Contact Info -
 		Email	: leong.shi.yun@gmail.com
@@ -141,17 +141,20 @@ class Project_category_model extends CI_Model
         {
             if($var = $this->db->delete(TABLE_PROJECT_CATEGORY, array('pc_id' => $pc_id)))
             {
-                var_dump($var);
                 if($this->count_all() <= 0)
                 {
+                    //@codeCoverageIgnoreStart
                     $this->db->truncate(TABLE_PROJECT_CATEGORY);
                 }
+                //@codeCoverageIgnoreEnd
                 return TRUE;
             }
+            //@codeCoverageIgnoreStart
             else
             {
                 return FALSE;
             }
+            //@codeCoverageIgnoreEnd
         }
         else
         {
@@ -165,17 +168,20 @@ class Project_category_model extends CI_Model
         {
             if($var = $this->db->delete(TABLE_PROJECT_CATEGORY, array('platform_id' => $platform_id)))
             {
-                var_dump($var);
                 if($this->count_all() <= 0)
                 {
+                    //@codeCoverageIgnoreStart
                     $this->db->truncate(TABLE_PROJECT_CATEGORY);
                 }
+                //@codeCoverageIgnoreEnd
                 return TRUE;
             }
+            //@codeCoverageIgnoreStart
             else
             {
                 return FALSE;
             }
+            //@codeCoverageIgnoreEnd
         }
         else
         {

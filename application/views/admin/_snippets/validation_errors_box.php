@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	- File Info -
 		File name		: validation_errors_box.php
 		Author(s)		: DAVINA Leong Shi Yun
-		Date Created	: 27 Jan 2016
+		Date Created	: 27 Jan 2017
 
 	- Contact Info -
 		Email	: leong.shi.yun@gmail.com

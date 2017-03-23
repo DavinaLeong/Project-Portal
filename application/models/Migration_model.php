@@ -1,16 +1,16 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**********************************************************************************
 	- File Info -
-		File name		: Migration_model.jpg
+		File name		: Migration_model.php
 		Author(s)		: DAVINA Leong Shi Yun
-		Date Created	: 26 Jan 2016
+		Date Created	: 26 Jan 2017
 
 	- Contact Info -
 		Email	: leong.shi.yun@gmail.com
 		Mobile	: (+65) 9369 3752 [Singapore]
 
 ***********************************************************************************/
-
+//@codeCoverageIgnoreStart
 class Migration_model extends CI_Model
 {
     public function run_parsed_sql($sql)
@@ -67,7 +67,7 @@ class Migration_model extends CI_Model
     public function reset()
     {
         $this->load->library('migration');
-        $this->migration->version('20170126210232');
+        $this->migration->version('20170209092304');
         $this->migration->current();
     }
 
@@ -78,3 +78,4 @@ class Migration_model extends CI_Model
     }
 
 } // end Migration_model class
+//@codeCoverageIgnoreEnd

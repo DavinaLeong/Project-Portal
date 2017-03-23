@@ -1,0 +1,15 @@
+Note:
+To execute cmd scripts in powershell, first run [cmd] before running the script by
+typing the script name; e.g. [unit_test].
+
+Executing cmd_scripts in powershell:
+1) type Set-ExecutionPolicy Unrestricted
+
+
+
+
+
+
+
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.

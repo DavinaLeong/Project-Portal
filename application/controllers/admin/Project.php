@@ -1,9 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**********************************************************************************
 	- File Info -
-		File name		: Project.jpg
+		File name		: Project.php
 		Author(s)		: DAVINA Leong Shi Yun
-		Date Created	: 02 Feb 2016
+		Date Created	: 02 Feb 2017
 
 	- Contact Info -
 		Email	: leong.shi.yun@gmail.com
@@ -82,7 +82,7 @@ class Project extends CI_Controller
         $this->form_validation->set_rules('project_name', 'Name', 'trim|required|max_length[512]');
         $this->form_validation->set_rules('project_icon', 'Icon', 'trim|max_length[512]');
         $this->form_validation->set_rules('project_description', 'Description', 'trim|max_length[512]');
-        $this->form_validation->set_rules('selected_project', 'Selected Project', 'trim|in_list[1]');
+        $this->form_validation->set_rules('selected_project', 'Selected Project', 'trim|in_list[0,1]');
 
         $status_str = implode(',', $this->Project_model->_status_array());
         $this->form_validation->set_rules('project_status', 'Status',
@@ -185,7 +185,7 @@ class Project extends CI_Controller
         $this->form_validation->set_rules('project_name', 'Name', 'trim|required|max_length[512]');
         $this->form_validation->set_rules('project_icon', 'Icon', 'trim|max_length[512]');
         $this->form_validation->set_rules('project_description', 'Description', 'trim|max_length[512]');
-        $this->form_validation->set_rules('selected_project', 'Selected Project', 'trim|in_list[1]');
+        $this->form_validation->set_rules('selected_project', 'Selected Project', 'trim|in_list[0,1]');
 
         $status_str = implode(',', $this->Project_model->_status_array());
         $this->form_validation->set_rules('project_status', 'Status',
@@ -212,6 +212,7 @@ class Project extends CI_Controller
             if($this->Link_category_model->get_by_project_id($project_id))
             {
                 $this->session->set_userdata('message', 'Unable to delete Project as there are existing Link Categories associated with it.');
+                redirect('admin/project/view/' . $project_id);
             }
             else
             {

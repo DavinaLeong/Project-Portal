@@ -3,7 +3,7 @@
 	- File Info -
 		File name		: edit_page.php
 		Author(s)		: DAVINA Leong Shi Yun
-		Date Created	: 01 Feb 2016
+		Date Created	: 01 Feb 2017
 
 	- Contact Info -
 		Email	: leong.shi.yun@gmail.com
@@ -40,6 +40,9 @@
                 <div class="row">
                     <div class="col-md-10">
 
+                        <?php $this->load->view('admin/_snippets/validation_errors_box'); ?>
+                        <?php $this->load->view('admin/_snippets/message_box'); ?>
+
                         <form id="form" class="form-horizontal" method="post" data-parsley-validate>
                             <fieldset>
                                 <legend>Record Details</legend>
@@ -64,7 +67,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-2" for="pc_description">Description <span class="text-danger">*</span></label>
+                                    <label class="control-label col-md-2" for="pc_description">Description</label>
                                     <div class="col-md-10">
                                         <input class="form-control" type="text" id="pc_description" name="pc_description" value="<?=set_value('pc_description', $project_category['pc_description']);?>" maxlength="512" />
                                     </div>

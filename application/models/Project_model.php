@@ -1,9 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**********************************************************************************
 	- File Info -
-		File name		: Project_model.jpg
+		File name		: Project_model.php
 		Author(s)		: DAVINA Leong Shi Yun
-		Date Created	: 01 Feb 2016
+		Date Created	: 01 Feb 2017
 
 	- Contact Info -
 		Email	: leong.shi.yun@gmail.com
@@ -193,14 +193,14 @@ class Project_model extends CI_Model
 	{
 		if($pc_id)
 		{
-			$this->db->select(TABLE_PROJECT . '.*, ' . TABLE_PLATFORM . '.platform_name, ' . TABLE_PROJECT_CATEGORY . '.pc_name');
-			$this->db->from(TABLE_PROJECT);
-			$this->db->join(TABLE_PROJECT_CATEGORY, TABLE_PROJECT . '.pc_id = ' . TABLE_PROJECT_CATEGORY . '.pc_id', 'left');
-			$this->db->where(TABLE_PROJECT . '.pc_id = ', $pc_id);
-			$this->db->where(TABLE_PROJECT . '.selected_project = ', 1);
+            $this->db->select(TABLE_PROJECT . '.*, ' . TABLE_PROJECT_CATEGORY . '.pc_name');
+            $this->db->from(TABLE_PROJECT);
+            $this->db->join(TABLE_PROJECT_CATEGORY, TABLE_PROJECT . '.pc_id = ' . TABLE_PROJECT_CATEGORY . '.pc_id', 'left');
+            $this->db->where(TABLE_PROJECT . '.pc_id = ', $pc_id);
+            $this->db->where(TABLE_PROJECT . '.selected_project = ', 1);
 
-			$query = $this->db->get();
-			return $query->result_array();
+            $query = $this->db->get();
+            return $query->result_array();
 		}
 		else
 		{
@@ -267,10 +267,12 @@ class Project_model extends CI_Model
 				}
 				return TRUE;
 			}
+			//@codeCoverageIgnoreStart
 			else
 			{
 				return FALSE;
 			}
+			//@codeCoverageIgnoreEnd
 		}
 		else
 		{
@@ -290,10 +292,12 @@ class Project_model extends CI_Model
                 }
                 return TRUE;
             }
-            else
-            {
-                return FALSE;
-            }
+            //@codeCoverageIgnoreStart
+			else
+			{
+				return FALSE;
+			}
+			//@codeCoverageIgnoreEnd
         }
         else
         {

@@ -3,7 +3,7 @@
 	- File Info -
 		File name		: view_page.php
 		Author(s)		: DAVINA Leong Shi Yun
-		Date Created	: 06 Feb 2016
+		Date Created	: 06 Feb 2017
 
 	- Contact Info -
 		Email	: leong.shi.yun@gmail.com
@@ -50,6 +50,8 @@
 
                 <div class="row">
                     <div class="col-md-10">
+
+                        <?php $this->load->view('admin/_snippets/message_box'); ?>
 
                         <!-- From start -->
                         <form id="form" class="form-horizontal">

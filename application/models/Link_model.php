@@ -1,9 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**********************************************************************************
 	- File Info -
-		File name		: Link_model.jpg
+		File name		: Link_model.php
 		Author(s)		: DAVINA Leong Shi Yun
-		Date Created	: 06 Feb 2016
+		Date Created	: 06 Feb 2017
 
 	- Contact Info -
 		Email	: leong.shi.yun@gmail.com
@@ -56,15 +56,22 @@ class Link_model extends CI_Model
 
     public function get_by_id_link_category_project($link_id=FALSE)
     {
-        $this->db->select(TABLE_LINK . '.*, ' .
+        if($link_id)
+        {
+            $this->db->select(TABLE_LINK . '.*, ' .
             TABLE_LINK_CATEGORY . '.project_id, ' . TABLE_LINK_CATEGORY . '.lc_name, ' .
             TABLE_PROJECT . '.project_name');
-        $this->db->from(TABLE_LINK);
-        $this->db->join(TABLE_LINK_CATEGORY, TABLE_LINK . '.lc_id = ' . TABLE_LINK_CATEGORY . '.lc_id', 'left');
-        $this->db->join(TABLE_PROJECT, TABLE_LINK_CATEGORY . '.project_id = ' . TABLE_PROJECT . '.project_id', 'left');
-        $this->db->where(TABLE_LINK . '.link_id = ', $link_id);
-        $query = $this->db->get();
-        return $query->row_array();
+            $this->db->from(TABLE_LINK);
+            $this->db->join(TABLE_LINK_CATEGORY, TABLE_LINK . '.lc_id = ' . TABLE_LINK_CATEGORY . '.lc_id', 'left');
+            $this->db->join(TABLE_PROJECT, TABLE_LINK_CATEGORY . '.project_id = ' . TABLE_PROJECT . '.project_id', 'left');
+            $this->db->where(TABLE_LINK . '.link_id = ', $link_id);
+            $query = $this->db->get();
+            return $query->row_array();
+        }
+        else
+        {
+            return FALSE;
+        }
     }
 
     public function get_by_status($status='Publish', $column='last_updated', $direction='DESC')
@@ -149,7 +156,7 @@ class Link_model extends CI_Model
     {
         if($project_id && $status)
         {
-            $this->db->select(TABLE_LINK . '*, ' . TABLE_LINK_CATEGORY . '.lc_name');
+            $this->db->select(TABLE_LINK . '.*, ' . TABLE_LINK_CATEGORY . '.lc_name');
             $this->db->from(TABLE_PROJECT);
             $this->db->join(TABLE_LINK_CATEGORY, TABLE_PROJECT . '.project_id = ' . TABLE_LINK_CATEGORY . '.project_id', 'left');
             $this->db->join(TABLE_LINK, TABLE_LINK_CATEGORY . '.lc_id = ' . TABLE_LINK . '.lc_id', 'left');
@@ -216,11 +223,13 @@ class Link_model extends CI_Model
         if($link_id)
         {
             $this->db->delete(TABLE_LINK, array('link_id' => $link_id));
+            //@codeCoverageIgnoreStart
             if($this->count_all() <= 0)
             {
                 $this->db->truncate(TABLE_LINK);
             }
             return TRUE;
+            //@codeCoverageIgnoreEnd
         }
         else
         {
@@ -233,11 +242,13 @@ class Link_model extends CI_Model
         if($lc_id)
         {
             $this->db->delete(TABLE_LINK, array('lc_id' => $lc_id));
+            //@codeCoverageIgnoreStart
             if($this->count_all() <= 0)
             {
                 $this->db->truncate(TABLE_LINK);
             }
             return TRUE;
+            //@codeCoverageIgnoreEnd
         }
         else
         {
