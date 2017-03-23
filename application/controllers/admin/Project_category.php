@@ -35,7 +35,7 @@ class Project_category extends CI_Controller
         $this->load->view('admin/project_category/browse_page', $data);
     }
 
-    public function create()
+    public function create($platform_id='')
     {
         $this->User_log_model->validate_access();
         $this->_set_rules_create();
@@ -54,6 +54,7 @@ class Project_category extends CI_Controller
             }
         }
         $data = array(
+            'platform_id' => $platform_id,
             'platforms' => $this->Platform_model->get_all('platform_name', 'ASC')
         );
         $this->load->view('admin/project_category/create_page', $data);

@@ -11,6 +11,7 @@
 
 ***********************************************************************************/
 /**
+ * @var $lc_id
  * @var $link_categories
  * @var $status_options
  */
@@ -53,7 +54,7 @@
                                         <select class="form-control" id="lc_id" name="lc_id" required>
                                             <option id="lc_id_0" value="">-- Select Link Category --</option>
                                             <?php foreach($link_categories as $key=> $link_category): ?>
-                                                <option id="lc_id_<?=$key+1;?>" value="<?=$link_category['lc_id'];?>" <?=set_select('lc_id', $link_category['lc_id']);?>><?=$link_category['lc_name'];?> (<?=$link_category['platform_name'] . ', ' . $link_category['project_name'];?>)</option>
+                                                <option id="lc_id_<?=$key+1;?>" value="<?=$link_category['lc_id'];?>" <?=set_select('lc_id', $link_category['lc_id'], ($link_category['lc_id'] == $lc_id));?>><?=$link_category['lc_name'];?> (<?=$link_category['platform_name'] . ', ' . $link_category['project_name'];?>)</option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>

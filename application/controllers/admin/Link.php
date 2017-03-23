@@ -35,7 +35,7 @@ class Link extends CI_Controller
         $this->load->view('admin/link/browse_page', $data);
     }
 
-    public function create()
+    public function create($lc_id='')
     {
         $this->User_log_model->validate_access();
         $this->_set_rules_create();
@@ -55,6 +55,7 @@ class Link extends CI_Controller
         }
 
         $data = array(
+            'lc_id' => $lc_id,
             'link_categories' => $this->Link_category_model->get_all_project_platform('project.project_name', 'ASC'),
             'status_options' => $this->Link_model->_status_array()
         );
