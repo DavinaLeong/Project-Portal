@@ -45,8 +45,10 @@ class Project_category extends CI_Controller
         {
             if($pc_id = $this->Project_category_model->insert($this->_prepare_create_array()))
             {
+                $this->session->set_userdata('post_platform_id', $this->input->post('platform_id'));
                 $this->User_log_model->log_message('Project Category created. | pc_id: ' . $pc_id);
-                $this->session->set_userdata('message', 'Project Category created. <a href="' . site_url() . '/admin/project_category/create">Create another.</a>');
+                $this->session->set_userdata('message', 'Project Category created. <a href="' . site_url() .
+                    '/admin/project_category/create/' . $this->session->userdata('post_platform_id') . '">Create another.</a>');
                 redirect('admin/project_category/view/' . $pc_id);
                 //@codeCoverageIgnoreStart
             }

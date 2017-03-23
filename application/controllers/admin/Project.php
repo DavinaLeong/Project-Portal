@@ -43,8 +43,10 @@ class Project extends CI_Controller
         {
             if($project_id = $this->Project_model->insert($this->_prepare_create_project_array()))
             {
+                $this->session->set_userdata('post_pc_id', $this->input->post('pc_id'));
                 $this->User_log_model->log_message('Project created. | project_id: ' . $project_id);
-                $this->session->set_userdata('message', 'Project created. <a href="' . site_url() . 'admin/project/create">Create another.</a>');
+                $this->session->set_userdata('message', 'Project created. <a href="' . site_url() .
+                    'admin/project/create' . $this->session->userdata('post_pc_id') . '">Create another.</a>');
 
                 // unset other selected projects
                 if($this->input->post('selected_project') == 1)
