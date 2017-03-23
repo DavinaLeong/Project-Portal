@@ -61,8 +61,15 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="lc_name">Name <span class="text-danger">*</span></label>
                                     <div class="col-md-10">
-                                        <input class="form-control" type="text" id="lc_name" name="lc_name"
-                                               value="<?=set_value('lc_name');?>" required maxlength="512" />
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" id="lc_name" name="lc_name"
+                                                   value="<?=set_value('lc_name');?>" required maxlength="512" />
+                                            <span class="input-group-btn">
+                                                <button id="fill_none_btn" class="btn btn-default" type="button" onClick="fillNone()">
+                                                    Fill with 'None'
+                                                </button>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -95,5 +102,12 @@
 </div>
 <?php $this->load->view('admin/_snippets/body_resources') ;?>
 <script src="<?=RESOURCES_FOLDER;?>parsleyjs/parsley.min.js"></script>
+<script>
+    function fillNone()
+    {
+        $('#lc_name').val('None');
+        $('#fill_none_btn').blur();
+    }
+</script>
 </body>
 </html>
