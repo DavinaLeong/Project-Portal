@@ -92,7 +92,11 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="selected_project">Selected Project</label>
                                     <div class="col-md-10">
-                                        <p id="selected_project" class="form-control-static"><?=$project['selected_project'] == 1 ? '<span class="text-primary">Yes</span>' : 'No';?></p>
+                                        <p id="selected_project" class="form-control-static">
+                                            <span class="label label-default">
+                                                <?=$project['selected_project'] == 1 ? 'Yes' : 'No';?>
+                                            </span>
+                                        </p>
                                     </div>
                                 </div>
                             </fieldset>
