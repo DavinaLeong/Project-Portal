@@ -27,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <link href="<?=RESOURCES_FOLDER;?>sb-admin-2/dist/css/sb-admin-2.min.css" rel="stylesheet" />
 
 <!-- Font Awesome Icons -->
-<link href="<?=RESOURCES_FOLDER;?>font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
 
 <!-- Project Portal CSS -->
 <link href="<?=RESOURCES_FOLDER;?>pp/dist/css/pp_admin_styles.css" rel="stylesheet" type="text/css" />
