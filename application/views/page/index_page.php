@@ -30,17 +30,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- favicon -->
     <link href="<?=RESOURCES_FOLDER;?>pp/dist/images/pp_icon.png" type="image/png" rel="icon" />
 
-    <!-- Bootstrap Core CSS -->
-    <link href="<?=RESOURCES_FOLDER;?>bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap 4 styles -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
 
-    <!-- Bootstrap Theme CSS -->
-    <link href="<?=RESOURCES_FOLDER;?>bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
-
-    <!-- Font Awesome Icons -->
+    <!-- Font Awesome 5 -->
     <link href="<?=RESOURCES_FOLDER;?>font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script> -->
 
     <!-- Project Portal CSS -->
-    <link href="<?=RESOURCES_FOLDER;?>pp/dist/css/pp_styles.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="<?=RESOURCES_FOLDER;?>pp/dist/css/pp_styles.css" rel="stylesheet" type="text/css" /> -->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -155,13 +153,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 <!-- container end -->
 
-<!-- jQuery -->
-<script src="<?=RESOURCES_FOLDER;?>jquery/jquery.min.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="<?=RESOURCES_FOLDER;?>bootstrap/js/bootstrap.min.js"></script>
-
-<!-- Bootstrap Theme JavaScript -->
-<script src="<?=RESOURCES_FOLDER;?>bootstrap/js/bootstrap-theme.min.js"></script>
+<!-- Bootstrap 4 scripts -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
 </body>
 </html>
