@@ -14,7 +14,7 @@ var IconField = React.createClass
     },
     render: function ()
     {
-        var icon = 'fa ' + this.state.icon_name + ' fa-fw';
+        var icon = this.state.icon_name + ' fa-fw';
         var asterisk = this.props.required ? <span className="text-danger">*</span> : '';
         return (
             <div className="form-group">
