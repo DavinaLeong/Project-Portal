@@ -67,40 +67,79 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         &nbsp;
         Links to all wamp project landing pages.
     </p>
+    <hr>
 
+    <h2 class="mb-3">Project Categories</h2>
     <!-- Accordion start -->
     <div id="pc-accordion" role="tablist">
         <?php
         foreach($project_categories as $pc_key=>$project_category):
-            $name_underscore = str_replace(' ', '_', strtolower($project_category['pc_name']));
-            $name_camel = str_replace(' ', '', $project_category['pc_name']); ?>
-            <!-- <?=$project_category['pc_name'];?> Panel start -->
-        <div id="pc-<?=$project_category['pc_id'];?>-card" class="card">
-            <div id="pc-<?=$project_category['pc_id'];?>-card-header" class="card-header" role="tab">
-                <h5 id="pc-<?=$project_category['pc_id'];?>-heading" class="mb-0">
-                    <a id="pc-<?=$project_category['pc_id'];?>-toggle" class="text-dark" data-toggle="collapse" href="#pc-<?=$project_category['pc_id'];?>-collapse" role="button" aria-expanded="true" aria-controls="pc-<?=$project_category['pc_id'];?>-collapse">
-                        <i class="fa <?=$project_category['pc_icon'];?> fa-fw"></i> <?=$project_category['pc_name'];?> <small>- <?=$project_category['pc_description'];?></small>
-                    </a>
+            $pc_id = $project_category['pc_id'];?><!-- <?=$project_category['pc_name'];?> start -->
+        <div id="pc-<?=$pc_id;?>-card" class="card">
+            <div id="pc-<?=$pc_id;?>-card-header" class="card-header" role="tab">
+                <h5 id="pc-<?=$pc_id;?>-heading" class="mb-0">
+                    <i class="fa <?=$project_category['pc_icon'];?> fa-fw"></i>&nbsp;<a id="pc-<?=$pc_id;?>-toggle" class="text-dark" data-toggle="collapse" href="#pc-<?=$pc_id;?>-collapse" role="button" aria-expanded="true" aria-controls="pc-<?=$pc_id;?>-collapse"><?=$project_category['pc_name'];?></a>&nbsp;<small>- <?=$project_category['pc_description'];?></small>
                 </h5>
             </div>
 
-            <div id="pc-<?=$project_category['pc_id'];?>-collapse" class="collapse<?=($pc_key > 0) ? '' : ' show';?>" role="tabpanel" aria-labelledby="pc-<?=$project_category['pc_id'];?>-card-header" data-parent="#pc-accordion">
-                <div id="pc-<?=$project_category['pc_id'];?>-card-body" class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
-                    on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
-                    raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+            <div id="pc-<?=$pc_id;?>-collapse" class="collapse<?=($pc_key > 0) ? '' : ' show';?>" role="tabpanel" aria-labelledby="pc-<?=$pc_id;?>-card-header" data-parent="#pc-accordion">
+                <div class="card-body">
+                    <div class="row">
+                        <?php $projects = $project_category['projects'];
+                        if(count($projects) <= 0): ?>
+                        <div id="pc-<?=$pc_id;?>-noproject" class="col-12 text-muted">No <em>active</em> "<?=$project_category['pc_name'];?>" projects on this server.</div>
+                        <?php else: ?>
+                        <?php   foreach($projects as $project_key=>$project):
+                            $project_id = $project['project_id'];
+                            $border_col = $text_col = $a_class = '';
+                            if($project['selected_project'] == 1) {
+                                $border_col = ' border-info';
+                                $text_col = ' text-info';
+                                $a_class = ' class="' . $text_col . '"';
+                            } ?>
+                        <div id="pc-<?=$pc_id;?>-project-<?=$project_id;?>-card" class="col-12 col-md-3 card<?=$border_col;?>">
+                            <div class="card-body">
+                                <h5 class="card-title<?=$text_col;?>"><i class="fa <?=$project['project_icon'];?> fa-fw"></i> <?=$project['project_name'];?></h5>
+                                <?php if( ! empty($project['project_description'])): ?>
+                                <p class="card-text"><?=$project['project_description'];?></p>
+                                <?php endif; ?>
+
+                                <?php $link_categories = $project['link_categories'];
+                                foreach($link_categories as $lc_key=>$link_category): ?>
+                                <?php if($link_category['lc_name'] !== 'None'): ?>
+                                <h6 class="card-subtitle text-secondary">localhost</h6>
+                                <?php endif; ?>
+
+                                <?php $links = $link_category['links'];
+                                        if(count($links) <= 0): ?>
+                                <p class="text-muted">No <em>active</em> links.</p>
+                                <?php   else: ?>
+                                <ul class="mb-2">
+                                <?php foreach($links as $link_key=>$link):
+                                    $output_url = ($link['use_https'] == 1 ? 'https://' : 'http://') . $link['url']; ?>
+                                    <li><a<?=$a_class;?> href="<?=$output_url;?>" target="_blank"><?=$link['label'];?></a></li>
+                                <?php       endforeach; ?>
+                                </ul>
+                                <?php   endif; ?>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                        <?php   endforeach; ?>
+                        <?php endif; ?>
+                    </div>
                 </div>
             </div>
         </div>
+        <!-- <?=$project_category['pc_name'];?> end -->
         <?php endforeach; ?>
     </div>
     <!-- Accordion end -->
 
     <!--footer start-->
-    <footer class="site-footer">
+    <footer class="text-secondary">
         <hr/>
         <div class="text-right">
-            <span class="text-secondary"><em><?=SITE_NAME;?> &#8226; <?= now('Y'); ?></em></span>
+            <span><em><?=SITE_NAME;?> &#8226; <?= now('Y'); ?></em></span>
         </div>
     </footer>
     <!--footer end-->
