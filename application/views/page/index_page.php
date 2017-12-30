@@ -49,18 +49,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 <!-- container start -->
 <div class="container">
-    <h1 class="page-header"><i class="fa fa-bookmark fa-fw"></i> Project Portal&nbsp;
-        <button class="btn btn-primary">
-            <i class="fa <?=$platform['platform_icon'];?> fa-fw"></i> <?=$platform['platform_name'];?>
-            <span class="badge"><?=$total_links;?></span>
-        </button>
+    <h1 class="display-4"><i class="fa fa-bookmark fa-fw"></i> Project Portal&nbsp;
+        <span class="btn btn-primary text-white">
+            <i class="fa <?=$platform['platform_icon'];?> fa-fw"></i> <?=$platform['platform_name'];?>&nbsp;
+            <span class="badge badge-light text-dark"><?=$total_links;?></span>
+        </span>
     </h1>
     <p class="lead">
-        <div class="btn-group btn-group-xs">
-            <a class="btn btn-info" href="<?=site_url('admin/authenticate/login');?>" target="_blank">
+        <div class="btn-group btn-group-sm">
+            <a class="btn btn-outline-info" href="<?=site_url('admin/authenticate/login');?>" target="_blank">
                 <i class="fa fa-user fa-fw"></i> Admin Panel
             </a>
-            <a class="btn btn-success" href="https://docs.google.com/forms/d/1DipH6wItUim97uXde-DCreLnqX8BDq6Fzp-tbainHfk/viewform" target="_blank">
+            <a class="btn btn-outline-success" href="https://docs.google.com/forms/d/1DipH6wItUim97uXde-DCreLnqX8BDq6Fzp-tbainHfk/viewform" target="_blank">
                 <i class="fa fa-check fa-fw"></i> Work Log
             </a>
         </div>
@@ -144,7 +144,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <footer class="site-footer">
         <hr/>
         <div class="text-right">
-            <span class="text-muted"><em><?=SITE_NAME;?> &#8226; <?= now('Y'); ?></em></span>
+            <span class="text-secondary"><em><?=SITE_NAME;?> &#8226; <?= now('Y'); ?></em></span>
         </div>
     </footer>
     <!--footer end-->
