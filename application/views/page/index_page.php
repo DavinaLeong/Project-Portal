@@ -34,8 +34,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
 
     <!-- Font Awesome 5 -->
-    <link href="<?=RESOURCES_FOLDER;?>font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script> -->
+    <!-- <link href="<?=RESOURCES_FOLDER;?>font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" /> -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
 
     <!-- Project Portal CSS -->
     <!-- <link href="<?=RESOURCES_FOLDER;?>pp/dist/css/pp_styles.css" rel="stylesheet" type="text/css" /> -->
@@ -49,19 +49,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 <!-- container start -->
 <div class="container">
-    <h1 class="display-4"><i class="fa fa-bookmark fa-fw"></i> Project Portal&nbsp;
+    <h1 class="display-4"><i class="fas fa-bookmark fa-fw"></i> Project Portal&nbsp;
         <span class="btn btn-primary text-white">
-            <i class="fa <?=$platform['platform_icon'];?> fa-fw"></i> <?=$platform['platform_name'];?>&nbsp;
+            <i class="fas <?=$platform['platform_icon'];?> fa-fw"></i> <?=$platform['platform_name'];?>&nbsp;
             <span class="badge badge-light text-dark"><?=$total_links;?></span>
         </span>
     </h1>
     <p class="lead">
         <div class="btn-group btn-group-sm">
             <a class="btn btn-outline-info" href="<?=site_url('admin/authenticate/login');?>" target="_blank">
-                <i class="fa fa-user fa-fw"></i> Admin Panel
+                <i class="fas fa-user fa-fw"></i> Admin Panel
             </a>
             <a class="btn btn-outline-success" href="https://docs.google.com/forms/d/1DipH6wItUim97uXde-DCreLnqX8BDq6Fzp-tbainHfk/viewform" target="_blank">
-                <i class="fa fa-check fa-fw"></i> Work Log
+                <i class="fas fa-check fa-fw"></i> Work Log
             </a>
         </div>
         &nbsp;
@@ -78,7 +78,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div id="pc-<?=$pc_id;?>-card" class="card">
             <div id="pc-<?=$pc_id;?>-card-header" class="card-header" role="tab">
                 <h5 id="pc-<?=$pc_id;?>-heading" class="mb-0">
-                    <i class="fa <?=$project_category['pc_icon'];?> fa-fw"></i>&nbsp;<a id="pc-<?=$pc_id;?>-toggle" class="text-dark" data-toggle="collapse" href="#pc-<?=$pc_id;?>-collapse" role="button" aria-expanded="true" aria-controls="pc-<?=$pc_id;?>-collapse"><?=$project_category['pc_name'];?></a>&nbsp;<small>- <?=$project_category['pc_description'];?></small>
+                    <i class="<?=$project_category['pc_icon'];?> fa-fw"></i>&nbsp;<a id="pc-<?=$pc_id;?>-toggle" class="text-dark" data-toggle="collapse" href="#pc-<?=$pc_id;?>-collapse" role="button" aria-expanded="true" aria-controls="pc-<?=$pc_id;?>-collapse"><?=$project_category['pc_name'];?></a>&nbsp;<small>- <?=$project_category['pc_description'];?></small>
                 </h5>
             </div>
 
@@ -99,7 +99,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             } ?>
                         <div id="pc-<?=$pc_id;?>-project-<?=$project_id;?>-card" class="col-12 col-md-3 card<?=$border_col;?>">
                             <div class="card-body">
-                                <h5 class="card-title<?=$text_col;?>"><i class="fa <?=$project['project_icon'];?> fa-fw"></i> <?=$project['project_name'];?></h5>
+                                <h5 class="card-title<?=$text_col;?>"><i class="<?=$project['project_icon'];?> fa-fw"></i> <?=$project['project_name'];?></h5>
                                 <?php if( ! empty($project['project_description'])): ?>
                                 <p class="card-text"><?=$project['project_description'];?></p>
                                 <?php endif; ?>
