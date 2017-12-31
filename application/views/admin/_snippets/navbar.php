@@ -29,10 +29,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <ul class="nav navbar-top-links navbar-right">
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fas fa-user fa-fw"></i> <?=$this->session->userdata('name');?> <i class="fas fa-caret-down"></i>
+                <i class="fas fa-user fa-fw"></i> <?=$this->session->userdata('name');?>&nbsp;&nbsp;<i class="fas fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
-                <li><a href="<?=site_url('admin/authenticate/logout');?>"><i class="fas fa-sign-out-alt fa-fw"></i> Logout</a></li>
+                <li><a href="<?=site_url('admin/authenticate/logout');?>"> <i class="fas fa-sign-out-alt fa-fw"></i> Logout</a></li>
             </ul>
         </li>
     </ul>
@@ -44,69 +44,69 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="sidebar-nav navbar-collapse">
 
             <ul class="nav" id="side-menu">
-                <li><a href="<?=site_url();?>" target="_blank"><i class="fa fa-file fa-fw"></i> Front Page</a></li>
-                <li><a href="<?=site_url('admin/authenticate/tasks');?>"><i class="fa fa-tasks fa-fw"></i> Tasks</a></li>
+                <li><a href="<?=site_url();?>" target="_blank"><i class="fas fa-file fa-fw"></i> Front Page</a></li>
+                <li><a href="<?=site_url('admin/authenticate/tasks');?>"><i class="fas fa-tasks fa-fw"></i> Tasks</a></li>
                 <!-- platform module -->
                 <li>
-                    <a href="#"><i class="fa fa-desktop fa-fw"></i> Platforms<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fas fa-desktop fa-fw"></i> Platforms<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="<?=site_url('admin/platform/browse');?>"><i class="fa fa-file-text-o fa-fw"></i> Browse Platforms</a>
+                            <a href="<?=site_url('admin/platform/browse');?>"><i class="fas fa-file-alt fa-fw"></i> Browse Platforms</a>
                         </li>
                         <li>
-                            <a href="<?=site_url('admin/platform/create');?>"><i class="fa fa-plus fa-fw"></i> Create Platform</a>
+                            <a href="<?=site_url('admin/platform/create');?>"><i class="fas fa-plus fa-fw"></i> Create Platform</a>
                         </li>
                     </ul>
                 </li>
 
                 <!-- project-category module -->
                 <li>
-                    <a href="#"><i class="fa fa-tags fa-fw"></i> Project Categories<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fas fa-tags fa-fw"></i> Project Categories<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="<?=site_url('admin/project_category/browse');?>"><i class="fa fa-file-text-o fa-fw"></i> Browse Project Categories</a>
+                            <a href="<?=site_url('admin/project_category/browse');?>"><i class="fas fa-file-alt fa-fw"></i> Browse Project Categories</a>
                         </li>
                         <li>
-                            <a href="<?=site_url('admin/project_category/create');?>"><i class="fa fa-plus fa-fw"></i> Create Project Category</a>
+                            <a href="<?=site_url('admin/project_category/create');?>"><i class="fas fa-plus fa-fw"></i> Create Project Category</a>
                         </li>
                     </ul>
                 </li>
 
                 <!-- project module -->
                 <li>
-                    <a href="#"><i class="fa fa-sitemap fa-fw"></i> Projects<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fas fa-sitemap fa-fw"></i> Projects<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="<?=site_url('admin/project/browse');?>"><i class="fa fa-file-text-o fa-fw"></i> Browse Projects</a>
+                            <a href="<?=site_url('admin/project/browse');?>"><i class="fas fa-file-alt fa-fw"></i> Browse Projects</a>
                         </li>
                         <li>
-                            <a href="<?=site_url('admin/project/create');?>"><i class="fa fa-plus fa-fw"></i> Create Project</a>
+                            <a href="<?=site_url('admin/project/create');?>"><i class="fas fa-plus fa-fw"></i> Create Project</a>
                         </li>
                     </ul>
                 </li>
 
                 <!-- link-category model -->
                 <li>
-                    <a href="#"><i class="fa fa-tag fa-fw"></i> Link Categories<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fas fa-tag fa-fw"></i> Link Categories<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="<?=site_url('admin/link_category/browse');?>"><i class="fa fa-file-text-o fa-fw"></i> Browse Link Categories</a>
+                            <a href="<?=site_url('admin/link_category/browse');?>"><i class="fas fa-file-alt fa-fw"></i> Browse Link Categories</a>
                         </li>
                         <li>
-                            <a href="<?=site_url('admin/link_category/create');?>"><i class="fa fa-plus fa-fw"></i> Create Link Category</a>
+                            <a href="<?=site_url('admin/link_category/create');?>"><i class="fas fa-plus fa-fw"></i> Create Link Category</a>
                         </li>
                     </ul>
                 </li>
 
                 <!-- link model -->
                 <li>
-                    <a href="#"><i class="fa fa-link fa-fw"></i> Links<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fas fa-link fa-fw"></i> Links<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="<?=site_url('admin/link/browse');?>"><i class="fa fa-file-text-o fa-fw"></i> Browse Links</a>
+                            <a href="<?=site_url('admin/link/browse');?>"><i class="fas fa-file-alt fa-fw"></i> Browse Links</a>
                         </li>
                         <li>
-                            <a href="<?=site_url('admin/link/create');?>"><i class="fa fa-plus fa-fw"></i> Create Link</a>
+                            <a href="<?=site_url('admin/link/create');?>"><i class="fas fa-plus fa-fw"></i> Create Link</a>
                         </li>
                     </ul>
                 </li>

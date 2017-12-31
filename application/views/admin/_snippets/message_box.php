@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div id="message_box" class="alert alert-info" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
         </button>
-        <i class="fa fa-info-circle fa-fw"></i> <?= $this->session->userdata('message') ?>
+        <i class="fas fa-info-circle fa-fw"></i> INFO: <?= $this->session->userdata('message') ?>
     </div>
     <?php $this->session->unset_userdata('message') ?>
 <?php endif;?>

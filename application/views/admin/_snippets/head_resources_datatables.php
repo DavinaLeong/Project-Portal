@@ -14,6 +14,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!-- Bootstrap Core CSS -->
 <link href="<?=RESOURCES_FOLDER;?>bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
+<!-- Font Awesome Icons -->
+<link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet">
+
 <!-- MetisMenu CSS -->
 <link href="<?=RESOURCES_FOLDER;?>sb-admin-2/vendor/metisMenu/metisMenu.min.css" rel="stylesheet" />
 
@@ -25,9 +28,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <!-- Custom CSS -->
 <link href="<?=RESOURCES_FOLDER;?>sb-admin-2/dist/css/sb-admin-2.min.css" rel="stylesheet" />
-
-<!-- Font Awesome Icons -->
-<script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
 
 <!-- Project Portal CSS -->
 <link href="<?=RESOURCES_FOLDER;?>pp/dist/css/pp_admin_styles.css" rel="stylesheet" type="text/css" />
