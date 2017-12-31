@@ -33,7 +33,7 @@
 
         <div class="row">
             <div id="main" class="col-lg-12">
-                <h1 class="page-header text-info"><i class="fa fa-file-text-o fa-fw"></i> Project Categories</h1>
+                <h1 class="page-header text-info"><i class="fas fa-file-alt fa-fw"></i> Project Categories</h1>
 
                 <p class="lead">Click on a 'row' to view a Project Category record.</p>
                 <?php $this->load->view('admin/_snippets/message_box');?>

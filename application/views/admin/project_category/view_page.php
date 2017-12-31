@@ -34,14 +34,14 @@
 
         <div class="row">
             <div id="main" class="col-lg-12">
-                <h1 class="page-header text-info"><i class="fa fa-eye fa-fw"></i> View Project Category&nbsp;
+                <h1 class="page-header text-info"><i class="fas fa-eye fa-fw"></i> View Project Category&nbsp;
                     <div class="btn-group">
                         <button id="action_btn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-gavel fa-fw"></i> Action <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a id="edit_record" href="<?=site_url('admin/project_category/edit/' . $project_category['pc_id']);?>"><i class="fa fa-pencil-square-o fa-fw"></i> Edit Record</a></li>
-                            <li><a id="delete_record" class="clickable" data-toggle="modal" data-target="#delete_modal"><i class="fa fa-trash fa-fw"></i> Delete Record</a></li>
+                            <li><a id="edit_record" href="<?=site_url('admin/project_category/edit/' . $project_category['pc_id']);?>"><i class="fas fa-edit fa-fw"></i> Edit Record</a></li>
+                            <li><a id="delete_record" class="clickable" data-toggle="modal" data-target="#delete_modal"><i class="fas fa-trash-alt fa-fw"></i> Delete Record</a></li>
                         </ul>
                     </div>
                 </h1>

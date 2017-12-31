@@ -36,7 +36,7 @@
 
         <div class="row">
             <div id="main" class="col-lg-12">
-                <h1 class="page-header text-info"><i class="fa fa-plus fa-fw"></i> Create Project Category</h1>
+                <h1 class="page-header text-info"><i class="fas fa-plus fa-fw"></i> Create Project Category</h1>
 
                 <div class="row">
                     <div class="col-md-10">
@@ -83,7 +83,7 @@
                             <div class="form-group">
                                 <br/>
                                 <div class="col-md-10 col-md-offset-2">
-                                    <button id="submit_btn" class="btn btn-primary" type="submit"><i class="fa fa-check fa-fw"></i> Submit</button>
+                                    <button id="submit_btn" class="btn btn-primary" type="submit"><i class="fas fa-check fa-fw"></i> Submit</button>
                                 </div>
                             </div>
                         </form>
