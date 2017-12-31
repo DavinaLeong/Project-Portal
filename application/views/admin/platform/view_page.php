@@ -72,7 +72,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="platform_icon">Icon</label>
                                     <div class="col-md-10">
-                                        <p id="platform_icon" class="form-control-static"><i class="fa <?=$platform['platform_icon'];?> fa-fw"></i> <small>(<?=$platform['platform_icon'];?>)</small></p>
+                                        <p id="platform_icon" class="form-control-static"><i class="<?=$platform['platform_icon'];?> fa-fw"></i> <small>(<?=$platform['platform_icon'];?>)</small></p>
                                     </div>
                                 </div>
                             </fieldset>
@@ -136,7 +136,7 @@
                                 <?php foreach($project_categories as $project_category): ?>
                                     <tr id="pc_row_<?=$project_category['pc_id'];?>" class="clickable" onclick="goto_view(<?=$project_category['pc_id'];?>)">
                                         <td><?=$project_category['pc_id'];?></td>
-                                        <td><?=$project_category['pc_name'];?></td>
+                                        <td><i class="<?=$project_category['pc_icon'];?> fa-fw"></i> <?=$project_category['pc_name'];?></td>
                                         <td><?=$project_category['pc_description'];?></td>
                                     </tr>
                                 <?php endforeach; ?>

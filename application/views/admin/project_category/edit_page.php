@@ -30,7 +30,8 @@
         <ol class="breadcrumb">
             <li><a href="<?=site_url('admin/authenticate/start');?>">Home</a></li>
             <li><a href="<?=site_url('admin/project_category/browse');?>">Project Categories</a></li>
-            <li class="active">Edit Project Category ID: <?=$project_category['pc_id'];?></li>
+            <li><a href="<?=site_url('admin/project_category/view/' . $project_category['pc_id']);?>">Project Category ID: <?=$project_category['pc_id'];?></a></li>
+            <li class="active">Edit Project Category</li>
         </ol>
 
         <div class="row">

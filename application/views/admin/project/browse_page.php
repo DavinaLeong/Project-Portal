@@ -33,7 +33,7 @@
 
         <div class="row">
             <div id="main" class="col-lg-12">
-                <h1 class="page-header text-info"><i class="fa fa-file-text-o fa-fw"></i> Projects</h1>
+                <h1 class="page-header text-info"><i class="fas fa-file-alt fa-fw"></i> Projects</h1>
 
                 <p class="lead">Click on a 'row' to view a Project record.</p>
                 <?php $this->load->view('admin/_snippets/message_box');?>
@@ -55,7 +55,7 @@
                             <tbody>
                             <?php foreach($projects as $key=> $project): ?>
                                 <tr id="project_row_<?=$project['project_id'];?>" class="clickable" onclick="goto_view(<?=$project['project_id'];?>)">
-                                    <td><i class="fa <?=$project['project_icon'];?> fa-fw"></i> <?=$project['project_name'];?></td>
+                                    <td><i class="<?=$project['project_icon'];?> fa-fw"></i> <?=$project['project_name'];?></td>
                                     <td><?=$project['project_description'];?></td>
                                     <td><?=$project['selected_project'] == 1 ? '<span class="text-primary">Yes</span>' : 'No';?></td>
                                     <td><span class="label label-default label-<?=strtolower($project['project_status']);?>"><?=$project['project_status'];?></span></td>
