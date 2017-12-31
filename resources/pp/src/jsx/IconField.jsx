@@ -24,7 +24,7 @@ var IconField = React.createClass
                     <div className="input-group">
                         <input className="form-control" type="text" id={this.props.field_name} name={this.props.field_name}
                                value={this.state.icon_name} required={this.props.required ? 'required' : ''} onChange={this.onIconFieldChange} />
-                        <span className="input-group-addon"><small>({icon})</small> <i className={icon}></i></span>
+                        <span className="input-group-addon"><span className="text-muted"><small>({icon})</small> <i className={icon}></i></span></span>
                     </div>
                     <p className="help-block"><a href="http://fontawesome.io/icons/" target="_blank">Font-Awesome Icon Reference</a></p>
                 </div>

@@ -27,11 +27,11 @@
 
 
 .fa.arrow:before {
-    content: "\f104";
+    content: "\f0d9";
 }
 
 .active > a > .fa.arrow:before {
-    content: "\f107";
+    content: "\f0d7";
 }
 
 .plus-times {
