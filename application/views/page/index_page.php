@@ -73,16 +73,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div id="pc-accordion" role="tablist">
         <?php
         foreach($project_categories as $pc_key=>$project_category):
-            $pc_id = $project_category['pc_id'];?><!-- <?=$project_category['pc_name'];?> start -->
-        <div id="pc-<?=$pc_id;?>-card" class="card">
-            <div id="pc-<?=$pc_id;?>-card-header" class="card-header" role="tab">
+            $pc_id = $project_category['pc_id'];
+            $is_resources = $project_category['pc_name'] == 'Resources' ? TRUE : FALSE; ?><!-- <?=$project_category['pc_name'];?> start -->
+        <div id="pc-<?=$pc_id;?>-card" class="card<?=$is_resources ? ' border-primary' : '';?>">
+            <div id="pc-<?=$pc_id;?>-card-header" class="card-header <?=$is_resources ? ' bg-primary' : '';?>" role="tab">
                 <h5 id="pc-<?=$pc_id;?>-heading" class="mb-0">
-                    <i class="<?=$project_category['pc_icon'];?> fa-fw"></i>&nbsp;<a id="pc-<?=$pc_id;?>-toggle" class="text-dark" data-toggle="collapse" href="#pc-<?=$pc_id;?>-collapse" role="button" aria-expanded="true" aria-controls="pc-<?=$pc_id;?>-collapse"><?=$project_category['pc_name'];?></a>&nbsp;<small>- <?=$project_category['pc_description'];?></small>
+                    <span class="fa-stack fa-1x align-middle" style="font-size: 60%;">
+                        <i class="fas fa-square fa-stack-2x"></i>
+                        <i class="<?=$project_category['pc_icon'];?> fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <a id="pc-<?=$pc_id;?>-toggle" <?=$is_resources ? ' class="text-white"' : '';?> data-toggle="collapse" href="#pc-<?=$pc_id;?>-collapse" role="button" aria-expanded="true" aria-controls="pc-<?=$pc_id;?>-collapse"><?=$project_category['pc_name'];?></a>
+                    <small>- <?=$project_category['pc_description'];?></small>
                 </h5>
             </div>
 
             <div id="pc-<?=$pc_id;?>-collapse" class="collapse<?=($pc_key > 0) ? '' : ' show';?>" role="tabpanel" aria-labelledby="pc-<?=$pc_id;?>-card-header" data-parent="#pc-accordion">
-                <div class="card-body">
+                <div class="card-body<?=$is_resources ? ' text-dark' : '';?>">
                     <div class="row">
                         <?php $projects = $project_category['projects'];
                         if(count($projects) <= 0): ?>

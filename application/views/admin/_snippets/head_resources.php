@@ -15,7 +15,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <link href="<?=RESOURCES_FOLDER;?>bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
 <!-- Font Awesome Icons -->
-<!-- <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script> -->
 <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet">
 
 <!-- MetisMenu CSS -->
