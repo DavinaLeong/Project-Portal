@@ -33,7 +33,7 @@
 
         <div class="row">
             <div id="main" class="col-lg-12">
-                <h1 class="page-header text-info"><i class="fa fa-file-text-o fa-fw"></i> Project Categories</h1>
+                <h1 class="page-header text-info"><i class="fas fa-file-alt fa-fw"></i> Project Categories</h1>
 
                 <p class="lead">Click on a 'row' to view a Project Category record.</p>
                 <?php $this->load->view('admin/_snippets/message_box');?>
@@ -54,7 +54,7 @@
                             <tbody>
                             <?php foreach($project_categories as $key=>$project_category): ?>
                                 <tr id="pc_row_<?-$project_category['pc_id'];?>" class="clickable" onclick="goto_view(<?=$project_category['pc_id'];?>)">
-                                    <td><i class="fa <?=$project_category['pc_icon'];?> fa-fw"></i> <?=$project_category['pc_name'];?></td>
+                                    <td><i class="<?=$project_category['pc_icon'];?> fa-fw"></i> <?=$project_category['pc_name'];?></td>
                                     <td><?=$project_category['pc_description'];?></td>
                                     <td data-sort="<?=format_dd_mm_yyyy_hh_ii_ss($project_category['date_added']);?>"
                                         ><?=format_dd_mmm_yyyy($project_category['date_added']);?></td>

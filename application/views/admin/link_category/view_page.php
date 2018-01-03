@@ -37,11 +37,11 @@
                 <h1 class="page-header text-info"><i class="fa fa-eye fa-fw"></i> View Link Category&nbsp;
                     <div class="btn-group">
                         <button id="action_btn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-gavel fa-fw"></i> Action <span class="caret"></span>
+                            <i class="fas fa-gavel fa-fw"></i> Action <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a id="edit_record" href="<?=site_url('admin/link_category/edit/' . $link_category['lc_id']);?>"><i class="fa fa-pencil-square-o fa-fw"></i> Edit Record</a></li>
-                            <li><a id="delete_record" class="clickable" data-toggle="modal" data-target="#delete_modal"><i class="fa fa-trash fa-fw"></i> Delete Record</a></li>
+                            <li><a id="edit_record" href="<?=site_url('admin/link_category/edit/' . $link_category['lc_id']);?>"><i class="fas fa-edit fa-fw"></i> Edit Record</a></li>
+                            <li><a id="delete_record" class="clickable" data-toggle="modal" data-target="#delete_modal"><i class="fas fa-trash-alt fa-fw"></i> Delete Record</a></li>
                         </ul>
                     </div>
                 </h1>
@@ -119,7 +119,7 @@
                             </div>
                             <div class="col-xs-6">
                                 <button id="new_link_btn" class="btn btn-default pull-right" type="button" onclick="goto_create(<?=$link_category['lc_id'];?>)">
-                                    <i class="fa fa-plus fa-fw"></i> Create Record
+                                    <i class="fas fa-plus fa-fw"></i> Create Record
                                 </button>
                             </div>
                         </div>

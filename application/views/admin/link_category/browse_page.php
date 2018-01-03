@@ -33,7 +33,7 @@
 
         <div class="row">
             <div id="main" class="col-lg-12">
-                <h1 class="page-header text-info"><i class="fa fa-file-text-o fa-fw"></i> Link Categories</h1>
+                <h1 class="page-header text-info"><i class="fas fa-edit fa-fw"></i> Link Categories</h1>
 
                 <?php $this->load->view('admin/_snippets/message_box');?>
                 <?php if( ! $link_categories) $this->load->view('admin/_snippets/no_records_box'); ?>
@@ -64,8 +64,8 @@
                                     ><?=format_rfc($link_category['last_updated']);?></td>
                                     <td>
                                         <div class="btn-group">
-                                            <a id="view_lc_<?=$link_category['lc_id'];?>" class="btn btn-default" href="<?=site_url('admin/link_category/view/' . $link_category['lc_id']);?>" data-toggle="tooltip" title="view Link Category record"><i class="fa fa-eye fa-fw"></i></a>
-                                            <a id="view_project_<?=$link_category['lc_id'];?>" class="btn btn-default" href="<?=site_url('admin/project/view/' . $link_category['project_id']);?>" target="_blank" data-toggle="tooltip" title="view Project record"><i class="fa fa-sitemap fa-fw"></i></a>
+                                            <a id="view_lc_<?=$link_category['lc_id'];?>" class="btn btn-default" href="<?=site_url('admin/link_category/view/' . $link_category['lc_id']);?>" data-toggle="tooltip" title="view Link Category record"><i class="fas fa-eye fa-fw"></i></a>
+                                            <a id="view_project_<?=$link_category['lc_id'];?>" class="btn btn-default" href="<?=site_url('admin/project/view/' . $link_category['project_id']);?>" target="_blank" data-toggle="tooltip" title="view Project record"><i class="fas fa-sitemap fa-fw"></i></a>
                                         </div>
                                     </td>
                                 </tr>

@@ -30,12 +30,13 @@
         <ol class="breadcrumb">
             <li><a href="<?=site_url('admin/authenticate/start');?>">Home</a></li>
             <li><a href="<?=site_url('admin/project_category/browse');?>">Project Categories</a></li>
-            <li class="active">Edit Project Category ID: <?=$project_category['pc_id'];?></li>
+            <li><a href="<?=site_url('admin/project_category/view/' . $project_category['pc_id']);?>">Project Category ID: <?=$project_category['pc_id'];?></a></li>
+            <li class="active">Edit Project Category</li>
         </ol>
 
         <div class="row">
             <div id="main" class="col-lg-12">
-                <h1 class="page-header text-info"><i class="fa fa-pencil-square-o fa-fw"></i> Edit Project Category</h1>
+                <h1 class="page-header text-info"><i class="fas fa-edit fa-fw"></i> Edit Project Category</h1>
 
                 <div class="row">
                     <div class="col-md-10">
@@ -97,7 +98,7 @@
                             <div class="form-group">
                                 <br/>
                                 <div class="col-md-10 col-md-offset-2">
-                                    <button id="submit_btn" class="btn btn-primary" type="submit"><i class="fa fa-check fa-fw"></i> Submit</button>
+                                    <button id="submit_btn" class="btn btn-primary" type="submit"><i class="fas fa-check fa-fw"></i> Submit</button>
                                 </div>
                             </div>
                         </form>

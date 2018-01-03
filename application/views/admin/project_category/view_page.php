@@ -34,14 +34,14 @@
 
         <div class="row">
             <div id="main" class="col-lg-12">
-                <h1 class="page-header text-info"><i class="fa fa-eye fa-fw"></i> View Project Category&nbsp;
+                <h1 class="page-header text-info"><i class="fas fa-eye fa-fw"></i> View Project Category&nbsp;
                     <div class="btn-group">
                         <button id="action_btn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-gavel fa-fw"></i> Action <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a id="edit_record" href="<?=site_url('admin/project_category/edit/' . $project_category['pc_id']);?>"><i class="fa fa-pencil-square-o fa-fw"></i> Edit Record</a></li>
-                            <li><a id="delete_record" class="clickable" data-toggle="modal" data-target="#delete_modal"><i class="fa fa-trash fa-fw"></i> Delete Record</a></li>
+                            <li><a id="edit_record" href="<?=site_url('admin/project_category/edit/' . $project_category['pc_id']);?>"><i class="fas fa-edit fa-fw"></i> Edit Record</a></li>
+                            <li><a id="delete_record" class="clickable" data-toggle="modal" data-target="#delete_modal"><i class="fas fa-trash-alt fa-fw"></i> Delete Record</a></li>
                         </ul>
                     </div>
                 </h1>
@@ -61,7 +61,11 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="platform">Platform</label>
                                     <div class="col-md-10">
-                                        <p id="platform" class="form-control-static"><i class="fa <?=$project_category['platform_icon'];?> fa-fw"></i> <?=$project_category['platform_name'];?></p>
+                                        <p id="platform" class="form-control-static"><i class="<?=$project_category['platform_icon'];?> fa-fw"></i> <?=$project_category['platform_name'];?>
+                                            <?php if($project_category['platform_name']): ?>
+                                                <br/>(<a href="<?=site_url('admin/platform/view/' . $project_category['platform_id']);?>" target="_blank">View Platform</a>)
+                                            <?php endif; ?>
+                                        </p>
                                     </div>
                                 </div>
 
@@ -75,7 +79,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="pc_icon">Icon</label>
                                     <div class="col-md-10">
-                                        <p id="pc_icon" class="form-control-static"><i class="fa <?=$project_category['pc_icon'];?> fa-fw"></i> (<?=$project_category['pc_icon'];?>)</p>
+                                        <p id="pc_icon" class="form-control-static"><i class="<?=$project_category['pc_icon'];?> fa-fw"></i> (<?=$project_category['pc_icon'];?>)</p>
                                     </div>
                                 </div>
 
@@ -93,7 +97,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="project_category_status">Date Added</label>
                                     <div class="col-md-10">
-                                        <p id="date_added" class="form-control-static"><?=format_dd_mm_yyyy_hh_ii_ss($project_category['date_added']);?></p>
+                                        <p id="date_added" class="form-control-static"><?=format_dd_mmm_yyyy_hh_ii_ss($project_category['date_added']);?></p>
                                     </div>
                                 </div>
 
@@ -140,7 +144,7 @@
                                 <?php foreach($projects as $project): ?>
                                     <tr id="project_row_<?=$project['project_id'];?>" class="clickable" onclick="goto_view(<?=$project['project_id'];?>)">
                                         <td><?=$project['project_id'];?></td>
-                                        <td><?=$project['project_name'];?></td>
+                                        <td><i class="<?=$project['project_icon'];?> fa-fw"></i> <?=$project['project_name'];?></td>
                                         <td><?=$project['project_description'];?></td>
                                         <td><span class="label label-default label-<?=strtolower($project['project_status']);?>"><?=$project['project_status'];?></span></td>
                                     </tr>

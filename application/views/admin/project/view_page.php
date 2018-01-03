@@ -41,8 +41,8 @@
                             <i class="fa fa-gavel fa-fw"></i> Action <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a id="edit_record" href="<?=site_url('admin/project/edit/' . $project['project_id']);?>"><i class="fa fa-pencil-square-o fa-fw"></i> Edit Record</a></li>
-                            <li><a id="delete_record" class="clickable" data-toggle="modal" data-target="#delete_modal"><i class="fa fa-trash fa-fw"></i> Delete Record</a></li>
+                            <li><a id="edit_record" href="<?=site_url('admin/project/edit/' . $project['project_id']);?>"><i class="fas fa-edit fa-fw"></i> Edit Record</a></li>
+                            <li><a id="delete_record" class="clickable" data-toggle="modal" data-target="#delete_modal"><i class="fas fa-trash-alt fa-fw"></i> Delete Record</a></li>
                         </ul>
                     </div>
                 </h1>
@@ -60,9 +60,9 @@
                                     <label class="control-label col-md-2" for="pc_name">Project Category</label>
                                     <div class="col-md-10">
                                         <p id="pc_name" class="form-control-static">
-                                            <i class="fa <?=$project['pc_icon'];?> fa-fw"></i> <?=$project['pc_name'];?><br/>
+                                            <i class="fa <?=$project['pc_icon'];?> fa-fw"></i> <?=$project['pc_name'];?>
                                             <?php if($project['pc_name']): ?>
-                                                (<a href="<?=site_url('admin/project_category/view/' . $project['pc_id']);?>" target="_blank">View Project Category</a>)
+                                                <br/>(<a href="<?=site_url('admin/project_category/view/' . $project['pc_id']);?>" target="_blank">View Project Category</a>)
                                             <?php endif; ?>
                                         </p>
                                     </div>
@@ -85,7 +85,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="project_icon">Icon</label>
                                     <div class="col-md-10">
-                                        <p id="project_icon" class="form-control-static"><i class="fa <?=$project['project_icon'];?> fa-fw"></i> <small>(<?=$project['project_icon'];?>)</small></p>
+                                        <p id="project_icon" class="form-control-static"><i class="<?=$project['project_icon'];?> fa-fw"></i> <small>(<?=$project['project_icon'];?>)</small></p>
                                     </div>
                                 </div>
 
@@ -140,7 +140,7 @@
                             </div>
                             <div class="col-xs-6">
                                 <button id="new_lc_btn" class="btn btn-default pull-right" onclick="goto_create(<?=$project['project_id'];?>)">
-                                    <i class="fa fa-plus fa-fw"></i> Create Record
+                                    <i class="fas fa-plus fa-fw"></i> Create Record
                                 </button>
                             </div>
                         </div>

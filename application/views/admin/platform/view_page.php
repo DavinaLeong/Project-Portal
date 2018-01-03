@@ -34,14 +34,14 @@
 
         <div class="row">
             <div id="main" class="col-lg-12">
-                <h1 class="page-header text-info"><i class="fa fa-eye fa-fw"></i> View Platform&nbsp;
+                <h1 class="page-header text-info"><i class="fas fa-eye fa-fw"></i> View Platform&nbsp;
                     <div class="btn-group">
                         <button id="action_btn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-gavel fa-fw"></i> Action <span class="caret"></span>
+                            <i class="fas fa-gavel fa-fw"></i> Action <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a id="edit_record" href="<?=site_url('admin/platform/edit/' . $platform['platform_id']);?>"><i class="fa fa-pencil-square-o fa-fw"></i> Edit Record</a></li>
-                            <li><a id="delete_record" class="clickable" data-toggle="modal" data-target="#delete_modal"><i class="fa fa-trash fa-fw"></i> Delete Record</a></li>
+                            <li><a id="edit_record" href="<?=site_url('admin/platform/edit/' . $platform['platform_id']);?>"><i class="fas fa-edit fa-fw"></i> Edit Record</a></li>
+                            <li><a id="delete_record" class="clickable" data-toggle="modal" data-target="#delete_modal"><i class="fas fa-trash-alt fa-fw"></i> Delete Record</a></li>
                         </ul>
                     </div>
                 </h1>
@@ -72,7 +72,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="platform_icon">Icon</label>
                                     <div class="col-md-10">
-                                        <p id="platform_icon" class="form-control-static"><i class="fa <?=$platform['platform_icon'];?> fa-fw"></i> <small>(<?=$platform['platform_icon'];?>)</small></p>
+                                        <p id="platform_icon" class="form-control-static"><i class="<?=$platform['platform_icon'];?> fa-fw"></i> <small>(<?=$platform['platform_icon'];?>)</small></p>
                                     </div>
                                 </div>
                             </fieldset>
@@ -90,7 +90,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="platform_status">Date Added</label>
                                     <div class="col-md-10">
-                                        <p id="date_added" class="form-control-static"><?=format_dd_mm_yyyy_hh_ii_ss($platform['date_added']);?></p>
+                                        <p id="date_added" class="form-control-static"><?=format_dd_mmm_yyyy_hh_ii_ss($platform['date_added']);?></p>
                                     </div>
                                 </div>
 
@@ -117,7 +117,7 @@
                             </div>
                             <div class="col-xs-6">
                                 <button id="create_new_pc" class="btn btn-default pull-right" type="button" onclick="goto_create(<?=$platform['platform_id'];?>)">
-                                    <i class="fa fa-plus fa-fw"></i> Create Record
+                                    <i class="fas fa-plus fa-fw"></i> Create Record
                                 </button>
                             </div>
                         </div>
@@ -136,7 +136,7 @@
                                 <?php foreach($project_categories as $project_category): ?>
                                     <tr id="pc_row_<?=$project_category['pc_id'];?>" class="clickable" onclick="goto_view(<?=$project_category['pc_id'];?>)">
                                         <td><?=$project_category['pc_id'];?></td>
-                                        <td><?=$project_category['pc_name'];?></td>
+                                        <td><i class="<?=$project_category['pc_icon'];?> fa-fw"></i> <?=$project_category['pc_name'];?></td>
                                         <td><?=$project_category['pc_description'];?></td>
                                     </tr>
                                 <?php endforeach; ?>
