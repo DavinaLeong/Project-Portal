@@ -22,7 +22,7 @@ class Page extends CI_Controller
 	    $this->load->model('Link_model');
 
 		$platform_id = 1;
-		$project_categories = $this->Project_category_model->get_by_platform_id($platform_id);
+		$project_categories = $this->Project_category_model->get_by_platform_id($platform_id, 'project_category.pc_name', 'ASC');
 		foreach($project_categories as $pc_key=>$project_category)
 		{
 			$projects = $this->Project_model->get_by_pc_id_status($project_category['pc_id']);
